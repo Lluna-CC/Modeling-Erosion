@@ -26,64 +26,9 @@
          </size>
         </property>
         <property name="title">
-         <string>Simulation controls</string>
+         <string>Controls</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="2" column="0">
-          <widget class="QPushButton" name="btnPause">
-           <property name="text">
-            <string>Pause</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Time step:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QDoubleSpinBox" name="timestep">
-           <property name="decimals">
-            <number>6</number>
-           </property>
-           <property name="maximum">
-            <double>1.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.010000000000000</double>
-           </property>
-           <property name="value">
-            <double>0.050000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="btnReset">
-           <property name="text">
-            <string>Restart</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="btnSimloop">
-           <property name="text">
-            <string>Simulate!</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="btnSimstep">
-           <property name="text">
-            <string>1 step</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QGridLayout" name="gridLayout"/>
        </widget>
       </item>
       <item>
@@ -110,7 +55,7 @@
             <string>No scene loaded</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -137,19 +82,14 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>22</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuScene">
     <property name="title">
      <string>Scene</string>
     </property>
-    <addaction name="actionSceneProjectiles"/>
-    <addaction name="actionSceneFountain"/>
-    <addaction name="actionSceneRope"/>
-    <addaction name="actionSceneCloth"/>
-    <addaction name="actionSceneTestIntegrators"/>
-    <addaction name="actionSceneTestColliders"/>
+    <addaction name="actionSceneBase"/>
    </widget>
    <widget class="QMenu" name="menuCamera">
     <property name="title">
@@ -164,9 +104,9 @@
    <addaction name="menuCamera"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionSceneFountain">
+  <action name="actionSceneBase">
    <property name="text">
-    <string>Fountain</string>
+    <string>Base</string>
    </property>
   </action>
   <action name="actionCameraReset">

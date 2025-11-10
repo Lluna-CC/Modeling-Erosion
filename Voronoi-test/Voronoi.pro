@@ -18,8 +18,8 @@ SOURCES += \
     code/main.cpp \
     code/mainwindow.cpp \
     code/model.cpp \
-    code/scenes/scenefountain.cpp \
-    code/widgets/widgetfountain.cpp \
+    code/scenes/scenebase.cpp \
+    code/widgets/widgetbase.cpp \
 
 HEADERS += \
     code/camera.h \
@@ -29,11 +29,11 @@ HEADERS += \
     code/mainwindow.h \
     code/model.h \
     code/scene.h \
-    code/scenes/scenefountain.h \
-    code/widgets/widgetfountain.h \
+    code/scenes/scenebase.h \
+    code/widgets/widgetbase.h \
 
 FORMS += \
     forms/mainwindow.ui \
-    forms/widgetfountain.ui \
+    forms/widgetbase.ui \
 
 RESOURCES += shaders.qrc

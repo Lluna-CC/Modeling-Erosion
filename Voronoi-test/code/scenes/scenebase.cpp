@@ -1,16 +1,16 @@
-#include "scenefountain.h"
+#include "scenebase.h"
 #include "glutils.h"
 #include "model.h"
 #include <QOpenGLFunctions_3_3_Core>
 
 
-SceneFountain::SceneFountain() {
-    widget = new WidgetFountain();
+SceneBase::SceneBase() {
+    widget = new WidgetBase();
     connect(widget, SIGNAL(updatedParameters()), this, SLOT(updateSimParams()));
 }
 
 
-SceneFountain::~SceneFountain() {
+SceneBase::~SceneBase() {
     if (widget)     delete widget;
     if (shader)     delete shader;
     if (vaoFloor)   delete vaoFloor;
@@ -20,7 +20,7 @@ SceneFountain::~SceneFountain() {
 }
 
 
-void SceneFountain::initialize() {
+void SceneBase::initialize() {
     // load shader
     shader = glutils::loadShaderProgram(":/shaders/phong.vert", ":/shaders/phong.frag");
 
@@ -48,21 +48,21 @@ void SceneFountain::initialize() {
 }
 
 
-void SceneFountain::reset()
+void SceneBase::reset()
 {
     // update values from UI
     updateSimParams();
 }
 
 
-void SceneFountain::updateSimParams()
+void SceneBase::updateSimParams()
 {
     // get gravity from UI and update force
 
 }
 
 
-void SceneFountain::paint(const Camera& camera) {
+void SceneBase::paint(const Camera& camera) {
 
     QOpenGLFunctions* glFuncs = nullptr;
     glFuncs = QOpenGLContext::currentContext()->functions();
@@ -101,18 +101,18 @@ void SceneFountain::paint(const Camera& camera) {
 }
 
 
-void SceneFountain::update(double dt) {
+void SceneBase::update(double dt) {
 
    
 }
 
-void SceneFountain::mousePressed(const QMouseEvent* e, const Camera&)
+void SceneBase::mousePressed(const QMouseEvent* e, const Camera&)
 {
     mouseX = e->pos().x();
     mouseY = e->pos().y();
 }
 
-void SceneFountain::mouseMoved(const QMouseEvent* e, const Camera& cam)
+void SceneBase::mouseMoved(const QMouseEvent* e, const Camera& cam)
 {
     int dx = e->pos().x() - mouseX;
     int dy = e->pos().y() - mouseY;

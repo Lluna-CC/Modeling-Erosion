@@ -5,15 +5,15 @@
 #include <QOpenGLVertexArrayObject>
 #include <list>
 #include "scene.h"
-#include "widgetfountain.h"
+#include "widgetbase.h"
 
-class SceneFountain : public Scene
+class SceneBase : public Scene
 {
     Q_OBJECT
 
 public:
-    SceneFountain();
-    virtual ~SceneFountain();
+    SceneBase();
+    virtual ~SceneBase();
 
     virtual void initialize();
     virtual void reset();
@@ -35,7 +35,7 @@ public slots:
     void updateSimParams();
 
 protected:
-    WidgetFountain* widget = nullptr;
+    WidgetBase* widget = nullptr;
 
     QOpenGLShaderProgram* shader = nullptr;
     QOpenGLVertexArrayObject* vaoSphereL = nullptr;
