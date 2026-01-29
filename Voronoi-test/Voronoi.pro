@@ -5,7 +5,6 @@ CONFIG += c++11
 CONFIG(release, release|debug):QMAKE_CXXFLAGS += -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib
 LIBS += -lvoro++
 
-INCLUDEPATH += akirmse-mountains
 
 SOURCES += \
     core.cpp \
@@ -25,16 +24,7 @@ SOURCES += \
     ppa.cpp \
     riversnet.cpp \
     scalarfield.cpp \
-    terrainanalysis.cpp \
     terrainwidget.cpp \
-    akirmse-mountains/divide_tree.cpp \
-    akirmse-mountains/domain_map.cpp \
-    akirmse-mountains/island_tree.cpp \
-    akirmse-mountains/latlng.cpp \
-    akirmse-mountains/line_tree.cpp \
-    akirmse-mountains/tile.cpp \
-    akirmse-mountains/tree_builder.cpp \
-    akirmse-mountains/utm_coordinate_system.cpp \
     voronoi.cpp \
     heightfieldWall.cpp
 
@@ -47,21 +37,7 @@ HEADERS += \
     ppa.h \
     riversnet.h \
     scalarfield.h \
-    terrainanalysis.h \
     terrainwidget.h \
-    akirmse-mountains/coordinate_system.h \
-    akirmse-mountains/divide_tree.h \
-    akirmse-mountains/domain_map.h \
-    akirmse-mountains/island_tree.h \
-    akirmse-mountains/latlng.h \
-    akirmse-mountains/line_tree.h \
-    akirmse-mountains/pixel_array.h \
-    akirmse-mountains/primitives.h \
-    akirmse-mountains/tile.h \
-    akirmse-mountains/tree_builder.h \
-    akirmse-mountains/util.h \
-    akirmse-mountains/utm.h \
-    akirmse-mountains/utm_coordinate_system.h \
     voronoi.h \
     heightfieldWall.h 
 

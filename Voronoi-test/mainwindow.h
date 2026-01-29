@@ -6,7 +6,6 @@
 #include <QSpinBox>
 #include "terrainwidget.h"
 #include "heightfield.h"
-#include "terrainanalysis.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -29,10 +28,6 @@ public slots:
     void updateLightmap();
     void updateTexture();
     void redrawBaseTexture();
-    void redrawRiversLayer();
-    void redrawRidgesLayer();
-    void redrawBaseRiversLayer();
-    void redrawBaseRidgesLayer();
     void modifyPalette();
     void resetPaletteRange();
     void computeVoronoi();
@@ -74,8 +69,7 @@ private:
     void computeLightmap(bool doShadows);
     void computeMetric();
     void computeBaseTexture(bool updateMetric = true);
-    void computeRiversLayer();
-    void computeRidgesLayer();
+
 
     QImage composeTexture() const;
     QImage shadeMap(const QImage& img, int shadeType = 0, bool shadows = false) const;
@@ -98,7 +92,6 @@ private:
 
     HeightField hf;
     ScalarField2 currentMetric;
-    TerrainAnalysis* terrainAnalysis = nullptr;
     Index2 cursorCell = Index2(-1,-1);
 
     Vector3 lightDirection;

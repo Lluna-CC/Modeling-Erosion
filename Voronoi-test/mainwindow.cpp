@@ -175,67 +175,17 @@ void MainWindow::createActions()
     connect(ui->dem_nni_radius, SIGNAL(valueChanged(double)), this, SLOT(redrawBaseTexture()));
     connect(ui->dem_nni_relative, SIGNAL(toggled(bool)), this, SLOT(redrawBaseTexture()));
 
-    connect(ui->showRivers, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_cit_s, SIGNAL(valueChanged(double)), this, SLOT(redrawBaseRiversLayer()));
-    connect(ui->rivers_cit_t, SIGNAL(valueChanged(double)), this, SLOT(redrawBaseRiversLayer()));
-    connect(ui->rivers_scale, SIGNAL(valueChanged(double)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_color, SIGNAL(currentIndexChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_width, SIGNAL(currentIndexChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->showSegmentSmooth, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->showRiversSimple, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->showRiversSources, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->showRiversJunctions, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
+   
 
-    connect(ui->showBasins, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasin_perimeter, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasin_color, SIGNAL(currentIndexChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasinAll, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasinStrahler, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasinStrahler_order, SIGNAL(valueChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_drainageBasinCoords, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_basin_x, SIGNAL(valueChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_basin_y, SIGNAL(valueChanged(int)), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_basin_useRiver, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_stopSea, SIGNAL(clicked()), this, SLOT(redrawRiversLayer()));
-    connect(ui->rivers_stopSea_elev, SIGNAL(valueChanged(double)), this, SLOT(redrawRiversLayer()));
-
-    connect(ui->showRidges, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_drainage, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_laplacian, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_curvature, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_drainageThreshold, SIGNAL(valueChanged(double)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_laplacianThreshold, SIGNAL(valueChanged(double)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_curvatureThreshold, SIGNAL(valueChanged(double)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_PPA, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_PPA_profileLength, SIGNAL(valueChanged(int)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showPPAdebug, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_divtree, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_divtree_promCutoff, SIGNAL(valueChanged(int)), this, SLOT(redrawBaseRidgesLayer()));
-    connect(ui->ridges_divtree_detailed, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_level, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_level_type, SIGNAL(currentIndexChanged(int)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_level_scale, SIGNAL(valueChanged(double)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showPeaks, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showSaddles, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_ignoreSea, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_ignoreSea_elev, SIGNAL(valueChanged(double)), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showProm, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_displayPeakId, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showIsol, SIGNAL(clicked()), this, SLOT(redrawRidgesLayer()));
-    connect(ui->ridges_showIsol_peak, SIGNAL(valueChanged(int)), this, SLOT(redrawRidgesLayer()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
 {    
-    if (terrainAnalysis) delete terrainAnalysis;
-    terrainAnalysis = new TerrainAnalysis(hf);
 
     widget->setHeightfield(hf, resetCam);
 
     computeLightmap(ui->dem_shadows->isChecked());
     computeBaseTexture();
-    computeRiversLayer();
-    computeRidgesLayer();
     updateTexture();
 
     displayHeightfieldDimensions();
@@ -268,14 +218,6 @@ void MainWindow::updateHeightfield(bool resetCam)
     ui->dem_zreduced_x->blockSignals(false);
     ui->dem_zreduced_y->blockSignals(false);
 
-    ui->rivers_basin_x->blockSignals(true);
-    ui->rivers_basin_y->blockSignals(true);
-    ui->rivers_basin_x->setMaximum(hf.getSizeX());
-    ui->rivers_basin_y->setMaximum(hf.getSizeY());
-    ui->rivers_basin_x->setValue(cursorCell.x());
-    ui->rivers_basin_y->setValue(cursorCell.y());
-    ui->rivers_basin_x->blockSignals(false);
-    ui->rivers_basin_y->blockSignals(false);
 }
 
 void MainWindow::updateLightmap()
@@ -297,38 +239,6 @@ void MainWindow::redrawBaseTexture()
     updateTexture();
 }
 
-void MainWindow::redrawRiversLayer()
-{
-    computeRiversLayer();
-    updateTexture();
-}
-
-void MainWindow::redrawRidgesLayer()
-{
-    computeRidgesLayer();
-    updateTexture();
-}
-
-void MainWindow::redrawBaseRiversLayer()
-{
-    computeRiversLayer();
-    if (ui->dem_depthToWater->isChecked() ||
-        ui->dem_hand->isChecked() ||
-        ui->dem_riverDistEuclidean->isChecked() ||
-        ui->dem_riverDistFlow->isChecked())
-    {
-        computeBaseTexture();
-    }
-    updateTexture();
-}
-
-void MainWindow::redrawBaseRidgesLayer()
-{
-    computeRidgesLayer();
-    if (ui->dem_nni->isChecked())
-        computeBaseTexture();
-    updateTexture();
-}
 
 void MainWindow::modifyPalette()
 {
@@ -775,13 +685,6 @@ void MainWindow::queryRay(const Ray& ray)
             setValueNoSignal(ui->dem_zreduced_y, cursorCell.y());
             if (ui->dem_zreduced_converging->isChecked() || ui->dem_zreduced_diverging->isChecked()) {
                 redrawBaseTexture();
-            }
-        }
-        if (ui->btn_pickBasinLocation->isChecked()) {
-            setValueNoSignal(ui->rivers_basin_x, cursorCell.x());
-            setValueNoSignal(ui->rivers_basin_y, cursorCell.y());
-            if (ui->showBasins->isChecked() && ui->rivers_drainageBasinCoords->isChecked()) {
-                redrawRiversLayer();
             }
         }
     }

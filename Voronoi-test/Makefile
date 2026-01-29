@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -mno-direct-extern-access -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib -O2 -Wall -Wextra -mno-direct-extern-access -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -Iakirmse-mountains -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I. -I/usr/lib/qt6/mkspecs/linux-g++
+INCPATH       = -I. -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I. -I/usr/lib/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -69,16 +69,7 @@ SOURCES       = core.cpp \
 		ppa.cpp \
 		riversnet.cpp \
 		scalarfield.cpp \
-		terrainanalysis.cpp \
 		terrainwidget.cpp \
-		akirmse-mountains/divide_tree.cpp \
-		akirmse-mountains/domain_map.cpp \
-		akirmse-mountains/island_tree.cpp \
-		akirmse-mountains/latlng.cpp \
-		akirmse-mountains/line_tree.cpp \
-		akirmse-mountains/tile.cpp \
-		akirmse-mountains/tree_builder.cpp \
-		akirmse-mountains/utm_coordinate_system.cpp \
 		voronoi.cpp \
 		heightfieldWall.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
@@ -100,16 +91,7 @@ OBJECTS       = core.o \
 		ppa.o \
 		riversnet.o \
 		scalarfield.o \
-		terrainanalysis.o \
 		terrainwidget.o \
-		divide_tree.o \
-		domain_map.o \
-		island_tree.o \
-		latlng.o \
-		line_tree.o \
-		tile.o \
-		tree_builder.o \
-		utm_coordinate_system.o \
 		voronoi.o \
 		heightfieldWall.o \
 		qrc_resources.o \
@@ -416,21 +398,7 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		ppa.h \
 		riversnet.h \
 		scalarfield.h \
-		terrainanalysis.h \
 		terrainwidget.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/domain_map.h \
-		akirmse-mountains/island_tree.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/line_tree.h \
-		akirmse-mountains/pixel_array.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/tile.h \
-		akirmse-mountains/tree_builder.h \
-		akirmse-mountains/util.h \
-		akirmse-mountains/utm.h \
-		akirmse-mountains/utm_coordinate_system.h \
 		voronoi.h \
 		heightfieldWall.h core.cpp \
 		heightfield-breach.cpp \
@@ -449,16 +417,7 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		ppa.cpp \
 		riversnet.cpp \
 		scalarfield.cpp \
-		terrainanalysis.cpp \
 		terrainwidget.cpp \
-		akirmse-mountains/divide_tree.cpp \
-		akirmse-mountains/domain_map.cpp \
-		akirmse-mountains/island_tree.cpp \
-		akirmse-mountains/latlng.cpp \
-		akirmse-mountains/line_tree.cpp \
-		akirmse-mountains/tile.cpp \
-		akirmse-mountains/tree_builder.cpp \
-		akirmse-mountains/utm_coordinate_system.cpp \
 		voronoi.cpp \
 		heightfieldWall.cpp
 QMAKE_TARGET  = Voronoi
@@ -1089,8 +1048,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents core.h heightfield.h integerfield.h isolation.h mainwindow.h ppa.h riversnet.h scalarfield.h terrainanalysis.h terrainwidget.h akirmse-mountains/coordinate_system.h akirmse-mountains/divide_tree.h akirmse-mountains/domain_map.h akirmse-mountains/island_tree.h akirmse-mountains/latlng.h akirmse-mountains/line_tree.h akirmse-mountains/pixel_array.h akirmse-mountains/primitives.h akirmse-mountains/tile.h akirmse-mountains/tree_builder.h akirmse-mountains/util.h akirmse-mountains/utm.h akirmse-mountains/utm_coordinate_system.h voronoi.h heightfieldWall.h $(DISTDIR)/
-	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp isolation.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp ppa.cpp riversnet.cpp scalarfield.cpp terrainanalysis.cpp terrainwidget.cpp akirmse-mountains/divide_tree.cpp akirmse-mountains/domain_map.cpp akirmse-mountains/island_tree.cpp akirmse-mountains/latlng.cpp akirmse-mountains/line_tree.cpp akirmse-mountains/tile.cpp akirmse-mountains/tree_builder.cpp akirmse-mountains/utm_coordinate_system.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents core.h heightfield.h integerfield.h isolation.h mainwindow.h ppa.h riversnet.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h $(DISTDIR)/
+	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp isolation.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp ppa.cpp riversnet.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -1141,18 +1100,9 @@ moc_mainwindow.cpp: mainwindow.h \
 		heightfield.h \
 		scalarfield.h \
 		integerfield.h \
-		terrainanalysis.h \
-		riversnet.h \
-		ppa.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		isolation.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/akirmse-mountains -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_terrainwidget.cpp: terrainwidget.h \
 		core.h \
@@ -1161,7 +1111,7 @@ moc_terrainwidget.cpp: terrainwidget.h \
 		integerfield.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/akirmse-mountains -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1252,16 +1202,7 @@ main.o: main.cpp mainwindow.h \
 		core.h \
 		heightfield.h \
 		scalarfield.h \
-		integerfield.h \
-		terrainanalysis.h \
-		riversnet.h \
-		ppa.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		isolation.h
+		integerfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
@@ -1270,15 +1211,6 @@ mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
 		heightfield.h \
 		scalarfield.h \
 		integerfield.h \
-		terrainanalysis.h \
-		riversnet.h \
-		ppa.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		isolation.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow-draw-metrics.o mainwindow-draw-metrics.cpp
 
@@ -1288,15 +1220,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		heightfield.h \
 		scalarfield.h \
 		integerfield.h \
-		terrainanalysis.h \
-		riversnet.h \
-		ppa.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		isolation.h \
 		ui_mainwindow.h \
 		voronoi.h \
 		heightfieldWall.h
@@ -1320,93 +1243,12 @@ scalarfield.o: scalarfield.cpp scalarfield.h \
 		core.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scalarfield.o scalarfield.cpp
 
-terrainanalysis.o: terrainanalysis.cpp terrainanalysis.h \
-		heightfield.h \
-		scalarfield.h \
-		core.h \
-		integerfield.h \
-		riversnet.h \
-		ppa.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		isolation.h \
-		akirmse-mountains/tree_builder.h \
-		akirmse-mountains/domain_map.h \
-		akirmse-mountains/tile.h \
-		akirmse-mountains/pixel_array.h \
-		akirmse-mountains/line_tree.h \
-		akirmse-mountains/utm_coordinate_system.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainanalysis.o terrainanalysis.cpp
-
 terrainwidget.o: terrainwidget.cpp terrainwidget.h \
 		core.h \
 		heightfield.h \
 		scalarfield.h \
 		integerfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainwidget.o terrainwidget.cpp
-
-divide_tree.o: akirmse-mountains/divide_tree.cpp akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/island_tree.h \
-		akirmse-mountains/line_tree.h \
-		akirmse-mountains/util.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o divide_tree.o akirmse-mountains/divide_tree.cpp
-
-domain_map.o: akirmse-mountains/domain_map.cpp akirmse-mountains/domain_map.h \
-		akirmse-mountains/tile.h \
-		akirmse-mountains/primitives.h \
-		scalarfield.h \
-		core.h \
-		akirmse-mountains/pixel_array.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o domain_map.o akirmse-mountains/domain_map.cpp
-
-island_tree.o: akirmse-mountains/island_tree.cpp akirmse-mountains/island_tree.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o island_tree.o akirmse-mountains/island_tree.cpp
-
-latlng.o: akirmse-mountains/latlng.cpp akirmse-mountains/latlng.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o latlng.o akirmse-mountains/latlng.cpp
-
-line_tree.o: akirmse-mountains/line_tree.cpp akirmse-mountains/line_tree.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/divide_tree.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/latlng.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o line_tree.o akirmse-mountains/line_tree.cpp
-
-tile.o: akirmse-mountains/tile.cpp akirmse-mountains/tile.h \
-		akirmse-mountains/primitives.h \
-		scalarfield.h \
-		core.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o akirmse-mountains/tile.cpp
-
-tree_builder.o: akirmse-mountains/tree_builder.cpp akirmse-mountains/tree_builder.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/domain_map.h \
-		akirmse-mountains/tile.h \
-		scalarfield.h \
-		core.h \
-		akirmse-mountains/pixel_array.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/divide_tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tree_builder.o akirmse-mountains/tree_builder.cpp
-
-utm_coordinate_system.o: akirmse-mountains/utm_coordinate_system.cpp akirmse-mountains/utm_coordinate_system.h \
-		akirmse-mountains/coordinate_system.h \
-		akirmse-mountains/primitives.h \
-		akirmse-mountains/latlng.h \
-		akirmse-mountains/util.h \
-		akirmse-mountains/utm.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utm_coordinate_system.o akirmse-mountains/utm_coordinate_system.cpp
 
 voronoi.o: voronoi.cpp voronoi.h \
 		heightfieldWall.h \
