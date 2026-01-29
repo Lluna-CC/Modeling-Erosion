@@ -709,4 +709,18 @@ void MainWindow::updateViewshedLocation()
 void MainWindow::computeVoronoi() {
     Voronoi::heightfieldVoronoi(&hf);
     //Voronoi::randomPointsTest();
+
+    Camera cam = widget -> getCamera();
+    Vector3 at = cam.getAt();
+    Vector3 eye = cam.getEye();
+    Vector3 up = cam.getUp();
+
+    std::cout << "Camera position: " << std::endl;
+    std::cout << eye[0] << " " << eye[1] << " " << eye[2] << std::endl;
+
+    std::cout << "Camera lookAt: " << std::endl;
+    std::cout << at[0] << " " << at[1] << " " << at[2] << std::endl;
+
+    std::cout << "Camera Up: " << std::endl;
+    std::cout << up[0] << " " << up[1] << " " << up[2] << std::endl;
 }

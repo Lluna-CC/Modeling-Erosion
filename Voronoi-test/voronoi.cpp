@@ -21,6 +21,7 @@ void Voronoi::heightfieldVoronoi(HeightField *hf) {
     int nx = hf -> getSizeX();
     int ny = hf -> getSizeY();
     double sizeX = hf -> getCellSize()[0];
+    double sizeY = hf -> getCellSize()[1];
     int nz = (max[2] - min[2])/sizeX; 
     int particles = nx*ny*nz/10000;
 
@@ -30,29 +31,48 @@ void Voronoi::heightfieldVoronoi(HeightField *hf) {
 
     double x,y,z;
     std::cout << "number of particles: " << particles << std::endl;
-    for (int i = 0; i < particles; ++i) {
-        x = min[0]+rnd()*(max[0]-min[0]);
-        y = min[1]+rnd()*(max[1]-min[1]);
-        z = min[2]+rnd()*(max[2]-min[2]);
-        if(hf_wall.point_inside(x,y,z)) con.put(i,x,y,z);
-        
+    /*for (int i = 0; i < nx - 1; ++i) {
+        for (int j = 0; j < ny - 1; ++j) {
+            for (int k = 0; k < 10; ++k) {
+                x = min[0] + i*sizeX + rnd()*(sizeX);
+                y = min[1] + j*sizeY  + rnd()*(sizeY);
+                double z_max = hf -> Height(Vector2(x,y));
+                z = min[2] + rnd()*(z_max - min[2]);
+                
+                int idx = i*ny*10 + j*10 + k;
+                con.put(idx,x,y,z);
+            }
+        }
+    }*/
+
+    int i = 0;
+    while (i < particles) {
+        x = min[0] + rnd()*(max[0] - min[0]);
+        y = min[1] + rnd()*(max[1] - min[1]);
+        double z_max = hf -> Height(Vector2(x,y));
+        z = min[2] + rnd()*(z_max - min[2]);
+
+        if(con.point_inside(x,y,z)) {
+            con.put(i,x,y,z);
+            ++i;
+        }
     }
 
-    std::cout << "Drawing particles into heightfield_voro_p.pov" << std::endl;
+    std::cout << "Drawing particles into VoronoiResults/heightfield_voro_p.pov" << std::endl;
     // Output the particle positions in gnuplot format
-    con.draw_particles_pov("heightfield_voro_p.pov");
+    con.draw_particles_pov("VoronoiResults/heightfield_voro_p.pov");
  
-    std::cout << "Drawing cells into heightfield_voro_v.pov" << std::endl;
+    std::cout << "Drawing cells into VoronoiResults/heightfield_voro_v.pov" << std::endl;
     // Output the Voronoi cells in gnuplot format
-    con.draw_cells_pov("heightfield_voro_v.pov");
+    con.draw_cells_pov("VoronoiResults/heightfield_voro_v.pov");
 
-    std::cout << "Drawing particles into heightfield_voro_p.gnu" << std::endl;
+    std::cout << "Drawing particles into VoronoiResults/heightfield_voro_p.gnu" << std::endl;
     // Output the particle positions in gnuplot format
-    con.draw_particles("heightfield_voro_p.gnu");
+    con.draw_particles("VoronoiResults/heightfield_voro_p.gnu");
  
-    std::cout << "Drawing cells into heightfield_voro_v.gnu" << std::endl;
+    std::cout << "Drawing cells into VoronoiResults/heightfield_voro_v.gnu" << std::endl;
     // Output the Voronoi cells in gnuplot format
-    con.draw_cells_gnuplot("heightfield_voro_v.gnu");
+    con.draw_cells_gnuplot("VoronoiResults/heightfield_voro_v.gnu");
 
     std::cout << "Done!" << std::endl;
 }

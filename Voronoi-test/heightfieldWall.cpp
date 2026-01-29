@@ -3,12 +3,12 @@ using namespace voro;
 
 bool HeightFieldWall::point_inside(double x, double y, double z) {
     double height = hf -> Height(Vector2(x,y), false);
-    return z < height;
+    return z <= height;
 }
 
 template<class vc_class> inline bool HeightFieldWall::cut_cell_base(vc_class &c, double x, double y, double z) {
     if (!point_inside(x,y,z)) return false;
-    Vector3 norm = hf -> Normal(Vector2(x,y), false); 
+    Vector3 norm = hf -> Normal(Vector2(x,y), true); 
     double height = hf -> Height(Vector2(x,y), false);
     double cos_a = dot(norm, Vector3(0,0,1));
     double dist = (height - z)*cos_a;
