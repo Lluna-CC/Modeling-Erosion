@@ -1,0 +1,6 @@
+            hmin    hmax
+aneto       2876    3403
+bassiero    2602    2902
+besiberri   2522    3028
+punta-alta  2496    3013
+salenques   2483    3286
