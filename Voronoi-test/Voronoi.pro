@@ -1,39 +1,77 @@
-QT       += core gui opengl
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui opengl widgets
 greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
 
 CONFIG += c++11
+CONFIG(release, release|debug):QMAKE_CXXFLAGS += -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib
+LIBS += -lvoro++
 
-INCLUDEPATH += code
-INCLUDEPATH += code/scenes
-INCLUDEPATH += code/widgets
-INCLUDEPATH += extlibs
-
-VPATH += code
+INCLUDEPATH += akirmse-mountains
 
 SOURCES += \
-    code/camera.cpp \
-    code/glutils.cpp \
-    code/glwidget.cpp \
-    code/main.cpp \
-    code/mainwindow.cpp \
-    code/model.cpp \
-    code/scenes/scenebase.cpp \
-    code/widgets/widgetbase.cpp \
+    core.cpp \
+    heightfield-breach.cpp \
+    heightfield-fill.cpp \
+    heightfield-metrics-hydrology.cpp \
+    heightfield-metrics-landforms.cpp \
+    heightfield-metrics-local.cpp \
+    heightfield-metrics-orometry.cpp \
+    heightfield-metrics-visibility.cpp \
+    heightfield.cpp \
+    integerfield.cpp \
+    isolation.cpp \
+    main.cpp \
+    mainwindow-draw-metrics.cpp \
+    mainwindow.cpp \
+    ppa.cpp \
+    riversnet.cpp \
+    scalarfield.cpp \
+    terrainanalysis.cpp \
+    terrainwidget.cpp \
+    akirmse-mountains/divide_tree.cpp \
+    akirmse-mountains/domain_map.cpp \
+    akirmse-mountains/island_tree.cpp \
+    akirmse-mountains/latlng.cpp \
+    akirmse-mountains/line_tree.cpp \
+    akirmse-mountains/tile.cpp \
+    akirmse-mountains/tree_builder.cpp \
+    akirmse-mountains/utm_coordinate_system.cpp \
+    voronoi.cpp \
+    heightfieldWall.cpp
 
 HEADERS += \
-    code/camera.h \
-    code/defines.h \
-    code/glutils.h \
-    code/glwidget.h \
-    code/mainwindow.h \
-    code/model.h \
-    code/scene.h \
-    code/scenes/scenebase.h \
-    code/widgets/widgetbase.h \
+    core.h \
+    heightfield.h \
+    integerfield.h \
+    isolation.h \
+    mainwindow.h \
+    ppa.h \
+    riversnet.h \
+    scalarfield.h \
+    terrainanalysis.h \
+    terrainwidget.h \
+    akirmse-mountains/coordinate_system.h \
+    akirmse-mountains/divide_tree.h \
+    akirmse-mountains/domain_map.h \
+    akirmse-mountains/island_tree.h \
+    akirmse-mountains/latlng.h \
+    akirmse-mountains/line_tree.h \
+    akirmse-mountains/pixel_array.h \
+    akirmse-mountains/primitives.h \
+    akirmse-mountains/tile.h \
+    akirmse-mountains/tree_builder.h \
+    akirmse-mountains/util.h \
+    akirmse-mountains/utm.h \
+    akirmse-mountains/utm_coordinate_system.h \
+    voronoi.h \
+    heightfieldWall.h 
 
 FORMS += \
-    forms/mainwindow.ui \
-    forms/widgetbase.ui \
+    mainwindow.ui
 
-RESOURCES += shaders.qrc
+RESOURCES += \
+    resources.qrc
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
