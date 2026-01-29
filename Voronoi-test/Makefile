@@ -62,7 +62,6 @@ SOURCES       = core.cpp \
 		heightfield-metrics-visibility.cpp \
 		heightfield.cpp \
 		integerfield.cpp \
-		isolation.cpp \
 		main.cpp \
 		mainwindow-draw-metrics.cpp \
 		mainwindow.cpp \
@@ -82,7 +81,6 @@ OBJECTS       = core.o \
 		heightfield-metrics-visibility.o \
 		heightfield.o \
 		integerfield.o \
-		isolation.o \
 		main.o \
 		mainwindow-draw-metrics.o \
 		mainwindow.o \
@@ -389,7 +387,6 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		Voronoi.pro core.h \
 		heightfield.h \
 		integerfield.h \
-		isolation.h \
 		mainwindow.h \
 		scalarfield.h \
 		terrainwidget.h \
@@ -404,7 +401,6 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		heightfield-metrics-visibility.cpp \
 		heightfield.cpp \
 		integerfield.cpp \
-		isolation.cpp \
 		main.cpp \
 		mainwindow-draw-metrics.cpp \
 		mainwindow.cpp \
@@ -1040,8 +1036,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents core.h heightfield.h integerfield.h isolation.h mainwindow.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h $(DISTDIR)/
-	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp isolation.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents core.h heightfield.h integerfield.h mainwindow.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h $(DISTDIR)/
+	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -1181,13 +1177,6 @@ integerfield.o: integerfield.cpp integerfield.h \
 		core.h \
 		scalarfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o integerfield.o integerfield.cpp
-
-isolation.o: isolation.cpp isolation.h \
-		heightfield.h \
-		scalarfield.h \
-		core.h \
-		integerfield.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isolation.o isolation.cpp
 
 main.o: main.cpp mainwindow.h \
 		terrainwidget.h \

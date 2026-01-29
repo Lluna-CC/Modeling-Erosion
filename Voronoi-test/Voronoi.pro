@@ -17,7 +17,6 @@ SOURCES += \
     heightfield-metrics-visibility.cpp \
     heightfield.cpp \
     integerfield.cpp \
-    isolation.cpp \
     main.cpp \
     mainwindow-draw-metrics.cpp \
     mainwindow.cpp \
@@ -30,7 +29,6 @@ HEADERS += \
     core.h \
     heightfield.h \
     integerfield.h \
-    isolation.h \
     mainwindow.h \
     scalarfield.h \
     terrainwidget.h \
