@@ -66,8 +66,6 @@ SOURCES       = core.cpp \
 		main.cpp \
 		mainwindow-draw-metrics.cpp \
 		mainwindow.cpp \
-		ppa.cpp \
-		riversnet.cpp \
 		scalarfield.cpp \
 		terrainwidget.cpp \
 		voronoi.cpp \
@@ -88,8 +86,6 @@ OBJECTS       = core.o \
 		main.o \
 		mainwindow-draw-metrics.o \
 		mainwindow.o \
-		ppa.o \
-		riversnet.o \
 		scalarfield.o \
 		terrainwidget.o \
 		voronoi.o \
@@ -395,8 +391,6 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		integerfield.h \
 		isolation.h \
 		mainwindow.h \
-		ppa.h \
-		riversnet.h \
 		scalarfield.h \
 		terrainwidget.h \
 		voronoi.h \
@@ -414,8 +408,6 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		main.cpp \
 		mainwindow-draw-metrics.cpp \
 		mainwindow.cpp \
-		ppa.cpp \
-		riversnet.cpp \
 		scalarfield.cpp \
 		terrainwidget.cpp \
 		voronoi.cpp \
@@ -1048,8 +1040,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents core.h heightfield.h integerfield.h isolation.h mainwindow.h ppa.h riversnet.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h $(DISTDIR)/
-	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp isolation.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp ppa.cpp riversnet.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents core.h heightfield.h integerfield.h isolation.h mainwindow.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h $(DISTDIR)/
+	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp isolation.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -1224,20 +1216,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		voronoi.h \
 		heightfieldWall.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
-
-ppa.o: ppa.cpp ppa.h \
-		heightfield.h \
-		scalarfield.h \
-		core.h \
-		integerfield.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ppa.o ppa.cpp
-
-riversnet.o: riversnet.cpp riversnet.h \
-		integerfield.h \
-		core.h \
-		heightfield.h \
-		scalarfield.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o riversnet.o riversnet.cpp
 
 scalarfield.o: scalarfield.cpp scalarfield.h \
 		core.h

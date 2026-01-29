@@ -21,8 +21,6 @@ SOURCES += \
     main.cpp \
     mainwindow-draw-metrics.cpp \
     mainwindow.cpp \
-    ppa.cpp \
-    riversnet.cpp \
     scalarfield.cpp \
     terrainwidget.cpp \
     voronoi.cpp \
@@ -34,8 +32,6 @@ HEADERS += \
     integerfield.h \
     isolation.h \
     mainwindow.h \
-    ppa.h \
-    riversnet.h \
     scalarfield.h \
     terrainwidget.h \
     voronoi.h \
