@@ -1,3 +1,7 @@
+#ifndef HEIGHTFIELDWALL_HH
+#define HEIGHTFIELDWALL_HH
+
+
 #include "voro++.hh"
 #include "heightfield.h"
 #include "core.h"
@@ -21,3 +25,5 @@ private:
     HeightField *hf;
     int w_id;
 };
+
+#endif

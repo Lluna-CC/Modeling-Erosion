@@ -9,9 +9,10 @@ bool HeightFieldWall::point_inside(double x, double y, double z) {
 template<class vc_class> inline bool HeightFieldWall::cut_cell_base(vc_class &c, double x, double y, double z) {
     if (!point_inside(x,y,z)) return false;
     Vector3 norm = hf -> Normal(Vector2(x,y), true); 
-    double height = hf -> Height(Vector2(x,y), false);
-    double cos_a = dot(norm, Vector3(0,0,1));
+    double height = hf -> Height(Vector2(x,y), true);
+    double cos_a = dot(norm, Vector3(1,0,0));
     double dist = (height - z)*cos_a;
+    if (z < 0.95*height) return false;
 
     return c.nplane(norm[0], norm[1], norm[2], dist*dist,w_id);
 }

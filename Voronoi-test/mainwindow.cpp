@@ -33,12 +33,15 @@ MainWindow::MainWindow(QWidget *parent)
     createPresets();
     updatePresetInfo();
 
+    
+
     // group radio buttons in DEM toolbox to be mutually exclusive across pages
     baseTexButtonGroup = new QButtonGroup(this);
     QList<QRadioButton*> allRadioButtons = ui->demToolbox->findChildren<QRadioButton*>();
     for (QRadioButton* rb : allRadioButtons) {
         baseTexButtonGroup->addButton(rb);
     }
+    
 }
 
 MainWindow::~MainWindow()
@@ -176,6 +179,9 @@ void MainWindow::createActions()
     connect(ui->dem_nni_relative, SIGNAL(toggled(bool)), this, SLOT(redrawBaseTexture()));
 
    
+    connect(ui->render_cells, SIGNAL(toggled(bool)), this, SLOT(changeRenderCells()));
+    connect(ui->render_particles, SIGNAL(toggled(bool)), this, SLOT(changeRenderParticles()));
+    connect(ui->render_original, SIGNAL(toggled(bool)), this, SLOT(changeRenderOriginal()));
 
 }
 
@@ -707,20 +713,23 @@ void MainWindow::updateViewshedLocation()
 }
 
 void MainWindow::computeVoronoi() {
-    Voronoi::heightfieldVoronoi(&hf);
+    
     //Voronoi::randomPointsTest();
+    CellDecomposition* cellDecomp = new CellDecomposition();
+    Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    Camera cam = widget -> getCamera();
-    Vector3 at = cam.getAt();
-    Vector3 eye = cam.getEye();
-    Vector3 up = cam.getUp();
+    widget -> setDecomposition(cellDecomp);
+    
+}
 
-    std::cout << "Camera position: " << std::endl;
-    std::cout << eye[0] << " " << eye[1] << " " << eye[2] << std::endl;
+void MainWindow::changeRenderCells() {
+    widget -> changeRenderCells();
+}
 
-    std::cout << "Camera lookAt: " << std::endl;
-    std::cout << at[0] << " " << at[1] << " " << at[2] << std::endl;
+void MainWindow::changeRenderParticles() {
+    widget -> changeRenderParticles();
+}
 
-    std::cout << "Camera Up: " << std::endl;
-    std::cout << up[0] << " " << up[1] << " " << up[2] << std::endl;
+void MainWindow::changeRenderOriginal() {
+    widget -> changeRenderOriginal();
 }

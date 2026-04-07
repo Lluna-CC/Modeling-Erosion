@@ -31,6 +31,9 @@ public slots:
     void modifyPalette();
     void resetPaletteRange();
     void computeVoronoi();
+    void changeRenderCells();
+    void changeRenderParticles();
+    void changeRenderOriginal();
 
     // terrain load actions
     void loadPNG();

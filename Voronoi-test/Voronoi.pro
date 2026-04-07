@@ -23,7 +23,8 @@ SOURCES += \
     scalarfield.cpp \
     terrainwidget.cpp \
     voronoi.cpp \
-    heightfieldWall.cpp
+    heightfieldWall.cpp \
+    celldecomposition.cpp
 
 HEADERS += \
     core.h \
@@ -33,7 +34,8 @@ HEADERS += \
     scalarfield.h \
     terrainwidget.h \
     voronoi.h \
-    heightfieldWall.h 
+    heightfieldWall.h \
+    celldecomposition.h
 
 FORMS += \
     mainwindow.ui

@@ -742,8 +742,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
-             <height>472</height>
+             <width>324</width>
+             <height>629</height>
             </rect>
            </property>
            <attribute name="label">
@@ -3045,21 +3045,62 @@
        <attribute name="title">
         <string>Voronoi</string>
        </attribute>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QGroupBox" name="groupBox">
         <property name="geometry">
          <rect>
-          <x>90</x>
-          <y>20</y>
-          <width>146</width>
-          <height>36</height>
+          <x>10</x>
+          <y>30</y>
+          <width>291</width>
+          <height>161</height>
          </rect>
         </property>
-        <property name="focusPolicy">
-         <enum>Qt::FocusPolicy::NoFocus</enum>
+        <property name="title">
+         <string>Voronoi Options</string>
         </property>
-        <property name="text">
-         <string>Compute Voronoi Cells</string>
-        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="focusPolicy">
+              <enum>Qt::FocusPolicy::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Compute Voronoi Cells</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QRadioButton" name="render_cells">
+               <property name="text">
+                <string>Render Cells</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="render_particles">
+               <property name="text">
+                <string>Render Particles</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="render_original">
+               <property name="text">
+                <string>Render Original</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>
@@ -3176,8 +3217,8 @@
    <slot>computeVoronoi()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1650</x>
-     <y>118</y>
+     <x>1809</x>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel">
      <x>1617</x>

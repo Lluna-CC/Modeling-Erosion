@@ -8,6 +8,7 @@
 #include <QOpenGLShaderProgram>
 #include "core.h"
 #include "heightfield.h"
+#include "celldecomposition.h"
 
 
 class TerrainWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
@@ -28,6 +29,12 @@ public:
     void showCursor(const Vector3& worldPos);
     void hideCursor();
 
+    void setDecomposition(CellDecomposition* decomp); 
+    void changeRenderMode();
+    void changeRenderCells();
+    void changeRenderParticles();
+    void changeRenderOriginal();
+    
 public slots:
     virtual void mousePressEvent(QMouseEvent*);
     virtual void mouseMoveEvent(QMouseEvent*);
@@ -64,12 +71,18 @@ protected:
     Vector3 currentAt = Vector3(0);
     Vector3 toAt = Vector3(0);
     int stepAt = 0;
+   
 
     // Cursor
     bool cursorEnabled;
     float cursorRadius;
     Vector3 cursorColor;
     Vector3 cursorPos;
+
+    CellDecomposition* cellDecomp = nullptr;
+    bool renderCells = true;
+    bool renderParticles = false;
+    bool renderOriginal = false;
 };
 
 #endif // TERRAINWIDGET_H

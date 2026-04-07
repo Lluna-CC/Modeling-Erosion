@@ -11,7 +11,7 @@ double maxElevation(HeightField *hf) {
 
 }
 
-void Voronoi::heightfieldVoronoi(HeightField *hf) {
+void Voronoi::heightfieldVoronoi(HeightField *hf, CellDecomposition* decomp) {
     
     std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
@@ -23,29 +23,53 @@ void Voronoi::heightfieldVoronoi(HeightField *hf) {
     double sizeX = hf -> getCellSize()[0];
     double sizeY = hf -> getCellSize()[1];
     int nz = (max[2] - min[2])/sizeX; 
-    int particles = nx*ny*nz/10000;
-
+    
+    
     container con(min[0],max[0], min[1],max[1], min[2],max[2], nx, ny, nz, false, false, false, 2);
     HeightFieldWall hf_wall(hf);
     con.add_wall(hf_wall);
 
     double x,y,z;
-    std::cout << "number of particles: " << particles << std::endl;
-    /*for (int i = 0; i < nx - 1; ++i) {
-        for (int j = 0; j < ny - 1; ++j) {
-            for (int k = 0; k < 10; ++k) {
-                x = min[0] + i*sizeX + rnd()*(sizeX);
-                y = min[1] + j*sizeY  + rnd()*(sizeY);
+    
+    
+    int block = 5;
+    int zSamples = 20;
+    int particles = 0;
+    //int block = ny;
+    //int zSamples = 1;
+    
+    
+    for (int i = 0; i < nx/block; ++i) {
+        for (int j = 0; j < ny/block; ++j) {
+            for (int k = 0; k < zSamples; ++k) {
+                x = min[0] + i*block*sizeX + rnd()*(block*sizeX);
+                y = min[1] + j*block*sizeY  + rnd()*(block*sizeY);
                 double z_max = hf -> Height(Vector2(x,y));
                 z = min[2] + rnd()*(z_max - min[2]);
                 
-                int idx = i*ny*10 + j*10 + k;
-                con.put(idx,x,y,z);
+                int idx = i*ny/block*zSamples + j*zSamples + k;
+                con.put(particles,x,y,z);
+                ++particles;
             }
         }
-    }*/
-
-    int i = 0;
+    }
+   
+    
+    c_loop_all loopAll(con);
+    std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
+     
+    if(!loopAll.start()) return;
+    decomp -> setNumCells(particles);
+    do {
+        voronoicell_neighbor c;
+        //std::cout << "a" << std::endl;
+        con.compute_cell(c,loopAll);
+        if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
+        decomp -> addCell(c,loopAll.x(), loopAll.y(), loopAll.z(), loopAll.pid());
+        
+    }while (loopAll.inc()); 
+    std::cout << "Decomposition ended" << std::endl;
+    /*int i = 0;
     while (i < particles) {
         x = min[0] + rnd()*(max[0] - min[0]);
         y = min[1] + rnd()*(max[1] - min[1]);
@@ -56,25 +80,8 @@ void Voronoi::heightfieldVoronoi(HeightField *hf) {
             con.put(i,x,y,z);
             ++i;
         }
-    }
-
-    std::cout << "Drawing particles into VoronoiResults/heightfield_voro_p.pov" << std::endl;
-    // Output the particle positions in gnuplot format
-    con.draw_particles_pov("VoronoiResults/heightfield_voro_p.pov");
- 
-    std::cout << "Drawing cells into VoronoiResults/heightfield_voro_v.pov" << std::endl;
-    // Output the Voronoi cells in gnuplot format
-    con.draw_cells_pov("VoronoiResults/heightfield_voro_v.pov");
-
-    std::cout << "Drawing particles into VoronoiResults/heightfield_voro_p.gnu" << std::endl;
-    // Output the particle positions in gnuplot format
-    con.draw_particles("VoronoiResults/heightfield_voro_p.gnu");
- 
-    std::cout << "Drawing cells into VoronoiResults/heightfield_voro_v.gnu" << std::endl;
-    // Output the Voronoi cells in gnuplot format
-    con.draw_cells_gnuplot("VoronoiResults/heightfield_voro_v.gnu");
-
-    std::cout << "Done!" << std::endl;
+    }*/
+    
 }
 
 void Voronoi::tethraedronTest() {
