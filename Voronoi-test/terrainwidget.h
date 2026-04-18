@@ -62,7 +62,7 @@ protected:
     GLuint numTriangles = 0;
     GLuint texId = 0;
     GLuint skyboxVAO = 0;    
-    QOpenGLShaderProgram shaderTerrain, shaderSkybox;
+    QOpenGLShaderProgram shaderTerrain, shaderSkybox, shaderVoro;
 
     // Camera
     Camera camera;

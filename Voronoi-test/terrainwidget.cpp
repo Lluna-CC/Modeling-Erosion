@@ -42,6 +42,10 @@ void TerrainWidget::initializeGL()
     shaderSkybox.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/skybox.vert");
     shaderSkybox.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/skybox.frag");
     shaderSkybox.link();
+    shaderVoro.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/voro.vert");
+    shaderVoro.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/voro.frag");
+    shaderVoro.addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/voro.geom");  
+    shaderVoro.link();
 
     glGenVertexArrays(1, &skyboxVAO);
 
@@ -96,7 +100,7 @@ void TerrainWidget::paintGL()
 
     // Terrain
     if (cellDecomp != nullptr && !renderOriginal) {
-        GLuint shader = shaderTerrain.programId();
+        GLuint shader = shaderVoro.programId();
         glUseProgram(shader);
         
 
@@ -382,7 +386,7 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
 void TerrainWidget::setDecomposition(CellDecomposition* decomp) {
     cellDecomp = decomp; 
     makeCurrent();
-    cellDecomp -> setShader(&shaderTerrain); 
+    cellDecomp -> setShader(&shaderVoro); 
     cellDecomp -> initializeSphereVAO(0);
     cellDecomp -> fullMeshDecomposition();
     

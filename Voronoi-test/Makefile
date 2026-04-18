@@ -1075,9 +1075,12 @@ compiler_rcc_clean:
 qrc_resources.cpp: resources.qrc \
 		/usr/lib/qt6/rcc \
 		shaders/skybox.vert \
+		shaders/voro.frag \
+		shaders/voro.vert \
 		shaders/terrain.frag \
 		shaders/skybox.frag \
-		shaders/terrain.vert
+		shaders/terrain.vert \
+		shaders/voro.geom
 	/usr/lib/qt6/rcc -name resources resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

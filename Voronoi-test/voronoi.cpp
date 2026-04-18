@@ -45,7 +45,7 @@ void Voronoi::heightfieldVoronoi(HeightField *hf, CellDecomposition* decomp) {
                 x = min[0] + i*block*sizeX + rnd()*(block*sizeX);
                 y = min[1] + j*block*sizeY  + rnd()*(block*sizeY);
                 double z_max = hf -> Height(Vector2(x,y));
-                z = min[2] + rnd()*(z_max - min[2]);
+                z = min[2] + rnd()*(max[2] - min[2]);
                 
                 int idx = i*ny/block*zSamples + j*zSamples + k;
                 con.put(particles,x,y,z);
@@ -65,7 +65,13 @@ void Voronoi::heightfieldVoronoi(HeightField *hf, CellDecomposition* decomp) {
         //std::cout << "a" << std::endl;
         con.compute_cell(c,loopAll);
         if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
-        decomp -> addCell(c,loopAll.x(), loopAll.y(), loopAll.z(), loopAll.pid());
+        double cellX = loopAll.x();
+        double cellY = loopAll.y();
+        double cellZ = loopAll.z();
+        double z_max = hf -> Height(Vector2(cellX,cellY));
+
+        if (cellZ <= z_max) decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid());
+        //else std::cout << "OUT OF RANGE!" << std::endl;
         
     }while (loopAll.inc()); 
     std::cout << "Decomposition ended" << std::endl;
