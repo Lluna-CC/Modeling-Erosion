@@ -67,15 +67,18 @@ void TerrainWidget::resizeGL(int w, int h)
 
 void TerrainWidget::paintGL()
 {
-    if (cellDecomp == nullptr) {
-        double camDist = Norm(camera.getEye() - terrainBBox.center());
-        double tradius = terrainBBox.radius();
-        if (camDist < terrainBBox.radius())
-            camera.setPlanes(100, 2*tradius);
-        else
-            camera.setPlanes(camDist - tradius, 2 * tradius + camDist);
+    
+    Box3 currentBox; 
+    if (cellDecomp == nullptr || !renderOriginal) currentBox = terrainBBox;
+    else currentBox = decompBox; 
 
-    }
+    double camDist = Norm(camera.getEye() - currentBox.center());
+    double tradius = currentBox.radius();
+    if (camDist < currentBox.radius())
+        camera.setPlanes(100, 2*tradius);
+    else
+        camera.setPlanes(camDist - tradius, 2 * tradius + camDist);
+
     
     // Clear
     glClearColor(0.62f, 0.74f, 0.85f, 1.f);
@@ -101,22 +104,21 @@ void TerrainWidget::paintGL()
         
 
         QMatrix4x4 matPerspective;
-            matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
-                            (GLdouble)width() / (GLdouble)height(),
-                            camera.getNearPlane()/2,camera.getFarPlane()*2);
-            
-            glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
+        matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
+                        (GLdouble)width() / (GLdouble)height(),
+                        camera.getNearPlane()/2,camera.getFarPlane()*2);
+        
+        glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
 
-            QMatrix4x4 matView;
-            matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
-                        QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
-                        QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
-            glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
+        QMatrix4x4 matView;
+        matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
+                    QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
+                    QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
+        glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
 
-        //Irrelevant
-        glUniform2f(glGetUniformLocation(shader, "u_worldMin"), 1.0, 1.0); 
-        glUniform2f(glGetUniformLocation(shader, "u_worldSize"), width(), height());
-    
+        
+        glUniform2f(glGetUniformLocation(shader, "u_worldMin"), decompBox.getMin()[0], decompBox.getMin()[1]);
+        glUniform2f(glGetUniformLocation(shader, "u_worldSize"), decompBox.width(), decompBox.height());
         if (cursorEnabled) {
             glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), cursorRadius);
             glUniform4f(glGetUniformLocation(shader, "u_cursorColor"), cursorColor[0], cursorColor[1],
@@ -127,9 +129,11 @@ void TerrainWidget::paintGL()
             glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), -1);
         }
 
-        glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texId);
 		glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
+
+        
         if (renderCells) cellDecomp -> renderCells();
         else {
             cellDecomp -> renderParticles();
@@ -385,10 +389,11 @@ void TerrainWidget::setDecomposition(CellDecomposition* decomp) {
     cellDecomp -> setShader(&shaderTerrain); 
     cellDecomp -> initializeSphereVAO(0);
     cellDecomp -> fullMeshDecomposition();
-    
-    camera = Camera::View(Box3(
+    decompBox = Box3(
 		Vector3(cellDecomp -> getMin()[0], cellDecomp -> getMin()[1], cellDecomp -> getMin()[2]),
-		Vector3(cellDecomp -> getMax()[0], cellDecomp -> getMax()[1], cellDecomp -> getMax()[2])));
+		Vector3(cellDecomp -> getMax()[0], cellDecomp -> getMax()[1], cellDecomp -> getMax()[2]));
+
+    camera = Camera::View(decompBox);
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
 }
 

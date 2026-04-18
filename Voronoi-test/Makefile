@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Voronoi1.0.0
-DISTDIR = /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/.tmp/Voronoi1.0.0
+DISTDIR = /home/lluna/Documentos/Modeling-Erosion/Voronoi-test/.tmp/Voronoi1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/usr/lib -Wl,-rpath-link,/usr/lib
 LIBS          = $(SUBLIBS) -lvoro++ /usr/lib/libQt6OpenGLWidgets.so /usr/lib/libQt6OpenGL.so /usr/lib/libQt6Widgets.so /usr/lib/libQt6Gui.so /usr/lib/libGLX.so /usr/lib/libOpenGL.so /usr/lib/libQt6Core.so -lpthread -lGLX -lOpenGL   
@@ -106,11 +106,51 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_KDSoapServer.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackCore.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackWidgets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_KQuickImageEditor.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3drender.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3drender_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_charts.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_charts_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_concurrent.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_connectivity_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core5compat.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core5compat_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_dbus_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_designer.pri \
@@ -126,13 +166,20 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphs_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpc.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpc_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_input_support_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_jsonrpc_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation_private.pri \
@@ -154,7 +201,15 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labssynchronizer_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_languageserver_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_linguist.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_location.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_location_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottie.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottie_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagegenerator_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimedia.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimedia_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimediaquick_private.pri \
@@ -165,6 +220,8 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_networkauth.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_networkauth_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_nfc.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_nfc_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_openglwidgets.pri \
@@ -181,6 +238,16 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_positioningquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatch_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
@@ -229,6 +296,10 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
@@ -291,6 +362,11 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickvectorimagehelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_repparser.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxmlglobal_private.pri \
@@ -300,6 +376,10 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialport.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialport_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_shadertools.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_shadertools_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_spatialaudio.pri \
@@ -354,12 +434,27 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_websockets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_websockets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webview.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webview_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_widgets_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_wl_shell_integration_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroCore.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroCoro.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroDBus.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroNetwork.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroQml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroQuick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroTest.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroWebSockets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_Qt6Keychain.pri \
 		/usr/lib/qt6/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/qt6/mkspecs/linux-g++/qmake.conf \
@@ -437,11 +532,51 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_KDSoapServer.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackCore.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackWidgets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_KQuickImageEditor.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3drender.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_3drender_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_charts.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_charts_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_concurrent.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_connectivity_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core5compat.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core5compat_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_core_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_dbus_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_designer.pri \
@@ -457,13 +592,20 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphs_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpc.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpc_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_input_support_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_jsonrpc_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation_private.pri \
@@ -485,7 +627,15 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labssynchronizer_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_languageserver_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_linguist.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_location.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_location_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottie.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottie_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagegenerator_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimedia.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimedia_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_multimediaquick_private.pri \
@@ -496,6 +646,8 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_networkauth.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_networkauth_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_nfc.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_nfc_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_openglwidgets.pri \
@@ -512,6 +664,16 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_positioningquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatch_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
@@ -560,6 +722,10 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
@@ -622,6 +788,11 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickvectorimagehelpers_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_repparser.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxml_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_scxmlglobal_private.pri \
@@ -631,6 +802,10 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialport.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_serialport_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_shadertools.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_shadertools_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_spatialaudio.pri \
@@ -685,12 +860,27 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_websockets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_websockets_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webview.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webview_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_widgets_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_wl_shell_integration_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib/qt6/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroCore.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroCoro.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroDBus.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroNetwork.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroQml.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroQuick.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroTest.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_QCoroWebSockets.pri \
+		/usr/lib/qt6/mkspecs/modules/qt_Qt6Keychain.pri \
 		/usr/lib/qt6/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/qt6/mkspecs/linux-g++/qmake.conf \
@@ -739,11 +929,51 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_KDSoapServer.pri:
 /usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackCore.pri:
 /usr/lib/qt6/mkspecs/modules/qt_KF6UserFeedbackWidgets.pri:
+/usr/lib/qt6/mkspecs/modules/qt_KQuickImageEditor.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3danimation_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dcore_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dextras_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dinput_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dlogic_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquick_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickanimation_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickextras_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickinput_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquicklogic_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickrender_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene2d_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3dquickscene3d_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3drender.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_3drender_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_bluetooth_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_charts.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_charts_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_chartsqml_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_concurrent.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_connectivity_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_core.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_core5compat.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_core5compat_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_core_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualization_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_datavisualizationqml_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_dbus.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_dbus_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_designer.pri:
@@ -759,13 +989,20 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_graphs_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_graphswidgets_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_grpc.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_grpc_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_grpcquick_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_gui_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_help.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_help_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_httpserver_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_input_support_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_jsonrpc_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_kms_support_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_labsanimation_private.pri:
@@ -787,7 +1024,15 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_labssynchronizer_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_languageserver_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_linguist.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_location.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_location_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_lottie.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_lottie_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagegenerator_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_lottievectorimagehelpers_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_multimedia.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_multimedia_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_multimediaquick_private.pri:
@@ -798,6 +1043,8 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_networkauth.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_networkauth_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_nfc.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_nfc_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_opengl.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_opengl_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_openglwidgets.pri:
@@ -814,6 +1061,16 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_positioningquick_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_printsupport_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobuf_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtcoretypes_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufqtguitypes_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufquick_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_protobufwellknowntypes_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatch_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri:
@@ -862,6 +1119,10 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticleeffects.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3dparticles_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysics_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_quick3dphysicshelpers_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri:
@@ -924,6 +1185,11 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_quickvectorimagehelpers_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjects_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_remoteobjectsqml_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_repparser.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_scxml.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_scxml_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_scxmlglobal_private.pri:
@@ -933,6 +1199,10 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_sensors_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_sensorsquick_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_serialbus_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_serialport.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_serialport_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_shadertools.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_shadertools_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_spatialaudio.pri:
@@ -987,12 +1257,27 @@ Makefile: Voronoi.pro /usr/lib/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/qt6/mks
 /usr/lib/qt6/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_websockets.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_websockets_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_webview.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_webview_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick.pri:
+/usr/lib/qt6/mkspecs/modules/qt_lib_webviewquick_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_widgets.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_widgets_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_wl_shell_integration_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_xml.pri:
 /usr/lib/qt6/mkspecs/modules/qt_lib_xml_private.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroCore.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroCoro.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroDBus.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroNetwork.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroQml.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroQuick.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroTest.pri:
+/usr/lib/qt6/mkspecs/modules/qt_QCoroWebSockets.pri:
+/usr/lib/qt6/mkspecs/modules/qt_Qt6Keychain.pri:
 /usr/lib/qt6/mkspecs/features/qt_functions.prf:
 /usr/lib/qt6/mkspecs/features/qt_config.prf:
 /usr/lib/qt6/mkspecs/linux-g++/qmake.conf:
@@ -1098,7 +1383,7 @@ moc_mainwindow.cpp: mainwindow.h \
 		celldecomposition.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documentos/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documentos/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_terrainwidget.cpp: terrainwidget.h \
 		core.h \
@@ -1108,7 +1393,7 @@ moc_terrainwidget.cpp: terrainwidget.h \
 		celldecomposition.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documentos/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documentos/Modeling-Erosion/Voronoi-test -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

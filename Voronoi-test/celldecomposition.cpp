@@ -120,7 +120,7 @@ void CellDecomposition::renderCells() {
 
     for (int i = 0; i < cells.size(); ++i) {
 
-        /*bool external = false;
+        /* bool external = false;
         for (int j = 0; j < cells[i].neighbors.size(); ++j) {
            if (cells[i].neighbors[j] == -99)  {
                 external = true;
@@ -129,6 +129,7 @@ void CellDecomposition::renderCells() {
         }
 
         if (external) continue; */
+
         glBindVertexArray(cellVAOs[i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
@@ -151,7 +152,7 @@ void CellDecomposition::fullMeshDecomposition() {
     for (int i = 0; i < cells.size(); ++i) {
         //std::cout << "Current Mesh Iteration: " << i << std::endl;
         float cellDist = minMaxDistance(cells[i].vertices);
-        if (cellDist > boxDist/2) continue;
+        if (cellDist > 0.8*boxDist) continue;
 
         cellToMesh(cells[i].vertices, cells[i].faces, cellVAOs[i], bufferVerts[i], bufferIndices[i], cells[i].nTriangles);
         //std::cout << cells[i].faces.size() << std::endl;
