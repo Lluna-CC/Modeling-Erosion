@@ -57,6 +57,7 @@ protected:
 
     // OpenGL render
     Box3 terrainBBox;
+    Box3 decompBox;
     GLuint meshVAO = 0;
     GLuint bufferVerts = 0, bufferIndices = 0;
     GLuint numTriangles = 0;
