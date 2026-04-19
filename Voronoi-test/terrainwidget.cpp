@@ -416,3 +416,21 @@ void TerrainWidget::changeRenderOriginal() {
     renderOriginal = !renderOriginal;
     update();
 }
+
+void TerrainWidget::keyPressEvent(QKeyEvent* event) {
+    if (event -> key() == Qt::Key_R) {
+        shaderTerrain.removeAllShaders();
+        shaderTerrain.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/terrain.vert");
+        shaderTerrain.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/terrain.frag");
+        shaderTerrain.link();
+        shaderSkybox.removeAllShaders();
+        shaderSkybox.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/skybox.vert");
+        shaderSkybox.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/skybox.frag");
+        shaderSkybox.link();
+        shaderVoro.removeAllShaders();
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/voro.vert");
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/voro.frag");
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/voro.geom");  
+        shaderVoro.link(); 
+    }
+}

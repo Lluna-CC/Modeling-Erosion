@@ -50,6 +50,8 @@ template <> constexpr inline auto TerrainWidget::qt_create_metaobjectdata<qt_met
         "wheelEvent",
         "QWheelEvent*",
         "event",
+        "keyPressEvent",
+        "QKeyEvent*",
         "resetCamera"
     };
 
@@ -76,8 +78,12 @@ template <> constexpr inline auto TerrainWidget::qt_create_metaobjectdata<qt_met
         QtMocHelpers::SlotData<void(QWheelEvent *)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 10, 11 },
         }}),
+        // Slot 'keyPressEvent'
+        QtMocHelpers::SlotData<void(QKeyEvent *)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 13, 11 },
+        }}),
         // Slot 'resetCamera'
-        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -107,7 +113,8 @@ void TerrainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 3: _t->mouseMoveEvent((*reinterpret_cast<std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
         case 4: _t->mouseReleaseEvent((*reinterpret_cast<std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
         case 5: _t->wheelEvent((*reinterpret_cast<std::add_pointer_t<QWheelEvent*>>(_a[1]))); break;
-        case 6: _t->resetCamera(); break;
+        case 6: _t->keyPressEvent((*reinterpret_cast<std::add_pointer_t<QKeyEvent*>>(_a[1]))); break;
+        case 7: _t->resetCamera(); break;
         default: ;
         }
     }
@@ -140,14 +147,14 @@ int TerrainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

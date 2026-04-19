@@ -20,6 +20,7 @@ public:
     template<class vc_class> inline bool cut_cell_base(vc_class &c, double x, double y, double z);
     bool cut_cell(voronoicell &c,double x, double y,double z) {return cut_cell_base(c,x,y,z);}
     bool cut_cell(voronoicell_neighbor &c,double x,double y,double z) {return cut_cell_base(c,x,y,z);}
+    template<class vc_class> bool cutNClosestPlanes(Vector3 p, int n,  vc_class& c, int nDistances = 10, int nAngles = 20);
 private:
 
     HeightField *hf;
