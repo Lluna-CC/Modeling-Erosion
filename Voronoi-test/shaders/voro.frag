@@ -22,6 +22,6 @@ void main()
         vec4 ccursor = (1 - u_cursorColor.a)*c + u_cursorColor.a*u_cursorColor;
         c = mix(c, ccursor, t);
     }
-    fragment = vec4(c.rgb, 1.0);
+    fragment = vec4(vec3(1.0)*gNormal.z, 1.0);
     //fragment = vec4(0.1, gl_FragCoord.z/3, 0.2, 1.0);
 }

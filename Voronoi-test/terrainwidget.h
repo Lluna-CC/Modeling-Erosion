@@ -9,6 +9,7 @@
 #include "core.h"
 #include "heightfield.h"
 #include "celldecomposition.h"
+#include "erosionAlgorithm.h"
 
 
 class TerrainWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
@@ -29,11 +30,12 @@ public:
     void showCursor(const Vector3& worldPos);
     void hideCursor();
 
-    void setDecomposition(CellDecomposition* decomp); 
+    void setDecomposition(CellDecomposition* decomp, HeightField* hf); 
     void changeRenderMode();
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();
+    void computeWaterPath();
     
 public slots:
     virtual void mousePressEvent(QMouseEvent*);
@@ -53,12 +55,17 @@ protected:
     virtual void resizeGL(int, int);
     virtual void paintGL();
     void checkGLError();
+    void downsampleVerts(const HeightField& hf, int down);
 
 protected:
+
+    ErosionAlgorithm eroder;
 
     // OpenGL render
     Box3 terrainBBox;
     Box3 decompBox;
+    std::vector<float> verts;
+    std::vector<uint> indices;
     GLuint meshVAO = 0;
     GLuint bufferVerts = 0, bufferIndices = 0;
     GLuint numTriangles = 0;

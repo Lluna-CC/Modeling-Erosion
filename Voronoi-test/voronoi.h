@@ -9,9 +9,8 @@
 class Voronoi {
 public:
 
-    static void heightfieldVoronoi(HeightField *hf, CellDecomposition *cellDecomp);
-    static void tethraedronTest();
-    static void randomPointsTest();
+    static void heightfieldVoronoi(const HeightField *hf, CellDecomposition *cellDecomp);
+    static void triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& f, CellDecomposition* decomp, const HeightField *hf);
 };
 
 #endif

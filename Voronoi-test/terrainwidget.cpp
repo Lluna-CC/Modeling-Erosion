@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QCursor>
 #include <iostream>
-
+#include "voronoi.h"
 
 TerrainWidget::TerrainWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -224,7 +224,7 @@ void TerrainWidget::setHeightfield(const HeightField& hf, bool centerCamera)
 
 	// verts
 	int idx = 0;
-	std::vector<GLfloat> verts(3*nx*ny);
+	verts.resize(3*nx*ny);
 	for (int i = 0; i < nx; i++) {
 		for (int j = 0; j < ny; j++) {
             Vector3 p = hf.Vertex(i, j);
@@ -237,7 +237,7 @@ void TerrainWidget::setHeightfield(const HeightField& hf, bool centerCamera)
 	// tris
 	numTriangles = (nx - 1) * (ny - 1) * 2;
 	idx = 0;
-	std::vector<GLuint> indices(numTriangles * 3);
+	indices.resize(numTriangles * 3);
 	for (int i = 1; i < nx; i++) {
 		for (int j = 1; j < ny; j++) {
 			GLuint v00 = (i - 1) * ny + j - 1;
@@ -268,16 +268,55 @@ void TerrainWidget::setHeightfield(const HeightField& hf, bool centerCamera)
 
 	glGenBuffers(1, &bufferVerts);
 	glBindBuffer(GL_ARRAY_BUFFER, bufferVerts);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * verts.size(), &verts[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verts.size(), &verts[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(attribVertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(attribVertexLoc);
 
 	glGenBuffers(1, &bufferIndices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferIndices);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 	glUseProgram(0);
+
+    //downsampleVerts(hf, 2);
+}
+
+void TerrainWidget::downsampleVerts(const HeightField& hf, int down) {
+    int nx = hf.getSizeX();
+	int ny = hf.getSizeY();
+
+    int idx = 0;
+	verts.resize(3*nx*ny/(down*down));
+	for (int i = 0; i < nx; i += down) {
+		for (int j = 0; j < ny; j += down) {
+            Vector3 p = hf.Vertex(i, j);
+			verts[idx++] = GLfloat(p[0]);
+			verts[idx++] = GLfloat(p[1]);
+			verts[idx++] = GLfloat(p[2]);
+		}
+	}
+
+	// tris
+	numTriangles = (nx/down - 1) * (ny/down - 1) * 2;
+	idx = 0;
+	indices.resize(numTriangles * 3);
+	for (int i = 1; i < nx; i++) {
+		for (int j = 1; j < ny; j++) {
+			GLuint v00 = (i - 1) * ny + j - 1;
+			GLuint v01 = (i - 1) * ny + j;
+			GLuint v10 = i * ny + j - 1;
+			GLuint v11 = i * ny + j;
+
+			indices[idx++] = v00;
+			indices[idx++] = v01;
+			indices[idx++] = v10;
+
+			indices[idx++] = v10;
+			indices[idx++] = v01;
+			indices[idx++] = v11;
+		}
+	}
 }
 
 void TerrainWidget::resetCamera()
@@ -387,18 +426,24 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
     update();
 }
 
-void TerrainWidget::setDecomposition(CellDecomposition* decomp) {
+void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf) {
+    delete cellDecomp;
     cellDecomp = decomp; 
+    Voronoi::triangleSamplingVoronoi(verts, indices, decomp, hf);
+
     makeCurrent();
     cellDecomp -> setShader(&shaderVoro); 
     cellDecomp -> initializeSphereVAO(0);
     cellDecomp -> fullMeshDecomposition();
+    
     decompBox = Box3(
 		Vector3(cellDecomp -> getMin()[0], cellDecomp -> getMin()[1], cellDecomp -> getMin()[2]),
 		Vector3(cellDecomp -> getMax()[0], cellDecomp -> getMax()[1], cellDecomp -> getMax()[2]));
 
     camera = Camera::View(decompBox);
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
+    eroder = ErosionAlgorithm(decomp -> getCells(), decomp -> getExteriorLinks(), decomp -> getLinks());
+    eroder.algorithmInitialization(100.0, Vector3(0,0,-1));
 }
 
 
@@ -428,9 +473,14 @@ void TerrainWidget::keyPressEvent(QKeyEvent* event) {
         shaderSkybox.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/skybox.frag");
         shaderSkybox.link();
         shaderVoro.removeAllShaders();
-        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/voro.vert");
-        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/voro.frag");
-        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/voro.geom");  
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/voro.vert");
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/voro.frag");
+        shaderVoro.addShaderFromSourceFile(QOpenGLShader::Geometry, "./shaders/voro.geom");  
         shaderVoro.link(); 
     }
+}
+
+void TerrainWidget::computeWaterPath() {
+    if (cellDecomp == nullptr) return;
+    eroder.waterPath();
 }

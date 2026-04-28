@@ -31,6 +31,7 @@ public slots:
     void modifyPalette();
     void resetPaletteRange();
     void computeVoronoi();
+    void computeWaterPath();
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();

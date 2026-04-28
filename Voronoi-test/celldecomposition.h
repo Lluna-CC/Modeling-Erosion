@@ -10,7 +10,7 @@
 #include<iostream>
 #include "core.h"
 #include <map>
-
+#include <set>
 
 
 enum cellState {
@@ -22,31 +22,33 @@ enum cellState {
 enum linkState {
   INTERIOR,
   EXTERIOR,
-  REMOVED
+  BROKEN
 };
 
 struct voroFace {
-  int planeID;
-  std::vector<unsigned int> faceNeighbors;
+  //int planeID;
+  //std::vector<unsigned int> faceNeighbors;
+  std::vector<unsigned int> vertices;
+  double area;
+  Vector3 normal;
 };
 
 
 struct vorocell {
-  double centroid[3];
+  Vector3 centroid;
   std::vector<float> vertices;
-  std::vector<std::vector<unsigned int>> faces;
-  std::vector<voroFace> faceIDs;
+  std::map<int,voroFace> faceData;
   std::vector<int> neighbors;
   int nTriangles;
   cellState state = SOLID;
-  //std::vector<int> faceIDs;
+  bool isExterior = false;
   
 };
 
 struct vorolink  {
   std::vector<std::pair<int,int>> neighbors;
   linkState state = INTERIOR;
-  float life = 100;
+  double life = 1.0;
 };
 
 
@@ -57,7 +59,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    CellDecomposition();
 
    void clear();
-   void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid);
+   void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside);
 
    void renderCells();
    void renderParticles();
@@ -70,6 +72,10 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    void initializeSphereVAO(unsigned int numSubdivisions);
    void setNumCells(int n);
 
+   std::vector<vorocell>* getCells() {return &cells;}
+   std::map<std::pair<int,int>, vorolink>* getLinks() {return &links;}
+   std::set<std::pair<int,int>>* getExteriorLinks() {return &exteriorLinks;}
+
  private:
    std::vector<std::vector<std::vector<unsigned int>>> cellFaces; //Each cell has a set of faces, which have a set of vertex indices inside the cell
 
@@ -80,6 +86,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    std::vector<vorocell> cells;
    std::map<std::pair<int,int>, vorolink> links;
+   std::set<std::pair<int,int>> exteriorLinks;
 
    float min[3];
    float max[3];
@@ -88,11 +95,13 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    GLuint sphereIndicesVBO;
    unsigned int sphereIndicesSize;
 
-   void cellToMesh(std::vector<float>& v, std::vector<std::vector<unsigned int>>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles);
+   void cellToMesh(std::vector<float>& v, std::map<int,voroFace>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles);
    void computeBounds();  
-   void addLinks(voro::voronoicell_neighbor& c, std::vector<std::vector<unsigned int>>& faces, int pid);
+   void addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& faces, int pid);
+   void updateExternalLinks();
    void breakLink(std::pair<int,int> link);
    void removeComponent(int cell);
+
 
    int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable);
    int componentSize_rec(int cell, int otherCell, bool& containsCore, bool& reachable, std::vector<bool>& visited);

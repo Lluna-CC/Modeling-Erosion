@@ -24,7 +24,9 @@ SOURCES += \
     terrainwidget.cpp \
     voronoi.cpp \
     heightfieldWall.cpp \
-    celldecomposition.cpp
+    celldecomposition.cpp \
+    erosionAlgorithm.cpp 
+
 
 HEADERS += \
     core.h \
@@ -35,7 +37,8 @@ HEADERS += \
     terrainwidget.h \
     voronoi.h \
     heightfieldWall.h \
-    celldecomposition.h
+    celldecomposition.h \
+    erosionAlgorithm.h
 
 FORMS += \
     mainwindow.ui

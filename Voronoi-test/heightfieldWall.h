@@ -10,7 +10,7 @@ using namespace voro;
 class HeightFieldWall: public wall {
 public:
 
-    HeightFieldWall(HeightField* height, int iw_id = -99) {
+    HeightFieldWall(const HeightField* height, int iw_id = -99) {
         hf = height;
         w_id = iw_id;
     }
@@ -23,7 +23,7 @@ public:
     template<class vc_class> bool cutNClosestPlanes(Vector3 p, int n,  vc_class& c, int nDistances = 10, int nAngles = 20);
 private:
 
-    HeightField *hf;
+    const HeightField *hf;
     int w_id;
 };
 

@@ -1,7 +1,6 @@
 #include "celldecomposition.h"
 #include<float.h>
 #include<cmath>
-#include<map>
 #include<fstream>
 
 
@@ -75,7 +74,9 @@ bool writeMesh(const std::string &filename, std::vector<float>& vertices, std::v
     return false;
 }
 
-void CellDecomposition::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid) {
+void CellDecomposition::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside) {
+    c.neighbors(cells[pid].neighbors);
+
     std::vector<int> auxiliarFaces;
     c.face_vertices(auxiliarFaces);
     int i = 0;
@@ -83,12 +84,15 @@ void CellDecomposition::addCell(voro::voronoicell_neighbor& c, double x, double 
 
     
     while (i < auxiliarFaces.size()) {
-        int nV = auxiliarFaces[i]; 
-        cells[pid].faces.push_back(std::vector<unsigned int>(nV));
+        int nV = auxiliarFaces[i];
+        voroFace face;
+        face.vertices = std::vector<unsigned int>(nV);
+        int faceID = cells[pid].neighbors[f];
+        cells[pid].faceData[faceID] = face;
         
         
         for (int j = 1; j <= nV; ++j) {
-            cells[pid].faces[f][j - 1] = auxiliarFaces[i + j];
+            cells[pid].faceData[faceID].vertices[j - 1] = auxiliarFaces[i + j];
         }
         
         
@@ -96,19 +100,23 @@ void CellDecomposition::addCell(voro::voronoicell_neighbor& c, double x, double 
         ++f;
     }
 
+    
+    
+    
     std::vector<double> aux;
     c.vertices(x,y,z, aux);
-    c.neighbors(cells[pid].neighbors);
-    //std::cout << "Neighbours" << std::endl;
-    //for (int k = 0; k < neigh.size(); ++k) std::cout << neigh[k] << std::endl;
 
     cells[pid].vertices.resize(aux.size());
     for (int i = 0; i < aux.size(); ++i) cells[pid].vertices[i] = (float) aux[i]; 
     cells[pid].centroid[0] = x;
     cells[pid].centroid[1] = y;
     cells[pid].centroid[2] = z;
+    if (outside) {
+        cells[pid].state = AIR;
+    }
 
-    addLinks(c,cells[pid].faces, pid);
+    
+    addLinks(c,cells[pid].faceData, pid);
 }
 
 
@@ -117,29 +125,23 @@ void CellDecomposition::renderCells() {
     model.setToIdentity();
     glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
     
-
+    //int renderedCells = 0;
     for (int i = 0; i < cells.size(); ++i) {
 
-        /* bool external = false;
-        for (int j = 0; j < cells[i].neighbors.size(); ++j) {
-           if (cells[i].neighbors[j] == -99)  {
-                external = true;
-                break;
-            }
-        }
-
-        if (external) continue; */
-
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
         glBindVertexArray(cellVAOs[i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
-       
+       //++renderedCells;
+
     }
+    //std::cout << "Rendering " << renderedCells << " cells" << std::endl;
 
 }
 
 void CellDecomposition::fullMeshDecomposition() {
     computeBounds();
+    updateExternalLinks();
 
     float diff[3];
     for (int k = 0; k < 3; ++k) diff[k] = max[k] - min[k];
@@ -150,14 +152,16 @@ void CellDecomposition::fullMeshDecomposition() {
     bufferIndices.resize(cells.size());
     
     for (int i = 0; i < cells.size(); ++i) {
+        
+        
         //std::cout << "Current Mesh Iteration: " << i << std::endl;
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
         float cellDist = minMaxDistance(cells[i].vertices);
-        if (cellDist > 0.8*boxDist) continue;
+        if (cellDist > 0.85*boxDist) continue;
 
-        cellToMesh(cells[i].vertices, cells[i].faces, cellVAOs[i], bufferVerts[i], bufferIndices[i], cells[i].nTriangles);
-        //std::cout << cells[i].faces.size() << std::endl;
+        cellToMesh(cells[i].vertices, cells[i].faceData, cellVAOs[i], bufferVerts[i], bufferIndices[i], cells[i].nTriangles);
     }
-
+    std::cout << "Models Created" << std::endl;
     
 }
 
@@ -184,28 +188,41 @@ void CellDecomposition::computeBounds() {
 }
 
 
-void CellDecomposition::cellToMesh(std::vector<float>& v, std::vector<std::vector<unsigned int>>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles) {
+void CellDecomposition::cellToMesh(std::vector<float>& v, std::map<int,voroFace>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles) {
     std::vector<unsigned int> indices;
 
-    /*std::cout << "number of verts: " << v.size()/3 << std::endl;
-    for (int i = 0; i < f.size(); ++i) {
-        std::cout << "face: " << i << ": " << std::endl;
-        for (int j = 0; j < f[i].size(); ++j) {
-            std::cout << f[i][j] << ": " << v[3*f[i][j]] << " " << v[3*f[i][j] + 1] << " " << v[3*f[i][j] + 2] << std::endl;
-        }
-    } */
+    for (auto it = f.begin(); it != f.end(); ++it) {
 
-    for (int i = 0; i < f.size(); ++i) {
-        indices.push_back(f[i][0]);
-        indices.push_back(f[i][2]);
-        indices.push_back(f[i][1]);
+        voroFace& face = it -> second;
 
-        for (int j = 3; j < f[i].size(); ++j) {
-            indices.push_back(f[i][0]);
-            indices.push_back(f[i][j]);
-            indices.push_back(f[i][j - 1]);
-    
+        indices.push_back(face.vertices[0]);
+        indices.push_back(face.vertices[2]);
+        indices.push_back(face.vertices[1]);
+
+        Vector3 v1 =  Vector3(v[3*face.vertices[0]], v[3*face.vertices[0] + 1], v[3*face.vertices[0] + 2]);
+        Vector3 v2 =  Vector3(v[3*face.vertices[2]], v[3*face.vertices[2] + 1], v[3*face.vertices[2] + 2]);
+        Vector3 v3 =  Vector3(v[3*face.vertices[1]], v[3*face.vertices[1] + 1], v[3*face.vertices[1] + 2]);
+        
+        Vector3 a = v2 - v1;
+        Vector3 b = v3 - v1;
+        face.normal = Normalized(cross(a,b));
+        double area = Norm(cross(a,b))/2;
+
+
+        for (int j = 3; j < face.vertices.size(); ++j) {
+            indices.push_back(face.vertices[0]);
+            indices.push_back(face.vertices[j]);
+            indices.push_back(face.vertices[j - 1]);
+            
+            v2 =  Vector3(v[3*face.vertices[j]], v[3*face.vertices[j] + 1], v[3*face.vertices[j] + 2]);
+            v3 =  Vector3(v[3*face.vertices[j - 1]], v[3*face.vertices[j - 1] + 1], v[3*face.vertices[j - 1] + 2]);
+        
+            a = v2 - v1;
+            b = v3 - v1;
+            area += Norm(cross(a,b))/2; 
         }        
+
+        face.area = area;
     }
     triangles = indices.size()/3;
 
@@ -373,37 +390,40 @@ void CellDecomposition::setNumCells(int n) {
 
 }
 
-void CellDecomposition::addLinks(voro::voronoicell_neighbor& c, std::vector<std::vector<unsigned int>>& faces, int pid) {
+void CellDecomposition::addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& faces, int pid) {
     int edg = -1;
-    for (int i = 0; i < faces.size(); ++i) {
-        
-        for (int k = 0; k < c.nu[faces[i][0]]; ++k) {
-                if (c.ed[faces[i][0]][k] == faces[i][1]) {
+    for (auto it = faces.begin(); it != faces.end(); ++it) {
+        voroFace& face = it -> second; 
+
+        for (int k = 0; k < c.nu[face.vertices[0]]; ++k) {
+                if (c.ed[face.vertices[0]][k] == face.vertices[1]) {
                     edg = k;
                     break;
                 } 
         }
-        int faceID = c.ne[faces[i][0]][edg];
+        int faceID = c.ne[face.vertices[0]][edg];
         std::pair<int,int> key;
         
         if (links.find(std::make_pair(pid, faceID)) != links.end()) key = std::make_pair(pid, faceID); 
         else key = std::make_pair(faceID,pid);
 
-        if (faceID < 0) {
-           links[key].state = EXTERIOR; 
+        
+        if (faceID < 0 || cells[faceID].state == AIR) {
+            links[key].state = EXTERIOR;
+            cells[pid].isExterior = true;
         }
 
-        for (int j = 0; j < faces[i].size(); ++j) {
+        for (int j = 0; j < face.vertices.size(); ++j) {
             
-            for (int k = 0; k < c.nu[faces[i][(j + 1)%faces[i].size()]]; ++k) {
-                if (c.ed[faces[i][(j + 1)%faces[i].size()]][k] == faces[i][j]) {
+            for (int k = 0; k < c.nu[face.vertices[(j + 1)%face.vertices.size()]]; ++k) {
+                if (c.ed[face.vertices[(j + 1)%face.vertices.size()]][k] == face.vertices[j]) {
                     edg = k;
                     break;
                 } 
             }
             
 
-            int neighID = c.ne[faces[i][(j + 1)%faces[i].size()]][edg];
+            int neighID = c.ne[face.vertices[(j + 1)%face.vertices.size()]][edg];
             std::pair<int,int> neighKey;
             if (links.find(std::make_pair(pid, neighID)) != links.end()) neighKey = std::make_pair(pid, neighID);
             else  {
@@ -412,7 +432,7 @@ void CellDecomposition::addLinks(voro::voronoicell_neighbor& c, std::vector<std:
             } 
 
             links[key].neighbors.push_back(neighKey);
-            //std::cout << "face: " << i << " ID: " << c.ne[faces[i][(j + 1)%faces[i].size()]][edg] << std::endl;   
+            //std::cout << "face: " << i << " ID: " << c.ne[face[(j + 1)%face.size()]][edg] << std::endl;   
         }
         
     }
@@ -439,6 +459,7 @@ void CellDecomposition::breakLink(std::pair<int,int> link) {
     }
 
     //Delete edge, ask(?)
+    /*
     std::vector<std::pair<int,int>> linkNeighbors;
     links.erase(link);
     for (int i = 0; i < linkNeighbors.size(); ++i) {
@@ -449,7 +470,7 @@ void CellDecomposition::breakLink(std::pair<int,int> link) {
                 links[act].neighbors.pop_back();
             }
         }
-    }
+    }*/
 
     //Check connected components
     if (link.first >= 0 && link.second >= 0) {
@@ -478,6 +499,9 @@ void CellDecomposition::breakLink(std::pair<int,int> link) {
             }
         }
     }
+
+    //Update external links
+    updateExternalLinks();
     
 
 }
@@ -515,4 +539,35 @@ void CellDecomposition::removeComponent(int cell) {
     }
 
     //FIX LINKS
+}
+
+void CellDecomposition::updateExternalLinks() {
+
+    for (int i = 0; i < cells.size(); ++i) {
+        for (int k = 0; k < cells[i].neighbors.size(); ++k) {
+            if (cells[i].neighbors[k] < 0 || cells[cells[i].neighbors[k]].state == AIR) {
+                cells[i].isExterior = true;     
+                break;
+            }
+        }
+    }
+
+    for (auto it = links.begin(); it != links.end();) {
+        std::pair<int,int>  key = it -> first;
+        if (key.first < 0 || cells[key.first].state == AIR || key.second < 0 || cells[key.second].state == AIR)  {
+            
+            if ( (key.first < 0 || cells[key.first].state == AIR) && ( key.second < 0 ||cells[key.second].state == AIR) )  {
+                it = links.erase(it);
+                exteriorLinks.erase(key);
+            }
+            else  {
+                links[key].state = EXTERIOR;
+                exteriorLinks.insert(key);
+                ++it;
+            }
+
+        }
+        else ++it;
+    }
+    
 }

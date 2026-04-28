@@ -182,7 +182,7 @@ void MainWindow::createActions()
     connect(ui->render_cells, SIGNAL(toggled(bool)), this, SLOT(changeRenderCells()));
     connect(ui->render_particles, SIGNAL(toggled(bool)), this, SLOT(changeRenderParticles()));
     connect(ui->render_original, SIGNAL(toggled(bool)), this, SLOT(changeRenderOriginal()));
-
+     connect(ui->compute_water_path, SIGNAL(clicked()), this, SLOT(computeWaterPath()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -716,10 +716,14 @@ void MainWindow::computeVoronoi() {
     
     //Voronoi::randomPointsTest();
     CellDecomposition* cellDecomp = new CellDecomposition();
-    Voronoi::heightfieldVoronoi(&hf, cellDecomp);
+    //Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    widget -> setDecomposition(cellDecomp);
+    widget -> setDecomposition(cellDecomp, &hf);
     
+}
+
+void MainWindow::computeWaterPath() {
+    widget -> computeWaterPath();
 }
 
 void MainWindow::changeRenderCells() {
