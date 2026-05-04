@@ -558,13 +558,10 @@ void CellDecomposition::updateExternalLinks() {
         ++it;
 
         if ( (key.first < 0 || cells[key.first].state == AIR) && ( key.second < 0 ||cells[key.second].state == AIR) )  {
-            links.erase(key);
-            exteriorLinks.erase(key);
-
             
-            std::vector<std::pair<int,int>> linkNeighbors;
-            for (int i = 0; i < linkNeighbors.size(); ++i) {
-                std::pair<int,int> act = linkNeighbors[i];
+            
+            for (int i = 0; i < links[key].neighbors.size(); ++i) {
+                std::pair<int,int> act = links[key].neighbors[i];
                 for (int j = 0; j < links[act].neighbors.size(); ++j) {
                     if (links[act].neighbors[j] == key) {
                         links[act].neighbors[j] = links[act].neighbors[links[act].neighbors.size() - 1];
@@ -572,11 +569,15 @@ void CellDecomposition::updateExternalLinks() {
                     }
                 }
             }
+            links.erase(key);
+            exteriorLinks.erase(key);
         }
 
         else if ((key.first > 0 && cells[key.first].state == AIR) || (key.second > 0 && cells[key.second].state == AIR))  {
             links[key].state = EXTERIOR;
+            links[key].life = 0.0;
             exteriorLinks.insert(key);
+            
         }
 
     }

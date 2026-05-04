@@ -21,11 +21,12 @@ class ErosionAlgorithm {
   
     void breakLink(std::pair<int,int > link);
     void removeComponent(int cell);
-    int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable);
+    int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior);
     int componentSize_rec(int cell, int otherCell, bool& containsCore, bool& reachable, std::vector<bool>& visited);
     void updateExternalLinks(); 
     double resistanceField(double x, double y, double z);
-    
+    void computeAverageArea();
+
     std::vector<double> weights; 
     std::vector<std::pair<int,int>> keys; 
 
@@ -45,4 +46,5 @@ class ErosionAlgorithm {
     double k_res = 0.25;
     double k_dmg = 0.5;
     double k_break = 0.4;
-};
+    double avg_area;
+  };
