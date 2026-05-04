@@ -9,10 +9,10 @@ class ErosionAlgorithm {
     ErosionAlgorithm(std::vector<vorocell>* c, std::set<std::pair<int,int>>* el, std::map<std::pair<int,int>, vorolink>* l);
     ErosionAlgorithm();
 
-    Vector3 sampleDirection();
+    Vector3 sampleDirection(double theta_base, double phi_base);
 
     
-    void algorithmInitialization(double initialFlow, Vector3 g = Vector3(0,0,-1));
+    void setErosionDirection(double theta, double phi);
     void waterPath();
 
 
@@ -24,6 +24,7 @@ class ErosionAlgorithm {
     int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable);
     int componentSize_rec(int cell, int otherCell, bool& containsCore, bool& reachable, std::vector<bool>& visited);
     void updateExternalLinks(); 
+    double resistanceField(double x, double y, double z);
     
     std::vector<double> weights; 
     std::vector<std::pair<int,int>> keys; 
@@ -36,8 +37,8 @@ class ErosionAlgorithm {
     std::discrete_distribution<int> externalLinkDistribution;
   
 
-    double initialFlow;
-    Vector3 g;
+    double initialFlow = 10.0;
+    Vector3 g = Vector3(0.0,0.0,-1.0);
 
     double k_air = 0.05;
     double k_solid = 0.1;

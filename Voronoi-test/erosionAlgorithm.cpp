@@ -16,16 +16,21 @@ ErosionAlgorithm::ErosionAlgorithm(std::vector<vorocell>* c, std::set<std::pair<
     
 }
 
-Vector3 ErosionAlgorithm::sampleDirection() {
-    std::random_device rd;
-    std::mt19937_64 generator{rd()};
+double ErosionAlgorithm::resistanceField(double x, double y, double z) {
+    return std::sin(x + y + z);
+}
 
-    std::normal_distribution theta_dist{M_PI/4, M_PI/8};
-    std::uniform_real_distribution<double> phi_dist(0.0,2*M_PI);
+Vector3 ErosionAlgorithm::sampleDirection(double theta_base, double phi_base) {
+    //std::random_device rd;
+    //std::mt19937_64 generator{rd()};
 
-    double theta = theta_dist(generator);
-    double phi = theta_dist(generator);
-    return Normalized(-Vector3(std::sin(theta)*std::cos(phi),std::sin(theta)*std::sin(phi),std::cos(theta)));
+    //std::normal_distribution theta_dist{M_PI/4, M_PI/8};
+    //std::uniform_real_distribution<double> phi_dist(0.0,2*M_PI);
+
+    //double theta = theta_dist(generator);
+    //double phi = theta_dist(generator);
+    
+    return Normalized(-Vector3(std::sin(theta_base)*std::cos(phi_base),std::sin(theta_base)*std::sin(phi_base),std::cos(theta_base)));
 }
 
 
@@ -48,35 +53,23 @@ void ErosionAlgorithm::getLinkDistibution(Vector3 dir) {
 
         weights[i] = area * dot(normal, dir);
         if (weights[i] < 0) weights[i] = 0;
-        if (weights[i] != weights[i]) weights[i] = 0;
+        if (weights[i] != weights[i]) {
+            weights[i] = 0;
+            std::cout << "!!!" << std::endl;
+        }
         ++i;
     }
 
-    /*for (int i = 0; i < keys.size(); ++i) {
-        std::cout << "Key: " << keys[i].first << " " << keys[i].second << ". Weight: " << weights[i] << std::endl;
-    }*/
 }
 
-void ErosionAlgorithm::algorithmInitialization(double initialFlow, Vector3 gravity) {
+void ErosionAlgorithm::setErosionDirection(double theta, double phi) {
     
 
-    Vector3 inDir = sampleDirection();
+    Vector3 inDir = sampleDirection(0.0, 0.0);
 
     getLinkDistibution(inDir);
     externalLinkDistribution = std::discrete_distribution<int> (weights.begin(), weights.end());
-    
-    this -> initialFlow = initialFlow;
-    g = gravity;
 
-    /* std::random_device rd;
-    std::default_random_engine generator{961733};
-    std::cout << "RANDOMNESS TEST" << std::endl;
-    
-    //for (double x: externalLinkDistribution.probabilities()) std::cout << x << std::endl;
-    
-    for (int i = 0; i < 1000; ++i) {
-        std::cout << "SELECTING NUMBER: " << externalLinkDistribution(generator) << std::endl;
-    }*/
 }
 
 void ErosionAlgorithm::waterPath() {
@@ -113,7 +106,7 @@ void ErosionAlgorithm::waterPath() {
 
             propagationWeight[i] = dot(g, Normalized(centr_b - centr_a));
             if (propagationWeight[i] < 0) propagationWeight[i] = 0;
-            propagationWeight[i] *= (1 - (*links)[(*links)[actLink].neighbors[i]].life * 0.5);
+            propagationWeight[i] *= (1 - (*links)[(*links)[actLink].neighbors[i]].life * resistanceField(centr_b[0], centr_b[1], centr_b[2]));
         }
 
         std::discrete_distribution<int> nextLinkDist(propagationWeight.begin(), propagationWeight.end());
@@ -123,7 +116,7 @@ void ErosionAlgorithm::waterPath() {
         std::cout << "Next: " << actLink.first << " " << actLink.second << std::endl;
 
         //EROSION AND DAMAGE PART
-        double link_area = actLink.first > 0 ? (*cells)[actLink.first].faceData[actLink.second].area : (*cells)[actLink.first].faceData[actLink.second].area;
+        double link_area = actLink.first > 0 ? (*cells)[actLink.first].faceData[actLink.second].area : (*cells)[actLink.second].faceData[actLink.first].area;
         double absorption = (*links)[actLink].life > 0 ? link_area * k_solid + (*links)[actLink].life * k_res : link_area*k_air;
         water = water - absorption;
         
@@ -316,21 +309,29 @@ void ErosionAlgorithm::updateExternalLinks() {
 
     for (auto it = (*links).begin(); it != (*links).end();) {
         std::pair<int,int>  key = it -> first;
-        if (key.first < 0 || (*cells)[key.first].state == AIR || key.second < 0 || (*cells)[key.second].state == AIR)  {
-            
-            if ( (key.first < 0 || (*cells)[key.first].state == AIR) && ( key.second < 0 ||(*cells)[key.second].state == AIR) )  {
-                it = (*links).erase(it);
-                (*exteriorLinks).erase(key);
-            }
-            else  {
-                (*links)[key].state = EXTERIOR;
-                (*exteriorLinks).insert(key);
-                ++it;
-            }
+        ++it;
 
+        if ( (key.first < 0 || (*cells)[key.first].state == AIR) && ( key.second < 0 || (*cells)[key.second].state == AIR) )  {
+            links -> erase(key);
+            exteriorLinks -> erase(key);
+
+            
+            std::vector<std::pair<int,int>> linkNeighbors;
+            for (int i = 0; i < linkNeighbors.size(); ++i) {
+                std::pair<int,int> act = linkNeighbors[i];
+                for (int j = 0; j < (*links)[act].neighbors.size(); ++j) {
+                    if ((*links)[act].neighbors[j] == key) {
+                        (*links)[act].neighbors[j] = (*links)[act].neighbors[(*links)[act].neighbors.size() - 1];
+                        (*links)[act].neighbors.pop_back();
+                    }
+                }
+            }
         }
-        else ++it;
+
+        else if ((key.first > 0 && (*cells)[key.first].state == AIR) || (key.second > 0 && (*cells)[key.second].state == AIR))  {
+            (*links)[key].state = EXTERIOR;
+            exteriorLinks -> insert(key);
+        }
     }
-    
 }
 #endif

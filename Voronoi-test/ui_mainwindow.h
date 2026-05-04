@@ -48,6 +48,7 @@ public:
     QAction *actionSaveLayerRidges;
     QWidget *centralwidget;
     QGridLayout *gridLayout_12;
+    QWidget *glWidget;
     QFrame *frameL;
     QVBoxLayout *verticalLayout_16;
     QGroupBox *Objects_groupBox_2;
@@ -111,7 +112,6 @@ public:
     QLabel *label_30;
     QLineEdit *lineClickInfoMetric;
     QSpacerItem *verticalSpacer;
-    QWidget *glWidget;
     QTabWidget *tabWidgetR;
     QWidget *tabDEM;
     QVBoxLayout *verticalLayout_15;
@@ -343,13 +343,24 @@ public:
     QSpacerItem *verticalSpacer_3;
     QWidget *tabVoro;
     QGroupBox *groupBox;
-    QHBoxLayout *horizontalLayout_3;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_5;
-    QPushButton *pushButton;
     QVBoxLayout *verticalLayout_4;
+    QPushButton *pushButton;
     QRadioButton *render_cells;
     QRadioButton *render_particles;
     QRadioButton *render_original;
+    QGroupBox *groupBox_5;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_7;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *theta;
+    QDoubleSpinBox *theta_spinbox;
+    QSpacerItem *horizontalSpacer_5;
+    QLabel *phi;
+    QDoubleSpinBox *phi_spinbox;
+    QPushButton *change_direction;
+    QPushButton *compute_water_path;
     QMenuBar *menubar;
     QMenu *menuSave;
     QMenu *menuLoad;
@@ -379,24 +390,35 @@ public:
         centralwidget->setObjectName("centralwidget");
         gridLayout_12 = new QGridLayout(centralwidget);
         gridLayout_12->setObjectName("gridLayout_12");
-        frameL = new QFrame(centralwidget);
-        frameL->setObjectName("frameL");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Expanding);
+        glWidget = new QWidget(centralwidget);
+        glWidget->setObjectName("glWidget");
+        glWidget->setEnabled(true);
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(frameL->sizePolicy().hasHeightForWidth());
-        frameL->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(glWidget->sizePolicy().hasHeightForWidth());
+        glWidget->setSizePolicy(sizePolicy);
+
+        gridLayout_12->addWidget(glWidget, 0, 1, 1, 1);
+
+        frameL = new QFrame(centralwidget);
+        frameL->setObjectName("frameL");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(frameL->sizePolicy().hasHeightForWidth());
+        frameL->setSizePolicy(sizePolicy1);
         frameL->setMinimumSize(QSize(300, 0));
         verticalLayout_16 = new QVBoxLayout(frameL);
         verticalLayout_16->setObjectName("verticalLayout_16");
         Objects_groupBox_2 = new QGroupBox(frameL);
         Objects_groupBox_2->setObjectName("Objects_groupBox_2");
         Objects_groupBox_2->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(Objects_groupBox_2->sizePolicy().hasHeightForWidth());
-        Objects_groupBox_2->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(Objects_groupBox_2->sizePolicy().hasHeightForWidth());
+        Objects_groupBox_2->setSizePolicy(sizePolicy2);
         Objects_groupBox_2->setFlat(false);
         verticalLayout_10 = new QVBoxLayout(Objects_groupBox_2);
         verticalLayout_10->setObjectName("verticalLayout_10");
@@ -596,11 +618,11 @@ public:
 
         sb_gaussianBlur_radius = new QSpinBox(groupBox_4);
         sb_gaussianBlur_radius->setObjectName("sb_gaussianBlur_radius");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(sb_gaussianBlur_radius->sizePolicy().hasHeightForWidth());
-        sb_gaussianBlur_radius->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(sb_gaussianBlur_radius->sizePolicy().hasHeightForWidth());
+        sb_gaussianBlur_radius->setSizePolicy(sizePolicy3);
         sb_gaussianBlur_radius->setMinimumSize(QSize(64, 0));
         sb_gaussianBlur_radius->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         sb_gaussianBlur_radius->setMaximum(1000);
@@ -610,11 +632,11 @@ public:
 
         label_21 = new QLabel(groupBox_4);
         label_21->setObjectName("label_21");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
-        label_21->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
+        label_21->setSizePolicy(sizePolicy4);
 
         gridLayout_6->addWidget(label_21, 0, 1, 1, 1);
 
@@ -717,8 +739,8 @@ public:
 
         btn_resetPaletteRange = new QPushButton(groupBox_palette);
         btn_resetPaletteRange->setObjectName("btn_resetPaletteRange");
-        sizePolicy2.setHeightForWidth(btn_resetPaletteRange->sizePolicy().hasHeightForWidth());
-        btn_resetPaletteRange->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(btn_resetPaletteRange->sizePolicy().hasHeightForWidth());
+        btn_resetPaletteRange->setSizePolicy(sizePolicy3);
         btn_resetPaletteRange->setMinimumSize(QSize(24, 24));
         btn_resetPaletteRange->setMaximumSize(QSize(24, 24));
         QFont font;
@@ -779,21 +801,10 @@ public:
 
         gridLayout_12->addWidget(frameL, 0, 0, 1, 1);
 
-        glWidget = new QWidget(centralwidget);
-        glWidget->setObjectName("glWidget");
-        glWidget->setEnabled(true);
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(glWidget->sizePolicy().hasHeightForWidth());
-        glWidget->setSizePolicy(sizePolicy4);
-
-        gridLayout_12->addWidget(glWidget, 0, 1, 1, 1);
-
         tabWidgetR = new QTabWidget(centralwidget);
         tabWidgetR->setObjectName("tabWidgetR");
-        sizePolicy.setHeightForWidth(tabWidgetR->sizePolicy().hasHeightForWidth());
-        tabWidgetR->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(tabWidgetR->sizePolicy().hasHeightForWidth());
+        tabWidgetR->setSizePolicy(sizePolicy1);
         tabWidgetR->setMinimumSize(QSize(320, 0));
         tabDEM = new QWidget();
         tabDEM->setObjectName("tabDEM");
@@ -978,8 +989,8 @@ public:
 
         label_33 = new QLabel(pageMorhology);
         label_33->setObjectName("label_33");
-        sizePolicy3.setHeightForWidth(label_33->sizePolicy().hasHeightForWidth());
-        label_33->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_33->sizePolicy().hasHeightForWidth());
+        label_33->setSizePolicy(sizePolicy4);
 
         horizontalLayout->addWidget(label_33);
 
@@ -1026,8 +1037,8 @@ public:
 
         label_14 = new QLabel(pageCurvatures);
         label_14->setObjectName("label_14");
-        sizePolicy3.setHeightForWidth(label_14->sizePolicy().hasHeightForWidth());
-        label_14->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_14->sizePolicy().hasHeightForWidth());
+        label_14->setSizePolicy(sizePolicy4);
 
         horizontalLayout_9->addWidget(label_14);
 
@@ -1098,8 +1109,8 @@ public:
 
         label_18 = new QLabel(pageRelief);
         label_18->setObjectName("label_18");
-        sizePolicy3.setHeightForWidth(label_18->sizePolicy().hasHeightForWidth());
-        label_18->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_18->sizePolicy().hasHeightForWidth());
+        label_18->setSizePolicy(sizePolicy4);
 
         horizontalLayout_11->addWidget(label_18);
 
@@ -1592,8 +1603,8 @@ public:
 
         label_34 = new QLabel(pageLandforms);
         label_34->setObjectName("label_34");
-        sizePolicy3.setHeightForWidth(label_34->sizePolicy().hasHeightForWidth());
-        label_34->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_34->sizePolicy().hasHeightForWidth());
+        label_34->setSizePolicy(sizePolicy4);
 
         horizontalLayout_24->addWidget(label_34);
 
@@ -1659,8 +1670,8 @@ public:
 
         label_28 = new QLabel(pageLandforms);
         label_28->setObjectName("label_28");
-        sizePolicy3.setHeightForWidth(label_28->sizePolicy().hasHeightForWidth());
-        label_28->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_28->sizePolicy().hasHeightForWidth());
+        label_28->setSizePolicy(sizePolicy4);
 
         horizontalLayout_14->addWidget(label_28);
 
@@ -1809,8 +1820,8 @@ public:
 
         label_6 = new QLabel(pageFlow);
         label_6->setObjectName("label_6");
-        sizePolicy3.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
-        label_6->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy4);
 
         horizontalLayout_8->addWidget(label_6);
 
@@ -1850,8 +1861,8 @@ public:
 
         label_39 = new QLabel(pageFlow);
         label_39->setObjectName("label_39");
-        sizePolicy3.setHeightForWidth(label_39->sizePolicy().hasHeightForWidth());
-        label_39->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_39->sizePolicy().hasHeightForWidth());
+        label_39->setSizePolicy(sizePolicy4);
 
         horizontalLayout_35->addWidget(label_39);
 
@@ -1867,8 +1878,8 @@ public:
 
         label_40 = new QLabel(pageFlow);
         label_40->setObjectName("label_40");
-        sizePolicy3.setHeightForWidth(label_40->sizePolicy().hasHeightForWidth());
-        label_40->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_40->sizePolicy().hasHeightForWidth());
+        label_40->setSizePolicy(sizePolicy4);
 
         horizontalLayout_35->addWidget(label_40);
 
@@ -1957,8 +1968,8 @@ public:
 
         label_38 = new QLabel(pageFlow);
         label_38->setObjectName("label_38");
-        sizePolicy3.setHeightForWidth(label_38->sizePolicy().hasHeightForWidth());
-        label_38->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(label_38->sizePolicy().hasHeightForWidth());
+        label_38->setSizePolicy(sizePolicy4);
 
         horizontalLayout_34->addWidget(label_38);
 
@@ -2187,31 +2198,33 @@ public:
         tabVoro->setObjectName("tabVoro");
         groupBox = new QGroupBox(tabVoro);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(10, 30, 291, 161));
-        horizontalLayout_3 = new QHBoxLayout(groupBox);
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        verticalLayout_5 = new QVBoxLayout();
+        groupBox->setGeometry(QRect(10, 30, 291, 221));
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(9, 34, 271, 171));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget);
         verticalLayout_5->setObjectName("verticalLayout_5");
-        pushButton = new QPushButton(groupBox);
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName("pushButton");
         pushButton->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-        verticalLayout_5->addWidget(pushButton);
+        verticalLayout_4->addWidget(pushButton);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName("verticalLayout_4");
-        render_cells = new QRadioButton(groupBox);
+        render_cells = new QRadioButton(layoutWidget);
         render_cells->setObjectName("render_cells");
         render_cells->setChecked(true);
 
         verticalLayout_4->addWidget(render_cells);
 
-        render_particles = new QRadioButton(groupBox);
+        render_particles = new QRadioButton(layoutWidget);
         render_particles->setObjectName("render_particles");
 
         verticalLayout_4->addWidget(render_particles);
 
-        render_original = new QRadioButton(groupBox);
+        render_original = new QRadioButton(layoutWidget);
         render_original->setObjectName("render_original");
 
         verticalLayout_4->addWidget(render_original);
@@ -2219,8 +2232,55 @@ public:
 
         verticalLayout_5->addLayout(verticalLayout_4);
 
+        groupBox_5 = new QGroupBox(tabVoro);
+        groupBox_5->setObjectName("groupBox_5");
+        groupBox_5->setGeometry(QRect(10, 270, 291, 221));
+        widget = new QWidget(groupBox_5);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(10, 36, 280, 161));
+        verticalLayout_7 = new QVBoxLayout(widget);
+        verticalLayout_7->setObjectName("verticalLayout_7");
+        verticalLayout_7->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        theta = new QLabel(widget);
+        theta->setObjectName("theta");
 
-        horizontalLayout_3->addLayout(verticalLayout_5);
+        horizontalLayout_3->addWidget(theta);
+
+        theta_spinbox = new QDoubleSpinBox(widget);
+        theta_spinbox->setObjectName("theta_spinbox");
+        theta_spinbox->setMaximum(180.000000000000000);
+
+        horizontalLayout_3->addWidget(theta_spinbox);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_5);
+
+        phi = new QLabel(widget);
+        phi->setObjectName("phi");
+
+        horizontalLayout_3->addWidget(phi);
+
+        phi_spinbox = new QDoubleSpinBox(widget);
+        phi_spinbox->setObjectName("phi_spinbox");
+        phi_spinbox->setMaximum(360.000000000000000);
+
+        horizontalLayout_3->addWidget(phi_spinbox);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_3);
+
+        change_direction = new QPushButton(widget);
+        change_direction->setObjectName("change_direction");
+
+        verticalLayout_7->addWidget(change_direction);
+
+        compute_water_path = new QPushButton(widget);
+        compute_water_path->setObjectName("compute_water_path");
+
+        verticalLayout_7->addWidget(compute_water_path);
 
         tabWidgetR->addTab(tabVoro, QString());
 
@@ -2498,6 +2558,11 @@ public:
         render_cells->setText(QCoreApplication::translate("MainWindow", "Render Cells", nullptr));
         render_particles->setText(QCoreApplication::translate("MainWindow", "Render Particles", nullptr));
         render_original->setText(QCoreApplication::translate("MainWindow", "Render Original", nullptr));
+        groupBox_5->setTitle(QCoreApplication::translate("MainWindow", "Erosion Options", nullptr));
+        theta->setText(QCoreApplication::translate("MainWindow", "Theta", nullptr));
+        phi->setText(QCoreApplication::translate("MainWindow", "Phi", nullptr));
+        change_direction->setText(QCoreApplication::translate("MainWindow", "Change Erosion Direction", nullptr));
+        compute_water_path->setText(QCoreApplication::translate("MainWindow", "Compute Water Path", nullptr));
         tabWidgetR->setTabText(tabWidgetR->indexOf(tabVoro), QCoreApplication::translate("MainWindow", "Voronoi", nullptr));
         menuSave->setTitle(QCoreApplication::translate("MainWindow", "Save", nullptr));
         menuLoad->setTitle(QCoreApplication::translate("MainWindow", "Load", nullptr));

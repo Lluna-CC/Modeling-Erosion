@@ -30,12 +30,13 @@ public:
     void showCursor(const Vector3& worldPos);
     void hideCursor();
 
-    void setDecomposition(CellDecomposition* decomp, HeightField* hf); 
+    void setDecomposition(CellDecomposition* decomp, HeightField* hf, double theta, double phi); 
     void changeRenderMode();
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();
     void computeWaterPath();
+    void changeErosionDirection(double theta, double phi);
     
 public slots:
     virtual void mousePressEvent(QMouseEvent*);

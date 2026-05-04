@@ -35,6 +35,7 @@ public slots:
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();
+    void changeErosionDirection();
 
     // terrain load actions
     void loadPNG();

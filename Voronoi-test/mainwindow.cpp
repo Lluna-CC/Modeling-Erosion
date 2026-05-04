@@ -182,7 +182,8 @@ void MainWindow::createActions()
     connect(ui->render_cells, SIGNAL(toggled(bool)), this, SLOT(changeRenderCells()));
     connect(ui->render_particles, SIGNAL(toggled(bool)), this, SLOT(changeRenderParticles()));
     connect(ui->render_original, SIGNAL(toggled(bool)), this, SLOT(changeRenderOriginal()));
-     connect(ui->compute_water_path, SIGNAL(clicked()), this, SLOT(computeWaterPath()));
+    connect(ui->compute_water_path, SIGNAL(clicked()), this, SLOT(computeWaterPath()));
+    connect(ui->change_direction, SIGNAL(clicked()), this, SLOT(changeErosionDirection()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -716,9 +717,11 @@ void MainWindow::computeVoronoi() {
     
     //Voronoi::randomPointsTest();
     CellDecomposition* cellDecomp = new CellDecomposition();
+    double theta = ui -> theta_spinbox -> value();
+    double phi = ui -> phi_spinbox -> value();
     //Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    widget -> setDecomposition(cellDecomp, &hf);
+    widget -> setDecomposition(cellDecomp, &hf, theta, phi);
     
 }
 
@@ -736,4 +739,11 @@ void MainWindow::changeRenderParticles() {
 
 void MainWindow::changeRenderOriginal() {
     widget -> changeRenderOriginal();
+}
+
+void MainWindow::changeErosionDirection() {
+    double theta = ui -> theta_spinbox -> value();
+    double phi = ui -> phi_spinbox -> value();
+
+    widget -> changeErosionDirection(theta, phi);
 }

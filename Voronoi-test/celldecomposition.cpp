@@ -207,6 +207,7 @@ void CellDecomposition::cellToMesh(std::vector<float>& v, std::map<int,voroFace>
         Vector3 b = v3 - v1;
         face.normal = Normalized(cross(a,b));
         double area = Norm(cross(a,b))/2;
+        if (area == 0) face.normal = Vector3(0,0,0);
 
 
         for (int j = 3; j < face.vertices.size(); ++j) {
@@ -545,7 +546,7 @@ void CellDecomposition::updateExternalLinks() {
 
     for (int i = 0; i < cells.size(); ++i) {
         for (int k = 0; k < cells[i].neighbors.size(); ++k) {
-            if (cells[i].neighbors[k] < 0 || cells[cells[i].neighbors[k]].state == AIR) {
+            if (cells[i].neighbors[k] > 0 && cells[cells[i].neighbors[k]].state == AIR) {
                 cells[i].isExterior = true;     
                 break;
             }
@@ -554,20 +555,30 @@ void CellDecomposition::updateExternalLinks() {
 
     for (auto it = links.begin(); it != links.end();) {
         std::pair<int,int>  key = it -> first;
-        if (key.first < 0 || cells[key.first].state == AIR || key.second < 0 || cells[key.second].state == AIR)  {
-            
-            if ( (key.first < 0 || cells[key.first].state == AIR) && ( key.second < 0 ||cells[key.second].state == AIR) )  {
-                it = links.erase(it);
-                exteriorLinks.erase(key);
-            }
-            else  {
-                links[key].state = EXTERIOR;
-                exteriorLinks.insert(key);
-                ++it;
-            }
+        ++it;
 
+        if ( (key.first < 0 || cells[key.first].state == AIR) && ( key.second < 0 ||cells[key.second].state == AIR) )  {
+            links.erase(key);
+            exteriorLinks.erase(key);
+
+            
+            std::vector<std::pair<int,int>> linkNeighbors;
+            for (int i = 0; i < linkNeighbors.size(); ++i) {
+                std::pair<int,int> act = linkNeighbors[i];
+                for (int j = 0; j < links[act].neighbors.size(); ++j) {
+                    if (links[act].neighbors[j] == key) {
+                        links[act].neighbors[j] = links[act].neighbors[links[act].neighbors.size() - 1];
+                        links[act].neighbors.pop_back();
+                    }
+                }
+            }
         }
-        else ++it;
+
+        else if ((key.first > 0 && cells[key.first].state == AIR) || (key.second > 0 && cells[key.second].state == AIR))  {
+            links[key].state = EXTERIOR;
+            exteriorLinks.insert(key);
+        }
+
     }
     
 }

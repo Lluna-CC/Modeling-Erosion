@@ -426,7 +426,7 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
     update();
 }
 
-void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf) {
+void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf, double theta, double phi) {
     delete cellDecomp;
     cellDecomp = decomp; 
     Voronoi::triangleSamplingVoronoi(verts, indices, decomp, hf);
@@ -443,7 +443,7 @@ void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf)
     camera = Camera::View(decompBox);
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
     eroder = ErosionAlgorithm(decomp -> getCells(), decomp -> getExteriorLinks(), decomp -> getLinks());
-    eroder.algorithmInitialization(100.0, Vector3(0,0,-1));
+    eroder.setErosionDirection(theta,phi);
 }
 
 
@@ -483,4 +483,9 @@ void TerrainWidget::keyPressEvent(QKeyEvent* event) {
 void TerrainWidget::computeWaterPath() {
     if (cellDecomp == nullptr) return;
     eroder.waterPath();
+}
+
+void TerrainWidget::changeErosionDirection(double theta, double phi) {
+    if (cellDecomp == nullptr) return;
+    eroder.setErosionDirection(theta, phi);
 }

@@ -50,9 +50,11 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "modifyPalette",
         "resetPaletteRange",
         "computeVoronoi",
+        "computeWaterPath",
         "changeRenderCells",
         "changeRenderParticles",
         "changeRenderOriginal",
+        "changeErosionDirection",
         "loadPNG",
         "loadASC",
         "updateDEM",
@@ -95,44 +97,48 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'computeVoronoi'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'changeRenderCells'
+        // Slot 'computeWaterPath'
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'changeRenderParticles'
+        // Slot 'changeRenderCells'
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'changeRenderOriginal'
+        // Slot 'changeRenderParticles'
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPNG'
+        // Slot 'changeRenderOriginal'
         QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadASC'
+        // Slot 'changeErosionDirection'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updateDEM'
+        // Slot 'loadPNG'
         QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPreset'
+        // Slot 'loadASC'
         QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updatePresetInfo'
+        // Slot 'updateDEM'
         QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayersCombined'
+        // Slot 'loadPreset'
         QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerMetric'
+        // Slot 'updatePresetInfo'
         QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRivers'
+        // Slot 'saveLayersCombined'
         QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRidges'
+        // Slot 'saveLayerMetric'
         QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveMetric'
+        // Slot 'saveLayerRivers'
         QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editFillDepressions'
+        // Slot 'saveLayerRidges'
         QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editBreaching'
+        // Slot 'saveMetric'
         QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editGaussianSmooth'
+        // Slot 'editFillDepressions'
         QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'editBreaching'
+        QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'editGaussianSmooth'
+        QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'queryRay'
-        QtMocHelpers::SlotData<void(const Ray &)>(28, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 29, 30 },
+        QtMocHelpers::SlotData<void(const Ray &)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 31, 32 },
         }}),
         // Slot 'updateViewshedLocation'
-        QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -165,24 +171,26 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->modifyPalette(); break;
         case 7: _t->resetPaletteRange(); break;
         case 8: _t->computeVoronoi(); break;
-        case 9: _t->changeRenderCells(); break;
-        case 10: _t->changeRenderParticles(); break;
-        case 11: _t->changeRenderOriginal(); break;
-        case 12: _t->loadPNG(); break;
-        case 13: _t->loadASC(); break;
-        case 14: _t->updateDEM(); break;
-        case 15: _t->loadPreset(); break;
-        case 16: _t->updatePresetInfo(); break;
-        case 17: _t->saveLayersCombined(); break;
-        case 18: _t->saveLayerMetric(); break;
-        case 19: _t->saveLayerRivers(); break;
-        case 20: _t->saveLayerRidges(); break;
-        case 21: _t->saveMetric(); break;
-        case 22: _t->editFillDepressions(); break;
-        case 23: _t->editBreaching(); break;
-        case 24: _t->editGaussianSmooth(); break;
-        case 25: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
-        case 26: _t->updateViewshedLocation(); break;
+        case 9: _t->computeWaterPath(); break;
+        case 10: _t->changeRenderCells(); break;
+        case 11: _t->changeRenderParticles(); break;
+        case 12: _t->changeRenderOriginal(); break;
+        case 13: _t->changeErosionDirection(); break;
+        case 14: _t->loadPNG(); break;
+        case 15: _t->loadASC(); break;
+        case 16: _t->updateDEM(); break;
+        case 17: _t->loadPreset(); break;
+        case 18: _t->updatePresetInfo(); break;
+        case 19: _t->saveLayersCombined(); break;
+        case 20: _t->saveLayerMetric(); break;
+        case 21: _t->saveLayerRivers(); break;
+        case 22: _t->saveLayerRidges(); break;
+        case 23: _t->saveMetric(); break;
+        case 24: _t->editFillDepressions(); break;
+        case 25: _t->editBreaching(); break;
+        case 26: _t->editGaussianSmooth(); break;
+        case 27: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 28: _t->updateViewshedLocation(); break;
         default: ;
         }
     }
@@ -207,14 +215,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 29)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 29;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 29)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 27;
+        _id -= 29;
     }
     return _id;
 }
