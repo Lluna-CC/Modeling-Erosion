@@ -103,6 +103,7 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
     int nz = (max[2] - min[2])/sizeX; 
 
     int block = 4;
+    double offset = 0.5*Norm(hf->getCellSize());
     int zSamples = 25;
 
     container con(min[0],max[0], min[1],max[1], min[2],max[2] + block, nx/4, ny/4, nz/4, false, false, false, 5);
@@ -128,12 +129,13 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
         Vector3 b = v3 - v1;
 
   
+        //Vector3 norm = Normalized(cross(a,b));
         Vector3 norm = Normalized(cross(a,b));
         
 
         //Add point to both sides
-        Vector3 first = centroid + block*norm;
-        Vector3 second = centroid - block*norm;
+        Vector3 first = centroid + offset*norm;
+        Vector3 second = centroid - offset*norm;
         
         con.put(particles,(double) first[0], (double) first[1], (double) first[2]);
         con.put(particles + 1,(double) second[0],(double) second[1], (double) second[2]);
