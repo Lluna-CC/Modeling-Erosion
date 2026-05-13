@@ -64,19 +64,20 @@ void ErosionAlgorithm::getLinkDistibution(Vector3 dir) {
 
 void ErosionAlgorithm::setErosionDirection(double theta, double phi) {
     
-
-    Vector3 inDir = sampleDirection(0.0, 0.0);
+    theta_dir = theta;
+    phi_dir = phi;
+    Vector3 inDir = sampleDirection(theta_dir, phi_dir);
 
     getLinkDistibution(inDir);
     externalLinkDistribution = std::discrete_distribution<int> (weights.begin(), weights.end());
 
 }
 
-void ErosionAlgorithm::waterPath() {
 
-    std::cout << "STARTING WATER PATH" << std::endl;
-    //std::cout << "MAX DIST: " << externalLinkDistribution.max() << " MIN: " << externalLinkDistribution.min() << std::endl;
+bool ErosionAlgorithm::waterPath() {
 
+    bool model_update = false;
+   
     std::random_device rd;
     std::mt19937 generator{rd()};
     std::uniform_real_distribution<double> rand(0.0,1.0);
@@ -85,8 +86,9 @@ void ErosionAlgorithm::waterPath() {
     double water = initialFlow;
     std::pair<int,int> actLink = keys[firstLink_key];
 
-    std::cout << "Starting from: " << firstLink_key << ": " << actLink.first << " " << actLink.second << std::endl;
+    //std::cout << "Starting from: " << firstLink_key << ": " << actLink.first << " " << actLink.second << std::endl;
     bool first = true;
+    if ((*cells)[actLink.first].state == AIR && (*cells)[actLink.second].state == AIR) std::cout << "Okay, there is something weird going on" << std::endl;
     while (water > 0) {
         std::vector<double> propagationWeight((*links)[actLink].neighbors.size());
         for(int i = 0; i < (*links)[actLink].neighbors.size(); ++i) {
@@ -117,10 +119,11 @@ void ErosionAlgorithm::waterPath() {
 
         //EROSION AND DAMAGE PART
         double link_area = actLink.first > 0 ? (*cells)[actLink.first].faceData[actLink.second].area : (*cells)[actLink.second].faceData[actLink.first].area;
+        if (link_area < 1e-100) link_area = avg_area/100;
         double absorption = (*links)[actLink].life > 0 ? link_area * k_solid + (*links)[actLink].life * k_res : link_area*k_air;
         water = water - absorption;
         
-        //std::cout << "Remaining water: " << water << std::endl;
+        std::cout << "Remaining water: " << water << std::endl;
         double full_absorption_probability = 1 - water/initialFlow;
         
         if (rand(generator) < full_absorption_probability) {
@@ -131,24 +134,32 @@ void ErosionAlgorithm::waterPath() {
         (*links)[actLink].life -= k_dmg*(absorption/link_area);
         if ((*links)[actLink].life <= 0 && (*links)[actLink].state != BROKEN && (*links)[actLink].state != EXTERIOR) {
             //BREAK
-            breakLink(actLink);
+            if(breakLink(actLink)) {
+                model_update = true; 
+                break;
+            }
         }
         else if ((*links)[actLink].life < k_break && (*links)[actLink].state != BROKEN && (*links)[actLink].state != EXTERIOR) {
             double break_prob = 1 - (*links)[actLink].life/k_break;
             if (rand(generator) < break_prob) {
                 (*links)[actLink].life = 0;
-                breakLink(actLink);
+                if (breakLink(actLink)) {
+                    model_update = true;
+                    break; 
+                }
+                
             } 
         }
         
     }
 
-    std::cout << "Water Path ended" << std::endl;
+    //std::cout << "Water Path ended" << std::endl;
+    return model_update;
 }
 
 
-void ErosionAlgorithm::breakLink(std::pair<int,int> link) {
-    std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
+bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
+    //std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
     (*links)[link].state = BROKEN;
     //Delete Cell connection
     /* if (link.first >= 0 && link.second >= 0) {
@@ -193,35 +204,37 @@ void ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     if (link.first >= 0 && link.second >= 0) {
         bool containsCore_first, reachable, exterior_one;
         int firstComp_count = componentSize(link.first, link.second, containsCore_first, reachable, exterior_one);
-        std::cout << "first component: " << firstComp_count << std::endl;
 
-        if ((*cells)[link.first].state == AIR && (*cells)[link.second].state == AIR) std::cout << "Okay, there is something weird going on" << std::endl;
-        std::cout << "Analyzed components" << std::endl;
+        
         if (!reachable) {
             std::cout << "Seprated components !!" << std::endl;
-            
+
             bool containsCore_second, exterior_two;
             int secondComp_count = componentSize(link.second, link.first, containsCore_second, reachable, exterior_two);
-            std::cout << "second component: " << secondComp_count << std::endl;
             
+            std::cout << "First size: " << firstComp_count << " Second size: " << secondComp_count << std::endl;
             if (!containsCore_first && containsCore_second) {
                 //Remove first component
                 update = exterior_one;
+                std::cout << "Removing first" << std::endl;
                 removeComponent(link.first);
             }
             else if (containsCore_first && !containsCore_second) {
                 //Remove Second Component
                 update = exterior_two;
+                std::cout << "Removing second" << std::endl;
                 removeComponent(link.second);
             }
 
             else if (!containsCore_first && !containsCore_second) {
                 if (firstComp_count > secondComp_count) {
                     update = exterior_two;
+                    std::cout << "Removing second" << std::endl;
                     removeComponent(link.second);
                 }
                 else  {
                     update = exterior_one;
+                    std::cout << "Removing first" << std::endl;
                     removeComponent(link.first);
                 }
             }
@@ -232,9 +245,16 @@ void ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     if (update) {
         std::cout << "Updating Links" << std::endl;
         updateExternalLinks();
+        
+        Vector3 inDir = sampleDirection(theta_dir, phi_dir);
+
+        getLinkDistibution(inDir);
+        externalLinkDistribution = std::discrete_distribution<int> (weights.begin(), weights.end());
+        
+        return true;
     }
     
-
+    else return false;
 }
 
 int ErosionAlgorithm::componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior) {
@@ -304,11 +324,18 @@ int ErosionAlgorithm::componentSize_rec(int cell, int otherCell, bool& containsC
 
 void ErosionAlgorithm::removeComponent(int cell) {
     (*cells)[cell].state = AIR;
+    if ((*cells)[cell].isExterior) removedExteriorCells.push_back(cell);
 
     for (int i = 0; i < (*cells)[cell].neighbors.size(); ++i) {
         int next = (*cells)[cell].neighbors[i];
         if (next < 0) continue;
-        if ((*cells)[next].state != AIR) removeComponent(next); 
+
+        std::pair<int,int> key;
+        if (links -> find(std::make_pair(cell, next)) != links -> end()) key = std::make_pair(cell, next);
+        else if (links -> find(std::make_pair(next, cell)) != links -> end()) key = std::make_pair(next, cell);
+        else std::cout << "????????" << std::endl;
+
+        if ((*cells)[next].state != AIR && (*links)[key].state != BROKEN) removeComponent(next); 
     }
 
     //FIX LINKS
@@ -318,8 +345,11 @@ void ErosionAlgorithm::removeComponent(int cell) {
 void ErosionAlgorithm::updateExternalLinks() {
 
     for (int i = 0; i < (*cells).size(); ++i) {
+        if ((*cells)[i].state == AIR) continue;
         for (int k = 0; k < (*cells)[i].neighbors.size(); ++k) {
             if ((*cells)[i].neighbors[k] < 0 || (*cells)[(*cells)[i].neighbors[k]].state == AIR) {
+                if (!(*cells)[i].isExterior) newExteriorCells.push_back(i);
+
                 (*cells)[i].isExterior = true;     
                 break;
             }
@@ -331,19 +361,22 @@ void ErosionAlgorithm::updateExternalLinks() {
         ++it;
 
         if ( (key.first < 0 || (*cells)[key.first].state == AIR) && ( key.second < 0 || (*cells)[key.second].state == AIR) )  {
-            links -> erase(key);
-            exteriorLinks -> erase(key);
-
+            
             
             for (int i = 0; i < (*links)[key].neighbors.size(); ++i) {
                 std::pair<int,int> act = (*links)[key].neighbors[i];
-                for (int j = 0; j < (*links)[act].neighbors.size(); ++j) {
+                for (int j = 0; j < (*links)[act].neighbors.size();) {
                     if ((*links)[act].neighbors[j] == key) {
                         (*links)[act].neighbors[j] = (*links)[act].neighbors[(*links)[act].neighbors.size() - 1];
                         (*links)[act].neighbors.pop_back();
                     }
+                    else ++j;
                 }
             }
+
+            links -> erase(key);
+            exteriorLinks -> erase(key);
+
         }
 
         else if ((key.first > 0 && (*cells)[key.first].state == AIR) || (key.second > 0 && (*cells)[key.second].state == AIR))  {
@@ -351,6 +384,7 @@ void ErosionAlgorithm::updateExternalLinks() {
             exteriorLinks -> insert(key);
         }
     }
+
 }
 
 void ErosionAlgorithm::computeAverageArea() {

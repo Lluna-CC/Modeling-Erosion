@@ -304,10 +304,10 @@ void CellDecomposition::initializeSphereVAO(unsigned int numSubdivisions) {
         -Z,-X, N
     };
     std::vector<unsigned int> tris = {
-        0,4,1,  0,9,4,  9,5,4,  4,5,8,  4,8,1,
-        8,10,1, 8,3,10, 5,3,8,  5,2,3,  2,7,3,
-        7,10,3, 7,6,10, 7,11,6, 11,0,6, 0,1,6,
-        6,1,10, 9,0,11, 9,11,2, 9,2,5,  7,2,11
+        0,1,4,  0,4,9,  9,4,5,  4,8,5,  4,1,8,
+        8,1,10, 8,10,3, 5,8,3,  5,3,2,  2,3,7,
+        7,3,10, 7,10,6, 7,6,11, 11,6,0, 0,6,1,
+        6,10,1, 9,11,0, 9,2,11, 9,5,2,  7,11,2
     };
 
     for (int s = 0; s < numSubdivisions; s++) {
@@ -545,6 +545,7 @@ void CellDecomposition::removeComponent(int cell) {
 void CellDecomposition::updateExternalLinks() {
 
     for (int i = 0; i < cells.size(); ++i) {
+        if (cells[i].state == AIR) continue;
         for (int k = 0; k < cells[i].neighbors.size(); ++k) {
             if (cells[i].neighbors[k] > 0 && cells[cells[i].neighbors[k]].state == AIR) {
                 cells[i].isExterior = true;     
@@ -562,11 +563,12 @@ void CellDecomposition::updateExternalLinks() {
             
             for (int i = 0; i < links[key].neighbors.size(); ++i) {
                 std::pair<int,int> act = links[key].neighbors[i];
-                for (int j = 0; j < links[act].neighbors.size(); ++j) {
+                for (int j = 0; j < links[act].neighbors.size();) {
                     if (links[act].neighbors[j] == key) {
                         links[act].neighbors[j] = links[act].neighbors[links[act].neighbors.size() - 1];
                         links[act].neighbors.pop_back();
                     }
+                    else ++j;
                 }
             }
             links.erase(key);
@@ -582,4 +584,23 @@ void CellDecomposition::updateExternalLinks() {
 
     }
     
+}
+
+void CellDecomposition::updateMesh(const std::vector<int>& newC, const std::vector<int>& oldC) {
+    for (int i = 0; i < newC.size(); ++i) {
+        int k = newC[i];
+        cells[k].isExterior = true;
+        cellToMesh(cells[k].vertices, cells[k].faceData, cellVAOs[k], bufferVerts[k], bufferIndices[k], cells[k].nTriangles);
+    }
+
+    glUseProgram(cellShader -> programId());
+    for (int i = 0; i < oldC.size(); ++i) {
+        int k = oldC[i];
+        cells[k].isExterior = false;
+        glDeleteBuffers(1, &bufferVerts[k]);
+        glDeleteBuffers(1, &bufferIndices[k]);
+        glDeleteVertexArrays(1, &cellVAOs[k]);
+	    
+    }
+    glUseProgram(0);
 }

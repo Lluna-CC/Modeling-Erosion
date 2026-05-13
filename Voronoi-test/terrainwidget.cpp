@@ -480,9 +480,17 @@ void TerrainWidget::keyPressEvent(QKeyEvent* event) {
     }
 }
 
-void TerrainWidget::computeWaterPath() {
+void TerrainWidget::computeWaterPath(int num) {
     if (cellDecomp == nullptr) return;
-    eroder.waterPath();
+    std::vector<int> newC,oldC;
+    for (int i = 0; i < num; ++i) {
+        std::cout << "Path n: " << i << std::endl;
+        if (eroder.waterPath()) {
+            std::cout << "Part removed! " << std::endl;
+            eroder.getNewExteriorCells(newC, oldC);
+            cellDecomp -> updateMesh(newC, oldC);
+        };
+    }
 }
 
 void TerrainWidget::changeErosionDirection(double theta, double phi) {

@@ -35,7 +35,7 @@ public:
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();
-    void computeWaterPath();
+    void computeWaterPath(int num);
     void changeErosionDirection(double theta, double phi);
     
 public slots:

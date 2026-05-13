@@ -351,7 +351,7 @@ public:
     QRadioButton *render_particles;
     QRadioButton *render_original;
     QGroupBox *groupBox_5;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_7;
     QHBoxLayout *horizontalLayout_3;
     QLabel *theta;
@@ -360,6 +360,10 @@ public:
     QLabel *phi;
     QDoubleSpinBox *phi_spinbox;
     QPushButton *change_direction;
+    QSpacerItem *verticalSpacer_4;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_2;
+    QSpinBox *paths_num;
     QPushButton *compute_water_path;
     QMenuBar *menubar;
     QMenu *menuSave;
@@ -2234,21 +2238,21 @@ public:
 
         groupBox_5 = new QGroupBox(tabVoro);
         groupBox_5->setObjectName("groupBox_5");
-        groupBox_5->setGeometry(QRect(10, 270, 291, 221));
-        widget = new QWidget(groupBox_5);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(10, 36, 280, 161));
-        verticalLayout_7 = new QVBoxLayout(widget);
+        groupBox_5->setGeometry(QRect(10, 270, 291, 271));
+        layoutWidget1 = new QWidget(groupBox_5);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(10, 40, 271, 220));
+        verticalLayout_7 = new QVBoxLayout(layoutWidget1);
         verticalLayout_7->setObjectName("verticalLayout_7");
         verticalLayout_7->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        theta = new QLabel(widget);
+        theta = new QLabel(layoutWidget1);
         theta->setObjectName("theta");
 
         horizontalLayout_3->addWidget(theta);
 
-        theta_spinbox = new QDoubleSpinBox(widget);
+        theta_spinbox = new QDoubleSpinBox(layoutWidget1);
         theta_spinbox->setObjectName("theta_spinbox");
         theta_spinbox->setMaximum(180.000000000000000);
 
@@ -2258,12 +2262,12 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_5);
 
-        phi = new QLabel(widget);
+        phi = new QLabel(layoutWidget1);
         phi->setObjectName("phi");
 
         horizontalLayout_3->addWidget(phi);
 
-        phi_spinbox = new QDoubleSpinBox(widget);
+        phi_spinbox = new QDoubleSpinBox(layoutWidget1);
         phi_spinbox->setObjectName("phi_spinbox");
         phi_spinbox->setMaximum(360.000000000000000);
 
@@ -2272,12 +2276,34 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout_3);
 
-        change_direction = new QPushButton(widget);
+        change_direction = new QPushButton(layoutWidget1);
         change_direction->setObjectName("change_direction");
 
         verticalLayout_7->addWidget(change_direction);
 
-        compute_water_path = new QPushButton(widget);
+        verticalSpacer_4 = new QSpacerItem(20, 15, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+
+        verticalLayout_7->addItem(verticalSpacer_4);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        label_2 = new QLabel(layoutWidget1);
+        label_2->setObjectName("label_2");
+
+        horizontalLayout_4->addWidget(label_2);
+
+        paths_num = new QSpinBox(layoutWidget1);
+        paths_num->setObjectName("paths_num");
+        paths_num->setMinimum(1);
+        paths_num->setMaximum(100000);
+        paths_num->setSingleStep(100);
+
+        horizontalLayout_4->addWidget(paths_num);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_4);
+
+        compute_water_path = new QPushButton(layoutWidget1);
         compute_water_path->setObjectName("compute_water_path");
 
         verticalLayout_7->addWidget(compute_water_path);
@@ -2562,7 +2588,8 @@ public:
         theta->setText(QCoreApplication::translate("MainWindow", "Theta", nullptr));
         phi->setText(QCoreApplication::translate("MainWindow", "Phi", nullptr));
         change_direction->setText(QCoreApplication::translate("MainWindow", "Change Erosion Direction", nullptr));
-        compute_water_path->setText(QCoreApplication::translate("MainWindow", "Compute Water Path", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Number of Paths", nullptr));
+        compute_water_path->setText(QCoreApplication::translate("MainWindow", "Compute Water Paths", nullptr));
         tabWidgetR->setTabText(tabWidgetR->indexOf(tabVoro), QCoreApplication::translate("MainWindow", "Voronoi", nullptr));
         menuSave->setTitle(QCoreApplication::translate("MainWindow", "Save", nullptr));
         menuLoad->setTitle(QCoreApplication::translate("MainWindow", "Load", nullptr));

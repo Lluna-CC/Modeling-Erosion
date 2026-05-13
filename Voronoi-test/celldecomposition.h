@@ -72,6 +72,9 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    void initializeSphereVAO(unsigned int numSubdivisions);
    void setNumCells(int n);
 
+   void updateMesh(const std::vector<int>& newC, const std::vector<int>& oldC);
+   
+
    std::vector<vorocell>* getCells() {return &cells;}
    std::map<std::pair<int,int>, vorolink>* getLinks() {return &links;}
    std::set<std::pair<int,int>>* getExteriorLinks() {return &exteriorLinks;}

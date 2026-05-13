@@ -726,7 +726,8 @@ void MainWindow::computeVoronoi() {
 }
 
 void MainWindow::computeWaterPath() {
-    widget -> computeWaterPath();
+    int path_num = ui -> paths_num -> value();
+    widget -> computeWaterPath(path_num);
 }
 
 void MainWindow::changeRenderCells() {
