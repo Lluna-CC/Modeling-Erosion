@@ -47,7 +47,7 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellDecomposition* decom
                 //double z_max = hf -> Height(Vector2(x,y));
                 z = min[2] + rnd()*(max[2] - min[2]);
                 
-                int idx = i*ny/block*zSamples + j*zSamples + k;
+                //int idx = i*ny/block*zSamples + j*zSamples + k;
                 con.put(particles,x,y,z);
                 ++particles;
             }
@@ -102,11 +102,11 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
     double sizeY = hf -> getCellSize()[1];
     int nz = (max[2] - min[2])/sizeX; 
 
-    int block = 4;
-    double offset = 0.5*Norm(hf->getCellSize());
-    int zSamples = 25;
+    int block = 1;
+    double offset = 0.75*Norm(hf->getCellSize());
+    int zSamples = 16;
 
-    container con(min[0],max[0], min[1],max[1], min[2],max[2] + block, nx/4, ny/4, nz/4, false, false, false, 5);
+    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx/4, ny/4, nz/4, false, false, false, 5);
 
     int particles = 0;
 
@@ -143,24 +143,25 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
         particles += 2;
     }
 
+    std::cout << "Triangles: " << particles << std::endl;
     //Particles under the terrain
     
-    for (int i = 0; i < nx/block; ++i) {
-        for (int j = 0; j < ny/block; ++j) {
-            double x_block = min[0] + i*block*sizeX + 0.5*((block - 1)*sizeX);
-            double y_block = min[1] + j*block*sizeY  + 0.5*((block - 1)*sizeY);
+    for (int i = 0; i < nx; ++i) {
+        for (int j = 0; j < ny; ++j) {
+            double x_block = min[0] + i*sizeX - 0.5*sizeX;
+            double y_block = min[1] + j*sizeY - 0.5*sizeY;
             double t = hf -> Height(Vector2(x_block,y_block));
-            t = t/max[2];
+            t = 1.0 - (max[2] - t)/(max[2] - min[2]);
             
-            int actSamples = 1 + zSamples*t;
+            int actSamples = ceil(1.0 + zSamples*t);
+            
             for (int k = 0; k < actSamples; ++k) {
-                x = min[0] + i*block*sizeX + rnd()*((block - 1)*sizeX);
-                y = min[1] + j*block*sizeY  + rnd()*((block - 1)*sizeY);
+                x = x_block + rnd()*(sizeX) - 0.5*sizeX;
+                y = y_block + rnd()*(sizeY) - 0.5*sizeY;
                 double z_max = hf -> Height(Vector2(x,y)) - block/2;
                 
-                z = min[2] + rnd()*(z_max - min[2]);
+                z = min[2] - 4*offset + rnd()*(z_max - min[2] + 2*offset);
                 
-                int idx = i*ny/block*zSamples + j*zSamples + k;
                 con.put(particles,x,y,z);
                 ++particles;
             }
@@ -189,4 +190,64 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
     }while (loopAll.inc()); 
     std::cout << "Decomposition ended" << std::endl;
 
+}
+
+void Voronoi::toyVoronoi(const HeightField *hf, CellDecomposition *decomp) {
+      
+     std::cout << "Starting!" << std::endl;
+    Box3 domain = hf -> getBox();
+    Vector3 min = domain.getMin();
+    Vector3 max = domain.getMax();
+
+    int nx = hf -> getSizeX();
+    int ny = hf -> getSizeY();
+    double sizeX = hf -> getCellSize()[0];
+    double sizeY = hf -> getCellSize()[1];
+    int nz = (max[2] - min[2])/sizeX; 
+
+    int block = 4;
+    double offset = 0.5*Norm(hf->getCellSize());
+    int zSamples = 25;
+
+    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 2*offset, nx/4, ny/4, nz/4, false, false, false, 5);
+
+    int particles = 0;
+
+    double x,y,z;
+
+    for (int i = 0; i < nx; ++i) {
+        x = min[0] + i*sizeX;
+        y = 0;
+        double max_z = hf -> Height(Vector2(x,y));
+        for (int k = 0; k < zSamples; ++k) {
+            
+            z = min[2] - 4*offset + rnd()*(max[2] - min[2] + 6*offset);
+                
+               
+            con.put(particles,x,y,z);
+            ++particles;
+        }
+
+    }
+
+    c_loop_all loopAll(con);
+    std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
+     
+    if(!loopAll.start()) return;
+    decomp -> setNumCells(particles);
+    do {
+        voronoicell_neighbor c;
+        //std::cout << "a" << std::endl;
+        con.compute_cell(c,loopAll);
+        if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
+        double cellX = loopAll.x();
+        double cellY = loopAll.y();
+        double cellZ = loopAll.z();
+        double z_max = hf -> Height(Vector2(cellX,cellY));
+
+        if (cellZ <= z_max) decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
+        
+    }while (loopAll.inc()); 
+    std::cout << "Decomposition ended" << std::endl;
 }

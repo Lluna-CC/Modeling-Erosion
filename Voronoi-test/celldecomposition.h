@@ -22,7 +22,8 @@ enum cellState {
 enum linkState {
   INTERIOR,
   EXTERIOR,
-  BROKEN
+  BROKEN,
+  MARKED
 };
 
 struct voroFace {
@@ -63,13 +64,16 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    void renderCells();
    void renderParticles();
-   
+   void renderLinks();
+   void renderPaths(std::set<std::pair<int,int>>& paths);
+
    void fullMeshDecomposition();
    void setShader(QOpenGLShaderProgram* shader) {cellShader = shader;} 
    float* getMin() {return min;}
    float* getMax() {return max;}
    
    void initializeSphereVAO(unsigned int numSubdivisions);
+   void initializeCylinderVAO();
    void setNumCells(int n);
 
    void updateMesh(const std::vector<int>& newC, const std::vector<int>& oldC);
@@ -93,9 +97,9 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    float min[3];
    float max[3];
-   GLuint sphereVAO;
-   GLuint sphereVertsVBO;
-   GLuint sphereIndicesVBO;
+   GLuint sphereVAO, cylinderVAO;
+   GLuint sphereVertsVBO, cylinderVertsVBO;
+   GLuint sphereIndicesVBO, cylinderIndicesVBO;
    unsigned int sphereIndicesSize;
 
    void cellToMesh(std::vector<float>& v, std::map<int,voroFace>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles);

@@ -49,69 +49,6 @@ public:
     QWidget *centralwidget;
     QGridLayout *gridLayout_12;
     QWidget *glWidget;
-    QFrame *frameL;
-    QVBoxLayout *verticalLayout_16;
-    QGroupBox *Objects_groupBox_2;
-    QVBoxLayout *verticalLayout_10;
-    QComboBox *cb_preset;
-    QHBoxLayout *horizontalLayout_37;
-    QLabel *label_48;
-    QLabel *label_preset;
-    QHBoxLayout *horizontalLayout_31;
-    QLabel *label_58;
-    QDoubleSpinBox *sb_presetFactor;
-    QPushButton *btn_loadPreset;
-    QGroupBox *groupBox_3;
-    QVBoxLayout *verticalLayout_3;
-    QGridLayout *gridLayout;
-    QDoubleSpinBox *hf_elevMin;
-    QLabel *label_9;
-    QLabel *label_11;
-    QLabel *label_7;
-    QDoubleSpinBox *hf_elevMax;
-    QSpinBox *hf_gridY;
-    QDoubleSpinBox *hf_kmY;
-    QLabel *label_8;
-    QLabel *label_12;
-    QLabel *label_10;
-    QDoubleSpinBox *hf_kmX;
-    QSpinBox *hf_gridX;
-    QLabel *label_4;
-    QLabel *label_cellSize;
-    QPushButton *btn_updateDEM;
-    QGroupBox *groupBox_4;
-    QVBoxLayout *verticalLayout;
-    QPushButton *btn_fillDepressions;
-    QPushButton *btn_breaching;
-    QGridLayout *gridLayout_6;
-    QPushButton *btn_gaussianSmooth;
-    QSpinBox *sb_gaussianBlur_radius;
-    QLabel *label_21;
-    QGroupBox *groupBox_9;
-    QGridLayout *gridLayout_2;
-    QDoubleSpinBox *light_altitude;
-    QLabel *label_44;
-    QDoubleSpinBox *light_azimuth;
-    QLabel *label_43;
-    QCheckBox *dem_shadows;
-    QCheckBox *dem_shading;
-    QGroupBox *groupBox_palette;
-    QGridLayout *gridLayout_11;
-    QComboBox *cb_palette;
-    QDoubleSpinBox *sb_paletteMax;
-    QCheckBox *fixed_palette;
-    QLabel *labelPaletteRange;
-    QDoubleSpinBox *sb_paletteMin;
-    QPushButton *btn_resetPaletteRange;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_5;
-    QLabel *label_27;
-    QLineEdit *lineClickInfoCell;
-    QLabel *label_26;
-    QLineEdit *lineClickInfoElev;
-    QLabel *label_30;
-    QLineEdit *lineClickInfoMetric;
-    QSpacerItem *verticalSpacer;
     QTabWidget *tabWidgetR;
     QWidget *tabDEM;
     QVBoxLayout *verticalLayout_15;
@@ -347,9 +284,13 @@ public:
     QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
     QPushButton *pushButton;
-    QRadioButton *render_cells;
-    QRadioButton *render_particles;
     QRadioButton *render_original;
+    QRadioButton *render_cells;
+    QFrame *line_2;
+    QLabel *label_24;
+    QRadioButton *render_particles;
+    QRadioButton *viz_links;
+    QRadioButton *viz_paths;
     QGroupBox *groupBox_5;
     QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_7;
@@ -365,6 +306,70 @@ public:
     QLabel *label_2;
     QSpinBox *paths_num;
     QPushButton *compute_water_path;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_5;
+    QLabel *label_27;
+    QLineEdit *lineClickInfoCell;
+    QLabel *label_26;
+    QLineEdit *lineClickInfoElev;
+    QLabel *label_30;
+    QLineEdit *lineClickInfoMetric;
+    QFrame *frameL;
+    QVBoxLayout *verticalLayout_16;
+    QGroupBox *Objects_groupBox_2;
+    QVBoxLayout *verticalLayout_10;
+    QComboBox *cb_toy;
+    QHBoxLayout *horizontalLayout_37;
+    QLabel *label_48;
+    QLabel *label_preset;
+    QHBoxLayout *horizontalLayout_31;
+    QLabel *label_58;
+    QDoubleSpinBox *sb_presetFactor;
+    QPushButton *btn_loadToy;
+    QGroupBox *groupBox_3;
+    QVBoxLayout *verticalLayout_3;
+    QGridLayout *gridLayout;
+    QDoubleSpinBox *hf_kmX;
+    QPushButton *btn_updateDEM;
+    QSpinBox *hf_gridY;
+    QLabel *label_8;
+    QLabel *label_7;
+    QLabel *label_12;
+    QLabel *label_cellSize;
+    QDoubleSpinBox *hf_kmY;
+    QLabel *label_4;
+    QDoubleSpinBox *hf_elevMin;
+    QLabel *label_10;
+    QDoubleSpinBox *hf_elevMax;
+    QLabel *label_9;
+    QLabel *label_11;
+    QSpinBox *hf_gridX;
+    QPushButton *btn_recommendedDEM;
+    QGroupBox *groupBox_4;
+    QVBoxLayout *verticalLayout;
+    QPushButton *btn_fillDepressions;
+    QPushButton *btn_breaching;
+    QGridLayout *gridLayout_6;
+    QSpinBox *sb_gaussianBlur_radius;
+    QPushButton *btn_gaussianSmooth;
+    QLabel *label_21;
+    QGroupBox *groupBox_9;
+    QGridLayout *gridLayout_2;
+    QDoubleSpinBox *light_altitude;
+    QDoubleSpinBox *light_azimuth;
+    QCheckBox *dem_shading;
+    QCheckBox *dem_shadows;
+    QLabel *label_44;
+    QLabel *label_43;
+    QGroupBox *groupBox_palette;
+    QGridLayout *gridLayout_11;
+    QComboBox *cb_palette;
+    QDoubleSpinBox *sb_paletteMax;
+    QCheckBox *fixed_palette;
+    QLabel *labelPaletteRange;
+    QDoubleSpinBox *sb_paletteMin;
+    QPushButton *btn_resetPaletteRange;
+    QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
     QMenu *menuSave;
     QMenu *menuLoad;
@@ -405,408 +410,11 @@ public:
 
         gridLayout_12->addWidget(glWidget, 0, 1, 1, 1);
 
-        frameL = new QFrame(centralwidget);
-        frameL->setObjectName("frameL");
+        tabWidgetR = new QTabWidget(centralwidget);
+        tabWidgetR->setObjectName("tabWidgetR");
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(frameL->sizePolicy().hasHeightForWidth());
-        frameL->setSizePolicy(sizePolicy1);
-        frameL->setMinimumSize(QSize(300, 0));
-        verticalLayout_16 = new QVBoxLayout(frameL);
-        verticalLayout_16->setObjectName("verticalLayout_16");
-        Objects_groupBox_2 = new QGroupBox(frameL);
-        Objects_groupBox_2->setObjectName("Objects_groupBox_2");
-        Objects_groupBox_2->setEnabled(true);
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(Objects_groupBox_2->sizePolicy().hasHeightForWidth());
-        Objects_groupBox_2->setSizePolicy(sizePolicy2);
-        Objects_groupBox_2->setFlat(false);
-        verticalLayout_10 = new QVBoxLayout(Objects_groupBox_2);
-        verticalLayout_10->setObjectName("verticalLayout_10");
-        cb_preset = new QComboBox(Objects_groupBox_2);
-        cb_preset->setObjectName("cb_preset");
-
-        verticalLayout_10->addWidget(cb_preset);
-
-        horizontalLayout_37 = new QHBoxLayout();
-        horizontalLayout_37->setObjectName("horizontalLayout_37");
-        label_48 = new QLabel(Objects_groupBox_2);
-        label_48->setObjectName("label_48");
-
-        horizontalLayout_37->addWidget(label_48);
-
-        label_preset = new QLabel(Objects_groupBox_2);
-        label_preset->setObjectName("label_preset");
-
-        horizontalLayout_37->addWidget(label_preset);
-
-
-        verticalLayout_10->addLayout(horizontalLayout_37);
-
-        horizontalLayout_31 = new QHBoxLayout();
-        horizontalLayout_31->setObjectName("horizontalLayout_31");
-        label_58 = new QLabel(Objects_groupBox_2);
-        label_58->setObjectName("label_58");
-
-        horizontalLayout_31->addWidget(label_58);
-
-        sb_presetFactor = new QDoubleSpinBox(Objects_groupBox_2);
-        sb_presetFactor->setObjectName("sb_presetFactor");
-        sb_presetFactor->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        sb_presetFactor->setMaximum(1.000000000000000);
-        sb_presetFactor->setSingleStep(0.050000000000000);
-        sb_presetFactor->setValue(1.000000000000000);
-
-        horizontalLayout_31->addWidget(sb_presetFactor);
-
-
-        verticalLayout_10->addLayout(horizontalLayout_31);
-
-        btn_loadPreset = new QPushButton(Objects_groupBox_2);
-        btn_loadPreset->setObjectName("btn_loadPreset");
-
-        verticalLayout_10->addWidget(btn_loadPreset);
-
-
-        verticalLayout_16->addWidget(Objects_groupBox_2);
-
-        groupBox_3 = new QGroupBox(frameL);
-        groupBox_3->setObjectName("groupBox_3");
-        verticalLayout_3 = new QVBoxLayout(groupBox_3);
-        verticalLayout_3->setObjectName("verticalLayout_3");
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName("gridLayout");
-        hf_elevMin = new QDoubleSpinBox(groupBox_3);
-        hf_elevMin->setObjectName("hf_elevMin");
-        hf_elevMin->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_elevMin->setDecimals(1);
-        hf_elevMin->setMinimum(-10000.000000000000000);
-        hf_elevMin->setMaximum(10000.000000000000000);
-        hf_elevMin->setSingleStep(50.000000000000000);
-        hf_elevMin->setValue(0.000000000000000);
-
-        gridLayout->addWidget(hf_elevMin, 2, 1, 1, 1);
-
-        label_9 = new QLabel(groupBox_3);
-        label_9->setObjectName("label_9");
-        label_9->setMaximumSize(QSize(50, 16777215));
-
-        gridLayout->addWidget(label_9, 0, 0, 1, 1);
-
-        label_11 = new QLabel(groupBox_3);
-        label_11->setObjectName("label_11");
-        label_11->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        gridLayout->addWidget(label_11, 1, 2, 1, 1);
-
-        label_7 = new QLabel(groupBox_3);
-        label_7->setObjectName("label_7");
-
-        gridLayout->addWidget(label_7, 2, 0, 1, 1);
-
-        hf_elevMax = new QDoubleSpinBox(groupBox_3);
-        hf_elevMax->setObjectName("hf_elevMax");
-        hf_elevMax->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_elevMax->setDecimals(1);
-        hf_elevMax->setMaximum(20000.000000000000000);
-        hf_elevMax->setSingleStep(50.000000000000000);
-        hf_elevMax->setValue(3500.000000000000000);
-
-        gridLayout->addWidget(hf_elevMax, 2, 3, 1, 1);
-
-        hf_gridY = new QSpinBox(groupBox_3);
-        hf_gridY->setObjectName("hf_gridY");
-        hf_gridY->setMinimumSize(QSize(80, 0));
-        hf_gridY->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_gridY->setMaximum(10000);
-        hf_gridY->setSingleStep(10);
-        hf_gridY->setValue(1200);
-
-        gridLayout->addWidget(hf_gridY, 0, 3, 1, 1);
-
-        hf_kmY = new QDoubleSpinBox(groupBox_3);
-        hf_kmY->setObjectName("hf_kmY");
-        hf_kmY->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_kmY->setDecimals(1);
-        hf_kmY->setMaximum(10000.000000000000000);
-        hf_kmY->setValue(60.000000000000000);
-
-        gridLayout->addWidget(hf_kmY, 1, 3, 1, 1);
-
-        label_8 = new QLabel(groupBox_3);
-        label_8->setObjectName("label_8");
-
-        gridLayout->addWidget(label_8, 1, 0, 1, 1);
-
-        label_12 = new QLabel(groupBox_3);
-        label_12->setObjectName("label_12");
-        label_12->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        gridLayout->addWidget(label_12, 2, 2, 1, 1);
-
-        label_10 = new QLabel(groupBox_3);
-        label_10->setObjectName("label_10");
-        label_10->setMaximumSize(QSize(10, 16777215));
-        label_10->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        gridLayout->addWidget(label_10, 0, 2, 1, 1);
-
-        hf_kmX = new QDoubleSpinBox(groupBox_3);
-        hf_kmX->setObjectName("hf_kmX");
-        hf_kmX->setMinimumSize(QSize(8, 0));
-        hf_kmX->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_kmX->setDecimals(1);
-        hf_kmX->setMaximum(10000.000000000000000);
-        hf_kmX->setValue(60.000000000000000);
-
-        gridLayout->addWidget(hf_kmX, 1, 1, 1, 1);
-
-        hf_gridX = new QSpinBox(groupBox_3);
-        hf_gridX->setObjectName("hf_gridX");
-        hf_gridX->setMinimumSize(QSize(90, 0));
-        hf_gridX->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        hf_gridX->setMaximum(10000);
-        hf_gridX->setSingleStep(10);
-        hf_gridX->setValue(1200);
-
-        gridLayout->addWidget(hf_gridX, 0, 1, 1, 1);
-
-        label_4 = new QLabel(groupBox_3);
-        label_4->setObjectName("label_4");
-        label_4->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
-
-        gridLayout->addWidget(label_4, 3, 0, 1, 1);
-
-        label_cellSize = new QLabel(groupBox_3);
-        label_cellSize->setObjectName("label_cellSize");
-
-        gridLayout->addWidget(label_cellSize, 3, 1, 1, 3);
-
-        btn_updateDEM = new QPushButton(groupBox_3);
-        btn_updateDEM->setObjectName("btn_updateDEM");
-        btn_updateDEM->setMaximumSize(QSize(16777215, 24));
-
-        gridLayout->addWidget(btn_updateDEM, 4, 0, 1, 4);
-
-
-        verticalLayout_3->addLayout(gridLayout);
-
-
-        verticalLayout_16->addWidget(groupBox_3);
-
-        groupBox_4 = new QGroupBox(frameL);
-        groupBox_4->setObjectName("groupBox_4");
-        verticalLayout = new QVBoxLayout(groupBox_4);
-        verticalLayout->setObjectName("verticalLayout");
-        btn_fillDepressions = new QPushButton(groupBox_4);
-        btn_fillDepressions->setObjectName("btn_fillDepressions");
-        btn_fillDepressions->setCheckable(false);
-
-        verticalLayout->addWidget(btn_fillDepressions);
-
-        btn_breaching = new QPushButton(groupBox_4);
-        btn_breaching->setObjectName("btn_breaching");
-        btn_breaching->setCheckable(false);
-
-        verticalLayout->addWidget(btn_breaching);
-
-        gridLayout_6 = new QGridLayout();
-        gridLayout_6->setObjectName("gridLayout_6");
-        btn_gaussianSmooth = new QPushButton(groupBox_4);
-        btn_gaussianSmooth->setObjectName("btn_gaussianSmooth");
-
-        gridLayout_6->addWidget(btn_gaussianSmooth, 0, 0, 1, 1);
-
-        sb_gaussianBlur_radius = new QSpinBox(groupBox_4);
-        sb_gaussianBlur_radius->setObjectName("sb_gaussianBlur_radius");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(sb_gaussianBlur_radius->sizePolicy().hasHeightForWidth());
-        sb_gaussianBlur_radius->setSizePolicy(sizePolicy3);
-        sb_gaussianBlur_radius->setMinimumSize(QSize(64, 0));
-        sb_gaussianBlur_radius->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        sb_gaussianBlur_radius->setMaximum(1000);
-        sb_gaussianBlur_radius->setValue(2);
-
-        gridLayout_6->addWidget(sb_gaussianBlur_radius, 0, 2, 1, 1);
-
-        label_21 = new QLabel(groupBox_4);
-        label_21->setObjectName("label_21");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
-        label_21->setSizePolicy(sizePolicy4);
-
-        gridLayout_6->addWidget(label_21, 0, 1, 1, 1);
-
-
-        verticalLayout->addLayout(gridLayout_6);
-
-
-        verticalLayout_16->addWidget(groupBox_4);
-
-        groupBox_9 = new QGroupBox(frameL);
-        groupBox_9->setObjectName("groupBox_9");
-        gridLayout_2 = new QGridLayout(groupBox_9);
-        gridLayout_2->setObjectName("gridLayout_2");
-        light_altitude = new QDoubleSpinBox(groupBox_9);
-        light_altitude->setObjectName("light_altitude");
-        light_altitude->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        light_altitude->setDecimals(1);
-        light_altitude->setMaximum(90.000000000000000);
-        light_altitude->setSingleStep(5.000000000000000);
-        light_altitude->setValue(60.000000000000000);
-
-        gridLayout_2->addWidget(light_altitude, 1, 3, 1, 1);
-
-        label_44 = new QLabel(groupBox_9);
-        label_44->setObjectName("label_44");
-
-        gridLayout_2->addWidget(label_44, 1, 2, 1, 1);
-
-        light_azimuth = new QDoubleSpinBox(groupBox_9);
-        light_azimuth->setObjectName("light_azimuth");
-        light_azimuth->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        light_azimuth->setDecimals(1);
-        light_azimuth->setMaximum(360.000000000000000);
-        light_azimuth->setSingleStep(15.000000000000000);
-        light_azimuth->setValue(315.000000000000000);
-
-        gridLayout_2->addWidget(light_azimuth, 1, 1, 1, 1);
-
-        label_43 = new QLabel(groupBox_9);
-        label_43->setObjectName("label_43");
-
-        gridLayout_2->addWidget(label_43, 1, 0, 1, 1);
-
-        dem_shadows = new QCheckBox(groupBox_9);
-        dem_shadows->setObjectName("dem_shadows");
-
-        gridLayout_2->addWidget(dem_shadows, 0, 2, 1, 2);
-
-        dem_shading = new QCheckBox(groupBox_9);
-        dem_shading->setObjectName("dem_shading");
-        dem_shading->setChecked(true);
-
-        gridLayout_2->addWidget(dem_shading, 0, 0, 1, 2);
-
-
-        verticalLayout_16->addWidget(groupBox_9);
-
-        groupBox_palette = new QGroupBox(frameL);
-        groupBox_palette->setObjectName("groupBox_palette");
-        gridLayout_11 = new QGridLayout(groupBox_palette);
-        gridLayout_11->setObjectName("gridLayout_11");
-        cb_palette = new QComboBox(groupBox_palette);
-        cb_palette->addItem(QString());
-        cb_palette->addItem(QString());
-        cb_palette->addItem(QString());
-        cb_palette->setObjectName("cb_palette");
-
-        gridLayout_11->addWidget(cb_palette, 0, 1, 1, 3);
-
-        sb_paletteMax = new QDoubleSpinBox(groupBox_palette);
-        sb_paletteMax->setObjectName("sb_paletteMax");
-        sb_paletteMax->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        sb_paletteMax->setDecimals(3);
-        sb_paletteMax->setMaximum(1.000000000000000);
-        sb_paletteMax->setStepType(QAbstractSpinBox::StepType::AdaptiveDecimalStepType);
-        sb_paletteMax->setValue(1.000000000000000);
-
-        gridLayout_11->addWidget(sb_paletteMax, 1, 2, 1, 1);
-
-        fixed_palette = new QCheckBox(groupBox_palette);
-        fixed_palette->setObjectName("fixed_palette");
-        fixed_palette->setChecked(true);
-
-        gridLayout_11->addWidget(fixed_palette, 0, 0, 1, 1);
-
-        labelPaletteRange = new QLabel(groupBox_palette);
-        labelPaletteRange->setObjectName("labelPaletteRange");
-        labelPaletteRange->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-
-        gridLayout_11->addWidget(labelPaletteRange, 1, 0, 1, 1);
-
-        sb_paletteMin = new QDoubleSpinBox(groupBox_palette);
-        sb_paletteMin->setObjectName("sb_paletteMin");
-        sb_paletteMin->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
-        sb_paletteMin->setDecimals(3);
-        sb_paletteMin->setMaximum(1.000000000000000);
-        sb_paletteMin->setStepType(QAbstractSpinBox::StepType::AdaptiveDecimalStepType);
-
-        gridLayout_11->addWidget(sb_paletteMin, 1, 1, 1, 1);
-
-        btn_resetPaletteRange = new QPushButton(groupBox_palette);
-        btn_resetPaletteRange->setObjectName("btn_resetPaletteRange");
-        sizePolicy3.setHeightForWidth(btn_resetPaletteRange->sizePolicy().hasHeightForWidth());
-        btn_resetPaletteRange->setSizePolicy(sizePolicy3);
-        btn_resetPaletteRange->setMinimumSize(QSize(24, 24));
-        btn_resetPaletteRange->setMaximumSize(QSize(24, 24));
-        QFont font;
-        font.setPointSize(16);
-        font.setBold(false);
-        btn_resetPaletteRange->setFont(font);
-        btn_resetPaletteRange->setText(QString::fromUtf8("\342\206\251\357\270\216"));
-
-        gridLayout_11->addWidget(btn_resetPaletteRange, 1, 3, 1, 1);
-
-
-        verticalLayout_16->addWidget(groupBox_palette);
-
-        groupBox_2 = new QGroupBox(frameL);
-        groupBox_2->setObjectName("groupBox_2");
-        gridLayout_5 = new QGridLayout(groupBox_2);
-        gridLayout_5->setObjectName("gridLayout_5");
-        label_27 = new QLabel(groupBox_2);
-        label_27->setObjectName("label_27");
-
-        gridLayout_5->addWidget(label_27, 0, 0, 1, 1);
-
-        lineClickInfoCell = new QLineEdit(groupBox_2);
-        lineClickInfoCell->setObjectName("lineClickInfoCell");
-        lineClickInfoCell->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoCell, 0, 1, 1, 1);
-
-        label_26 = new QLabel(groupBox_2);
-        label_26->setObjectName("label_26");
-
-        gridLayout_5->addWidget(label_26, 1, 0, 1, 1);
-
-        lineClickInfoElev = new QLineEdit(groupBox_2);
-        lineClickInfoElev->setObjectName("lineClickInfoElev");
-        lineClickInfoElev->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoElev, 1, 1, 1, 1);
-
-        label_30 = new QLabel(groupBox_2);
-        label_30->setObjectName("label_30");
-
-        gridLayout_5->addWidget(label_30, 2, 0, 1, 1);
-
-        lineClickInfoMetric = new QLineEdit(groupBox_2);
-        lineClickInfoMetric->setObjectName("lineClickInfoMetric");
-        lineClickInfoMetric->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoMetric, 2, 1, 1, 1);
-
-
-        verticalLayout_16->addWidget(groupBox_2);
-
-        verticalSpacer = new QSpacerItem(20, 121, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        verticalLayout_16->addItem(verticalSpacer);
-
-
-        gridLayout_12->addWidget(frameL, 0, 0, 1, 1);
-
-        tabWidgetR = new QTabWidget(centralwidget);
-        tabWidgetR->setObjectName("tabWidgetR");
         sizePolicy1.setHeightForWidth(tabWidgetR->sizePolicy().hasHeightForWidth());
         tabWidgetR->setSizePolicy(sizePolicy1);
         tabWidgetR->setMinimumSize(QSize(320, 0));
@@ -816,11 +424,11 @@ public:
         verticalLayout_15->setObjectName("verticalLayout_15");
         demToolbox = new QToolBox(tabDEM);
         demToolbox->setObjectName("demToolbox");
-        QSizePolicy sizePolicy5(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(demToolbox->sizePolicy().hasHeightForWidth());
-        demToolbox->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(demToolbox->sizePolicy().hasHeightForWidth());
+        demToolbox->setSizePolicy(sizePolicy2);
         pageMorhology = new QWidget();
         pageMorhology->setObjectName("pageMorhology");
         pageMorhology->setGeometry(QRect(0, 0, 324, 629));
@@ -927,11 +535,11 @@ public:
         horizontalLayout_19->setObjectName("horizontalLayout_19");
         dem_fractLaplacian_s = new QDoubleSpinBox(pageMorhology);
         dem_fractLaplacian_s->setObjectName("dem_fractLaplacian_s");
-        QSizePolicy sizePolicy6(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(dem_fractLaplacian_s->sizePolicy().hasHeightForWidth());
-        dem_fractLaplacian_s->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(dem_fractLaplacian_s->sizePolicy().hasHeightForWidth());
+        dem_fractLaplacian_s->setSizePolicy(sizePolicy3);
         dem_fractLaplacian_s->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         dem_fractLaplacian_s->setMaximum(1.000000000000000);
         dem_fractLaplacian_s->setSingleStep(0.100000000000000);
@@ -941,8 +549,8 @@ public:
 
         dem_fractLaplacian_n = new QSpinBox(pageMorhology);
         dem_fractLaplacian_n->setObjectName("dem_fractLaplacian_n");
-        sizePolicy6.setHeightForWidth(dem_fractLaplacian_n->sizePolicy().hasHeightForWidth());
-        dem_fractLaplacian_n->setSizePolicy(sizePolicy6);
+        sizePolicy3.setHeightForWidth(dem_fractLaplacian_n->sizePolicy().hasHeightForWidth());
+        dem_fractLaplacian_n->setSizePolicy(sizePolicy3);
         dem_fractLaplacian_n->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         dem_fractLaplacian_n->setMaximum(1000);
         dem_fractLaplacian_n->setValue(30);
@@ -993,6 +601,9 @@ public:
 
         label_33 = new QLabel(pageMorhology);
         label_33->setObjectName("label_33");
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(label_33->sizePolicy().hasHeightForWidth());
         label_33->setSizePolicy(sizePolicy4);
 
@@ -1488,18 +1099,18 @@ public:
         horizontalLayout_23->setObjectName("horizontalLayout_23");
         label_25 = new QLabel(pageLandforms);
         label_25->setObjectName("label_25");
-        QSizePolicy sizePolicy7(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Preferred);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(label_25->sizePolicy().hasHeightForWidth());
-        label_25->setSizePolicy(sizePolicy7);
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Preferred);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(label_25->sizePolicy().hasHeightForWidth());
+        label_25->setSizePolicy(sizePolicy5);
 
         horizontalLayout_23->addWidget(label_25);
 
         dem_landformName = new QLabel(pageLandforms);
         dem_landformName->setObjectName("dem_landformName");
-        sizePolicy5.setHeightForWidth(dem_landformName->sizePolicy().hasHeightForWidth());
-        dem_landformName->setSizePolicy(sizePolicy5);
+        sizePolicy2.setHeightForWidth(dem_landformName->sizePolicy().hasHeightForWidth());
+        dem_landformName->setSizePolicy(sizePolicy2);
 
         horizontalLayout_23->addWidget(dem_landformName);
 
@@ -1550,8 +1161,8 @@ public:
         horizontalLayout_29->setObjectName("horizontalLayout_29");
         dem_fisher2004_minScale = new QSpinBox(pageLandforms);
         dem_fisher2004_minScale->setObjectName("dem_fisher2004_minScale");
-        sizePolicy6.setHeightForWidth(dem_fisher2004_minScale->sizePolicy().hasHeightForWidth());
-        dem_fisher2004_minScale->setSizePolicy(sizePolicy6);
+        sizePolicy3.setHeightForWidth(dem_fisher2004_minScale->sizePolicy().hasHeightForWidth());
+        dem_fisher2004_minScale->setSizePolicy(sizePolicy3);
         dem_fisher2004_minScale->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         dem_fisher2004_minScale->setMinimum(3);
         dem_fisher2004_minScale->setMaximum(201);
@@ -1562,15 +1173,15 @@ public:
 
         label_31 = new QLabel(pageLandforms);
         label_31->setObjectName("label_31");
-        sizePolicy7.setHeightForWidth(label_31->sizePolicy().hasHeightForWidth());
-        label_31->setSizePolicy(sizePolicy7);
+        sizePolicy5.setHeightForWidth(label_31->sizePolicy().hasHeightForWidth());
+        label_31->setSizePolicy(sizePolicy5);
 
         horizontalLayout_29->addWidget(label_31);
 
         dem_fisher2004_maxScale = new QSpinBox(pageLandforms);
         dem_fisher2004_maxScale->setObjectName("dem_fisher2004_maxScale");
-        sizePolicy6.setHeightForWidth(dem_fisher2004_maxScale->sizePolicy().hasHeightForWidth());
-        dem_fisher2004_maxScale->setSizePolicy(sizePolicy6);
+        sizePolicy3.setHeightForWidth(dem_fisher2004_maxScale->sizePolicy().hasHeightForWidth());
+        dem_fisher2004_maxScale->setSizePolicy(sizePolicy3);
         dem_fisher2004_maxScale->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         dem_fisher2004_maxScale->setMinimum(3);
         dem_fisher2004_maxScale->setMaximum(201);
@@ -1737,15 +1348,15 @@ public:
         dem_streamArea_flowAlgorithm->addItem(QString());
         dem_streamArea_flowAlgorithm->addItem(QString());
         dem_streamArea_flowAlgorithm->setObjectName("dem_streamArea_flowAlgorithm");
-        sizePolicy6.setHeightForWidth(dem_streamArea_flowAlgorithm->sizePolicy().hasHeightForWidth());
-        dem_streamArea_flowAlgorithm->setSizePolicy(sizePolicy6);
+        sizePolicy3.setHeightForWidth(dem_streamArea_flowAlgorithm->sizePolicy().hasHeightForWidth());
+        dem_streamArea_flowAlgorithm->setSizePolicy(sizePolicy3);
 
         gridLayout_8->addWidget(dem_streamArea_flowAlgorithm, 0, 1, 1, 2);
 
         label_29 = new QLabel(groupBox_10);
         label_29->setObjectName("label_29");
-        sizePolicy5.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
-        label_29->setSizePolicy(sizePolicy5);
+        sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
+        label_29->setSizePolicy(sizePolicy2);
         label_29->setMaximumSize(QSize(80, 16777215));
 
         gridLayout_8->addWidget(label_29, 1, 0, 1, 1);
@@ -1910,11 +1521,11 @@ public:
 
         dem_streamPower_t = new QDoubleSpinBox(pageFlow);
         dem_streamPower_t->setObjectName("dem_streamPower_t");
-        QSizePolicy sizePolicy8(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
-        sizePolicy8.setHeightForWidth(dem_streamPower_t->sizePolicy().hasHeightForWidth());
-        dem_streamPower_t->setSizePolicy(sizePolicy8);
+        QSizePolicy sizePolicy6(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(dem_streamPower_t->sizePolicy().hasHeightForWidth());
+        dem_streamPower_t->setSizePolicy(sizePolicy6);
         dem_streamPower_t->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         dem_streamPower_t->setDecimals(1);
         dem_streamPower_t->setMaximum(10000.000000000000000);
@@ -2202,10 +1813,10 @@ public:
         tabVoro->setObjectName("tabVoro");
         groupBox = new QGroupBox(tabVoro);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(10, 30, 291, 221));
+        groupBox->setGeometry(QRect(10, 30, 291, 271));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(9, 34, 271, 171));
+        layoutWidget->setGeometry(QRect(9, 34, 271, 221));
         verticalLayout_5 = new QVBoxLayout(layoutWidget);
         verticalLayout_5->setObjectName("verticalLayout_5");
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -2217,31 +1828,55 @@ public:
 
         verticalLayout_4->addWidget(pushButton);
 
+        render_original = new QRadioButton(layoutWidget);
+        render_original->setObjectName("render_original");
+        render_original->setChecked(true);
+
+        verticalLayout_4->addWidget(render_original);
+
         render_cells = new QRadioButton(layoutWidget);
         render_cells->setObjectName("render_cells");
-        render_cells->setChecked(true);
+        render_cells->setChecked(false);
 
         verticalLayout_4->addWidget(render_cells);
+
+        line_2 = new QFrame(layoutWidget);
+        line_2->setObjectName("line_2");
+        line_2->setFrameShape(QFrame::Shape::HLine);
+        line_2->setFrameShadow(QFrame::Shadow::Sunken);
+
+        verticalLayout_4->addWidget(line_2);
+
+        label_24 = new QLabel(layoutWidget);
+        label_24->setObjectName("label_24");
+        label_24->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_4->addWidget(label_24);
 
         render_particles = new QRadioButton(layoutWidget);
         render_particles->setObjectName("render_particles");
 
         verticalLayout_4->addWidget(render_particles);
 
-        render_original = new QRadioButton(layoutWidget);
-        render_original->setObjectName("render_original");
+        viz_links = new QRadioButton(layoutWidget);
+        viz_links->setObjectName("viz_links");
 
-        verticalLayout_4->addWidget(render_original);
+        verticalLayout_4->addWidget(viz_links);
+
+        viz_paths = new QRadioButton(layoutWidget);
+        viz_paths->setObjectName("viz_paths");
+
+        verticalLayout_4->addWidget(viz_paths);
 
 
         verticalLayout_5->addLayout(verticalLayout_4);
 
         groupBox_5 = new QGroupBox(tabVoro);
         groupBox_5->setObjectName("groupBox_5");
-        groupBox_5->setGeometry(QRect(10, 270, 291, 271));
+        groupBox_5->setGeometry(QRect(10, 320, 291, 271));
         layoutWidget1 = new QWidget(groupBox_5);
         layoutWidget1->setObjectName("layoutWidget1");
-        layoutWidget1->setGeometry(QRect(10, 40, 271, 220));
+        layoutWidget1->setGeometry(QRect(10, 40, 280, 220));
         verticalLayout_7 = new QVBoxLayout(layoutWidget1);
         verticalLayout_7->setObjectName("verticalLayout_7");
         verticalLayout_7->setContentsMargins(0, 0, 0, 0);
@@ -2308,9 +1943,408 @@ public:
 
         verticalLayout_7->addWidget(compute_water_path);
 
+        groupBox_2 = new QGroupBox(tabVoro);
+        groupBox_2->setObjectName("groupBox_2");
+        groupBox_2->setGeometry(QRect(10, 600, 297, 156));
+        gridLayout_5 = new QGridLayout(groupBox_2);
+        gridLayout_5->setObjectName("gridLayout_5");
+        label_27 = new QLabel(groupBox_2);
+        label_27->setObjectName("label_27");
+
+        gridLayout_5->addWidget(label_27, 0, 0, 1, 1);
+
+        lineClickInfoCell = new QLineEdit(groupBox_2);
+        lineClickInfoCell->setObjectName("lineClickInfoCell");
+        lineClickInfoCell->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoCell, 0, 1, 1, 1);
+
+        label_26 = new QLabel(groupBox_2);
+        label_26->setObjectName("label_26");
+
+        gridLayout_5->addWidget(label_26, 1, 0, 1, 1);
+
+        lineClickInfoElev = new QLineEdit(groupBox_2);
+        lineClickInfoElev->setObjectName("lineClickInfoElev");
+        lineClickInfoElev->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoElev, 1, 1, 1, 1);
+
+        label_30 = new QLabel(groupBox_2);
+        label_30->setObjectName("label_30");
+
+        gridLayout_5->addWidget(label_30, 2, 0, 1, 1);
+
+        lineClickInfoMetric = new QLineEdit(groupBox_2);
+        lineClickInfoMetric->setObjectName("lineClickInfoMetric");
+        lineClickInfoMetric->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoMetric, 2, 1, 1, 1);
+
         tabWidgetR->addTab(tabVoro, QString());
 
         gridLayout_12->addWidget(tabWidgetR, 0, 2, 1, 1);
+
+        frameL = new QFrame(centralwidget);
+        frameL->setObjectName("frameL");
+        sizePolicy1.setHeightForWidth(frameL->sizePolicy().hasHeightForWidth());
+        frameL->setSizePolicy(sizePolicy1);
+        frameL->setMinimumSize(QSize(300, 0));
+        verticalLayout_16 = new QVBoxLayout(frameL);
+        verticalLayout_16->setObjectName("verticalLayout_16");
+        Objects_groupBox_2 = new QGroupBox(frameL);
+        Objects_groupBox_2->setObjectName("Objects_groupBox_2");
+        Objects_groupBox_2->setEnabled(true);
+        QSizePolicy sizePolicy7(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(Objects_groupBox_2->sizePolicy().hasHeightForWidth());
+        Objects_groupBox_2->setSizePolicy(sizePolicy7);
+        Objects_groupBox_2->setFlat(false);
+        verticalLayout_10 = new QVBoxLayout(Objects_groupBox_2);
+        verticalLayout_10->setObjectName("verticalLayout_10");
+        cb_toy = new QComboBox(Objects_groupBox_2);
+        cb_toy->addItem(QString());
+        cb_toy->addItem(QString());
+        cb_toy->setObjectName("cb_toy");
+
+        verticalLayout_10->addWidget(cb_toy);
+
+        horizontalLayout_37 = new QHBoxLayout();
+        horizontalLayout_37->setObjectName("horizontalLayout_37");
+        label_48 = new QLabel(Objects_groupBox_2);
+        label_48->setObjectName("label_48");
+
+        horizontalLayout_37->addWidget(label_48);
+
+        label_preset = new QLabel(Objects_groupBox_2);
+        label_preset->setObjectName("label_preset");
+
+        horizontalLayout_37->addWidget(label_preset);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_37);
+
+        horizontalLayout_31 = new QHBoxLayout();
+        horizontalLayout_31->setObjectName("horizontalLayout_31");
+        label_58 = new QLabel(Objects_groupBox_2);
+        label_58->setObjectName("label_58");
+
+        horizontalLayout_31->addWidget(label_58);
+
+        sb_presetFactor = new QDoubleSpinBox(Objects_groupBox_2);
+        sb_presetFactor->setObjectName("sb_presetFactor");
+        sb_presetFactor->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        sb_presetFactor->setMaximum(1.000000000000000);
+        sb_presetFactor->setSingleStep(0.050000000000000);
+        sb_presetFactor->setValue(1.000000000000000);
+
+        horizontalLayout_31->addWidget(sb_presetFactor);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_31);
+
+        btn_loadToy = new QPushButton(Objects_groupBox_2);
+        btn_loadToy->setObjectName("btn_loadToy");
+
+        verticalLayout_10->addWidget(btn_loadToy);
+
+
+        verticalLayout_16->addWidget(Objects_groupBox_2);
+
+        groupBox_3 = new QGroupBox(frameL);
+        groupBox_3->setObjectName("groupBox_3");
+        verticalLayout_3 = new QVBoxLayout(groupBox_3);
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName("gridLayout");
+        hf_kmX = new QDoubleSpinBox(groupBox_3);
+        hf_kmX->setObjectName("hf_kmX");
+        hf_kmX->setMinimumSize(QSize(8, 0));
+        hf_kmX->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_kmX->setDecimals(1);
+        hf_kmX->setMaximum(10000.000000000000000);
+        hf_kmX->setValue(60.000000000000000);
+
+        gridLayout->addWidget(hf_kmX, 1, 1, 1, 1);
+
+        btn_updateDEM = new QPushButton(groupBox_3);
+        btn_updateDEM->setObjectName("btn_updateDEM");
+        btn_updateDEM->setMaximumSize(QSize(16777215, 24));
+
+        gridLayout->addWidget(btn_updateDEM, 4, 0, 1, 4);
+
+        hf_gridY = new QSpinBox(groupBox_3);
+        hf_gridY->setObjectName("hf_gridY");
+        hf_gridY->setMinimumSize(QSize(80, 0));
+        hf_gridY->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_gridY->setMaximum(10000);
+        hf_gridY->setSingleStep(10);
+        hf_gridY->setValue(1200);
+
+        gridLayout->addWidget(hf_gridY, 0, 3, 1, 1);
+
+        label_8 = new QLabel(groupBox_3);
+        label_8->setObjectName("label_8");
+
+        gridLayout->addWidget(label_8, 1, 0, 1, 1);
+
+        label_7 = new QLabel(groupBox_3);
+        label_7->setObjectName("label_7");
+
+        gridLayout->addWidget(label_7, 2, 0, 1, 1);
+
+        label_12 = new QLabel(groupBox_3);
+        label_12->setObjectName("label_12");
+        label_12->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        gridLayout->addWidget(label_12, 2, 2, 1, 1);
+
+        label_cellSize = new QLabel(groupBox_3);
+        label_cellSize->setObjectName("label_cellSize");
+
+        gridLayout->addWidget(label_cellSize, 3, 1, 1, 3);
+
+        hf_kmY = new QDoubleSpinBox(groupBox_3);
+        hf_kmY->setObjectName("hf_kmY");
+        hf_kmY->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_kmY->setDecimals(1);
+        hf_kmY->setMaximum(10000.000000000000000);
+        hf_kmY->setValue(60.000000000000000);
+
+        gridLayout->addWidget(hf_kmY, 1, 3, 1, 1);
+
+        label_4 = new QLabel(groupBox_3);
+        label_4->setObjectName("label_4");
+        label_4->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+
+        gridLayout->addWidget(label_4, 3, 0, 1, 1);
+
+        hf_elevMin = new QDoubleSpinBox(groupBox_3);
+        hf_elevMin->setObjectName("hf_elevMin");
+        hf_elevMin->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_elevMin->setDecimals(1);
+        hf_elevMin->setMinimum(-10000.000000000000000);
+        hf_elevMin->setMaximum(10000.000000000000000);
+        hf_elevMin->setSingleStep(50.000000000000000);
+        hf_elevMin->setValue(0.000000000000000);
+
+        gridLayout->addWidget(hf_elevMin, 2, 1, 1, 1);
+
+        label_10 = new QLabel(groupBox_3);
+        label_10->setObjectName("label_10");
+        label_10->setMaximumSize(QSize(10, 16777215));
+        label_10->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        gridLayout->addWidget(label_10, 0, 2, 1, 1);
+
+        hf_elevMax = new QDoubleSpinBox(groupBox_3);
+        hf_elevMax->setObjectName("hf_elevMax");
+        hf_elevMax->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_elevMax->setDecimals(1);
+        hf_elevMax->setMaximum(20000.000000000000000);
+        hf_elevMax->setSingleStep(50.000000000000000);
+        hf_elevMax->setValue(3500.000000000000000);
+
+        gridLayout->addWidget(hf_elevMax, 2, 3, 1, 1);
+
+        label_9 = new QLabel(groupBox_3);
+        label_9->setObjectName("label_9");
+        label_9->setMaximumSize(QSize(50, 16777215));
+
+        gridLayout->addWidget(label_9, 0, 0, 1, 1);
+
+        label_11 = new QLabel(groupBox_3);
+        label_11->setObjectName("label_11");
+        label_11->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        gridLayout->addWidget(label_11, 1, 2, 1, 1);
+
+        hf_gridX = new QSpinBox(groupBox_3);
+        hf_gridX->setObjectName("hf_gridX");
+        hf_gridX->setMinimumSize(QSize(90, 0));
+        hf_gridX->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        hf_gridX->setMaximum(10000);
+        hf_gridX->setSingleStep(10);
+        hf_gridX->setValue(1200);
+
+        gridLayout->addWidget(hf_gridX, 0, 1, 1, 1);
+
+
+        verticalLayout_3->addLayout(gridLayout);
+
+        btn_recommendedDEM = new QPushButton(groupBox_3);
+        btn_recommendedDEM->setObjectName("btn_recommendedDEM");
+
+        verticalLayout_3->addWidget(btn_recommendedDEM);
+
+
+        verticalLayout_16->addWidget(groupBox_3);
+
+        groupBox_4 = new QGroupBox(frameL);
+        groupBox_4->setObjectName("groupBox_4");
+        verticalLayout = new QVBoxLayout(groupBox_4);
+        verticalLayout->setObjectName("verticalLayout");
+        btn_fillDepressions = new QPushButton(groupBox_4);
+        btn_fillDepressions->setObjectName("btn_fillDepressions");
+        btn_fillDepressions->setCheckable(false);
+
+        verticalLayout->addWidget(btn_fillDepressions);
+
+        btn_breaching = new QPushButton(groupBox_4);
+        btn_breaching->setObjectName("btn_breaching");
+        btn_breaching->setCheckable(false);
+
+        verticalLayout->addWidget(btn_breaching);
+
+        gridLayout_6 = new QGridLayout();
+        gridLayout_6->setObjectName("gridLayout_6");
+        sb_gaussianBlur_radius = new QSpinBox(groupBox_4);
+        sb_gaussianBlur_radius->setObjectName("sb_gaussianBlur_radius");
+        QSizePolicy sizePolicy8(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(sb_gaussianBlur_radius->sizePolicy().hasHeightForWidth());
+        sb_gaussianBlur_radius->setSizePolicy(sizePolicy8);
+        sb_gaussianBlur_radius->setMinimumSize(QSize(64, 0));
+        sb_gaussianBlur_radius->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        sb_gaussianBlur_radius->setMaximum(1000);
+        sb_gaussianBlur_radius->setValue(2);
+
+        gridLayout_6->addWidget(sb_gaussianBlur_radius, 0, 2, 1, 1);
+
+        btn_gaussianSmooth = new QPushButton(groupBox_4);
+        btn_gaussianSmooth->setObjectName("btn_gaussianSmooth");
+
+        gridLayout_6->addWidget(btn_gaussianSmooth, 0, 0, 1, 1);
+
+        label_21 = new QLabel(groupBox_4);
+        label_21->setObjectName("label_21");
+        sizePolicy4.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
+        label_21->setSizePolicy(sizePolicy4);
+
+        gridLayout_6->addWidget(label_21, 0, 1, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout_6);
+
+
+        verticalLayout_16->addWidget(groupBox_4);
+
+        groupBox_9 = new QGroupBox(frameL);
+        groupBox_9->setObjectName("groupBox_9");
+        gridLayout_2 = new QGridLayout(groupBox_9);
+        gridLayout_2->setObjectName("gridLayout_2");
+        light_altitude = new QDoubleSpinBox(groupBox_9);
+        light_altitude->setObjectName("light_altitude");
+        light_altitude->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        light_altitude->setDecimals(1);
+        light_altitude->setMaximum(90.000000000000000);
+        light_altitude->setSingleStep(5.000000000000000);
+        light_altitude->setValue(60.000000000000000);
+
+        gridLayout_2->addWidget(light_altitude, 1, 3, 1, 1);
+
+        light_azimuth = new QDoubleSpinBox(groupBox_9);
+        light_azimuth->setObjectName("light_azimuth");
+        light_azimuth->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        light_azimuth->setDecimals(1);
+        light_azimuth->setMaximum(360.000000000000000);
+        light_azimuth->setSingleStep(15.000000000000000);
+        light_azimuth->setValue(315.000000000000000);
+
+        gridLayout_2->addWidget(light_azimuth, 1, 1, 1, 1);
+
+        dem_shading = new QCheckBox(groupBox_9);
+        dem_shading->setObjectName("dem_shading");
+        dem_shading->setChecked(true);
+
+        gridLayout_2->addWidget(dem_shading, 0, 0, 1, 2);
+
+        dem_shadows = new QCheckBox(groupBox_9);
+        dem_shadows->setObjectName("dem_shadows");
+
+        gridLayout_2->addWidget(dem_shadows, 0, 2, 1, 2);
+
+        label_44 = new QLabel(groupBox_9);
+        label_44->setObjectName("label_44");
+
+        gridLayout_2->addWidget(label_44, 1, 2, 1, 1);
+
+        label_43 = new QLabel(groupBox_9);
+        label_43->setObjectName("label_43");
+
+        gridLayout_2->addWidget(label_43, 1, 0, 1, 1);
+
+
+        verticalLayout_16->addWidget(groupBox_9);
+
+        groupBox_palette = new QGroupBox(frameL);
+        groupBox_palette->setObjectName("groupBox_palette");
+        gridLayout_11 = new QGridLayout(groupBox_palette);
+        gridLayout_11->setObjectName("gridLayout_11");
+        cb_palette = new QComboBox(groupBox_palette);
+        cb_palette->addItem(QString());
+        cb_palette->addItem(QString());
+        cb_palette->addItem(QString());
+        cb_palette->setObjectName("cb_palette");
+
+        gridLayout_11->addWidget(cb_palette, 0, 1, 1, 3);
+
+        sb_paletteMax = new QDoubleSpinBox(groupBox_palette);
+        sb_paletteMax->setObjectName("sb_paletteMax");
+        sb_paletteMax->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        sb_paletteMax->setDecimals(3);
+        sb_paletteMax->setMaximum(1.000000000000000);
+        sb_paletteMax->setStepType(QAbstractSpinBox::StepType::AdaptiveDecimalStepType);
+        sb_paletteMax->setValue(1.000000000000000);
+
+        gridLayout_11->addWidget(sb_paletteMax, 1, 2, 1, 1);
+
+        fixed_palette = new QCheckBox(groupBox_palette);
+        fixed_palette->setObjectName("fixed_palette");
+        fixed_palette->setChecked(true);
+
+        gridLayout_11->addWidget(fixed_palette, 0, 0, 1, 1);
+
+        labelPaletteRange = new QLabel(groupBox_palette);
+        labelPaletteRange->setObjectName("labelPaletteRange");
+        labelPaletteRange->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+
+        gridLayout_11->addWidget(labelPaletteRange, 1, 0, 1, 1);
+
+        sb_paletteMin = new QDoubleSpinBox(groupBox_palette);
+        sb_paletteMin->setObjectName("sb_paletteMin");
+        sb_paletteMin->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
+        sb_paletteMin->setDecimals(3);
+        sb_paletteMin->setMaximum(1.000000000000000);
+        sb_paletteMin->setStepType(QAbstractSpinBox::StepType::AdaptiveDecimalStepType);
+
+        gridLayout_11->addWidget(sb_paletteMin, 1, 1, 1, 1);
+
+        btn_resetPaletteRange = new QPushButton(groupBox_palette);
+        btn_resetPaletteRange->setObjectName("btn_resetPaletteRange");
+        sizePolicy8.setHeightForWidth(btn_resetPaletteRange->sizePolicy().hasHeightForWidth());
+        btn_resetPaletteRange->setSizePolicy(sizePolicy8);
+        btn_resetPaletteRange->setMinimumSize(QSize(24, 24));
+        btn_resetPaletteRange->setMaximumSize(QSize(24, 24));
+        QFont font;
+        font.setPointSize(16);
+        font.setBold(false);
+        btn_resetPaletteRange->setFont(font);
+        btn_resetPaletteRange->setText(QString::fromUtf8("\342\206\251\357\270\216"));
+
+        gridLayout_11->addWidget(btn_resetPaletteRange, 1, 3, 1, 1);
+
+
+        verticalLayout_16->addWidget(groupBox_palette);
+
+        verticalSpacer = new QSpacerItem(20, 121, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        verticalLayout_16->addItem(verticalSpacer);
+
+
+        gridLayout_12->addWidget(frameL, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -2349,9 +2383,9 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(computeVoronoi()));
 
-        cb_preset->setCurrentIndex(-1);
         tabWidgetR->setCurrentIndex(1);
         demToolbox->setCurrentIndex(0);
+        cb_toy->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -2388,44 +2422,6 @@ public:
 #if QT_CONFIG(tooltip)
         actionSaveLayerRidges->setToolTip(QCoreApplication::translate("MainWindow", "Save ridges layer as PNG", nullptr));
 #endif // QT_CONFIG(tooltip)
-        Objects_groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Preset terrains", nullptr));
-        label_48->setText(QCoreApplication::translate("MainWindow", "Dimensions", nullptr));
-        label_preset->setText(QCoreApplication::translate("MainWindow", "0x0 cells, 0x0km", nullptr));
-        label_58->setText(QCoreApplication::translate("MainWindow", "Rescale factor", nullptr));
-        btn_loadPreset->setText(QCoreApplication::translate("MainWindow", "Load preset", nullptr));
-        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Terrain dimensions", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "Cells", nullptr));
-        label_11->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "Range", nullptr));
-        label_8->setText(QCoreApplication::translate("MainWindow", "Km", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Cellsize", nullptr));
-        label_cellSize->setText(QCoreApplication::translate("MainWindow", "0 x 0 m", nullptr));
-        btn_updateDEM->setText(QCoreApplication::translate("MainWindow", "Update height field", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "Terrain modifiers", nullptr));
-        btn_fillDepressions->setText(QCoreApplication::translate("MainWindow", "Fill depressions", nullptr));
-        btn_breaching->setText(QCoreApplication::translate("MainWindow", "Breach depressions", nullptr));
-        btn_gaussianSmooth->setText(QCoreApplication::translate("MainWindow", "Gaussian smoothing", nullptr));
-        sb_gaussianBlur_radius->setSuffix(QCoreApplication::translate("MainWindow", " cells", nullptr));
-        label_21->setText(QCoreApplication::translate("MainWindow", "radius", nullptr));
-        groupBox_9->setTitle(QCoreApplication::translate("MainWindow", "Light", nullptr));
-        label_44->setText(QCoreApplication::translate("MainWindow", "Altitude", nullptr));
-        label_43->setText(QCoreApplication::translate("MainWindow", "Azimuth", nullptr));
-        dem_shadows->setText(QCoreApplication::translate("MainWindow", "Self-shadows", nullptr));
-        dem_shading->setText(QCoreApplication::translate("MainWindow", "Terrain shading", nullptr));
-        groupBox_palette->setTitle(QCoreApplication::translate("MainWindow", "Colormap", nullptr));
-        cb_palette->setItemText(0, QCoreApplication::translate("MainWindow", "CoolWarm", nullptr));
-        cb_palette->setItemText(1, QCoreApplication::translate("MainWindow", "Reds", nullptr));
-        cb_palette->setItemText(2, QCoreApplication::translate("MainWindow", "Blues", nullptr));
-
-        fixed_palette->setText(QCoreApplication::translate("MainWindow", "Fix palette", nullptr));
-        labelPaletteRange->setText(QCoreApplication::translate("MainWindow", "Range", nullptr));
-        sb_paletteMin->setSuffix(QString());
-        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Info cursor (right mouse button)", nullptr));
-        label_27->setText(QCoreApplication::translate("MainWindow", "Cell id", nullptr));
-        label_26->setText(QCoreApplication::translate("MainWindow", "Elevation", nullptr));
-        label_30->setText(QCoreApplication::translate("MainWindow", "Metric", nullptr));
 #if QT_CONFIG(tooltip)
         tabWidgetR->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -2581,16 +2577,61 @@ public:
 #endif // QT_CONFIG(accessibility)
         groupBox->setTitle(QCoreApplication::translate("MainWindow", "Voronoi Options", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Compute Voronoi Cells", nullptr));
-        render_cells->setText(QCoreApplication::translate("MainWindow", "Render Cells", nullptr));
-        render_particles->setText(QCoreApplication::translate("MainWindow", "Render Particles", nullptr));
         render_original->setText(QCoreApplication::translate("MainWindow", "Render Original", nullptr));
+        render_cells->setText(QCoreApplication::translate("MainWindow", "Render Cells", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "Extra Visualization Options", nullptr));
+        render_particles->setText(QCoreApplication::translate("MainWindow", "Render Particles", nullptr));
+        viz_links->setText(QCoreApplication::translate("MainWindow", "Visualize Links", nullptr));
+        viz_paths->setText(QCoreApplication::translate("MainWindow", "Visualize Paths", nullptr));
         groupBox_5->setTitle(QCoreApplication::translate("MainWindow", "Erosion Options", nullptr));
         theta->setText(QCoreApplication::translate("MainWindow", "Theta", nullptr));
         phi->setText(QCoreApplication::translate("MainWindow", "Phi", nullptr));
         change_direction->setText(QCoreApplication::translate("MainWindow", "Change Erosion Direction", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Number of Paths", nullptr));
         compute_water_path->setText(QCoreApplication::translate("MainWindow", "Compute Water Paths", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Info cursor (right mouse button)", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "Cell id", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Elevation", nullptr));
+        label_30->setText(QCoreApplication::translate("MainWindow", "Metric", nullptr));
         tabWidgetR->setTabText(tabWidgetR->indexOf(tabVoro), QCoreApplication::translate("MainWindow", "Voronoi", nullptr));
+        Objects_groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Toy terrains", nullptr));
+        cb_toy->setItemText(0, QCoreApplication::translate("MainWindow", "Simple Toy", nullptr));
+        cb_toy->setItemText(1, QCoreApplication::translate("MainWindow", "Second test", nullptr));
+
+        label_48->setText(QCoreApplication::translate("MainWindow", "Dimensions", nullptr));
+        label_preset->setText(QCoreApplication::translate("MainWindow", "0x0 cells, 0x0km", nullptr));
+        label_58->setText(QCoreApplication::translate("MainWindow", "Rescale factor", nullptr));
+        btn_loadToy->setText(QCoreApplication::translate("MainWindow", "Load toy", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Terrain dimensions", nullptr));
+        btn_updateDEM->setText(QCoreApplication::translate("MainWindow", "Update height field", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "Km", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Range", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_cellSize->setText(QCoreApplication::translate("MainWindow", "0 x 0 m", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Cellsize", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Cells", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
+        btn_recommendedDEM->setText(QCoreApplication::translate("MainWindow", "Recomended Values", nullptr));
+        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "Terrain modifiers", nullptr));
+        btn_fillDepressions->setText(QCoreApplication::translate("MainWindow", "Fill depressions", nullptr));
+        btn_breaching->setText(QCoreApplication::translate("MainWindow", "Breach depressions", nullptr));
+        sb_gaussianBlur_radius->setSuffix(QCoreApplication::translate("MainWindow", " cells", nullptr));
+        btn_gaussianSmooth->setText(QCoreApplication::translate("MainWindow", "Gaussian smoothing", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "radius", nullptr));
+        groupBox_9->setTitle(QCoreApplication::translate("MainWindow", "Light", nullptr));
+        dem_shading->setText(QCoreApplication::translate("MainWindow", "Terrain shading", nullptr));
+        dem_shadows->setText(QCoreApplication::translate("MainWindow", "Self-shadows", nullptr));
+        label_44->setText(QCoreApplication::translate("MainWindow", "Altitude", nullptr));
+        label_43->setText(QCoreApplication::translate("MainWindow", "Azimuth", nullptr));
+        groupBox_palette->setTitle(QCoreApplication::translate("MainWindow", "Colormap", nullptr));
+        cb_palette->setItemText(0, QCoreApplication::translate("MainWindow", "CoolWarm", nullptr));
+        cb_palette->setItemText(1, QCoreApplication::translate("MainWindow", "Reds", nullptr));
+        cb_palette->setItemText(2, QCoreApplication::translate("MainWindow", "Blues", nullptr));
+
+        fixed_palette->setText(QCoreApplication::translate("MainWindow", "Fix palette", nullptr));
+        labelPaletteRange->setText(QCoreApplication::translate("MainWindow", "Range", nullptr));
+        sb_paletteMin->setSuffix(QString());
         menuSave->setTitle(QCoreApplication::translate("MainWindow", "Save", nullptr));
         menuLoad->setTitle(QCoreApplication::translate("MainWindow", "Load", nullptr));
     } // retranslateUi

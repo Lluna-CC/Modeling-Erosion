@@ -74,7 +74,7 @@ void ErosionAlgorithm::setErosionDirection(double theta, double phi) {
 }
 
 
-bool ErosionAlgorithm::waterPath() {
+bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 
     bool model_update = false;
    
@@ -83,6 +83,7 @@ bool ErosionAlgorithm::waterPath() {
     std::uniform_real_distribution<double> rand(0.0,1.0);
 
     int firstLink_key = externalLinkDistribution(generator);
+
     double water = initialFlow;
     std::pair<int,int> actLink = keys[firstLink_key];
 
@@ -90,6 +91,7 @@ bool ErosionAlgorithm::waterPath() {
     bool first = true;
     if ((*cells)[actLink.first].state == AIR && (*cells)[actLink.second].state == AIR) std::cout << "Okay, there is something weird going on" << std::endl;
     while (water > 0) {
+        
         std::vector<double> propagationWeight((*links)[actLink].neighbors.size());
         for(int i = 0; i < (*links)[actLink].neighbors.size(); ++i) {
             int a,b; 
@@ -115,6 +117,7 @@ bool ErosionAlgorithm::waterPath() {
         
         int next = nextLinkDist(generator);
         actLink = (*links)[actLink].neighbors[next];
+        visited.insert(actLink);
         //std::cout << "Next: " << actLink.first << " " << actLink.second << std::endl;
 
         //EROSION AND DAMAGE PART
@@ -123,7 +126,7 @@ bool ErosionAlgorithm::waterPath() {
         double absorption = (*links)[actLink].life > 0 ? link_area * k_solid + (*links)[actLink].life * k_res : link_area*k_air;
         water = water - absorption;
         
-        std::cout << "Remaining water: " << water << std::endl;
+        //std::cout << "Remaining water: " << water << std::endl;
         double full_absorption_probability = 1 - water/initialFlow;
         
         if (rand(generator) < full_absorption_probability) {

@@ -69,11 +69,64 @@ void TerrainWidget::resizeGL(int w, int h)
     glViewport(0, 0, (GLint)w, (GLint)h);
 }
 
+void TerrainWidget::renderScene(QOpenGLShaderProgram& renderShader) {
+    GLuint shader = renderShader.programId();
+    glUseProgram(shader);
+        
+
+    QMatrix4x4 matPerspective;
+    matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
+                    (GLdouble)width() / (GLdouble)height(),
+                    camera.getNearPlane()/2,camera.getFarPlane()*2);
+        
+    glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
+
+    QMatrix4x4 matView;
+    matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
+                QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
+                QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
+    glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
+
+        
+    glUniform2f(glGetUniformLocation(shader, "u_worldMin"), decompBox.getMin()[0], decompBox.getMin()[1]);
+    glUniform2f(glGetUniformLocation(shader, "u_worldSize"), decompBox.width(), decompBox.height());
+    if (cursorEnabled) {
+        glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), cursorRadius);
+        glUniform4f(glGetUniformLocation(shader, "u_cursorColor"), cursorColor[0], cursorColor[1],
+                                                                    cursorColor[2], 0.5);
+        glUniform2f(glGetUniformLocation(shader, "u_cursorWorld"), cursorPos[0], cursorPos[1]);
+    }
+    else {
+        glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), -1);
+    }
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texId);
+    glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
+
+    switch (renderMode) {
+        case 0:
+            glBindVertexArray(meshVAO);
+            glDrawElements(GL_TRIANGLES, numTriangles*3, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+
+            break;
+        case 1:
+            cellDecomp -> renderCells();
+            break;
+        case 2:
+            cellDecomp -> renderParticles();
+            break;
+    }
+
+    glUseProgram(0);
+}
+
 void TerrainWidget::paintGL()
 {
     
     Box3 currentBox; 
-    if (cellDecomp == nullptr || !renderOriginal) currentBox = terrainBBox;
+    if (cellDecomp == nullptr || renderMode == 0) currentBox = terrainBBox;
     else currentBox = decompBox; 
 
     double camDist = Norm(camera.getEye() - currentBox.center());
@@ -101,93 +154,74 @@ void TerrainWidget::paintGL()
     glUniform2f(glGetUniformLocation(shader, "iResolution"), width(), height());
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-    // Terrain
-    if (cellDecomp != nullptr && !renderOriginal) {
-        GLuint shader = shaderVoro.programId();
+    if (renderMode != 0) {
+        if (cellDecomp == nullptr) return;
+        shader = shaderVoro.programId();
         glUseProgram(shader);
-        
-
-        QMatrix4x4 matPerspective;
-        matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
-                        (GLdouble)width() / (GLdouble)height(),
-                        camera.getNearPlane()/2,camera.getFarPlane()*2);
-        
-        glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
-
-        QMatrix4x4 matView;
-        matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
-                    QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
-                    QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
-        glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
-
-        
-        glUniform2f(glGetUniformLocation(shader, "u_worldMin"), decompBox.getMin()[0], decompBox.getMin()[1]);
-        glUniform2f(glGetUniformLocation(shader, "u_worldSize"), decompBox.width(), decompBox.height());
-        if (cursorEnabled) {
-            glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), cursorRadius);
-            glUniform4f(glGetUniformLocation(shader, "u_cursorColor"), cursorColor[0], cursorColor[1],
-                                                                       cursorColor[2], 0.5);
-            glUniform2f(glGetUniformLocation(shader, "u_cursorWorld"), cursorPos[0], cursorPos[1]);
-        }
-        else {
-            glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), -1);
-        }
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texId);
-		glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
-
-        
-        if (renderCells) cellDecomp -> renderCells();
-        else {
-            cellDecomp -> renderParticles();
-        }
-        glUseProgram(0);
     }
-
-	else if (meshVAO > 0) {
+    else if (meshVAO > 0) {
         shader = shaderTerrain.programId();
         glUseProgram(shader);
+        
+    }
+    else return;
+    // Terrain
 
-        QMatrix4x4 matPerspective;
-        matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
+    QMatrix4x4 matPerspective;
+    matPerspective.perspective(Math::RadianToDegree(camera.getAngleOfViewV(width(), height())),
                         (GLdouble)width() / (GLdouble)height(),
-                        camera.getNearPlane(), camera.getFarPlane());
-        glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
-
-        QMatrix4x4 matView;
-        matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
-                       QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
-                       QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
-        glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
-
-        QMatrix4x4 model;
-        model.setToIdentity();
-        glUniformMatrix4fv(glGetUniformLocation(shader, "ModelMatrix"), 1, GL_FALSE, model.data());
-
-		glUniform2f(glGetUniformLocation(shader, "u_worldMin"), terrainBBox.getMin()[0], terrainBBox.getMin()[1]);
-        glUniform2f(glGetUniformLocation(shader, "u_worldSize"), terrainBBox.width(), terrainBBox.height());
-        if (cursorEnabled) {
-            glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), cursorRadius);
-            glUniform4f(glGetUniformLocation(shader, "u_cursorColor"), cursorColor[0], cursorColor[1],
-                                                                       cursorColor[2], 0.5);
-            glUniform2f(glGetUniformLocation(shader, "u_cursorWorld"), cursorPos[0], cursorPos[1]);
-        }
-        else {
-            glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), -1);
-        }
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texId);
-		glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
-
-		glBindVertexArray(meshVAO);
-		glDrawElements(GL_TRIANGLES, numTriangles*3, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
-		glUseProgram(0);
+                        camera.getNearPlane(),camera.getFarPlane());
+    glUniformMatrix4fv(glGetUniformLocation(shader, "ProjectionMatrix"), 1, GL_FALSE, matPerspective.data());
+    
+    QMatrix4x4 matView;
+    matView.lookAt(QVector3D(camera.getEye()[0], camera.getEye()[1], camera.getEye()[2]),
+                QVector3D(camera.getAt()[0],  camera.getAt()[1],  camera.getAt()[2]),
+                QVector3D(camera.getUp()[0],  camera.getUp()[1],  camera.getUp()[2]));
+    glUniformMatrix4fv(glGetUniformLocation(shader, "ViewMatrix"), 1, GL_FALSE, matView.data());
+    
+    glUniform2f(glGetUniformLocation(shader, "u_worldMin"), terrainBBox.getMin()[0], terrainBBox.getMin()[1]);
+    glUniform2f(glGetUniformLocation(shader, "u_worldSize"), terrainBBox.width(), terrainBBox.height());
+    if (cursorEnabled) {
+        glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), cursorRadius);
+        glUniform4f(glGetUniformLocation(shader, "u_cursorColor"), cursorColor[0], cursorColor[1],
+                                                                    cursorColor[2], 0.5);
+        glUniform2f(glGetUniformLocation(shader, "u_cursorWorld"), cursorPos[0], cursorPos[1]);
+    }
+    else {
+        glUniform1f(glGetUniformLocation(shader, "u_cursorRadius"), -1);
     }
 
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texId);
+    glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
+    
+    QMatrix4x4 model;
+    switch (renderMode) {
+        case 0:
+            model.setToIdentity();
+            glUniformMatrix4fv(glGetUniformLocation(shader, "ModelMatrix"), 1, GL_FALSE, model.data());
+
+            glBindVertexArray(meshVAO);
+            glDrawElements(GL_TRIANGLES, numTriangles*3, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+            break;
+        case 1:
+            cellDecomp -> renderCells();
+            break;
+        case 2:
+            cellDecomp -> renderParticles();
+            break;
+        case 3:
+            cellDecomp -> renderLinks();
+            break;
+        case 4:
+            cellDecomp -> renderPaths(paths);
+            break;
+        default:
+            break;
+    }
+ 
+    glUseProgram(0);
     
 }
 
@@ -434,6 +468,7 @@ void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf,
     makeCurrent();
     cellDecomp -> setShader(&shaderVoro); 
     cellDecomp -> initializeSphereVAO(0);
+    cellDecomp -> initializeCylinderVAO();
     cellDecomp -> fullMeshDecomposition();
     
     decompBox = Box3(
@@ -447,18 +482,8 @@ void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf,
 }
 
 
-void TerrainWidget::changeRenderCells() {
-    renderCells = !renderCells;
-    update();
-}
-
-void TerrainWidget::changeRenderParticles() {
-    renderParticles = !renderParticles;
-    update();
-}
-
-void TerrainWidget::changeRenderOriginal() {
-    renderOriginal = !renderOriginal;
+void TerrainWidget::setRenderMode(int mode) {
+    renderMode = mode;
     update();
 }
 
@@ -483,9 +508,10 @@ void TerrainWidget::keyPressEvent(QKeyEvent* event) {
 void TerrainWidget::computeWaterPath(int num) {
     if (cellDecomp == nullptr) return;
     std::vector<int> newC,oldC;
+    paths.clear();
     for (int i = 0; i < num; ++i) {
-        std::cout << "Path n: " << i << std::endl;
-        if (eroder.waterPath()) {
+        //std::cout << "Path n: " << i << std::endl;
+        if (eroder.waterPath(paths)) {
             std::cout << "Part removed! " << std::endl;
             eroder.getNewExteriorCells(newC, oldC);
             cellDecomp -> updateMesh(newC, oldC);
@@ -497,3 +523,24 @@ void TerrainWidget::changeErosionDirection(double theta, double phi) {
     if (cellDecomp == nullptr) return;
     eroder.setErosionDirection(theta, phi);
 }
+
+void TerrainWidget::setToyDecomposition(CellDecomposition* decomp, double theta, double phi) {
+    delete cellDecomp;
+    cellDecomp = decomp; 
+
+    makeCurrent();
+    cellDecomp -> setShader(&shaderVoro); 
+    cellDecomp -> initializeSphereVAO(0);
+    cellDecomp -> initializeCylinderVAO();
+    cellDecomp -> fullMeshDecomposition();
+    
+    decompBox = Box3(
+		Vector3(cellDecomp -> getMin()[0], cellDecomp -> getMin()[1], cellDecomp -> getMin()[2]),
+		Vector3(cellDecomp -> getMax()[0], cellDecomp -> getMax()[1], cellDecomp -> getMax()[2]));
+
+    camera = Camera::View(decompBox);
+    //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
+    eroder = ErosionAlgorithm(decomp -> getCells(), decomp -> getExteriorLinks(), decomp -> getLinks());
+    eroder.setErosionDirection(theta,phi);
+}
+

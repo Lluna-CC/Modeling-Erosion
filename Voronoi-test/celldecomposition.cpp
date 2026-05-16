@@ -124,7 +124,7 @@ void CellDecomposition::renderCells() {
     QMatrix4x4 model;
     model.setToIdentity();
     glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
-    
+    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
     //int renderedCells = 0;
     for (int i = 0; i < cells.size(); ++i) {
 
@@ -137,6 +137,70 @@ void CellDecomposition::renderCells() {
     }
     //std::cout << "Rendering " << renderedCells << " cells" << std::endl;
 
+}
+
+void CellDecomposition::renderLinks() {
+    QMatrix4x4 model;
+    
+    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
+    //int renderedCells = 0;
+    for (int i = 0; i < cells.size(); ++i) {
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        model.setToIdentity();
+        model.translate((float) cells[i].centroid[0], (float) cells[i].centroid[1], (float) cells[i].centroid[2]);
+        model.scale(0.35,0.35,0.35);
+        model.translate(-(float) cells[i].centroid[0], -(float) cells[i].centroid[1], -(float) cells[i].centroid[2]);
+
+        glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
+
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        glBindVertexArray(cellVAOs[i]);
+        glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+       //++renderedCells;
+
+    }
+
+    glBindVertexArray(cylinderVAO);
+    
+
+    for (int i = 0; i < cells.size(); ++i) {  
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        
+        for (int j = 0; j < cells[i].neighbors.size(); ++j) {
+            int neigh = cells[i].neighbors[j];
+            if (neigh < i) continue;
+            
+            std::pair<int,int> key;
+            if (links.find(std::make_pair(i, neigh)) != links.end()) key = std::make_pair(i, neigh);
+            else if (links.find(std::make_pair(neigh, i)) != links.end()) key = std::make_pair(neigh, i);
+            else continue;
+
+            if (links[key].state == BROKEN || links[key].state == EXTERIOR) continue;
+            float t = links[key].life;
+
+            glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+            
+            float dist = Norm(cells[neigh].centroid - cells[i].centroid);
+            Vector3 dir = Normalized(cells[neigh].centroid - cells[i].centroid);
+            float angle = acos(dot(Vector3(0,0,1),dir)) *360/(2*M_PI);
+            Vector3 axis = cross(Vector3(0,0,1),dir);
+            Vector3 centr = cells[i].centroid + dir*dist/2;
+
+            QMatrix4x4 model;
+            model.setToIdentity();
+            model.translate((float) centr[0], (float) centr[1], (float) centr[2]);
+            model.rotate(angle, axis[0], axis[1], axis[2]);
+            model.scale(0.25,0.25,dist/2);
+
+            //std::cout << particles[i] << " " << particles[i + 1] << " " << particles [i + 2] << std::endl;
+            glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
+
+            glDrawElements(GL_TRIANGLES, 12*3, GL_UNSIGNED_INT, 0);
+        }
+        
+    }
+    glBindVertexArray(0);
 }
 
 void CellDecomposition::fullMeshDecomposition() {
@@ -272,15 +336,90 @@ void CellDecomposition::renderParticles() {
         QMatrix4x4 model;
         model.setToIdentity();
         model.translate((float) cells[i].centroid[0], (float) cells[i].centroid[1], (float) cells[i].centroid[2]);
-        model.scale(2.0,2.0,2.0);
+        model.scale(1.5,1.5,1.5);
 
         //std::cout << particles[i] << " " << particles[i + 1] << " " << particles [i + 2] << std::endl;
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
-
+        glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
         glDrawElements(GL_TRIANGLES, sphereIndicesSize, GL_UNSIGNED_INT, 0);
     }
+
     glBindVertexArray(0);
     
+}
+
+void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths) {
+    
+    QMatrix4x4 model;
+    
+    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
+    //int renderedCells = 0;
+    for (int i = 0; i < cells.size(); ++i) {
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        model.setToIdentity();
+        model.translate((float) cells[i].centroid[0], (float) cells[i].centroid[1], (float) cells[i].centroid[2]);
+        model.scale(0.35,0.35,0.35);
+        model.translate(-(float) cells[i].centroid[0], -(float) cells[i].centroid[1], -(float) cells[i].centroid[2]);
+
+        glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
+
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        glBindVertexArray(cellVAOs[i]);
+        glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+       //++renderedCells;
+
+    }
+
+    for (auto it = paths.begin(); it != paths.end(); ++it) {
+        if (links[*it].state == INTERIOR) links[*it].state = MARKED; 
+    }
+    glBindVertexArray(cylinderVAO);
+    
+
+    for (int i = 0; i < cells.size(); ++i) {  
+        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        
+        for (int j = 0; j < cells[i].neighbors.size(); ++j) {
+            int neigh = cells[i].neighbors[j];
+            if (neigh < i) continue;
+            
+            std::pair<int,int> key;
+            if (links.find(std::make_pair(i, neigh)) != links.end()) key = std::make_pair(i, neigh);
+            else if (links.find(std::make_pair(neigh, i)) != links.end()) key = std::make_pair(neigh, i);
+            else continue;
+
+            if (links[key].state == BROKEN || links[key].state == EXTERIOR) continue;
+            if (links[key].state == MARKED) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.1f, 0.5f,1.0f);
+            else {
+                float t = links[key].life;
+                glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+            }
+            
+            float dist = Norm(cells[neigh].centroid - cells[i].centroid);
+            Vector3 dir = Normalized(cells[neigh].centroid - cells[i].centroid);
+            float angle = acos(dot(Vector3(0,0,1),dir)) *360/(2*M_PI);
+            Vector3 axis = cross(Vector3(0,0,1),dir);
+            Vector3 centr = cells[i].centroid + dir*dist/2;
+
+            QMatrix4x4 model;
+            model.setToIdentity();
+            model.translate((float) centr[0], (float) centr[1], (float) centr[2]);
+            model.rotate(angle, axis[0], axis[1], axis[2]);
+            model.scale(0.25,0.25,dist/2);
+
+            //std::cout << particles[i] << " " << particles[i + 1] << " " << particles [i + 2] << std::endl;
+            glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
+
+            glDrawElements(GL_TRIANGLES, 12*3, GL_UNSIGNED_INT, 0);
+        }
+        
+    }
+    glBindVertexArray(0);
+
+    for (auto it = paths.begin(); it != paths.end(); ++it) {
+        if (links[*it].state == MARKED) links[*it].state = INTERIOR; 
+    }
 }
 
 void CellDecomposition::initializeSphereVAO(unsigned int numSubdivisions) {
@@ -377,6 +516,55 @@ void CellDecomposition::initializeSphereVAO(unsigned int numSubdivisions) {
 
     glGenBuffers(1, &sphereIndicesVBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sphereIndicesVBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * tris.size(), &tris[0], GL_STATIC_DRAW);
+
+	glBindVertexArray(0);
+	glUseProgram(0);
+
+    //writeMesh("./PLYTests/icosa.ply", verts, tris);
+    //std::cout << "saved icosa" << std::endl;
+}
+
+void CellDecomposition::initializeCylinderVAO() {
+        
+    //std::cout << "CYLINDER" << std::endl;
+    const float X=1.0;
+    //const float Z=.850650808352039932f;
+    const float N=0.f;
+
+    std::vector<float> verts = {
+        -X, -X, -X,
+        -X, -X, X,
+        -X, X, X,
+        -X, X,-X,
+        X,-X,-X,
+        X, -X, X,
+        X, X, X,
+        X, X,-X
+    };
+    std::vector<unsigned int> tris = {
+        0,1,2, 0,2,3, 0,3,4, 4,3,7, 4,6,5, 4,7,6,
+        5,6,1, 6,2,1, 7,3,6, 3,2,6, 4,5,1, 4,1,0 
+    };
+
+
+    //sphereIndicesSize = tris.size();
+    
+    glGenVertexArrays(1, &cylinderVAO);
+    glBindVertexArray(cylinderVAO);
+ 
+    glUseProgram(cellShader -> programId());
+    GLuint attribVertexLoc = glGetAttribLocation(cellShader -> programId(), "a_position");
+    
+
+	glGenBuffers(1, &cylinderVertsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, cylinderVertsVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * verts.size(), &verts[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(attribVertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(attribVertexLoc);
+
+    glGenBuffers(1, &cylinderIndicesVBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cylinderIndicesVBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * tris.size(), &tris[0], GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
@@ -541,6 +729,7 @@ void CellDecomposition::removeComponent(int cell) {
 
     //FIX LINKS
 }
+
 
 void CellDecomposition::updateExternalLinks() {
 

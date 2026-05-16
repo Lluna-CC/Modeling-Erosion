@@ -31,12 +31,11 @@ public:
     void hideCursor();
 
     void setDecomposition(CellDecomposition* decomp, HeightField* hf, double theta, double phi); 
-    void changeRenderMode();
-    void changeRenderCells();
-    void changeRenderParticles();
-    void changeRenderOriginal();
+    void setToyDecomposition(CellDecomposition* decomp, double theta, double phi);
+    void setRenderMode(int mode);
     void computeWaterPath(int num);
     void changeErosionDirection(double theta, double phi);
+
     
 public slots:
     virtual void mousePressEvent(QMouseEvent*);
@@ -61,6 +60,7 @@ protected:
 protected:
 
     ErosionAlgorithm eroder;
+    std::set<std::pair<int,int>> paths;
 
     // OpenGL render
     Box3 terrainBBox;
@@ -90,9 +90,9 @@ protected:
     Vector3 cursorPos;
 
     CellDecomposition* cellDecomp = nullptr;
-    bool renderCells = true;
-    bool renderParticles = false;
-    bool renderOriginal = false;
+    int renderMode = 0;
+
+    void renderScene(QOpenGLShaderProgram& shader);
 };
 
 #endif // TERRAINWIDGET_H

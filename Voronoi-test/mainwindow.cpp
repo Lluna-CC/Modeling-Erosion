@@ -57,9 +57,10 @@ void MainWindow::createActions()
 
     connect(ui->actionLoadPNG, SIGNAL(triggered()), this, SLOT(loadPNG()));
     connect(ui->actionLoadASC, SIGNAL(triggered()), this, SLOT(loadASC()));
-    connect(ui->btn_loadPreset, SIGNAL(clicked()), this, SLOT(loadPreset()));
-    connect(ui->cb_preset, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePresetInfo()));
+    connect(ui->btn_loadToy, SIGNAL(clicked()), this, SLOT(loadToy()));
+    connect(ui->cb_toy, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePresetInfo()));
     connect(ui->btn_updateDEM, SIGNAL(clicked()), this, SLOT(updateDEM()));
+    connect(ui->btn_recommendedDEM, SIGNAL(clicked()), this, SLOT(recommendedDEM()));
 
     connect(ui->actionSaveTexture, SIGNAL(triggered()), this, SLOT(saveLayersCombined()));
     connect(ui->actionSaveLayerMetric, SIGNAL(triggered()), this, SLOT(saveLayerMetric()));
@@ -179,9 +180,12 @@ void MainWindow::createActions()
     connect(ui->dem_nni_relative, SIGNAL(toggled(bool)), this, SLOT(redrawBaseTexture()));
 
    
-    connect(ui->render_cells, SIGNAL(toggled(bool)), this, SLOT(changeRenderCells()));
-    connect(ui->render_particles, SIGNAL(toggled(bool)), this, SLOT(changeRenderParticles()));
-    connect(ui->render_original, SIGNAL(toggled(bool)), this, SLOT(changeRenderOriginal()));
+    connect(ui->render_cells, SIGNAL(clicked(bool)), this, SLOT(changeRenderCells()));
+    connect(ui->render_particles, SIGNAL(clicked(bool)), this, SLOT(changeRenderParticles()));
+    connect(ui->render_original, SIGNAL(clicked(bool)), this, SLOT(changeRenderOriginal()));
+    connect(ui->viz_links, SIGNAL(clicked(bool)), this, SLOT(changeRenderLinkViz()));
+    connect(ui->viz_paths, SIGNAL(clicked(bool)), this, SLOT(changeRenderPathViz()));
+    
     connect(ui->compute_water_path, SIGNAL(clicked()), this, SLOT(computeWaterPath()));
     connect(ui->change_direction, SIGNAL(clicked()), this, SLOT(changeErosionDirection()));
 }
@@ -402,6 +406,21 @@ void MainWindow::updateDEM()
     resizeHeightfield();
 }
 
+void MainWindow::recommendedDEM() {
+    if (hf.getNumElements() == 0) return;
+
+    int x = ui->hf_gridX->value();
+    int y = ui->hf_gridY->value();
+    int cells = x*y;
+    
+    if (cells < 50000) return;
+    
+    int divisor = ceil(sqrt(cells/50000.0));
+
+    ui -> hf_gridX -> setValue(x/divisor);
+    ui -> hf_gridY -> setValue(y/divisor);
+}
+
 void MainWindow::loadHeightfield(const QString& hfPath, double hfWidth, double hfHeight, double hfMinZ, double hfMaxZ, double scale)
 {
     std::cout << "Loading " << hfPath.toStdString() << std::endl;
@@ -568,7 +587,7 @@ void MainWindow::saveMetric()
 
 void MainWindow::loadPreset()
 {
-    if (ui->cb_preset->count() == 0) return;
+    /*if (ui->cb_preset->count() == 0) return;
 
     std::string selected = ui->cb_preset->currentText().toStdString();
     if (presetTerrains.find(selected) == presetTerrains.end()) return;
@@ -576,19 +595,67 @@ void MainWindow::loadPreset()
     const PresetTerrain& preset = presetTerrains[selected];
     loadHeightfield(preset.imagePath, preset.terrainX, preset.terrainY,
                     preset.hmin, preset.hmax, ui->sb_presetFactor->value());
-    ui->dem_sunlightLatitude->setValue(preset.avgLat);
+    ui->dem_sunlightLatitude->setValue(preset.avgLat);*/
 }
+
+void MainWindow::loadToy()
+{
+    //std::cout << ui->cb_toy->currentIndex() << std::endl;
+    int idx = ui->cb_toy->currentIndex();
+    if (idx == -1) return;
+    
+    int ncols = 0, nrows = 0;
+    float minLat = 0, minLon = 0, cellSize = 0;
+    switch (idx) {
+        case 0:
+            ncols = 100; nrows = 20;
+            minLat = -20; minLon = -10; cellSize = 5.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            for (int i = 0; i < ncols; i++) {
+                for (int j = 0; j < nrows; j++) {
+                    hf(i, j) = i*cos(i/3.0)*cos(i/3.0);
+                }
+            }
+
+            updateHeightfield();
+            break;
+        case 1:
+            ncols = 100; nrows = 20;
+            minLat = -20; minLon = -10; cellSize = 5.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            for (int i = 0; i < ncols; i++) {
+                for (int j = 0; j < nrows; j++) {
+                    hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
+                }
+            }
+
+            updateHeightfield();
+            break;
+        default:
+            break;
+
+    }
+    
+    CellDecomposition* cellDecomp = new CellDecomposition();
+    double theta = ui -> theta_spinbox -> value();
+    double phi = ui -> phi_spinbox -> value();
+
+    Voronoi::toyVoronoi(&hf, cellDecomp);
+
+    widget -> setToyDecomposition(cellDecomp, theta, phi);
+}
+
 
 void MainWindow::updatePresetInfo()
 {
-    const PresetTerrain& preset = presetTerrains[ui->cb_preset->currentText().toStdString()];
+    /*const PresetTerrain& preset = presetTerrains[ui->cb_preset->currentText().toStdString()];
     ui->label_preset->setText(
                 QString::number(preset.cellsX) + " x "
                 + QString::number(preset.cellsY) + " cells,  "
                 + QString::number(preset.terrainX/1000.0, 'f', 1) + " x "
                 + QString::number(preset.terrainY/1000.0, 'f', 1) + " km"
                 );
-    ui->sb_presetFactor->setValue(preset.defaultScale);
+    ui->sb_presetFactor->setValue(preset.defaultScale);*/
 }
 
 void disableComboBoxItem(QComboBox * comboBox, int index)
@@ -607,7 +674,7 @@ void disableComboBoxItem(QComboBox * comboBox, int index)
 
 void MainWindow::createPresets()
 {
-    QFile file("terrains/presets.txt");
+    /*QFile file("terrains/presets.txt");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         std::cout << "Could not find preset terrains file" << std::endl;
         return;
@@ -662,7 +729,7 @@ void MainWindow::createPresets()
             minElev, maxElev,
             latitude, scale
         );
-    }
+    } */
 }
 
 
@@ -731,15 +798,23 @@ void MainWindow::computeWaterPath() {
 }
 
 void MainWindow::changeRenderCells() {
-    widget -> changeRenderCells();
+    widget -> setRenderMode(1);
 }
 
 void MainWindow::changeRenderParticles() {
-    widget -> changeRenderParticles();
+    widget -> setRenderMode(2);
 }
 
 void MainWindow::changeRenderOriginal() {
-    widget -> changeRenderOriginal();
+    widget -> setRenderMode(0);
+}
+
+void MainWindow::changeRenderLinkViz() {
+    widget -> setRenderMode(3);
+}
+
+void MainWindow::changeRenderPathViz() {
+    widget -> setRenderMode(4);
 }
 
 void MainWindow::changeErosionDirection() {

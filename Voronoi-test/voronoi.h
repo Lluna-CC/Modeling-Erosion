@@ -11,6 +11,7 @@ public:
 
     static void heightfieldVoronoi(const HeightField *hf, CellDecomposition *cellDecomp);
     static void triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& f, CellDecomposition* decomp, const HeightField *hf);
+    static void toyVoronoi(const HeightField *hf, CellDecomposition *decomp);
 };
 
 #endif

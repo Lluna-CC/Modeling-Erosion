@@ -35,13 +35,18 @@ public slots:
     void changeRenderCells();
     void changeRenderParticles();
     void changeRenderOriginal();
+    void changeRenderLinkViz();
+    void changeRenderPathViz();
     void changeErosionDirection();
 
     // terrain load actions
     void loadPNG();
     void loadASC();
     void updateDEM();
+    void recommendedDEM();
 
+    void loadToy();
+    
     // presets
     void loadPreset();
     void updatePresetInfo();

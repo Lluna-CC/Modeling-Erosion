@@ -13,7 +13,7 @@ class ErosionAlgorithm {
 
     
     void setErosionDirection(double theta, double phi);
-    bool waterPath();
+    bool waterPath(std::set<std::pair<int,int>>& visited);
 
     //Returns true if the model changed
     void getNewExteriorCells(std::vector<int>& newC, std::vector<int>& oldC) {
