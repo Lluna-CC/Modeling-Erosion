@@ -131,11 +131,12 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
   
         //Vector3 norm = Normalized(cross(a,b));
         Vector3 norm = Normalized(cross(a,b));
-        
+        Vector3 jitter = Vector3(rnd(),rnd(),rnd());
+        jitter = Normalized(jitter - dot(jitter,norm)*norm);
 
         //Add point to both sides
-        Vector3 first = centroid + offset*norm;
-        Vector3 second = centroid - offset*norm;
+        Vector3 first = centroid + offset*norm + offset*jitter*0.2*rnd();
+        Vector3 second = centroid - offset*norm + offset*jitter*0.2*rnd();
         
         con.put(particles,(double) first[0], (double) first[1], (double) first[2]);
         con.put(particles + 1,(double) second[0],(double) second[1], (double) second[2]);
