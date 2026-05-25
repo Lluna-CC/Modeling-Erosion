@@ -628,6 +628,28 @@ void MainWindow::loadToy()
                     hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
                 }
             }
+        case 2:
+            ncols = 100; nrows = 20;
+            minLat = -20; minLon = -10; cellSize = 5.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            for (int i = 0; i < ncols; i++) {
+                for (int j = 0; j < nrows; j++) {
+                    //GAUSSIAN
+                    //hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
+                }
+            }
+
+            updateHeightfield();
+            break;
+        case 3:
+            ncols = 100; nrows = 20;
+            minLat = -20; minLon = -10; cellSize = 5.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            for (int i = 0; i < ncols; i++) {
+                for (int j = 0; j < nrows; j++) {
+                    hf(i, j) =  5;
+                }
+            }
 
             updateHeightfield();
             break;

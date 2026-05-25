@@ -25,7 +25,8 @@ SOURCES += \
     voronoi.cpp \
     heightfieldWall.cpp \
     celldecomposition.cpp \
-    erosionAlgorithm.cpp 
+    erosionAlgorithm.cpp \
+    cellGraph.cpp
 
 
 HEADERS += \
@@ -38,7 +39,8 @@ HEADERS += \
     voronoi.h \
     heightfieldWall.h \
     celldecomposition.h \
-    erosionAlgorithm.h
+    erosionAlgorithm.h \
+    cellGraph.h
 
 FORMS += \
     mainwindow.ui

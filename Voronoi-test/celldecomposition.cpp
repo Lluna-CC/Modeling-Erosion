@@ -75,48 +75,7 @@ bool writeMesh(const std::string &filename, std::vector<float>& vertices, std::v
 }
 
 void CellDecomposition::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside) {
-    c.neighbors(cells[pid].neighbors);
-
-    std::vector<int> auxiliarFaces;
-    c.face_vertices(auxiliarFaces);
-    int i = 0;
-    int f = 0;
-
-    
-    while (i < auxiliarFaces.size()) {
-        int nV = auxiliarFaces[i];
-        voroFace face;
-        face.vertices = std::vector<unsigned int>(nV);
-        int faceID = cells[pid].neighbors[f];
-        cells[pid].faceData[faceID] = face;
-        
-        
-        for (int j = 1; j <= nV; ++j) {
-            cells[pid].faceData[faceID].vertices[j - 1] = auxiliarFaces[i + j];
-        }
-        
-        
-        i = i + nV + 1;
-        ++f;
-    }
-
-    
-    
-    
-    std::vector<double> aux;
-    c.vertices(x,y,z, aux);
-
-    cells[pid].vertices.resize(aux.size());
-    for (int i = 0; i < aux.size(); ++i) cells[pid].vertices[i] = (float) aux[i]; 
-    cells[pid].centroid[0] = x;
-    cells[pid].centroid[1] = y;
-    cells[pid].centroid[2] = z;
-    if (outside) {
-        cells[pid].state = AIR;
-    }
-
-    
-    addLinks(c,cells[pid].faceData, pid);
+    graph.addCell(c,x,y,z,pid,outside);
 }
 
 
@@ -576,7 +535,7 @@ void CellDecomposition::initializeCylinderVAO() {
 
 void CellDecomposition::setNumCells(int n) {
     cells.resize(n);
-
+    graph.setNumCells(n);
 }
 
 void CellDecomposition::addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& faces, int pid) {

@@ -9,48 +9,10 @@
 #include <QVector3D>
 #include<iostream>
 #include "core.h"
+#include "cellGraph.h"
 #include <map>
 #include <set>
 
-
-enum cellState {
-  SOLID,
-  AIR,
-  CORE
-};
-
-enum linkState {
-  INTERIOR,
-  EXTERIOR,
-  BROKEN,
-  MARKED
-};
-
-struct voroFace {
-  //int planeID;
-  //std::vector<unsigned int> faceNeighbors;
-  std::vector<unsigned int> vertices;
-  double area;
-  Vector3 normal;
-};
-
-
-struct vorocell {
-  Vector3 centroid;
-  std::vector<float> vertices;
-  std::map<int,voroFace> faceData;
-  std::vector<int> neighbors;
-  int nTriangles;
-  cellState state = SOLID;
-  bool isExterior = false;
-  
-};
-
-struct vorolink  {
-  std::vector<std::pair<int,int>> neighbors;
-  linkState state = INTERIOR;
-  double life = 1.0;
-};
 
 
 
@@ -84,8 +46,6 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    std::set<std::pair<int,int>>* getExteriorLinks() {return &exteriorLinks;}
 
  private:
-   std::vector<std::vector<std::vector<unsigned int>>> cellFaces; //Each cell has a set of faces, which have a set of vertex indices inside the cell
-
    std::vector<GLuint> cellVAOs;
    std::vector<GLuint> bufferVerts;
    std::vector<GLuint> bufferIndices;
@@ -94,6 +54,8 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    std::vector<vorocell> cells;
    std::map<std::pair<int,int>, vorolink> links;
    std::set<std::pair<int,int>> exteriorLinks;
+
+   CellGraph graph;
 
    float min[3];
    float max[3];
