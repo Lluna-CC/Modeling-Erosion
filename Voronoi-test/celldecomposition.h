@@ -39,9 +39,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    void updateMesh(const std::vector<int>& newC, const std::vector<int>& oldC);
    
-   std::vector<vorocell>* getCells() {return &graph.getCells(0);}
-   std::map<std::pair<int,int>, vorolink>* getLinks() {return &graph.getLinks(0);}
-   std::set<std::pair<int,int>>* getExteriorLinks() {return &graph.getExteriorLinks(0);}
+   MultiResolutionGraph* getGraph() {return &graph;}
 
    void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {graph.multiLevelVoronoiDecomposition(v,f,hf);}
    void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};

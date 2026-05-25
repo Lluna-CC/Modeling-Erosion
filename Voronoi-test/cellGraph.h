@@ -37,7 +37,7 @@ struct vorocell {
   int nTriangles;
   cellState state = SOLID;
   bool isExterior = false;
-  
+  int upperLevelCentroid = -1;
 };
 
 struct vorolink  {

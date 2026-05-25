@@ -1,5 +1,6 @@
 #include "multiResolutionGraph.h"
 #include <random>
+#include<float.h>
 
 void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {
     levels.resize(2);
@@ -17,7 +18,8 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
     int first = dist(rng);
     centroids[0] = levels[0].getCells()[first].centroid;
 
-    std::vector<double> minDistances(levels[0].getNumCells());
+    std::vector<double> minDistances(levels[0].getNumCells(), DBL_MAX);
+    std::vector<int> closestCentroid(levels[0].getNumCells());
     double max = -1; 
     int argmax;
     
@@ -26,7 +28,10 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
         for (int j = 0; j < minDistances.size(); ++j) {
             Vector3 centr = levels[0].getCells()[j].centroid;
             double dist = Norm(centr - centroids[i - 1]);
-            if (dist < minDistances[j]) minDistances[j] = dist;
+            if (dist < minDistances[j]) {
+                minDistances[j] = dist;
+                closestCentroid[j] = i - 1;
+            }
             if (minDistances[j] > max) {
                 max = minDistances[j];
                 argmax = j;
@@ -36,6 +41,18 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
         centroids[i] =  levels[0].getCells()[argmax].centroid;
         max = -1;
     }
+
+    for (int j = 0; j < minDistances.size(); ++j) {
+        Vector3 centr = levels[0].getCells()[j].centroid;
+        double dist = Norm(centr - centroids[newSize - 1]);
+        if (dist < minDistances[j]) {
+            minDistances[j] = dist;
+            closestCentroid[j] = newSize - 1;
+        }
+        
+        levels[0].getCells()[j].upperLevelCentroid = closestCentroid[j];
+    }
+
 
     Voronoi::voronoiFromCentroids(centroids, &levels[1], hf);
     std::cout << "second level completed" << std::endl;

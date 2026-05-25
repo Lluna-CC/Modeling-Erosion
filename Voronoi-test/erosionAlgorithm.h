@@ -6,7 +6,7 @@ class ErosionAlgorithm {
 
   public:
 
-    ErosionAlgorithm(std::vector<vorocell>* c, std::set<std::pair<int,int>>* el, std::map<std::pair<int,int>, vorolink>* l);
+    ErosionAlgorithm(MultiResolutionGraph* g);
     ErosionAlgorithm();
 
     Vector3 sampleDirection(double theta_base, double phi_base);
@@ -35,9 +35,8 @@ class ErosionAlgorithm {
     std::vector<double> weights; 
     std::vector<std::pair<int,int>> keys; 
 
-    std::vector<vorocell>* cells;
-    std::set<std::pair<int,int>>* exteriorLinks;
-    std::map<std::pair<int,int>, vorolink>* links;
+  
+    MultiResolutionGraph* graph;
 
     
     std::discrete_distribution<int> externalLinkDistribution;
