@@ -460,11 +460,12 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
     update();
 }
 
-void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf, double theta, double phi) {
+void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi) {
     delete cellDecomp;
-    cellDecomp = decomp; 
-    Voronoi::triangleSamplingVoronoi(verts, indices, decomp, hf);
-
+    cellDecomp = new CellDecomposition();
+    
+    cellDecomp -> voronoiDecomposition(verts, indices, hf);
+    
     makeCurrent();
     cellDecomp -> setShader(&shaderVoro); 
     cellDecomp -> initializeSphereVAO(0);
@@ -477,7 +478,7 @@ void TerrainWidget::setDecomposition(CellDecomposition* decomp, HeightField* hf,
 
     camera = Camera::View(decompBox);
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
-    eroder = ErosionAlgorithm(decomp -> getCells(), decomp -> getExteriorLinks(), decomp -> getLinks());
+    eroder = ErosionAlgorithm(cellDecomp -> getCells(), cellDecomp -> getExteriorLinks(), cellDecomp -> getLinks());
     eroder.setErosionDirection(theta,phi);
 }
 

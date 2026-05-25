@@ -167,3 +167,9 @@ void CellGraph::computeBounds() {
     std::cout << "min: " << min[0] << " " << min[1] << " " << min[2] << std::endl;
     std::cout << "max: " << max[0] << " " << max[1] << " " << max[2] << std::endl;*/
 }
+
+void CellGraph::clear() {
+    cells.clear();
+    links.clear();
+    exteriorLinks.clear();
+}

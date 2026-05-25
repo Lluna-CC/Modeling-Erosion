@@ -71,7 +71,8 @@ SOURCES       = core.cpp \
 		heightfieldWall.cpp \
 		celldecomposition.cpp \
 		erosionAlgorithm.cpp \
-		cellGraph.cpp qrc_resources.cpp \
+		cellGraph.cpp \
+		multiResolutionGraph.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_terrainwidget.cpp
 OBJECTS       = core.o \
@@ -94,6 +95,7 @@ OBJECTS       = core.o \
 		celldecomposition.o \
 		erosionAlgorithm.o \
 		cellGraph.o \
+		multiResolutionGraph.o \
 		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_terrainwidget.o
@@ -401,7 +403,8 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		heightfieldWall.h \
 		celldecomposition.h \
 		erosionAlgorithm.h \
-		cellGraph.h core.cpp \
+		cellGraph.h \
+		multiResolutionGraph.h core.cpp \
 		heightfield-breach.cpp \
 		heightfield-fill.cpp \
 		heightfield-metrics-hydrology.cpp \
@@ -420,7 +423,8 @@ DIST          = /usr/lib/qt6/mkspecs/features/spec_pre.prf \
 		heightfieldWall.cpp \
 		celldecomposition.cpp \
 		erosionAlgorithm.cpp \
-		cellGraph.cpp
+		cellGraph.cpp \
+		multiResolutionGraph.cpp
 QMAKE_TARGET  = Voronoi
 DESTDIR       = 
 TARGET        = Voronoi
@@ -1051,8 +1055,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents core.h heightfield.h integerfield.h mainwindow.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h celldecomposition.h erosionAlgorithm.h cellGraph.h $(DISTDIR)/
-	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp celldecomposition.cpp erosionAlgorithm.cpp cellGraph.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents core.h heightfield.h integerfield.h mainwindow.h scalarfield.h terrainwidget.h voronoi.h heightfieldWall.h celldecomposition.h erosionAlgorithm.h cellGraph.h multiResolutionGraph.h $(DISTDIR)/
+	$(COPY_FILE) --parents core.cpp heightfield-breach.cpp heightfield-fill.cpp heightfield-metrics-hydrology.cpp heightfield-metrics-landforms.cpp heightfield-metrics-local.cpp heightfield-metrics-orometry.cpp heightfield-metrics-visibility.cpp heightfield.cpp integerfield.cpp main.cpp mainwindow-draw-metrics.cpp mainwindow.cpp scalarfield.cpp terrainwidget.cpp voronoi.cpp heightfieldWall.cpp celldecomposition.cpp erosionAlgorithm.cpp cellGraph.cpp multiResolutionGraph.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -1108,6 +1112,8 @@ moc_mainwindow.cpp: mainwindow.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
 		erosionAlgorithm.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
@@ -1120,6 +1126,8 @@ moc_terrainwidget.cpp: terrainwidget.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
 		erosionAlgorithm.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
@@ -1210,6 +1218,8 @@ main.o: main.cpp mainwindow.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
 		erosionAlgorithm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
@@ -1221,6 +1231,8 @@ mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
 		erosionAlgorithm.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow-draw-metrics.o mainwindow-draw-metrics.cpp
@@ -1233,10 +1245,10 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
-		erosionAlgorithm.h \
-		ui_mainwindow.h \
 		voronoi.h \
-		heightfieldWall.h
+		heightfieldWall.h \
+		erosionAlgorithm.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 scalarfield.o: scalarfield.cpp scalarfield.h \
@@ -1250,9 +1262,9 @@ terrainwidget.o: terrainwidget.cpp terrainwidget.h \
 		integerfield.h \
 		celldecomposition.h \
 		cellGraph.h \
-		erosionAlgorithm.h \
 		voronoi.h \
-		heightfieldWall.h
+		heightfieldWall.h \
+		erosionAlgorithm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainwidget.o terrainwidget.cpp
 
 voronoi.o: voronoi.cpp voronoi.h \
@@ -1261,7 +1273,6 @@ voronoi.o: voronoi.cpp voronoi.h \
 		scalarfield.h \
 		core.h \
 		integerfield.h \
-		celldecomposition.h \
 		cellGraph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o voronoi.o voronoi.cpp
 
@@ -1274,18 +1285,31 @@ heightfieldWall.o: heightfieldWall.cpp heightfieldWall.h \
 
 celldecomposition.o: celldecomposition.cpp celldecomposition.h \
 		core.h \
-		cellGraph.h
+		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
+		heightfield.h \
+		scalarfield.h \
+		integerfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o celldecomposition.o celldecomposition.cpp
 
 erosionAlgorithm.o: erosionAlgorithm.cpp erosionAlgorithm.h \
 		celldecomposition.h \
 		core.h \
-		cellGraph.h
+		cellGraph.h \
+		voronoi.h \
+		heightfieldWall.h \
+		heightfield.h \
+		scalarfield.h \
+		integerfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o erosionAlgorithm.o erosionAlgorithm.cpp
 
 cellGraph.o: cellGraph.cpp cellGraph.h \
 		core.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cellGraph.o cellGraph.cpp
+
+multiResolutionGraph.o: multiResolutionGraph.cpp multiResolutionGraph.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o multiResolutionGraph.o multiResolutionGraph.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

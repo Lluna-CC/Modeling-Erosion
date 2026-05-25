@@ -628,6 +628,8 @@ void MainWindow::loadToy()
                     hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
                 }
             }
+            updateHeightfield();
+            break;
         case 2:
             ncols = 100; nrows = 20;
             minLat = -20; minLon = -10; cellSize = 5.0;
@@ -662,7 +664,7 @@ void MainWindow::loadToy()
     double theta = ui -> theta_spinbox -> value();
     double phi = ui -> phi_spinbox -> value();
 
-    Voronoi::toyVoronoi(&hf, cellDecomp);
+    cellDecomp -> toyVoronoi(&hf);
 
     widget -> setToyDecomposition(cellDecomp, theta, phi);
 }
@@ -805,12 +807,11 @@ void MainWindow::updateViewshedLocation()
 void MainWindow::computeVoronoi() {
     
     //Voronoi::randomPointsTest();
-    CellDecomposition* cellDecomp = new CellDecomposition();
     double theta = ui -> theta_spinbox -> value();
     double phi = ui -> phi_spinbox -> value();
     //Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    widget -> setDecomposition(cellDecomp, &hf, theta, phi);
+    widget -> setDecomposition(&hf, theta, phi);
     
 }
 

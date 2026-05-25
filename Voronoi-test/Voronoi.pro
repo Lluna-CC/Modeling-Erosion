@@ -26,7 +26,8 @@ SOURCES += \
     heightfieldWall.cpp \
     celldecomposition.cpp \
     erosionAlgorithm.cpp \
-    cellGraph.cpp
+    cellGraph.cpp \
+    multiResolutionGraph.cpp
 
 
 HEADERS += \
@@ -40,7 +41,8 @@ HEADERS += \
     heightfieldWall.h \
     celldecomposition.h \
     erosionAlgorithm.h \
-    cellGraph.h
+    cellGraph.h \
+    multiResolutionGraph.h
 
 FORMS += \
     mainwindow.ui

@@ -11,7 +11,7 @@ double maxElevation(HeightField *hf) {
 
 }
 
-void Voronoi::heightfieldVoronoi(const HeightField *hf, CellDecomposition* decomp) {
+void Voronoi::heightfieldVoronoi(const HeightField *hf, CellGraph* graph) {
     
     std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
@@ -59,7 +59,7 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellDecomposition* decom
     std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
      
     if(!loopAll.start()) return;
-    decomp -> setNumCells(particles);
+    graph -> setNumCells(particles);
     do {
         voronoicell_neighbor c;
         //std::cout << "a" << std::endl;
@@ -70,7 +70,7 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellDecomposition* decom
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        if (cellZ <= z_max) decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
         //else std::cout << "OUT OF RANGE!" << std::endl;
         
     }while (loopAll.inc()); 
@@ -90,7 +90,7 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellDecomposition* decom
     
 }
 
-void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& f, CellDecomposition* decomp, const HeightField* hf) {
+void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& f, CellGraph* graph, const HeightField* hf) {
     std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
     Vector3 min = domain.getMin();
@@ -106,7 +106,7 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
     double offset = 0.75*Norm(hf->getCellSize());
     int zSamples = 16;
 
-    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx/4, ny/4, nz/4, false, false, false, 5);
+    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx, ny, nz, false, false, false, 2);
 
     int particles = 0;
 
@@ -174,28 +174,27 @@ void Voronoi::triangleSamplingVoronoi(std::vector<float>& v, std::vector<uint>& 
     std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
      
     if(!loopAll.start()) return;
-    decomp -> setNumCells(particles);
+    graph -> setNumCells(particles);
     do {
         voronoicell_neighbor c;
         //std::cout << "a" << std::endl;
         con.compute_cell(c,loopAll);
-        if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
         double cellX = loopAll.x();
         double cellY = loopAll.y();
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        if (cellZ <= z_max) decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
-        else decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
+        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
         
     }while (loopAll.inc()); 
     std::cout << "Decomposition ended" << std::endl;
 
 }
 
-void Voronoi::toyVoronoi(const HeightField *hf, CellDecomposition *decomp) {
+void Voronoi::toyVoronoi(const HeightField *hf, CellGraph *graph) {
       
-     std::cout << "Starting!" << std::endl;
+    std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
     Vector3 min = domain.getMin();
     Vector3 max = domain.getMax();
@@ -210,7 +209,7 @@ void Voronoi::toyVoronoi(const HeightField *hf, CellDecomposition *decomp) {
     double offset = 0.5*Norm(hf->getCellSize());
     int zSamples = 25;
 
-    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 2*offset, nx/4, ny/4, nz/4, false, false, false, 5);
+    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 2*offset, nx, ny, nz, false, false, false, 2);
 
     int particles = 0;
 
@@ -235,20 +234,57 @@ void Voronoi::toyVoronoi(const HeightField *hf, CellDecomposition *decomp) {
     std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
      
     if(!loopAll.start()) return;
-    decomp -> setNumCells(particles);
+    graph -> setNumCells(particles);
     do {
         voronoicell_neighbor c;
         //std::cout << "a" << std::endl;
         con.compute_cell(c,loopAll);
-        if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
         double cellX = loopAll.x();
         double cellY = loopAll.y();
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        if (cellZ <= z_max) decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
-        else decomp -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
+        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
         
     }while (loopAll.inc()); 
     std::cout << "Decomposition ended" << std::endl;
+}
+
+void Voronoi::voronoiFromCentroids(const std::vector<Vector3> centroids, CellGraph* graph, const HeightField* hf) {
+     Box3 domain = hf -> getBox();
+    Vector3 min = domain.getMin();
+    Vector3 max = domain.getMax();
+
+    int nx = hf -> getSizeX();
+    int ny = hf -> getSizeY();
+    double sizeX = hf -> getCellSize()[0];
+    double sizeY = hf -> getCellSize()[1];
+    int nz = (max[2] - min[2])/sizeX; 
+    
+    container con(min[0],max[0], min[1],max[1], min[2],max[2], nx, ny, nz, false, false, false, 2);
+    int particles = centroids.size();
+
+    for (int i = 0; i < particles; ++i) {
+        con.put(i, centroids[i][0],centroids[i][1],centroids[i][2]);
+    }
+
+    c_loop_all loopAll(con);
+
+    
+    if(!loopAll.start()) return;
+    graph -> setNumCells(particles);
+    do {
+        voronoicell_neighbor c;
+        //std::cout << "a" << std::endl;
+        con.compute_cell(c,loopAll);
+        double cellX = loopAll.x();
+        double cellY = loopAll.y();
+        double cellZ = loopAll.z();
+        double z_max = hf -> Height(Vector2(cellX,cellY));
+
+        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
+        
+    }while (loopAll.inc()); 
 }

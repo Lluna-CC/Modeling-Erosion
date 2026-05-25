@@ -68,6 +68,7 @@ class CellGraph {
   int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior);
   void updateExternalLinks(); 
 
+  void clear();
   
  private:
 

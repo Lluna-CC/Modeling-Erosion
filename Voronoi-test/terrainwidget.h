@@ -30,7 +30,7 @@ public:
     void showCursor(const Vector3& worldPos);
     void hideCursor();
 
-    void setDecomposition(CellDecomposition* decomp, HeightField* hf, double theta, double phi); 
+    void setDecomposition(HeightField* hf, double theta, double phi); 
     void setToyDecomposition(CellDecomposition* decomp, double theta, double phi);
     void setRenderMode(int mode);
     void computeWaterPath(int num);

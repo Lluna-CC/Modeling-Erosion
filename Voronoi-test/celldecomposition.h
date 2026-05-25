@@ -9,9 +9,10 @@
 #include <QVector3D>
 #include<iostream>
 #include "core.h"
-#include "cellGraph.h"
+#include "multiResolutionGraph.h"
 #include <map>
 #include <set>
+#include "voronoi.h"
 
 
 
@@ -22,8 +23,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    CellDecomposition();
 
    void clear();
-   void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside);
-
+   
    void renderCells();
    void renderParticles();
    void renderLinks();
@@ -31,19 +31,20 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    void fullMeshDecomposition();
    void setShader(QOpenGLShaderProgram* shader) {cellShader = shader;} 
-   float* getMin() {return min;}
-   float* getMax() {return max;}
+   Vector3 getMin() {return min;}
+   Vector3 getMax() {return max;}
    
    void initializeSphereVAO(unsigned int numSubdivisions);
    void initializeCylinderVAO();
-   void setNumCells(int n);
 
    void updateMesh(const std::vector<int>& newC, const std::vector<int>& oldC);
    
+   std::vector<vorocell>* getCells() {return &graph.getCells(0);}
+   std::map<std::pair<int,int>, vorolink>* getLinks() {return &graph.getLinks(0);}
+   std::set<std::pair<int,int>>* getExteriorLinks() {return &graph.getExteriorLinks(0);}
 
-   std::vector<vorocell>* getCells() {return &cells;}
-   std::map<std::pair<int,int>, vorolink>* getLinks() {return &links;}
-   std::set<std::pair<int,int>>* getExteriorLinks() {return &exteriorLinks;}
+   void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {graph.multiLevelVoronoiDecomposition(v,f,hf);}
+   void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};
 
  private:
    std::vector<GLuint> cellVAOs;
@@ -51,14 +52,10 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    std::vector<GLuint> bufferIndices;
    QOpenGLShaderProgram* cellShader = nullptr;
 
-   std::vector<vorocell> cells;
-   std::map<std::pair<int,int>, vorolink> links;
-   std::set<std::pair<int,int>> exteriorLinks;
+   MultiResolutionGraph graph;
 
-   CellGraph graph;
-
-   float min[3];
-   float max[3];
+   Vector3 min;
+   Vector3 max;
    GLuint sphereVAO, cylinderVAO;
    GLuint sphereVertsVBO, cylinderVertsVBO;
    GLuint sphereIndicesVBO, cylinderIndicesVBO;
@@ -66,14 +63,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    void cellToMesh(std::vector<float>& v, std::map<int,voroFace>& f, GLuint& meshVAO, GLuint& bufferVerts, GLuint& bufferIndices, int& triangles);
    void computeBounds();  
-   void addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& faces, int pid);
-   void updateExternalLinks();
-   void breakLink(std::pair<int,int> link);
-   void removeComponent(int cell);
 
-
-   int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable);
-   int componentSize_rec(int cell, int otherCell, bool& containsCore, bool& reachable, std::vector<bool>& visited);
   
 };
 
