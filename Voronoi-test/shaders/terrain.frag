@@ -6,6 +6,7 @@ uniform sampler2D u_texture;
 uniform float u_cursorRadius;
 uniform vec2  u_cursorWorld;
 uniform vec4  u_cursorColor;
+uniform float u_alpha;
 
 in vec3 worldPos;
 
@@ -21,6 +22,6 @@ void main()
         vec4 ccursor = (1 - u_cursorColor.a)*c + u_cursorColor.a*u_cursorColor;
         c = mix(c, ccursor, t);
     }
-    fragment = vec4(c.rgb, 1.0);
+    fragment = vec4(c.rgb, u_alpha);
     //fragment = vec4(0.1, gl_FragCoord.z/2, 0.2, 1.0);
 }

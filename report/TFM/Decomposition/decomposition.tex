@@ -1,0 +1,27 @@
+\chapter{Model Decomposition}
+One of the core aspects of simluating erosion on 3D terrains is 
+the model representation that we use. Any eroision simulation applied
+on a 3D model will modfiy the model and its properties, so proper
+data structures that allow for dynamic modifications of the model are 
+key for these types of simulations. Additionally, applying erosion to an 
+object also exposes the \textit{interior} of said object, so any model
+representation that we use also has to encode some internal information of
+the model, as internal points of a model might become part of the surface
+at some point of the process.
+\\
+
+In order to represent the internal structure of a model, we decomposed 
+the base model into multiple cells covering the whole volume of the object.
+A core part of this project has been focused on the model decomposition,
+as well as on algorithms to produce and improve said decomposition. In this
+section of the thesis we are going to introduce some basic topics on 
+3D modeling, explore the potential representations that could be used for 
+terrain erosion and, finally, we are going to take a deep dive into the 
+method we implemented and the improvements we added to increase the quality
+of the decomposition. 
+
+
+\section{Initial Method}
+\section{Problems and Solutions}
+\section{Final Method}
+\section{Extensions}

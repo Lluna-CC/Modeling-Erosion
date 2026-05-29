@@ -1,0 +1,125 @@
+\chapter{Previous work and Preliminaries}
+
+To understand this project and our contributions to the field, we will 
+first present some background information about the topic as well of 
+previous approaches to our problem (or similar problems), so that the reader 
+can better understand both the problem and our proposed solutions.
+
+\section{Terrains and Landscapes}
+
+T
+\subsection{General weathering effects}
+
+\subsection{Freeze-thaw cycle}
+
+\section{Terrain Representation and Modeling}
+Virtual terrains are a fundamental aspect of this thesis, so it is important 
+to review current approaches to represent and work with these types of models.
+A deep dive into the state-of-the-art on terrain generation can be found on 
+\cite{galin2019review}, but we are going to present only the most relevant 
+methods for our project, as a full review is out of the scope of this thesis.
+
+\subsection{Terrain Representations}
+
+When representing terrains and landscapes there are multiple data structures 
+and representations we can use depending on the ammount of information that 
+we need to store and the nature of the model.
+
+\vspace{10pt}
+
+The main model representation techniques can be divided in \textit{Elevation
+Models}, maninly focused on representing the surface of the terrain, and 
+\textins{Volumetric Models}, that aim to capture some interal properties of 
+the terrain as well as more complex structures.
+
+\subsubsection{Elevation Models}
+Elevation models are the simplest ways of representing virtual terrains. 
+They consist on assigning an height to every point on a 2D space. In a more 
+formal way, a terrain is represented by a function $h: \mathbb{R}^2 
+\rightarrow \mathbb{R}$ that is at least $C^0$. From an height function we 
+can easily extract the slope at one point $s(x,y)$ by using the norm of 
+the gradient:
+
+$$s(x,y) = \left \lVert \nabla h(x,y) \right \rVert = \left \lVert(\frac{\partial h}{\partial x}, \frac{\partial h}{\partial y}) \right \rVert$$
+
+And from the gradient (projected to $\mathbb{R}^3$) we can easily obtain 
+the normal at one point $n(x,y)$:
+
+$$n(x,y) = \frac{(-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)}
+{\left \lVert (-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)\right \rVert }$$
+
+With the height, normal and slope we have all that we need for a basic 
+representation of a terrain. Of course, as we are using a bivariate function
+to represent the terrain, we can only have one elevation for each point 
+on the domain, and that makes features like caves or overhangs impossible 
+to represent with this method.
+
+\vspace{10pt}
+
+Despite its limitations, elevation models are widely used for its simplicity
+and memory efficiency as they can capture the general structure of a landscape,
+given that complex features like overhangs often represent a small part of the 
+overall terrain.
+
+\vspace{10pt}
+
+To expand on this topic, elevation models only require a bivariate function
+to represent the whole terrain, which can capture the whole terrain in a 
+really simple closed-form expression, providing infinite precission with 
+an extremly small ammount of memory. However, constructing functions that
+represent complex realistic terrains is highly challenging and, for that 
+reason, elevation models commonly use \textit{discrete heightfields} 
+(also called \textit{Digital Elevation Models} or DEM) to represent terrains.
+
+\vspace{10pt}
+
+Discrete Heightfields are a collection of altitudes in a 2D grid. In order 
+to create a DEM, you have to divide the domain of the terrain (assuming a 
+rectangular domain) into a grid of $n x m$ cells, then, you assign an altitude
+to every cell of the grid. The grid will only contain concrete values for
+a set of discrete values, but you can obtain a height for every point of 
+the domain by interpolating multiple values of the heightfield. This method
+limits the accuracy of the model (as we stop having infinite precission), 
+but it has the advantadge of representing arbitrary terrains in a really
+simple way.
+
+\vspace{10pt}
+
+Heightfields are an extremly common way to represent terrains, and they can
+be easily stored in textures and monochromatic images (as figure 
+\ref{fig:anetoImage} shows), sometimes making use of the texture 
+interpolation capabilities on the GPU to accelerate computations on 
+heightfields. Specifically, DEMs are used on \cite{Argudo2025descriptors}, 
+a project focused on terrain analysis that provides multiple metrics for 
+terrains and whose code has been1 reutilized in this project to implement 
+and test our erosion algorithm.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Aneto heightfield]{\label{fig:anetoTex}\includegraphics[width=0.25\linewidth]{Background/aneto.png}
+    }
+    \hspace{20pt}
+    \subfigure[Aneto model on the app]{\label{fig:anetoApp}\includegraphics[width=0.3\linewidth]{Background/aneto-app.png}
+        }
+    
+    \caption{Heightfield of the mountain Aneto as a monochromatic image and 
+    the terrain produced by said heightfield on our application}
+    \label{fig:anetoImage}
+\end{figure}
+
+To finalize the topic of elevation models, \textbf{HABLAR SOBRE LAYERED 
+REPRESENTATIONS Y CITAR UN PAPER DE EROSION QUE LAS USE}.
+
+\subsubsection{Volumetric Models}
+\subsection{Terrain Synthesis}
+
+
+\section{Model Decompositions}
+\subsection{Voxelization and Space Decompositions}
+\subsection{Tetrahedralization}
+\subsection{Voronoi Decomposition}
+\section{Terrain Weathering}
+\subsection{Physical Models for Erosion}
+\subsection{Dynamic simulations}
+\section{Previous Simulator}

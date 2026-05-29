@@ -1,0 +1,107 @@
+\documentclass[a4paper, twoside]{report}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{amsmath} 
+\hypersetup{colorlinks=false}
+% \usepackage{lscape}
+% \usepackage{subfigure}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage[%
+  backend=bibtex      % biber or bibtex
+%,style=authoryear    % Alphabeticalsch
+ ,style=numeric-comp  % numerical-compressed
+ ,sorting=none        % no sorting
+ ,sortcites=true      % some other example options ...
+ ,block=none
+ ,indexing=false
+ ,citereset=none
+ ,isbn=true
+ ,url=true
+ ,doi=true            % prints doi
+ ,natbib=true         % if you need natbib functions
+]{biblatex}
+\addbibresource{Bibs/sample.bib}
+
+\usepackage{url}
+\usepackage{tikz}
+%\usetikzlibrary{external}
+%\tikzexternalize % activate!
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{pgfgantt}
+\usepackage{epigraph}
+\usepackage{comment}
+% \usepackage{lscape}
+% \usepackage{eurosym}
+\usepackage{minted}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+% \usepackage{pdflscape}
+\usepackage{adjustbox}
+\usepackage{pgfplots}
+% \usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{xcolor} % to access the named colour LightGray
+\definecolor{LightGray}{gray}{0.9}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+
+% Define question and answer environment
+\newenvironment{faq}{\begin{description}[style=nextline]}{\end{description}}
+
+\newtheorem{theorem}{Theorem}[section] % Theorem numbering by section
+\newtheorem{lemma}[theorem]{Lemma}     % Lemmas use the same numbering as theorems
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}[section] % Definitions numbered by section
+\newtheorem{proposition}{Proposition}
+\newtheorem{claim}{Claim}
+\newtheorem{conjecture}{Conjecture}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=3cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
+
+\pgfplotsset{compat=1.18}
+
+\title{TFM}
+% Update supervisor and other title stuff in title/title.tex
+\setlength {\marginparwidth }{2cm} 
+\begin{document}
+\includepdf[pages=-]{Title/portada.pdf}
+\input{Misc/misc}
+ % \newgeometry{
+ % a4paper,
+ % left=20mm,
+ % top=30mm,
+ % }
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+\input{Introduction/intro.tex}
+\newpage
+\input{Background/background}
+\newpage
+\input{Decomposition/decomposition}
+\newpage
+\input{Erosion/erosion}
+\newpage
+\input{Results/results.tex}
+\newpage
+\input{Conclusion/Conclusion}
+\newpage
+\nocite{*}
+\printbibliography
+
+
+\end{document}

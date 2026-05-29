@@ -29,7 +29,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    void renderLinks();
    void renderPaths(std::set<std::pair<int,int>>& paths);
 
-   void fullMeshDecomposition();
+   void fullMeshDecomposition(int l);
    void setShader(QOpenGLShaderProgram* shader) {cellShader = shader;} 
    Vector3 getMin() {return min;}
    Vector3 getMax() {return max;}
@@ -45,9 +45,9 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};
 
  private:
-   std::vector<GLuint> cellVAOs;
-   std::vector<GLuint> bufferVerts;
-   std::vector<GLuint> bufferIndices;
+   std::vector<std::vector<GLuint>> cellVAOs;
+   std::vector<std::vector<GLuint>> bufferVerts;
+   std::vector<std::vector<GLuint>> bufferIndices;
    QOpenGLShaderProgram* cellShader = nullptr;
 
    MultiResolutionGraph graph;

@@ -6,7 +6,7 @@ class ErosionAlgorithm {
 
   public:
 
-    ErosionAlgorithm(MultiResolutionGraph* g);
+    ErosionAlgorithm(MultiResolutionGraph* g, int workLevel = 0);
     ErosionAlgorithm();
 
     Vector3 sampleDirection(double theta_base, double phi_base);
@@ -55,5 +55,7 @@ class ErosionAlgorithm {
     double avg_area;
     double theta_dir;
     double phi_dir;
+
+    int level;
 
   };

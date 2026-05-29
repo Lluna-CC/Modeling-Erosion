@@ -3,11 +3,20 @@
 #include<float.h>
 
 void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {
-    levels.resize(2);
-    Voronoi::triangleSamplingVoronoi(v,f,&levels[0],hf);
+    
+    
+    levels.resize(nLevels);
+    upperLevel.resize(nLevels - 1);
+    lowerLevel.resize(nLevels - 1);
 
-    int newSize = levels[0].getNumCells()/10;
+    
+    Voronoi::cellSamplingVoronoi(hf,&levels[0]);
+
+    int newSize = levels[0].getNumCells()/scale;
+
     if (newSize == 0) return;
+    upperLevel[0].resize(levels[0].getNumCells());
+    lowerLevel[0].resize(newSize);
 
     std::vector<Vector3> centroids(newSize);
 
@@ -50,7 +59,8 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
             closestCentroid[j] = newSize - 1;
         }
         
-        levels[0].getCells()[j].upperLevelCentroid = closestCentroid[j];
+        upperLevel[0][j] = closestCentroid[j];
+        lowerLevel[0][closestCentroid[j]].push_back(j); 
     }
 
 
@@ -70,5 +80,15 @@ void MultiResolutionGraph::clear() {
 
 void MultiResolutionGraph::updateExternalLinks() {
     if (levels.size() == 0) return;
-    else levels[0].updateExternalLinks();
+    for (int l = 0; l < levels.size(); ++l) levels[l].updateExternalLinks();
+}
+
+
+void MultiResolutionGraph::removeLowerLevel(int l, int cell) {
+    if (l < 1) return;
+    std::vector<vorocell>& lowerCells = levels[l - 1].getCells();
+    for (int i = 0; i < lowerLevel[l - 1][cell].size(); ++i) {
+        int actCell = lowerLevel[l - 1][cell][i];
+        lowerCells[actCell].state = AIR;
+    }
 }

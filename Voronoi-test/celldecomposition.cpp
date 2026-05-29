@@ -6,6 +6,10 @@
 
 CellDecomposition::CellDecomposition() {
     initializeOpenGLFunctions();
+    
+    cellVAOs.resize(graph.getLevels());
+    bufferVerts.resize(graph.getLevels());
+    bufferIndices.resize(graph.getLevels());
 }
 
 
@@ -85,8 +89,8 @@ void CellDecomposition::renderCells() {
     //int renderedCells = 0;
     for (int i = 0; i < cells.size(); ++i) {
 
-        if (!cells[i].isExterior || cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[i]);
+        if (cells[i].state == AIR) continue;
+        glBindVertexArray(cellVAOs[0][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
@@ -113,7 +117,7 @@ void CellDecomposition::renderLinks() {
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
 
         if (!cells[i].isExterior || cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[i]);
+        glBindVertexArray(cellVAOs[0][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
@@ -162,28 +166,28 @@ void CellDecomposition::renderLinks() {
     glBindVertexArray(0);
 }
 
-void CellDecomposition::fullMeshDecomposition() {
+void CellDecomposition::fullMeshDecomposition(int l) {
     computeBounds();
     graph.updateExternalLinks();
-    std::vector<vorocell>& cells = graph.getCells(0);
+    std::vector<vorocell>& cells = graph.getCells(l);
 
     float diff[3];
     for (int k = 0; k < 3; ++k) diff[k] = max[k] - min[k];
     float boxDist = diff[0]*diff[0] + diff[1]*diff[1] + diff[2]*diff[2];
 
-    cellVAOs.resize(cells.size());
-    bufferVerts.resize(cells.size());
-    bufferIndices.resize(cells.size());
+    cellVAOs[l].resize(cells.size());
+    bufferVerts[l].resize(cells.size());
+    bufferIndices[l].resize(cells.size());
     
     for (int i = 0; i < cells.size(); ++i) {
         
         
         //std::cout << "Current Mesh Iteration: " << i << std::endl;
-        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        if (cells[i].state == AIR) continue;
         float cellDist = minMaxDistance(cells[i].vertices);
         if (cellDist > 0.85*boxDist) continue;
 
-        cellToMesh(cells[i].vertices, cells[i].faceData, cellVAOs[i], bufferVerts[i], bufferIndices[i], cells[i].nTriangles);
+        cellToMesh(cells[i].vertices, cells[i].faceData, cellVAOs[l][i], bufferVerts[l][i], bufferIndices[l][i], cells[i].nTriangles);
     }
     std::cout << "Models Created" << std::endl;
     
@@ -311,7 +315,7 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths) {
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
 
         if (!cells[i].isExterior || cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[i]);
+        glBindVertexArray(cellVAOs[0][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
@@ -527,16 +531,16 @@ void CellDecomposition::updateMesh(const std::vector<int>& newC, const std::vect
     for (int i = 0; i < newC.size(); ++i) {
         int k = newC[i];
         cells[k].isExterior = true;
-        cellToMesh(cells[k].vertices, cells[k].faceData, cellVAOs[k], bufferVerts[k], bufferIndices[k], cells[k].nTriangles);
+        cellToMesh(cells[k].vertices, cells[k].faceData, cellVAOs[0][k], bufferVerts[0][k], bufferIndices[0][k], cells[k].nTriangles);
     }
 
     glUseProgram(cellShader -> programId());
     for (int i = 0; i < oldC.size(); ++i) {
         int k = oldC[i];
         cells[k].isExterior = false;
-        glDeleteBuffers(1, &bufferVerts[k]);
-        glDeleteBuffers(1, &bufferIndices[k]);
-        glDeleteVertexArrays(1, &cellVAOs[k]);
+        glDeleteBuffers(1, &bufferVerts[0][k]);
+        glDeleteBuffers(1, &bufferIndices[0][k]);
+        glDeleteVertexArrays(1, &cellVAOs[0][k]);
 	    
     }
     glUseProgram(0);

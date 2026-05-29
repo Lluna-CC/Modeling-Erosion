@@ -38,6 +38,11 @@ public slots:
     void changeRenderLinkViz();
     void changeRenderPathViz();
     void changeErosionDirection();
+    void changeAlphaOirignal();
+    void changeAlphaCells();
+    void changeAlphaParticles();
+    void changeAlphaLinks();
+    void changeAlphaPaths();
 
     // terrain load actions
     void loadPNG();
@@ -99,6 +104,7 @@ private:
     TerrainWidget *widget;
     QButtonGroup *baseTexButtonGroup;
     QString dataPath = "./";
+    int maxRecommendedCells = 75000;
 
     HeightField hf;
     ScalarField2 currentMetric;

@@ -8,10 +8,12 @@ ErosionAlgorithm::ErosionAlgorithm() {
     
 }
 
-ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g) {
+ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel) {
 
     graph = g;
+    level = workLevel;
     computeAverageArea();
+    
 }
 
 double ErosionAlgorithm::resistanceField(double x, double y, double z) {
@@ -33,12 +35,11 @@ Vector3 ErosionAlgorithm::sampleDirection(double theta_base, double phi_base) {
 
 
 void ErosionAlgorithm::getLinkDistibution(Vector3 dir) {
-    std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(0);
+    std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
     weights.resize(exteriorLinks.size());
     keys.resize(exteriorLinks.size());
-    std::vector<vorocell>& cells = graph -> getCells(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
 
-    //std::cout << "Number of keys!! " <<  exteriorLinks -> size() << std::endl;
 
     int i = 0;
     for (auto it = exteriorLinks.begin(); it != exteriorLinks.end(); ++it) {
@@ -77,8 +78,8 @@ void ErosionAlgorithm::setErosionDirection(double theta, double phi) {
 bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 
     bool model_update = false;
-    std::vector<vorocell>& cells = graph -> getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
+    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
 
     std::random_device rd;
     std::mt19937 generator{rd()};
@@ -88,10 +89,10 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 
     double water = initialFlow;
     std::pair<int,int> actLink = keys[firstLink_key];
-
     //std::cout << "Starting from: " << firstLink_key << ": " << actLink.first << " " << actLink.second << std::endl;
     bool first = true;
     if (cells[actLink.first].state == AIR && cells[actLink.second].state == AIR) std::cout << "Okay, there is something weird going on" << std::endl;
+  
     while (water > 0) {
         
         std::vector<double> propagationWeight(links[actLink].neighbors.size());
@@ -165,7 +166,7 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 
 bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     //std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
-    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(0);
+    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
     links[link].state = BROKEN;
     //Delete Cell connection
     /* if (link.first >= 0 && link.second >= 0) {
@@ -218,17 +219,17 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
             bool containsCore_second, exterior_two;
             int secondComp_count = componentSize(link.second, link.first, containsCore_second, reachable, exterior_two);
             
-            std::cout << "First size: " << firstComp_count << " Second size: " << secondComp_count << std::endl;
+            //std::cout << "First size: " << firstComp_count << " Second size: " << secondComp_count << std::endl;
             if (!containsCore_first && containsCore_second) {
                 //Remove first component
                 update = exterior_one;
-                std::cout << "Removing first" << std::endl;
+                //std::cout << "Removing first" << std::endl;
                 removeComponent(link.first);
             }
             else if (containsCore_first && !containsCore_second) {
                 //Remove Second Component
                 update = exterior_two;
-                std::cout << "Removing second" << std::endl;
+                //std::cout << "Removing second" << std::endl;
                 removeComponent(link.second);
             }
 
@@ -264,8 +265,8 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
 }
 
 int ErosionAlgorithm::componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior) {
-    std::vector<vorocell>& cells = graph -> getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
+    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
     std::vector<bool> visited(cells.size(), false);
     containsCore = false;
     reachable = false;
@@ -313,10 +314,11 @@ int ErosionAlgorithm::componentSize_rec(int cell, int otherCell, bool& containsC
 }
 
 void ErosionAlgorithm::removeComponent(int cell) {
-    std::vector<vorocell>& cells = graph -> getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
+    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
 
     cells[cell].state = AIR;
+    if (level > 0) graph -> removeLowerLevel(level, cell);
     if (cells[cell].isExterior) removedExteriorCells.push_back(cell);
 
     for (int i = 0; i < cells[cell].neighbors.size(); ++i) {
@@ -336,9 +338,9 @@ void ErosionAlgorithm::removeComponent(int cell) {
 
 
 void ErosionAlgorithm::updateExternalLinks() {
-    std::vector<vorocell>& cells = graph -> getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(0);
-    std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
+    std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
+    std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
 
     for (int i = 0; i < cells.size(); ++i) {
         if (cells[i].state == AIR) continue;
@@ -384,7 +386,7 @@ void ErosionAlgorithm::updateExternalLinks() {
 }
 
 void ErosionAlgorithm::computeAverageArea() {
-    std::vector<vorocell>& cells = graph -> getCells(0);
+    std::vector<vorocell>& cells = graph -> getCells(level);
 
     avg_area = 0;
     int total_faces = 0;

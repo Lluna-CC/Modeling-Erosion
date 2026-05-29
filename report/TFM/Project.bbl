@@ -1,0 +1,387 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global/global}
+  \entry{10.2312:ceig.20241139}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=MD}{%
+         family={Mateos},
+         familyi={M\bibinitperiod},
+         given={Diego},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CL}{%
+         family={Carranza},
+         familyi={C\bibinitperiod},
+         given={Luis},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Susin},
+         familyi={S\bibinitperiod},
+         given={Anton},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AO}{%
+         family={Argudo},
+         familyi={A\bibinitperiod},
+         given={Oscar},
+         giveni={O\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=MJ}{%
+         family={Marco},
+         familyi={M\bibinitperiod},
+         given={Julio},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=PG}{%
+         family={Patow},
+         familyi={P\bibinitperiod},
+         given={Gustavo},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Eurographics Association}%
+    }
+    \strng{namehash}{MD+1}
+    \strng{fullhash}{MDCLSAAO1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Spanish Computer Graphics Conference (CEIG)}
+    \verb{doi}
+    \verb 10.2312/ceig.20241139
+    \endverb
+    \field{isbn}{978-3-03868-261-5}
+    \field{title}{{Simulation of Mechanical Weathering for Modeling Rocky Terrains }}
+    \field{year}{2024}
+  \endentry
+
+  \entry{Argudo2025descriptors}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=AO}{%
+         family={Argudo},
+         familyi={A\bibinitperiod},
+         given={O.},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu{\'e}rin},
+         familyi={G\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=SH}{%
+         family={Schott},
+         familyi={S\bibinitperiod},
+         given={H.},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AO+1}
+    \strng{fullhash}{AOGESHGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb https://doi.org/10.1111/cgf.70080
+    \endverb
+    \field{number}{2}
+    \field{title}{Terrain descriptors for landscape synthesis, analysis and simulation}
+    \field{volume}{44}
+    \field{journaltitle}{Computer Graphics Forum}
+    \field{year}{2025}
+  \endentry
+
+  \entry{osti_code-54674}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=RC}{%
+         family={Rycroft},
+         familyi={R\bibinitperiod},
+         given={ChrisH.},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RC1}
+    \strng{fullhash}{RC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.11578/dc.20210416.28
+    \endverb
+    \field{title}{VORO++}
+    \verb{url}
+    \verb https://www.osti.gov/biblio/code-54674
+    \endverb
+    \field{annotation}{%
+    Voro++ is a software library for the Computation of 3D Voronoi cells. It is primarily designed for applications in physics and materials science, where Voronoi cells can be a useful tool in the analysis of densely-packed particle systems. For a set of points in a space, the Voronoi cell of each particle is defined as the region which is closer to that particle than any other. Originally defined by Georgy Voronci [1], it has become a powerful tool in many scientific fields, whenever region of space must be divided between constituent points or particles [2]. Over the past twenty years, the algorithms for computing Voronoi cells have been well-studied, and several high-quality software packages are available. However, some (such as Triangle [3] are designed for the 2D case. Others, such as QHull [4], make use of algorithms for computing complete tessellations. This can offer limited flexibility, such as for handling complex boundary conditions, where direct cell-by-cell manipulation is beneficial. Voro++ is a library of C++ classes for direct computation of 3D Voronoi cells. The author believes this the first general purpose library that takes full advantage of the C++ class structure, making it simple to use, modify, and incorporate into other programs. The author has received considerable interest from other academic institutions about making use of the code. Features include: -- Rapid computation times, two to three times faster than Qhull in some typical cases -- Support for floating point inaccuracies and degenerate cases -- Support for curved and planar walls; periodic and non-periodic boundary conditions -- Support for radical Voronoi tessellations and neighbor list computations --Straightforward generalization to a parallel/ multicore architecture.%
+    }
+    \field{month}{02}
+    \field{year}{2009}
+  \endentry
+
+  \entry{galin2019review}{inproceedings}{}{}
+    \name{author}{7}{}{%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu{\'e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CG}{%
+         family={Cordonnier},
+         familyi={C\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CMP}{%
+         family={Cani},
+         familyi={C\bibinitperiod},
+         given={Marie-Paule},
+         giveni={M\bibinithyphendelim P\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gain},
+         familyi={G\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Wiley Online Library}%
+    }
+    \strng{namehash}{GE+1}
+    \strng{fullhash}{GEGEPACGCMPBBGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Graphics Forum}
+    \field{number}{2}
+    \field{pages}{553\bibrangedash 577}
+    \field{title}{A review of digital terrain modeling}
+    \field{volume}{38}
+    \field{year}{2019}
+  \endentry
+
+  \entry{WILSON2012107}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=WJP}{%
+         family={Wilson},
+         familyi={W\bibinitperiod},
+         given={John\bibnamedelima P.},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \keyw{Digital elevation models, Data preprocessing, Land surface parameters, Erosion modeling, Error propagation}
+    \strng{namehash}{WJP1}
+    \strng{fullhash}{WJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    This article examines how the methods and data sources used to generate DEMs and calculate land surface parameters have changed over the past 25years. The primary goal is to describe the state-of-the-art for a typical digital terrain modeling workflow that starts with data capture, continues with data preprocessing and DEM generation, and concludes with the calculation of one or more primary and secondary land surface parameters. The article first describes some of ways in which LiDAR and RADAR remote sensing technologies have transformed the sources and methods for capturing elevation data. It next discusses the need for and various methods that are currently used to preprocess DEMs along with some of the challenges that confront those who tackle these tasks. The bulk of the article describes some of the subtleties involved in calculating the primary land surface parameters that are derived directly from DEMs without additional inputs and the two sets of secondary land surface parameters that are commonly used to model solar radiation and the accompanying interactions between the land surface and the atmosphere on the one hand and water flow and related surface processes on the other. It concludes with a discussion of the various kinds of errors that are embedded in DEMs, how these may be propagated and carried forward in calculating various land surface parameters, and the consequences of this state-of-affairs for the modern terrain analyst.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1016/j.geomorph.2011.03.012
+    \endverb
+    \field{issn}{0169-555X}
+    \field{note}{Geospatial Technologies and Geomorphological Mapping Proceedings of the 41st Annual Binghamton Geomorphology Symposium}
+    \field{number}{1}
+    \field{pages}{107\bibrangedash 121}
+    \field{title}{Digital terrain modeling}
+    \verb{url}
+    \verb https://www.sciencedirect.com/science/article/pii/S0169555X11001449
+    \endverb
+    \field{volume}{137}
+    \field{journaltitle}{Geomorphology}
+    \field{year}{2012}
+  \endentry
+
+  \entry{10.1145/1294685.1294717}{inproceedings}{}{}
+    \name{author}{1}{}{%
+      {{hash=BF}{%
+         family={Belhadj},
+         familyi={B\bibinitperiod},
+         given={Far\`{e}s},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{terrain, surface reconstruction, surface modeling, midpoint displacement, fractals}
+    \strng{namehash}{BF1}
+    \strng{fullhash}{BF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We present an algorithm mainly designed to reconstruct Digital Elevation Maps (DEM). Our approach relays on a fast and highly controllable fractal-based algorithm, we are able to create DEMs according to given constraints. Thus, these constraints can be given as scattered dataset of elevations obtained by satellite, our method supersamples this data and creates the according smooth terrain surface. Moreover, as a painter can make a sketch of his model, the final user can give or edit the main characteristics, local details and morphology, of his wanted DEM instantaneously obtaining the resulting terrain surface. Note that there is no limitation on the number of local constraints (that could vary from 0 to the number of points of the final DEM). Thus, the method we propose gives the ability to modify the global aspect (the surface behavior) as well as to constrain any local detail of the final terrain model. This paper presents the algorithm and reconstruction examples. Using a Root Mean Square Error computation between an original model and its downsampled-then-reconstructed version, the results confirm the method good behavior and show its efficiency. Other various terrain models and alternative applications are presented.%
+    }
+    \field{booktitle}{Proceedings of the 5th International Conference on Computer Graphics, Virtual Reality, Visualisation and Interaction in Africa}
+    \verb{doi}
+    \verb 10.1145/1294685.1294717
+    \endverb
+    \field{isbn}{9781595939067}
+    \field{pages}{197–204}
+    \field{series}{AFRIGRAPH '07}
+    \field{title}{Terrain modeling: a constrained fractal model}
+    \verb{url}
+    \verb https://doi.org/10.1145/1294685.1294717
+    \endverb
+    \list{location}{1}{%
+      {Grahamstown, South Africa}%
+    }
+    \field{year}{2007}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
+
+  \entry{10.1145/3731201}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=YZ}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Zhanyu},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=JA}{%
+         family={Jain},
+         familyi={J\bibinitperiod},
+         given={Aryamaan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CG}{%
+         family={Cordonnier},
+         familyi={C\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CMP}{%
+         family={Cani},
+         familyi={C\bibinitperiod},
+         given={Marie-Paule},
+         giveni={M\bibinithyphendelim P\bibinitperiod},
+      }}%
+      {{hash=WZ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Zhaopeng},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{physical simulation of natural phenomena}
+    \strng{namehash}{YZ+1}
+    \strng{fullhash}{YZJACGCMPWZBB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We introduce Arenite, a novel physics-based approach for modeling sandstone structures. The key insight of our work is that simulating a combination of stress and multi-factor erosion enables the generation of a wide variety of sandstone structures observed in nature. We isolate the key shape-forming phenomena: multi-physics fabric interlocking, wind and fluvial erosion, and particle-based deposition processes. Complex 3D structures such as arches, alcoves, hoodoos, or buttes can be achieved by creating simple 3D structures with user-painted erodable areas and vegetation and running the simulation. We demonstrate the algorithm on a wide variety of structures, and our GPU-based implementation achieves the simulation in less than 5 minutes on a desktop computer for our most complex example.%
+    }
+    \verb{doi}
+    \verb 10.1145/3731201
+    \endverb
+    \field{issn}{0730-0301}
+    \field{number}{4}
+    \field{title}{Arenite: A Physics-based Sandstone Simulator}
+    \verb{url}
+    \verb https://doi.org/10.1145/3731201
+    \endverb
+    \field{volume}{44}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Graph.}
+    \field{month}{07}
+    \field{year}{2025}
+  \endentry
+
+  \entry{natali2013modeling}{inproceedings}{}{}
+    \name{author}{5}{}{%
+      {{hash=NM}{%
+         family={Natali},
+         familyi={N\bibinitperiod},
+         given={Mattia},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LEM}{%
+         family={Lidal},
+         familyi={L\bibinitperiod},
+         given={Endre\bibnamedelima M},
+         giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=PJ}{%
+         family={Parulek},
+         familyi={P\bibinitperiod},
+         given={Julius},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=VI}{%
+         family={Viola},
+         familyi={V\bibinitperiod},
+         given={Ivan},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Patel},
+         familyi={P\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NM+1}
+    \strng{fullhash}{NMLEMPJVIPD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Eurographics (State of the Art Reports)}
+    \field{pages}{155\bibrangedash 173}
+    \field{title}{Modeling Terrains and Subsurface Geology.}
+    \field{year}{2013}
+  \endentry
+\enddatalist
+\endinput

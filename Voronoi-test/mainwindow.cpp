@@ -188,6 +188,12 @@ void MainWindow::createActions()
     
     connect(ui->compute_water_path, SIGNAL(clicked()), this, SLOT(computeWaterPath()));
     connect(ui->change_direction, SIGNAL(clicked()), this, SLOT(changeErosionDirection()));
+
+    connect(ui->alpha_original, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaOirignal()));
+    connect(ui->alpha_cells, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaCells()));
+    connect(ui->alpha_particles, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaParticles()));
+    connect(ui->alpha_links, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaLinks()));
+    connect(ui->alpha_paths, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaPaths()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -413,9 +419,9 @@ void MainWindow::recommendedDEM() {
     int y = ui->hf_gridY->value();
     int cells = x*y;
     
-    if (cells < 50000) return;
+    if (cells < maxRecommendedCells) return;
     
-    int divisor = ceil(sqrt(cells/50000.0));
+    int divisor = ceil(sqrt(cells/double(maxRecommendedCells)));
 
     ui -> hf_gridX -> setValue(x/divisor);
     ui -> hf_gridY -> setValue(y/divisor);
@@ -845,4 +851,30 @@ void MainWindow::changeErosionDirection() {
     double phi = ui -> phi_spinbox -> value();
 
     widget -> changeErosionDirection(theta, phi);
+}
+
+
+void MainWindow::changeAlphaOirignal() {
+    float alpha = ui -> alpha_original -> value();
+    widget -> setAlpha(0, alpha);
+}
+
+void MainWindow::changeAlphaCells(){
+    float alpha = ui -> alpha_cells -> value();
+    widget -> setAlpha(1, alpha);
+}
+
+void MainWindow::changeAlphaParticles(){
+    float alpha = ui -> alpha_particles -> value();
+    widget -> setAlpha(2, alpha);
+}
+
+void MainWindow::changeAlphaLinks(){
+    float alpha = ui -> alpha_links -> value();
+    widget -> setAlpha(3, alpha);
+}
+
+void MainWindow::changeAlphaPaths(){
+    float alpha = ui -> alpha_paths -> value();
+    widget -> setAlpha(4, alpha);
 }

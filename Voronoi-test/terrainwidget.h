@@ -33,6 +33,7 @@ public:
     void setDecomposition(HeightField* hf, double theta, double phi); 
     void setToyDecomposition(CellDecomposition* decomp, double theta, double phi);
     void setRenderMode(int mode);
+    void setAlpha(int mode, float value);
     void computeWaterPath(int num);
     void changeErosionDirection(double theta, double phi);
 
@@ -90,9 +91,8 @@ protected:
     Vector3 cursorPos;
 
     CellDecomposition* cellDecomp = nullptr;
-    int renderMode = 0;
-
-    void renderScene(QOpenGLShaderProgram& shader);
+    bool renderMode[5] = {true, false, false, false, false};
+    float alphas[5] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
 };
 
 #endif // TERRAINWIDGET_H

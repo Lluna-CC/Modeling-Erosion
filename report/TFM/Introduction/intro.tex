@@ -1,0 +1,90 @@
+\chapter{Introduction}
+
+Virtual terrains appear in a wide variety of applications: from entretainment
+to physical simulation or science visualization, a lot of virtual scenes 
+are set on a digital landscape. Despite the ubiquity of virtual terrains 
+on 3D scenes, the complex and fractal structure of natural landscapes still
+brings multiple challenges for the field of synthetic terrain generation.
+
+\vspace{10pt}
+
+Most virtual terrains are represented using 2D heightfields which, despite 
+being highly convenient when generating, storing and manipulating terrain
+models, have a major drawback: heightfields can only represent 2.5D 
+models. Because each point in a 2D plane has a set elevation and every 
+point between the ground and the given elevation is considered as solid 
+(and the terrain interior), we can not represent features like caves, 
+arches or overhangs, where not all points between the ground and the 
+maximum elevation are solid. Additionally, these representations of terrains 
+also fail to reproduce complex geometry commonly found in rocky terrains, 
+like sharp ridges, loose blocks or steep cliffs.
+
+\vspace{10pt}
+
+Many of these complex structures that can not be easily captured by 2D 
+heightfields, arise from different types of weathering events, like percolation
+and freeze-thaw cycles. To address this limitations on virtual terrain models, ç
+our goal in this thesis is to study the mechanical weathering of rocky 
+terrians to enhance models given from 2D heightfields and add the complex features 
+that these fields fail to caputre. 
+
+\vspace{10pt}
+
+Terrain enhancement through weathering simulation not only improves the 
+realism and quality of the models, adding the aforementioned complex 
+features, but it can also be applied dynamically to simulate the changes 
+a terrain goes through over multiple years.
+
+\vspace{10pt}
+
+This project is built on a previous project on this same topic \cite{10.2312:ceig.20241139}, 
+using the same algorithm as a base, we worked on adressing some limitations 
+of the previous project.
+\section{Contributions}
+
+As mentioned before, this project is heavily based on a previous one, and
+our proposed algorithm is built on the previous one. Despite that, we add
+mulitple improvements to the base algorithm to increase the quality of 
+the results and its efficiency. 
+
+\vspace{10pt}
+
+The main point we wanted to adress of the previous project was the lack of
+a physically based approach to the algorithm, as the proposed algorithm
+made a lot of simplifications and ignored multiple physical interactions 
+which made the method less accurate and realistic. However, during this 
+thesis we also found other areas that could be improved and expanded 
+to improve both the quality and the efficiency of the algorithm.
+
+\vspace{10pt}
+
+The limitations of the previous project and our imporvements will be 
+discussed at length during these thesis, but our main contributions can
+be summarized in three large blocks: improvements to the decomposition of 
+the terrain into cells, improvements in the efficiency of the algorithm and
+improvement on the quality of the algorithm by extending the simulation to 
+a physically based one.  
+
+\section{Set-up and tools}
+
+Another difference between the project we base this thesis on, albeit less
+significant, is the tools used. In the project that presented the algorithm we 
+are extending, a blender pluging was implemented to show the method, however, 
+here we have implemented our erosion model using C++ and we showed the 
+results in a QT application using OpenGL for rendering.
+
+\vspace{10pt}
+
+To make the application, we reused the code provided by an article on 
+terrain descriptors \cite{Argudo2025descriptors}, as it already 
+implemented many basic functionalities to work with virtual terrains. We
+then modified and expanded the application implementing our algorithm for 
+mechanical weathering as well as implementing other functionalities to aid in the 
+visualization and debugging of our method. Some of the changes that we 
+implemented modify the basic functionalities of the program, so 
+our project should not be seen as an extension to said application.
+
+\vspace{10pt}
+
+Finally, we used the C++ library Voro++ \cite{osti_code-54674} to generate 
+voronoi decompositions, a core aspect of our erosion algorithm.

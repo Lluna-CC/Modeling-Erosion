@@ -10,11 +10,11 @@
 class MultiResolutionGraph {
   public:
     //CellGraph& getLevel(int k) {return levels[k];};
-    int getNumCells(int k) {return levels[k].getNumCells();}
+    int getNumCells(int l) {return levels[l].getNumCells();}
 
-    std::vector<vorocell>& getCells(int k) {return levels[k].getCells();}
-    std::map<std::pair<int,int>, vorolink>& getLinks(int k) {return levels[k].getLinks();}
-    std::set<std::pair<int,int>>& getExteriorLinks(int k) {return levels[k].getExteriorLinks();}
+    std::vector<vorocell>& getCells(int l) {return levels[l].getCells();}
+    std::map<std::pair<int,int>, vorolink>& getLinks(int l) {return levels[l].getLinks();}
+    std::set<std::pair<int,int>>& getExteriorLinks(int l) {return levels[l].getExteriorLinks();}
 
     void computeBounds();
     Vector3 getMin() {return levels[0].getMin();}
@@ -26,9 +26,17 @@ class MultiResolutionGraph {
     void clear();
     void updateExternalLinks();
 
-  private:
-    std::vector<CellGraph> levels;
+    int getLevels() {return nLevels;}
+    void removeLowerLevel(int l, int cell);
 
-};
+  private:
+    int nLevels = 2;
+  
+    std::vector<CellGraph> levels;
+    std::vector<std::vector<int>> upperLevel; //For each level and for each cell of that level, the centroid on the upper level
+    std::vector<std::vector<std::vector<int>>> lowerLevel; //For each level and cell a vector of "children"
+    
+    int scale = 10;
+ };
 
 #endif
