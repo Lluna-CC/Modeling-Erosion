@@ -282,10 +282,9 @@ public:
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
-    QPushButton *pushButton;
     QHBoxLayout *horizontalLayout_16;
     QLabel *label_24;
-    QSpinBox *spinBox;
+    QSpinBox *layer;
     QHBoxLayout *horizontalLayout_18;
     QCheckBox *render_original;
     QDoubleSpinBox *alpha_original;
@@ -301,8 +300,16 @@ public:
     QHBoxLayout *horizontalLayout_27;
     QCheckBox *viz_paths;
     QDoubleSpinBox *alpha_paths;
+    QGroupBox *groupBox_7;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_9;
+    QHBoxLayout *horizontalLayout_32;
+    QLabel *label_36;
+    QSpinBox *multiRes_factor;
+    QPushButton *pushButton;
+    QWidget *tabVisualVoro;
     QGroupBox *groupBox_5;
-    QWidget *layoutWidget1;
+    QWidget *layoutWidget_2;
     QVBoxLayout *verticalLayout_7;
     QHBoxLayout *horizontalLayout_3;
     QLabel *theta;
@@ -316,14 +323,6 @@ public:
     QLabel *label_2;
     QSpinBox *paths_num;
     QPushButton *compute_water_path;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_5;
-    QLabel *label_27;
-    QLineEdit *lineClickInfoCell;
-    QLabel *label_26;
-    QLineEdit *lineClickInfoElev;
-    QLabel *label_30;
-    QLineEdit *lineClickInfoMetric;
     QFrame *frameL;
     QVBoxLayout *verticalLayout_16;
     QGroupBox *Objects_groupBox_2;
@@ -379,6 +378,14 @@ public:
     QLabel *labelPaletteRange;
     QDoubleSpinBox *sb_paletteMin;
     QPushButton *btn_resetPaletteRange;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_5;
+    QLabel *label_27;
+    QLineEdit *lineClickInfoCell;
+    QLabel *label_26;
+    QLineEdit *lineClickInfoElev;
+    QLabel *label_30;
+    QLineEdit *lineClickInfoMetric;
     QSpacerItem *verticalSpacer;
     QWidget *glWidget;
     QMenuBar *menubar;
@@ -1813,21 +1820,15 @@ public:
         tabVoro->setObjectName("tabVoro");
         groupBox = new QGroupBox(tabVoro);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(20, 20, 281, 321));
+        groupBox->setGeometry(QRect(20, 10, 281, 321));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(10, 40, 261, 271));
+        layoutWidget->setGeometry(QRect(10, 40, 261, 266));
         verticalLayout_5 = new QVBoxLayout(layoutWidget);
         verticalLayout_5->setObjectName("verticalLayout_5");
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName("verticalLayout_4");
-        pushButton = new QPushButton(layoutWidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-
-        verticalLayout_4->addWidget(pushButton);
-
         horizontalLayout_16 = new QHBoxLayout();
         horizontalLayout_16->setObjectName("horizontalLayout_16");
         label_24 = new QLabel(layoutWidget);
@@ -1835,10 +1836,11 @@ public:
 
         horizontalLayout_16->addWidget(label_24);
 
-        spinBox = new QSpinBox(layoutWidget);
-        spinBox->setObjectName("spinBox");
+        layer = new QSpinBox(layoutWidget);
+        layer->setObjectName("layer");
+        layer->setMaximum(1);
 
-        horizontalLayout_16->addWidget(spinBox);
+        horizontalLayout_16->addWidget(layer);
 
 
         verticalLayout_4->addLayout(horizontalLayout_16);
@@ -1937,23 +1939,59 @@ public:
 
         verticalLayout_5->addLayout(verticalLayout_4);
 
-        groupBox_5 = new QGroupBox(tabVoro);
+        groupBox_7 = new QGroupBox(tabVoro);
+        groupBox_7->setObjectName("groupBox_7");
+        groupBox_7->setGeometry(QRect(20, 340, 281, 151));
+        widget = new QWidget(groupBox_7);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(20, 40, 241, 83));
+        verticalLayout_9 = new QVBoxLayout(widget);
+        verticalLayout_9->setObjectName("verticalLayout_9");
+        verticalLayout_9->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_32 = new QHBoxLayout();
+        horizontalLayout_32->setObjectName("horizontalLayout_32");
+        label_36 = new QLabel(widget);
+        label_36->setObjectName("label_36");
+
+        horizontalLayout_32->addWidget(label_36);
+
+        multiRes_factor = new QSpinBox(widget);
+        multiRes_factor->setObjectName("multiRes_factor");
+        multiRes_factor->setMinimum(1);
+        multiRes_factor->setMaximum(200);
+        multiRes_factor->setValue(10);
+
+        horizontalLayout_32->addWidget(multiRes_factor);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_32);
+
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName("pushButton");
+        pushButton->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+
+        verticalLayout_9->addWidget(pushButton);
+
+        tabWidgetR->addTab(tabVoro, QString());
+        tabVisualVoro = new QWidget();
+        tabVisualVoro->setObjectName("tabVisualVoro");
+        groupBox_5 = new QGroupBox(tabVisualVoro);
         groupBox_5->setObjectName("groupBox_5");
-        groupBox_5->setGeometry(QRect(20, 340, 281, 271));
-        layoutWidget1 = new QWidget(groupBox_5);
-        layoutWidget1->setObjectName("layoutWidget1");
-        layoutWidget1->setGeometry(QRect(10, 40, 261, 220));
-        verticalLayout_7 = new QVBoxLayout(layoutWidget1);
+        groupBox_5->setGeometry(QRect(10, 10, 281, 271));
+        layoutWidget_2 = new QWidget(groupBox_5);
+        layoutWidget_2->setObjectName("layoutWidget_2");
+        layoutWidget_2->setGeometry(QRect(10, 40, 261, 220));
+        verticalLayout_7 = new QVBoxLayout(layoutWidget_2);
         verticalLayout_7->setObjectName("verticalLayout_7");
         verticalLayout_7->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        theta = new QLabel(layoutWidget1);
+        theta = new QLabel(layoutWidget_2);
         theta->setObjectName("theta");
 
         horizontalLayout_3->addWidget(theta);
 
-        theta_spinbox = new QDoubleSpinBox(layoutWidget1);
+        theta_spinbox = new QDoubleSpinBox(layoutWidget_2);
         theta_spinbox->setObjectName("theta_spinbox");
         theta_spinbox->setMaximum(180.000000000000000);
 
@@ -1963,12 +2001,12 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_5);
 
-        phi = new QLabel(layoutWidget1);
+        phi = new QLabel(layoutWidget_2);
         phi->setObjectName("phi");
 
         horizontalLayout_3->addWidget(phi);
 
-        phi_spinbox = new QDoubleSpinBox(layoutWidget1);
+        phi_spinbox = new QDoubleSpinBox(layoutWidget_2);
         phi_spinbox->setObjectName("phi_spinbox");
         phi_spinbox->setMaximum(360.000000000000000);
 
@@ -1977,7 +2015,7 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout_3);
 
-        change_direction = new QPushButton(layoutWidget1);
+        change_direction = new QPushButton(layoutWidget_2);
         change_direction->setObjectName("change_direction");
 
         verticalLayout_7->addWidget(change_direction);
@@ -1988,12 +2026,12 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        label_2 = new QLabel(layoutWidget1);
+        label_2 = new QLabel(layoutWidget_2);
         label_2->setObjectName("label_2");
 
         horizontalLayout_4->addWidget(label_2);
 
-        paths_num = new QSpinBox(layoutWidget1);
+        paths_num = new QSpinBox(layoutWidget_2);
         paths_num->setObjectName("paths_num");
         paths_num->setMinimum(1);
         paths_num->setMaximum(100000);
@@ -2004,50 +2042,12 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout_4);
 
-        compute_water_path = new QPushButton(layoutWidget1);
+        compute_water_path = new QPushButton(layoutWidget_2);
         compute_water_path->setObjectName("compute_water_path");
 
         verticalLayout_7->addWidget(compute_water_path);
 
-        groupBox_2 = new QGroupBox(tabVoro);
-        groupBox_2->setObjectName("groupBox_2");
-        groupBox_2->setGeometry(QRect(20, 620, 281, 151));
-        gridLayout_5 = new QGridLayout(groupBox_2);
-        gridLayout_5->setObjectName("gridLayout_5");
-        label_27 = new QLabel(groupBox_2);
-        label_27->setObjectName("label_27");
-
-        gridLayout_5->addWidget(label_27, 0, 0, 1, 1);
-
-        lineClickInfoCell = new QLineEdit(groupBox_2);
-        lineClickInfoCell->setObjectName("lineClickInfoCell");
-        lineClickInfoCell->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoCell, 0, 1, 1, 1);
-
-        label_26 = new QLabel(groupBox_2);
-        label_26->setObjectName("label_26");
-
-        gridLayout_5->addWidget(label_26, 1, 0, 1, 1);
-
-        lineClickInfoElev = new QLineEdit(groupBox_2);
-        lineClickInfoElev->setObjectName("lineClickInfoElev");
-        lineClickInfoElev->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoElev, 1, 1, 1, 1);
-
-        label_30 = new QLabel(groupBox_2);
-        label_30->setObjectName("label_30");
-
-        gridLayout_5->addWidget(label_30, 2, 0, 1, 1);
-
-        lineClickInfoMetric = new QLineEdit(groupBox_2);
-        lineClickInfoMetric->setObjectName("lineClickInfoMetric");
-        lineClickInfoMetric->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineClickInfoMetric, 2, 1, 1, 1);
-
-        tabWidgetR->addTab(tabVoro, QString());
+        tabWidgetR->addTab(tabVisualVoro, QString());
 
         gridLayout_12->addWidget(tabWidgetR, 0, 2, 1, 1);
 
@@ -2070,6 +2070,8 @@ public:
         verticalLayout_10 = new QVBoxLayout(Objects_groupBox_2);
         verticalLayout_10->setObjectName("verticalLayout_10");
         cb_toy = new QComboBox(Objects_groupBox_2);
+        cb_toy->addItem(QString());
+        cb_toy->addItem(QString());
         cb_toy->addItem(QString());
         cb_toy->addItem(QString());
         cb_toy->setObjectName("cb_toy");
@@ -2405,6 +2407,46 @@ public:
 
         verticalLayout_16->addWidget(groupBox_palette);
 
+        groupBox_2 = new QGroupBox(frameL);
+        groupBox_2->setObjectName("groupBox_2");
+        gridLayout_5 = new QGridLayout(groupBox_2);
+        gridLayout_5->setObjectName("gridLayout_5");
+        label_27 = new QLabel(groupBox_2);
+        label_27->setObjectName("label_27");
+
+        gridLayout_5->addWidget(label_27, 0, 0, 1, 1);
+
+        lineClickInfoCell = new QLineEdit(groupBox_2);
+        lineClickInfoCell->setObjectName("lineClickInfoCell");
+        lineClickInfoCell->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoCell, 0, 1, 1, 1);
+
+        label_26 = new QLabel(groupBox_2);
+        label_26->setObjectName("label_26");
+
+        gridLayout_5->addWidget(label_26, 1, 0, 1, 1);
+
+        lineClickInfoElev = new QLineEdit(groupBox_2);
+        lineClickInfoElev->setObjectName("lineClickInfoElev");
+        lineClickInfoElev->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoElev, 1, 1, 1, 1);
+
+        label_30 = new QLabel(groupBox_2);
+        label_30->setObjectName("label_30");
+
+        gridLayout_5->addWidget(label_30, 2, 0, 1, 1);
+
+        lineClickInfoMetric = new QLineEdit(groupBox_2);
+        lineClickInfoMetric->setObjectName("lineClickInfoMetric");
+        lineClickInfoMetric->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineClickInfoMetric, 2, 1, 1, 1);
+
+
+        verticalLayout_16->addWidget(groupBox_2);
+
         verticalSpacer = new QSpacerItem(20, 121, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         verticalLayout_16->addItem(verticalSpacer);
@@ -2652,28 +2694,29 @@ public:
 #if QT_CONFIG(accessibility)
         tabVoro->setAccessibleName(QString());
 #endif // QT_CONFIG(accessibility)
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Voronoi Options", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Compute Voronoi Cells", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Voronoi Visuals", nullptr));
         label_24->setText(QCoreApplication::translate("MainWindow", "Layer", nullptr));
         render_original->setText(QCoreApplication::translate("MainWindow", "Render Original", nullptr));
         render_cells->setText(QCoreApplication::translate("MainWindow", "Render Cells", nullptr));
         render_particles->setText(QCoreApplication::translate("MainWindow", "Render Particles", nullptr));
         viz_links->setText(QCoreApplication::translate("MainWindow", "Visualize Links", nullptr));
         viz_paths->setText(QCoreApplication::translate("MainWindow", "Visualize Paths", nullptr));
+        groupBox_7->setTitle(QCoreApplication::translate("MainWindow", "Voronoi Options", nullptr));
+        label_36->setText(QCoreApplication::translate("MainWindow", "Multi-Resolution Factor", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Compute Voronoi Cells", nullptr));
+        tabWidgetR->setTabText(tabWidgetR->indexOf(tabVoro), QCoreApplication::translate("MainWindow", "Voronoi", nullptr));
         groupBox_5->setTitle(QCoreApplication::translate("MainWindow", "Erosion Options", nullptr));
         theta->setText(QCoreApplication::translate("MainWindow", "Theta", nullptr));
         phi->setText(QCoreApplication::translate("MainWindow", "Phi", nullptr));
         change_direction->setText(QCoreApplication::translate("MainWindow", "Change Erosion Direction", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Number of Paths", nullptr));
         compute_water_path->setText(QCoreApplication::translate("MainWindow", "Compute Water Paths", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Info cursor (right mouse button)", nullptr));
-        label_27->setText(QCoreApplication::translate("MainWindow", "Cell id", nullptr));
-        label_26->setText(QCoreApplication::translate("MainWindow", "Elevation", nullptr));
-        label_30->setText(QCoreApplication::translate("MainWindow", "Metric", nullptr));
-        tabWidgetR->setTabText(tabWidgetR->indexOf(tabVoro), QCoreApplication::translate("MainWindow", "Voronoi", nullptr));
+        tabWidgetR->setTabText(tabWidgetR->indexOf(tabVisualVoro), QCoreApplication::translate("MainWindow", "Erosion", nullptr));
         Objects_groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Toy terrains", nullptr));
-        cb_toy->setItemText(0, QCoreApplication::translate("MainWindow", "Simple Toy", nullptr));
-        cb_toy->setItemText(1, QCoreApplication::translate("MainWindow", "Second test", nullptr));
+        cb_toy->setItemText(0, QCoreApplication::translate("MainWindow", "Oscillating Mountain", nullptr));
+        cb_toy->setItemText(1, QCoreApplication::translate("MainWindow", "Sinus", nullptr));
+        cb_toy->setItemText(2, QCoreApplication::translate("MainWindow", "Gaussain Bump", nullptr));
+        cb_toy->setItemText(3, QCoreApplication::translate("MainWindow", "Constant heightfield", nullptr));
 
         label_48->setText(QCoreApplication::translate("MainWindow", "Dimensions", nullptr));
         label_preset->setText(QCoreApplication::translate("MainWindow", "0x0 cells, 0x0km", nullptr));
@@ -2709,6 +2752,10 @@ public:
         fixed_palette->setText(QCoreApplication::translate("MainWindow", "Fix palette", nullptr));
         labelPaletteRange->setText(QCoreApplication::translate("MainWindow", "Range", nullptr));
         sb_paletteMin->setSuffix(QString());
+        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Info cursor (right mouse button)", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "Cell id", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Elevation", nullptr));
+        label_30->setText(QCoreApplication::translate("MainWindow", "Metric", nullptr));
         menuSave->setTitle(QCoreApplication::translate("MainWindow", "Save", nullptr));
         menuLoad->setTitle(QCoreApplication::translate("MainWindow", "Load", nullptr));
     } // retranslateUi

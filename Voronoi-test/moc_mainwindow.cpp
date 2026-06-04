@@ -62,6 +62,7 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "changeAlphaParticles",
         "changeAlphaLinks",
         "changeAlphaPaths",
+        "changeRenderLayer",
         "loadPNG",
         "loadASC",
         "updateDEM",
@@ -130,42 +131,44 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'changeAlphaPaths'
         QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPNG'
+        // Slot 'changeRenderLayer'
         QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadASC'
+        // Slot 'loadPNG'
         QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updateDEM'
+        // Slot 'loadASC'
         QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'recommendedDEM'
+        // Slot 'updateDEM'
         QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadToy'
+        // Slot 'recommendedDEM'
         QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPreset'
+        // Slot 'loadToy'
         QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updatePresetInfo'
+        // Slot 'loadPreset'
         QtMocHelpers::SlotData<void()>(30, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayersCombined'
+        // Slot 'updatePresetInfo'
         QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerMetric'
+        // Slot 'saveLayersCombined'
         QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRivers'
+        // Slot 'saveLayerMetric'
         QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRidges'
+        // Slot 'saveLayerRivers'
         QtMocHelpers::SlotData<void()>(34, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveMetric'
+        // Slot 'saveLayerRidges'
         QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editFillDepressions'
+        // Slot 'saveMetric'
         QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editBreaching'
+        // Slot 'editFillDepressions'
         QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editGaussianSmooth'
+        // Slot 'editBreaching'
         QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'editGaussianSmooth'
+        QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'queryRay'
-        QtMocHelpers::SlotData<void(const Ray &)>(39, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 40, 41 },
+        QtMocHelpers::SlotData<void(const Ray &)>(40, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 41, 42 },
         }}),
         // Slot 'updateViewshedLocation'
-        QtMocHelpers::SlotData<void()>(42, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(43, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -210,23 +213,24 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 18: _t->changeAlphaParticles(); break;
         case 19: _t->changeAlphaLinks(); break;
         case 20: _t->changeAlphaPaths(); break;
-        case 21: _t->loadPNG(); break;
-        case 22: _t->loadASC(); break;
-        case 23: _t->updateDEM(); break;
-        case 24: _t->recommendedDEM(); break;
-        case 25: _t->loadToy(); break;
-        case 26: _t->loadPreset(); break;
-        case 27: _t->updatePresetInfo(); break;
-        case 28: _t->saveLayersCombined(); break;
-        case 29: _t->saveLayerMetric(); break;
-        case 30: _t->saveLayerRivers(); break;
-        case 31: _t->saveLayerRidges(); break;
-        case 32: _t->saveMetric(); break;
-        case 33: _t->editFillDepressions(); break;
-        case 34: _t->editBreaching(); break;
-        case 35: _t->editGaussianSmooth(); break;
-        case 36: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
-        case 37: _t->updateViewshedLocation(); break;
+        case 21: _t->changeRenderLayer(); break;
+        case 22: _t->loadPNG(); break;
+        case 23: _t->loadASC(); break;
+        case 24: _t->updateDEM(); break;
+        case 25: _t->recommendedDEM(); break;
+        case 26: _t->loadToy(); break;
+        case 27: _t->loadPreset(); break;
+        case 28: _t->updatePresetInfo(); break;
+        case 29: _t->saveLayersCombined(); break;
+        case 30: _t->saveLayerMetric(); break;
+        case 31: _t->saveLayerRivers(); break;
+        case 32: _t->saveLayerRidges(); break;
+        case 33: _t->saveMetric(); break;
+        case 34: _t->editFillDepressions(); break;
+        case 35: _t->editBreaching(); break;
+        case 36: _t->editGaussianSmooth(); break;
+        case 37: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 38: _t->updateViewshedLocation(); break;
         default: ;
         }
     }
@@ -251,14 +255,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 38)
+        if (_id < 39)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 38;
+        _id -= 39;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 38)
+        if (_id < 39)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 38;
+        _id -= 39;
     }
     return _id;
 }

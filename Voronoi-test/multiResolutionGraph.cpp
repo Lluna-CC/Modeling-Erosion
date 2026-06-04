@@ -2,7 +2,7 @@
 #include <random>
 #include<float.h>
 
-void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {
+void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int scale) {
     
     
     levels.resize(nLevels);
@@ -19,6 +19,7 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
     lowerLevel[0].resize(newSize);
 
     std::vector<Vector3> centroids(newSize);
+    std::vector<bool> exterior(newSize, true);
 
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -60,11 +61,12 @@ void MultiResolutionGraph::multiLevelVoronoiDecomposition(std::vector<float>& v,
         }
         
         upperLevel[0][j] = closestCentroid[j];
-        lowerLevel[0][closestCentroid[j]].push_back(j); 
+        lowerLevel[0][closestCentroid[j]].push_back(j);
+        if (levels[0].getCells()[j].state == SOLID) exterior[closestCentroid[j]] = false;
     }
 
 
-    Voronoi::voronoiFromCentroids(centroids, &levels[1], hf);
+    Voronoi::voronoiFromCentroids(centroids, exterior, &levels[1], hf);
     std::cout << "second level completed" << std::endl;
 
 }
@@ -90,5 +92,39 @@ void MultiResolutionGraph::removeLowerLevel(int l, int cell) {
     for (int i = 0; i < lowerLevel[l - 1][cell].size(); ++i) {
         int actCell = lowerLevel[l - 1][cell][i];
         lowerCells[actCell].state = AIR;
+    }
+}
+
+void MultiResolutionGraph::updateLowerLevelCells(int l, int cell) {
+    if (l < 1 || l > lowerLevel.size() + 1) return;
+    std::vector<vorocell>& lowerCells = levels[l - 1].getCells();
+    for (int i = 0; i < lowerLevel[l - 1][cell].size(); ++i) {
+        int actCell = lowerLevel[l - 1][cell][i];
+        if (lowerCells[actCell].state == AIR) continue;
+        for (int k = 0; k < lowerCells[actCell].neighbors.size(); ++k) {
+            if (lowerCells[actCell].neighbors[k] < 0 || lowerCells[lowerCells[actCell].neighbors[k]].state == AIR) {
+                lowerCells[actCell].isExterior = true;     
+                break;
+            }
+        }
+    
+    }
+}
+
+void MultiResolutionGraph::updateExternalCells(int l) {
+    if (l < 0 || l > levels.size()) return;
+    std::vector<vorocell>& cells = levels[l].getCells();
+    for (int i = 0; i < cells.size(); ++i) {
+        if (cells[i].state == AIR) continue;
+        for (int k = 0; k < cells[i].neighbors.size(); ++k) {
+            if (cells[i].neighbors[k] < 0 || cells[cells[i].neighbors[k]].state == AIR) {
+                if (!cells[i].isExterior) {
+                    
+                }
+                //graph -> updateLowerLevelCells(1, i);
+                cells[i].isExterior = true;     
+                break;
+            }
+        }
     }
 }

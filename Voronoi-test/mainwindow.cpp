@@ -194,6 +194,8 @@ void MainWindow::createActions()
     connect(ui->alpha_particles, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaParticles()));
     connect(ui->alpha_links, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaLinks()));
     connect(ui->alpha_paths, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaPaths()));
+
+    connect(ui->layer, SIGNAL(valueChanged(int)), this, SLOT(changeRenderLayer()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -643,7 +645,9 @@ void MainWindow::loadToy()
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
                     //GAUSSIAN
-                    //hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
+                    double x = double(i)/(2*ncols) - 0.25;
+                    double sig = 0.075;
+                    hf(i, j) = 75*exp(-x*x/(2*sig*sig));
                 }
             }
 
@@ -655,7 +659,8 @@ void MainWindow::loadToy()
             hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
-                    hf(i, j) =  5;
+                    if (i == 0) hf(i,j) = 0;
+                    else hf(i, j) =  20;
                 }
             }
 
@@ -815,9 +820,10 @@ void MainWindow::computeVoronoi() {
     //Voronoi::randomPointsTest();
     double theta = ui -> theta_spinbox -> value();
     double phi = ui -> phi_spinbox -> value();
+    int multiRes_factor = ui -> multiRes_factor -> value();
     //Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    widget -> setDecomposition(&hf, theta, phi);
+    widget -> setDecomposition(&hf, theta, phi, multiRes_factor);
     
 }
 
@@ -877,4 +883,9 @@ void MainWindow::changeAlphaLinks(){
 void MainWindow::changeAlphaPaths(){
     float alpha = ui -> alpha_paths -> value();
     widget -> setAlpha(4, alpha);
+}
+
+void MainWindow::changeRenderLayer() {
+    int layer = ui -> layer -> value();
+    widget -> setRenderLayer(layer);
 }

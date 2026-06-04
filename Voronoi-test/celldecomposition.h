@@ -24,10 +24,10 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
 
    void clear();
    
-   void renderCells();
-   void renderParticles();
-   void renderLinks();
-   void renderPaths(std::set<std::pair<int,int>>& paths);
+   void renderCells(int l);
+   void renderParticles(int l);
+   void renderLinks(int l);
+   void renderPaths(std::set<std::pair<int,int>>& paths, int l);
 
    void fullMeshDecomposition(int l);
    void setShader(QOpenGLShaderProgram* shader) {cellShader = shader;} 
@@ -41,7 +41,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    
    MultiResolutionGraph* getGraph() {return &graph;}
 
-   void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf) {graph.multiLevelVoronoiDecomposition(v,f,hf);}
+   void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int multiRes_factor) {graph.multiLevelVoronoiDecomposition(v,f,hf, multiRes_factor);}
    void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};
 
  private:

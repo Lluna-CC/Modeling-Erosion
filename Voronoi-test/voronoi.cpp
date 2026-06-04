@@ -3,6 +3,9 @@
 using namespace voro;
 
 
+const double Voronoi::offsetScale = 0.5; 
+const double Voronoi::areaRatioLimit = 1.5;
+const int Voronoi::areRatioWindow = 8;
 
 // This function returns a random double between 0 and 1
 double rnd() {return double(rand())/RAND_MAX;}
@@ -103,7 +106,7 @@ void Voronoi::triangleSamplingVoronoi(const HeightField* hf, std::vector<float>&
     int nz = (max[2] - min[2])/sizeX; 
 
     int block = 1;
-    double offset = 0.75*Norm(hf->getCellSize());
+    double offset = offsetScale*Norm(hf->getCellSize());
     int zSamples = 16;
 
     container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx, ny, nz, false, false, false, 2);
@@ -192,12 +195,41 @@ void Voronoi::triangleSamplingVoronoi(const HeightField* hf, std::vector<float>&
 
 }
 
+void subSampling(double x, double y, double sizeX, double sizeY, int offset, container& con, int& particles, const HeightField* hf, int subdivisions) {
+    double sub_x[4] = {x - 0.25*sizeX, x + 0.25*sizeX, x - 0.25*sizeX, x + 0.25*sizeX};
+    double sub_y[4] = {y + 0.25*sizeY, y + 0.25*sizeY, y - 0.25*sizeY, y - 0.25*sizeY};
+    for (int k = 0; k < 4; ++k) {
+        double local_x = sub_x[k] + (rnd() - 0.5)*sizeX*0.25;
+        double local_y = sub_y[k] + (rnd() - 0.5)*sizeY*0.25;   
+        double local_z = hf -> Height(Vector2(local_x, local_y));
+
+        if (subdivisions > 0) {
+            subSampling(sub_x[k], sub_y[k], sizeX*0.5, sizeY*0.5, offset, con, particles, hf, subdivisions - 1);
+        }
+
+        else {
+            Vector3 centroid =  Vector3(local_x,local_y,local_z);
+            Vector3 norm = hf -> Normal(Vector2(x,y));
+            
+            //Add point to both sides
+            Vector3 first = centroid + offset*norm;
+            Vector3 second = centroid - offset*norm;
+            
+            con.put(particles,(double) first[0], (double) first[1], (double) first[2]);
+            con.put(particles + 1,(double) second[0],(double) second[1], (double) second[2]);
+            
+            particles += 2;
+
+        }
+    }
+}
+
 void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
     std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
     Vector3 min = domain.getMin();
     Vector3 max = domain.getMax();
-    ScalarField2 roughness = hf -> SurfaceRoughnessSAT(32, false);
+    ScalarField2 AreaRatio = hf -> AreaRatio(areRatioWindow);
 
     int nx = hf -> getSizeX();
     int ny = hf -> getSizeY();
@@ -206,7 +238,7 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
     int nz = (max[2] - min[2])/sizeX; 
 
     int block = 1;
-    double offset = 0.75*Norm(hf->getCellSize());
+    double offset = offsetScale*Norm(hf->getCellSize());
     int zSamples = 16;
 
     container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx, ny, nz, false, false, false, 2);
@@ -223,23 +255,32 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
     //Two particles per cell
     for (int i = 0; i < nx; ++i) {
         for (int j = 0; j < ny; ++j) {
-            x = min[0] + i*sizeX - 0.5*sizeX;
-            y = min[1] + j*sizeY - 0.5*sizeY;
+            double center_x = min[0] + i*sizeX - 0.5*sizeX;
+            double center_y = min[1] + j*sizeY - 0.5*sizeY; 
+            x = center_x + (rnd() - 0.5)*sizeX*0.5;
+            y = center_y + (rnd() - 0.5)*sizeY*0.5;
             z = hf -> Height(Vector2(x,y));
 
-            Vector3 centroid =  Vector3(x,y,z);
-            Vector3 norm = hf -> Normal(Vector2(x,y));
-            Vector3 jitter = Vector3(rnd(),rnd(),rnd());
-            jitter = Normalized(jitter - dot(jitter,norm)*norm);
-
-            //Add point to both sides
-            Vector3 first = centroid + offset*norm + offset*jitter*0.2*rnd();
-            Vector3 second = centroid - offset*norm + offset*jitter*0.2*rnd();
+            double localAreaRatio = AreaRatio.at(i,j);
+            if (localAreaRatio > areaRatioLimit) {
+                if (localAreaRatio > areaRatioLimit + 0.5) subSampling(center_x,center_y,sizeX,sizeY, offset, con, particles, hf, 1);
+                else subSampling(center_x,center_y,sizeX,sizeY, offset, con, particles, hf, 0);
+            }
             
-            con.put(particles,(double) first[0], (double) first[1], (double) first[2]);
-            con.put(particles + 1,(double) second[0],(double) second[1], (double) second[2]);
+            else {
+                Vector3 centroid =  Vector3(x,y,z);
+                Vector3 norm = hf -> Normal(Vector2(x,y));
+                
+                //Add point to both sides
+                Vector3 first = centroid + offset*norm;
+                Vector3 second = centroid - offset*norm;
+                
+                con.put(particles,(double) first[0], (double) first[1], (double) first[2]);
+                con.put(particles + 1,(double) second[0],(double) second[1], (double) second[2]);
+                
+                particles += 2;
+            }
             
-            particles += 2;
         }
     }
 
@@ -260,7 +301,7 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
                 y = y_block + rnd()*(sizeY) - 0.5*sizeY;
                 double z_max = hf -> Height(Vector2(x,y)) - block/2;
                 
-                z = min[2] - 4*offset + rnd()*(z_max - min[2] + 3*offset);
+                z = min[2] - 4*offset + rnd()*(z_max - min[2] + 2*offset);
                 
                 con.put(particles,x,y,z);
                 ++particles;
@@ -306,10 +347,10 @@ void Voronoi::toyVoronoi(const HeightField *hf, CellGraph *graph) {
     int nz = (max[2] - min[2])/sizeX; 
 
     int block = 4;
-    double offset = 0.5*Norm(hf->getCellSize());
+    double offset = offsetScale*Norm(hf->getCellSize());
     int zSamples = 25;
 
-    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 2*offset, nx, ny, nz, false, false, false, 2);
+    container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx, ny, nz, false, false, false, 2);
 
     int particles = 0;
 
@@ -351,7 +392,7 @@ void Voronoi::toyVoronoi(const HeightField *hf, CellGraph *graph) {
     std::cout << "Decomposition ended" << std::endl;
 }
 
-void Voronoi::voronoiFromCentroids(const std::vector<Vector3> centroids, CellGraph* graph, const HeightField* hf) {
+void Voronoi::voronoiFromCentroids(const std::vector<Vector3>& centroids, const std::vector<bool>& exterior, CellGraph* graph, const HeightField* hf) {
      Box3 domain = hf -> getBox();
     Vector3 min = domain.getMin();
     Vector3 max = domain.getMax();
@@ -383,8 +424,7 @@ void Voronoi::voronoiFromCentroids(const std::vector<Vector3> centroids, CellGra
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
-        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
-        
+        graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), exterior[loopAll.pid()] && cellZ >= z_max);
+    
     }while (loopAll.inc()); 
 }

@@ -167,7 +167,10 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     //std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
+    //std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
+    
     links[link].state = BROKEN;
+    
     //Delete Cell connection
     /* if (link.first >= 0 && link.second >= 0) {
         for (int i = 0; i < (*cells)[link.first].neighbors.size(); ++i) {
@@ -215,6 +218,7 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
         
         if (!reachable) {
             std::cout << "Seprated components !!" << std::endl;
+            recentlyRemoved.clear();
 
             bool containsCore_second, exterior_two;
             int secondComp_count = componentSize(link.second, link.first, containsCore_second, reachable, exterior_two);
@@ -284,8 +288,6 @@ int ErosionAlgorithm::componentSize(int cell, int otherCell, bool& containsCore,
         if (cells[actCell].state == CORE) containsCore = true;
         if (actCell == otherCell) reachable = true;
 
-        if (cells[actCell].isExterior) exterior = true;
-
         for (int i = 0; i < cells[actCell].neighbors.size(); ++i) {
             int next = cells[actCell].neighbors[i];
             if (next < 0) continue;
@@ -293,10 +295,14 @@ int ErosionAlgorithm::componentSize(int cell, int otherCell, bool& containsCore,
             std::pair<int,int> key;
             if (links.find(std::make_pair(actCell, next)) != links.end()) key = std::make_pair(actCell, next);
             else if (links.find(std::make_pair(next, actCell)) != links.end()) key = std::make_pair(next, actCell);
-            else std::cout << "????????" << std::endl;
+            else continue;
 
+            if (links[key].state == EXTERIOR) {
+                exterior = true;
+                continue;
+            }
 
-            if (!visited[next] && links[key].state != BROKEN && links[key].state != EXTERIOR)  {
+            if (!visited[next] && links[key].state != BROKEN)  {
                 visited[next] = true;
                 next_cells.push(next);
             } 
@@ -318,8 +324,8 @@ void ErosionAlgorithm::removeComponent(int cell) {
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
 
     cells[cell].state = AIR;
+    recentlyRemoved.insert(cell);
     if (level > 0) graph -> removeLowerLevel(level, cell);
-    if (cells[cell].isExterior) removedExteriorCells.push_back(cell);
 
     for (int i = 0; i < cells[cell].neighbors.size(); ++i) {
         int next = cells[cell].neighbors[i];
@@ -328,7 +334,7 @@ void ErosionAlgorithm::removeComponent(int cell) {
         std::pair<int,int> key;
         if (links.find(std::make_pair(cell, next)) != links.end()) key = std::make_pair(cell, next);
         else if (links.find(std::make_pair(next, cell)) != links.end()) key = std::make_pair(next, cell);
-        else std::cout << "????????" << std::endl;
+        else continue;
 
         if (cells[next].state != AIR && links[key].state != BROKEN) removeComponent(next); 
     }
@@ -341,13 +347,14 @@ void ErosionAlgorithm::updateExternalLinks() {
     std::vector<vorocell>& cells = graph -> getCells(level);
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
     std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
-
+    
+    graph -> updateExternalCells(0);
     for (int i = 0; i < cells.size(); ++i) {
         if (cells[i].state == AIR) continue;
         for (int k = 0; k < cells[i].neighbors.size(); ++k) {
-            if (cells[i].neighbors[k] < 0 || cells[cells[i].neighbors[k]].state == AIR) {
-                if (!cells[i].isExterior) newExteriorCells.push_back(i);
-
+            if (cells[i].neighbors[k] < 0 || recentlyRemoved.find(cells[i].neighbors[k]) != recentlyRemoved.end()) {
+                
+                //graph -> updateLowerLevelCells(1, i);
                 cells[i].isExterior = true;     
                 break;
             }
@@ -377,7 +384,7 @@ void ErosionAlgorithm::updateExternalLinks() {
 
         }
 
-        else if ((key.first > 0 && cells[key.first].state == AIR) || (key.second > 0 && cells[key.second].state == AIR))  {
+        else if ((key.first > 0 && recentlyRemoved.find(key.first) != recentlyRemoved.end()) || (key.second > 0 && recentlyRemoved.find(key.second) != recentlyRemoved.end()))  {
             links[key].state = EXTERIOR;
             exteriorLinks.insert(key);
         }

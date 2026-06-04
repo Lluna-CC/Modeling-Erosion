@@ -30,12 +30,13 @@ public:
     void showCursor(const Vector3& worldPos);
     void hideCursor();
 
-    void setDecomposition(HeightField* hf, double theta, double phi); 
+    void setDecomposition(HeightField* hf, double theta, double phi, int multiRes_factor); 
     void setToyDecomposition(CellDecomposition* decomp, double theta, double phi);
     void setRenderMode(int mode);
     void setAlpha(int mode, float value);
     void computeWaterPath(int num);
     void changeErosionDirection(double theta, double phi);
+    void setRenderLayer(int l);
 
     
 public slots:
@@ -93,6 +94,7 @@ protected:
     CellDecomposition* cellDecomp = nullptr;
     bool renderMode[5] = {true, false, false, false, false};
     float alphas[5] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
+    int renderLayer = 0;
 };
 
 #endif // TERRAINWIDGET_H

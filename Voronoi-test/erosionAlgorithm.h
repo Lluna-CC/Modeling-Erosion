@@ -16,11 +16,7 @@ class ErosionAlgorithm {
     bool waterPath(std::set<std::pair<int,int>>& visited);
 
     //Returns true if the model changed
-    void getNewExteriorCells(std::vector<int>& newC, std::vector<int>& oldC) {
-        newC = newExteriorCells;
-        oldC = removedExteriorCells;
-    }
-
+    
   private:
     void getLinkDistibution(Vector3 dir);
   
@@ -40,10 +36,8 @@ class ErosionAlgorithm {
 
     
     std::discrete_distribution<int> externalLinkDistribution;
-  
-    std::vector<int> newExteriorCells;
-    std::vector<int> removedExteriorCells;
-
+    std::set<int> recentlyRemoved;
+    
     double initialFlow = 10.0;
     Vector3 g = Vector3(0.0,0.0,-1.0);
 

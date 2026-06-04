@@ -186,22 +186,22 @@ void TerrainWidget::paintGL()
     
     if (renderMode[1]) {
         glUniform1f(glGetUniformLocation(shader, "u_alpha"), alphas[1]);
-        cellDecomp -> renderCells();
+        cellDecomp -> renderCells(renderLayer);
     }
 
     if (renderMode[2]) {
         glUniform1f(glGetUniformLocation(shader, "u_alpha"), alphas[2]);
-        cellDecomp -> renderParticles();
+        cellDecomp -> renderParticles(renderLayer);
     }
 
     if (renderMode[3]) {
         glUniform1f(glGetUniformLocation(shader, "u_alpha"), alphas[3]);
-        cellDecomp -> renderLinks();
+        cellDecomp -> renderLinks(renderLayer);
     }
 
     if (renderMode[4]) {
         glUniform1f(glGetUniformLocation(shader, "u_alpha"), alphas[4]);
-        cellDecomp -> renderPaths(paths);
+        cellDecomp -> renderPaths(paths, renderLayer);
     }
     glUseProgram(0);
     
@@ -443,11 +443,11 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
     update();
 }
 
-void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi) {
+void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi, int multiRes_factor) {
     delete cellDecomp;
     cellDecomp = new CellDecomposition();
     
-    cellDecomp -> voronoiDecomposition(verts, indices, hf);
+    cellDecomp -> voronoiDecomposition(verts, indices, hf, multiRes_factor);
     
     makeCurrent();
     cellDecomp -> setShader(&shaderVoro); 
@@ -532,4 +532,8 @@ void TerrainWidget::setToyDecomposition(CellDecomposition* decomp, double theta,
 
 void TerrainWidget::setAlpha(int mode, float value) {
     alphas[mode] = value;
+}
+
+void TerrainWidget::setRenderLayer(int l) {
+    renderLayer = l;
 }

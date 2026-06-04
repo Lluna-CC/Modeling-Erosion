@@ -43,6 +43,7 @@ public slots:
     void changeAlphaParticles();
     void changeAlphaLinks();
     void changeAlphaPaths();
+    void changeRenderLayer();
 
     // terrain load actions
     void loadPNG();

@@ -2369,13 +2369,13 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>20</y>
+          <y>10</y>
           <width>281</width>
           <height>321</height>
          </rect>
         </property>
         <property name="title">
-         <string>Voronoi Options</string>
+         <string>Voronoi Visuals</string>
         </property>
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
@@ -2383,22 +2383,12 @@
            <x>10</x>
            <y>40</y>
            <width>261</width>
-           <height>271</height>
+           <height>266</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="focusPolicy">
-               <enum>Qt::FocusPolicy::NoFocus</enum>
-              </property>
-              <property name="text">
-               <string>Compute Voronoi Cells</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_16">
               <item>
@@ -2409,7 +2399,11 @@
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox"/>
+               <widget class="QSpinBox" name="layer">
+                <property name="maximum">
+                 <number>1</number>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -2541,11 +2535,75 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="groupBox_5">
+       <widget class="QGroupBox" name="groupBox_7">
         <property name="geometry">
          <rect>
           <x>20</x>
           <y>340</y>
+          <width>281</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Voronoi Options</string>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>241</width>
+           <height>83</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_32">
+            <item>
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>Multi-Resolution Factor</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="multiRes_factor">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="value">
+               <number>10</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>Compute Voronoi Cells</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabVisualVoro">
+       <attribute name="title">
+        <string>Erosion</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
           <width>281</width>
           <height>271</height>
          </rect>
@@ -2553,7 +2611,7 @@
         <property name="title">
          <string>Erosion Options</string>
         </property>
-        <widget class="QWidget" name="layoutWidget">
+        <widget class="QWidget" name="layoutWidget_2">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -2668,63 +2726,6 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>620</y>
-          <width>281</width>
-          <height>151</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Info cursor (right mouse button)</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_5">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_27">
-           <property name="text">
-            <string>Cell id</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineClickInfoCell">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_26">
-           <property name="text">
-            <string>Elevation</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineClickInfoElev">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_30">
-           <property name="text">
-            <string>Metric</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineClickInfoMetric">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </widget>
      </widget>
     </item>
@@ -2768,12 +2769,22 @@
             </property>
             <item>
              <property name="text">
-              <string>Simple Toy</string>
+              <string>Oscillating Mountain</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Second test</string>
+              <string>Sinus</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gaussain Bump</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Constant heightfield</string>
              </property>
             </item>
            </widget>
@@ -3339,6 +3350,57 @@
             </property>
             <property name="text">
              <string notr="true">↩︎</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Info cursor (right mouse button)</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>Cell id</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineClickInfoCell">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>Elevation</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineClickInfoElev">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_30">
+            <property name="text">
+             <string>Metric</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineClickInfoMetric">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

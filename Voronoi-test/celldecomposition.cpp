@@ -79,9 +79,9 @@ bool writeMesh(const std::string &filename, std::vector<float>& vertices, std::v
 }
 
 
-void CellDecomposition::renderCells() {
+void CellDecomposition::renderCells(int l) {
     QMatrix4x4 model;
-    std::vector<vorocell>& cells = graph.getCells(0);
+    std::vector<vorocell>& cells = graph.getCells(l);
     
     model.setToIdentity();
     glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
@@ -89,8 +89,8 @@ void CellDecomposition::renderCells() {
     //int renderedCells = 0;
     for (int i = 0; i < cells.size(); ++i) {
 
-        if (cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[0][i]);
+        if (cells[i].state == AIR || !cells[i].isExterior) continue;
+        glBindVertexArray(cellVAOs[l][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
@@ -100,10 +100,10 @@ void CellDecomposition::renderCells() {
 
 }
 
-void CellDecomposition::renderLinks() {
+void CellDecomposition::renderLinks(int l) {
     QMatrix4x4 model;
-    std::vector<vorocell>& cells = graph.getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph.getLinks(0);
+    std::vector<vorocell>& cells = graph.getCells(l);
+    std::map<std::pair<int,int>, vorolink>& links = graph.getLinks(l);
     
     glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
     //int renderedCells = 0;
@@ -117,7 +117,7 @@ void CellDecomposition::renderLinks() {
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
 
         if (!cells[i].isExterior || cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[0][i]);
+        glBindVertexArray(cellVAOs[l][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
@@ -276,10 +276,10 @@ void CellDecomposition::clear() {
 }
 
 
-void CellDecomposition::renderParticles() {
+void CellDecomposition::renderParticles(int l) {
     
     glBindVertexArray(sphereVAO);
-    std::vector<vorocell>& cells = graph.getCells(0);
+    std::vector<vorocell>& cells = graph.getCells(l);
     
     for (int i = 0; i < cells.size(); ++i) {  
         QMatrix4x4 model;
@@ -297,11 +297,11 @@ void CellDecomposition::renderParticles() {
     
 }
 
-void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths) {
+void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths, int l) {
     
     QMatrix4x4 model;
-    std::vector<vorocell>& cells = graph.getCells(0);
-    std::map<std::pair<int,int>, vorolink>& links = graph.getLinks(0);
+    std::vector<vorocell>& cells = graph.getCells(l);
+    std::map<std::pair<int,int>, vorolink>& links = graph.getLinks(l);
     
     glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
     //int renderedCells = 0;
@@ -315,7 +315,7 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths) {
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
 
         if (!cells[i].isExterior || cells[i].state == AIR) continue;
-        glBindVertexArray(cellVAOs[0][i]);
+        glBindVertexArray(cellVAOs[l][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        //++renderedCells;
