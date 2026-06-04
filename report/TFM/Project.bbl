@@ -202,6 +202,817 @@
     \field{year}{2019}
   \endentry
 
+  \entry{945341}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={B.},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=FR}{%
+         family={Forsbach},
+         familyi={F\bibinitperiod},
+         given={R.},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \keyw{Fractals;Data structures;Mars;Physics;Geology;Interpolation;Joining processes;Adaptive algorithm}
+    \strng{namehash}{BBFR1}
+    \strng{fullhash}{BBFR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings Spring Conference on Computer Graphics}
+    \verb{doi}
+    \verb 10.1109/SCCG.2001.945341
+    \endverb
+    \field{pages}{80\bibrangedash 86}
+    \field{title}{Layered data representation for visual simulation of terrain erosion}
+    \field{year}{2001}
+  \endentry
+
+  \entry{10.1145/3072959.3073667}{article}{}{}
+    \name{author}{7}{}{%
+      {{hash=CG}{%
+         family={Cordonnier},
+         familyi={C\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gain},
+         familyi={G\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu\'{e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CMP}{%
+         family={Cani},
+         familyi={C\bibinitperiod},
+         given={Marie-Paule},
+         giveni={M\bibinithyphendelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{erosion, landscape, simulation of natural phenomena, stochastic, terrain, vegetation}
+    \strng{namehash}{CG+1}
+    \strng{fullhash}{CGGEGJBBGEPACMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We introduce a novel framework for interactive landscape authoring that supports bi-directional feedback between erosion and vegetation simulation. Vegetation and terrain erosion have strong mutual impact and their interplay influences the overall realism of virtual scenes. Despite their importance, these complex interactions have been neglected in computer graphics. Our framework overcomes this by simulating the effect of a variety of geomorphological agents and the mutual interaction between different material and vegetation layers, including rock, sand, humus, grass, shrubs, and trees. Users are able to exploit these interactions with an authoring interface that consistently shapes the terrain and populates it with details. Our method, validated through side-by-side comparison with real terrains, can be used not only to generate realistic static landscapes, but also to follow the temporal evolution of a landscape over a few centuries.%
+    }
+    \verb{doi}
+    \verb 10.1145/3072959.3073667
+    \endverb
+    \field{issn}{0730-0301}
+    \field{number}{4}
+    \field{title}{Authoring landscapes by combining ecosystem and terrain erosion simulation}
+    \verb{url}
+    \verb https://doi.org/10.1145/3072959.3073667
+    \endverb
+    \field{volume}{36}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Graph.}
+    \field{month}{07}
+    \field{year}{2017}
+  \endentry
+
+  \entry{wingender2022simulation}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=WD}{%
+         family={Wingender},
+         familyi={W\bibinitperiod},
+         given={Dennis},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BD}{%
+         family={Balzani},
+         familyi={B\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{WDBD1}
+    \strng{fullhash}{WDBD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{385\bibrangedash 406}
+    \field{title}{Simulation of crack propagation through voxel-based, heterogeneous structures based on eigenerosion and finite cells}
+    \field{volume}{70}
+    \field{journaltitle}{Computational Mechanics}
+    \field{year}{2022}
+  \endentry
+
+  \entry{turini2006simulating}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=TG}{%
+         family={Turini},
+         familyi={T\bibinitperiod},
+         given={Giuseppe},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GF}{%
+         family={Ganovelli},
+         familyi={G\bibinitperiod},
+         given={Fabio},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=MC}{%
+         family={Montani},
+         familyi={M\bibinitperiod},
+         given={Claudio},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TGGFMC1}
+    \strng{fullhash}{TGGFMC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Eurographics (Short Presentations)}
+    \field{pages}{127\bibrangedash 131}
+    \field{title}{Simulating Drilling on Tetrahedral Meshes.}
+    \field{year}{2006}
+  \endentry
+
+  \entry{Muller_2022}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=MM}{%
+         family={Muller},
+         familyi={M\bibinitperiod},
+         given={Matias},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MM1}
+    \strng{fullhash}{MM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{100 X simulation speedup with mesh embedding}
+    \verb{url}
+    \verb https://matthias-research.github.io/pages/tenMinutePhysics/12-softBod
+    \verb ySkinning.pdf
+    \endverb
+    \field{journaltitle}{Ten Minute Physics}
+    \field{year}{2022}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{10.1007/BF01900837}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=NA}{%
+         family={Norton},
+         familyi={N\bibinitperiod},
+         given={Alan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=TG}{%
+         family={Turk},
+         familyi={T\bibinitperiod},
+         given={Greg},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Bacon},
+         familyi={B\bibinitperiod},
+         given={Bob},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gerth},
+         familyi={G\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Sweeney},
+         familyi={S\bibinitperiod},
+         given={Paula},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer-Verlag}%
+    }
+    \keyw{animation, collision detection, deformation, dynamics, modeling}
+    \strng{namehash}{NA+1}
+    \strng{fullhash}{NATGBBGJSP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/BF01900837
+    \endverb
+    \field{issn}{0178-2789}
+    \field{number}{4}
+    \field{pages}{210–219}
+    \field{title}{Animation of fracture by physical modeling}
+    \verb{url}
+    \verb https://doi.org/10.1007/BF01900837
+    \endverb
+    \field{volume}{7}
+    \list{location}{1}{%
+      {Berlin, Heidelberg}%
+    }
+    \field{journaltitle}{Vis. Comput.}
+    \field{month}{07}
+    \field{year}{1991}
+  \endentry
+
+  \entry{10.1145/54852.378522}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=TD}{%
+         family={Terzopoulos},
+         familyi={T\bibinitperiod},
+         given={Demetri},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=FK}{%
+         family={Fleischer},
+         familyi={F\bibinitperiod},
+         given={Kurt},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{simulation, modeling, elasticity, dynamics, deformation, animation}
+    \strng{namehash}{TDFK1}
+    \strng{fullhash}{TDFK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We continue our development of physically-based models for animating nonrigid objects in simulated physical environments. Our prior work treats the special case of objects that undergo perfectly elastic deformations. Real materials, however, exhibit a rich variety of inelastic phenomena. For instance, objects may restore themselves to their natural shapes slowly, or perhaps only partially upon removal of forces that cause deformation. Moreover, the deformation may depend on the history of applied forces. The present paper proposes inelastically deformable models for use in computer graphics animation. These dynamic models tractably simulate three canonical inelastic behaviors---viscoelasticity, plasticity, and fracture. Viscous and plastic processes within the models evolve a reference component, which describes the natural shape, according to yield and creep relationships that depend on applied force and/or instantaneous deformation. Simple fracture mechanics result from internal processes that introduce local discontinuities as a function of the instantaneous deformations measured through the model. We apply our inelastically deformable models to achieve novel computer graphics effects.%
+    }
+    \field{booktitle}{Proceedings of the 15th Annual Conference on Computer Graphics and Interactive Techniques}
+    \verb{doi}
+    \verb 10.1145/54852.378522
+    \endverb
+    \field{isbn}{0897912756}
+    \field{pages}{269–278}
+    \field{series}{SIGGRAPH '88}
+    \field{title}{Modeling inelastic deformation: viscolelasticity, plasticity, fracture}
+    \verb{url}
+    \verb https://doi.org/10.1145/54852.378522
+    \endverb
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{year}{1988}
+  \endentry
+
+  \entry{10.2312:sca.20141122}{inproceedings}{}{}
+    \name{author}{5}{}{%
+      {{hash=LJA}{%
+         family={Levine},
+         familyi={L\bibinitperiod},
+         given={Joshua\bibnamedelima A.},
+         giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=BAW}{%
+         family={Bargteil},
+         familyi={B\bibinitperiod},
+         given={Adam\bibnamedelima W.},
+         giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Corsi},
+         familyi={C\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=TJ}{%
+         family={Tessendorf},
+         familyi={T\bibinitperiod},
+         given={Jerry},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Geist},
+         familyi={G\bibinitperiod},
+         given={Robert},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=KV}{%
+         family={Koltun},
+         familyi={K\bibinitperiod},
+         given={Vladlen},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=SE}{%
+         family={Sifakis},
+         familyi={S\bibinitperiod},
+         given={Eftychios},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Eurographics Association}%
+    }
+    \strng{namehash}{LJA+1}
+    \strng{fullhash}{LJABAWCCTJGR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Eurographics/ ACM SIGGRAPH Symposium on Computer Animation}
+    \verb{doi}
+    \verb 10.2312/sca.20141122
+    \endverb
+    \field{isbn}{978-3-905674-61-3}
+    \field{issn}{1727-5288}
+    \field{title}{{A Peridynamic Perspective on Spring-Mass Fracture}}
+    \field{year}{2014}
+  \endentry
+
+  \entry{10.1145/1242073.1242200}{inproceedings}{}{}
+    \name{author}{1}{}{%
+      {{hash=RS}{%
+         family={Raghavachary},
+         familyi={R\bibinitperiod},
+         given={Saty},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{visual simulation, natural phenomena}
+    \strng{namehash}{RS1}
+    \strng{fullhash}{RS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    This sketch describes a way of generating realistic cracks and fragments to visually simulate brittle fracture on polygonal surfaces.%
+    }
+    \field{booktitle}{ACM SIGGRAPH 2002 Conference Abstracts and Applications}
+    \verb{doi}
+    \verb 10.1145/1242073.1242200
+    \endverb
+    \field{isbn}{1581135254}
+    \field{pages}{187}
+    \field{series}{SIGGRAPH '02}
+    \field{title}{Fracture generation on polygonal meshes using Voronoi polygons}
+    \verb{url}
+    \verb https://doi.org/10.1145/1242073.1242200
+    \endverb
+    \list{location}{1}{%
+      {San Antonio, Texas}%
+    }
+    \field{year}{2002}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
+
+  \entry{10.1145/3641816}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gain},
+         familyi={G\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu\'{e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=AO}{%
+         family={Argudo},
+         familyi={A\bibinitperiod},
+         given={Oscar},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{Ecosystem simulation, natural phenomena}
+    \strng{namehash}{PA+1}
+    \strng{fullhash}{PAGJGEAOGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    The creation of truly believable simulated natural environments remains an unsolved problem in Computer Graphics. This is, in part, due to a lack of visual variety. In nature, apart from variation due to abiotic and biotic growth factors, a significant role is played by disturbance events, such as fires, windstorms, disease, and death and decay processes, which give rise to both standing dead trees (snags) and downed woody debris (logs). For instance, snags constitute on average 10\% of unmanaged forests by basal area, and logs account for 2 (frac{1}{2}) times this quantity.While previous systems have incorporated individual elements of disturbance (e.g., forest fires) and decay (e.g., the formation of humus), there has been no unifying treatment, perhaps because of the challenge of matching simulation results with generated geometric models.In this paper, we present a framework that combines an ecosystem simulation, which explicitly incorporates disturbance events and decay processes, with a model realization process, which balances the uniqueness arising from life history with the need for instancing due to memory constraints. We tested our hypothesis concerning the visual impact of disturbance and decay with a two-alternative forced-choice experiment (n = 116). Our findings are that the presence of dead wood in various forms, as snags or logs, significantly improves the believability of natural scenes, while, surprisingly, general variation in the number of model instances, with up to 8 models per species, and a focus on disturbance events, does not.%
+    }
+    \verb{doi}
+    \verb 10.1145/3641816
+    \endverb
+    \field{issn}{0730-0301}
+    \field{number}{2}
+    \field{title}{DeadWood: Including Disturbance and Decay in the Depiction of Digital Nature}
+    \verb{url}
+    \verb https://doi.org/10.1145/3641816
+    \endverb
+    \field{volume}{43}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Graph.}
+    \field{month}{02}
+    \field{year}{2024}
+  \endentry
+
+  \entry{10.1145/3721238.3730745}{inproceedings}{}{}
+    \name{author}{6}{}{%
+      {{hash=LB}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Bosheng},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SN}{%
+         family={Schwarz},
+         familyi={S\bibinitperiod},
+         given={Nikolas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=PW}{%
+         family={Palubicki},
+         familyi={P\bibinitperiod},
+         given={Wojtek},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=PS}{%
+         family={Pirk},
+         familyi={P\bibinitperiod},
+         given={S\"{o}ren},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MDL}{%
+         family={Michels},
+         familyi={M\bibinitperiod},
+         given={Dominik\bibnamedelima L.},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{Geometric Modeling, Tree Models, Strands, Interaction}
+    \strng{namehash}{LB+1}
+    \strng{fullhash}{LBSNPWPSMDLBB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We propose a novel approach for the computational modeling of lignified tissues, such as those found in tree branches and timber. We leverage a state-of-the-art strand-based representation for tree form, which we extend to describe biophysical processes at short and long time scales. Simulations at short time scales enable us to model different breaking patterns due to branch bending, twisting, and breaking. On long timescales, our method enables the simulation of realistic branch shapes under the influence of plausible biophysical processes, such as the development of compression and tension wood. We specifically focus on computationally fast simulations of woody material, enabling the interactive exploration of branches and wood breaking. By leveraging Cosserat rod physics, our method enables the generation of a wide variety of breaking patterns. We showcase the capabilities of our method by performing and visualizing numerous experiments.%
+    }
+    \field{booktitle}{Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers}
+    \verb{doi}
+    \verb 10.1145/3721238.3730745
+    \endverb
+    \field{isbn}{9798400715402}
+    \field{series}{SIGGRAPH Conference Papers '25}
+    \field{title}{Stressful Tree Modeling: Breaking Branches with Strands}
+    \verb{url}
+    \verb https://doi.org/10.1145/3721238.3730745
+    \endverb
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{year}{2025}
+  \endentry
+
+  \entry{YANG_SCHWARZ_2026}{misc}{}{}
+    \name{author}{2}{}{%
+      {{hash=YZ}{%
+         family={YANG},
+         familyi={Y\bibinitperiod},
+         given={ZHANYU},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=SNA}{%
+         family={SCHWARZ},
+         familyi={S\bibinitperiod},
+         given={NIKOLAS\bibnamedelima A.},
+         giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YZSNA1}
+    \strng{fullhash}{YZSNA1}
+    \field{labelnamesource}{author}
+    \verb{url}
+    \verb https://jango6324.github.io/woodstock/
+    \endverb
+    \field{journaltitle}{Woodstock: Interactive modeling of fungal wood decay}
+    \field{year}{2026}
+  \endentry
+
+  \entry{10.1145/3731201}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=YZ}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Zhanyu},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=JA}{%
+         family={Jain},
+         familyi={J\bibinitperiod},
+         given={Aryamaan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CG}{%
+         family={Cordonnier},
+         familyi={C\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CMP}{%
+         family={Cani},
+         familyi={C\bibinitperiod},
+         given={Marie-Paule},
+         giveni={M\bibinithyphendelim P\bibinitperiod},
+      }}%
+      {{hash=WZ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Zhaopeng},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{physical simulation of natural phenomena}
+    \strng{namehash}{YZ+1}
+    \strng{fullhash}{YZJACGCMPWZBB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We introduce Arenite, a novel physics-based approach for modeling sandstone structures. The key insight of our work is that simulating a combination of stress and multi-factor erosion enables the generation of a wide variety of sandstone structures observed in nature. We isolate the key shape-forming phenomena: multi-physics fabric interlocking, wind and fluvial erosion, and particle-based deposition processes. Complex 3D structures such as arches, alcoves, hoodoos, or buttes can be achieved by creating simple 3D structures with user-painted erodable areas and vegetation and running the simulation. We demonstrate the algorithm on a wide variety of structures, and our GPU-based implementation achieves the simulation in less than 5 minutes on a desktop computer for our most complex example.%
+    }
+    \verb{doi}
+    \verb 10.1145/3731201
+    \endverb
+    \field{issn}{0730-0301}
+    \field{number}{4}
+    \field{title}{Arenite: A Physics-based Sandstone Simulator}
+    \verb{url}
+    \verb https://doi.org/10.1145/3731201
+    \endverb
+    \field{volume}{44}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Graph.}
+    \field{month}{07}
+    \field{year}{2025}
+  \endentry
+
+  \entry{10.1145/3130800.3130804}{article}{}{}
+    \name{author}{7}{}{%
+      {{hash=GE}{%
+         family={Gu\'{e}rin},
+         familyi={G\bibinitperiod},
+         given={\'{E}ric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DJ}{%
+         family={Digne},
+         familyi={D\bibinitperiod},
+         given={Julie},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={\'{E}ric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=WC}{%
+         family={Wolf},
+         familyi={W\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=MB}{%
+         family={Martinez},
+         familyi={M\bibinitperiod},
+         given={Beno\^{\i}t},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{deep learning, procedural modeling, terrain generation}
+    \strng{namehash}{GE+2}
+    \strng{fullhash}{GEDJGEPAWCBBMB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Authoring virtual terrains presents a challenge and there is a strong need for authoring tools able to create realistic terrains with simple user-inputs and with high user control. We propose an example-based authoring pipeline that uses a set of terrain synthesizers dedicated to specific tasks. Each terrain synthesizer is a Conditional Generative Adversarial Network trained by using real-world terrains and their sketched counterparts. The training sets are built automatically with a view that the terrain synthesizers learn the generation from features that are easy to sketch. During the authoring process, the artist first creates a rough sketch of the main terrain features, such as rivers, valleys and ridges, and the algorithm automatically synthesizes a terrain corresponding to the sketch using the learned features of the training samples. Moreover, an erosion synthesizer can also generate terrain evolution by erosion at a very low computational cost. Our framework allows for an easy terrain authoring and provides a high level of realism for a minimum sketch cost. We show various examples of terrain synthesis created by experienced as well as inexperienced users who are able to design a vast variety of complex terrains in a very short time.%
+    }
+    \verb{doi}
+    \verb 10.1145/3130800.3130804
+    \endverb
+    \field{issn}{0730-0301}
+    \field{number}{6}
+    \field{title}{Interactive example-based terrain authoring with conditional generative adversarial networks}
+    \verb{url}
+    \verb https://doi.org/10.1145/3130800.3130804
+    \endverb
+    \field{volume}{36}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Graph.}
+    \field{month}{11}
+    \field{year}{2017}
+  \endentry
+
+  \entry{https://doi.org/10.1111/cgf.14992}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=GC}{%
+         family={Grenier},
+         familyi={G\bibinitperiod},
+         given={C.},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=G�}{%
+         family={Guérin},
+         familyi={G\bibinitperiod},
+         given={É.},
+         giveni={�\bibinitperiod},
+      }}%
+      {{hash=G�}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={É.},
+         giveni={�\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Sauvage},
+         familyi={S\bibinitperiod},
+         given={B.},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \keyw{modelling, natural phenomena, geometric modelling, rendering, real-time rendering}
+    \strng{namehash}{GC+1}
+    \strng{fullhash}{GCG�G�SB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Abstract Assisting the authoring of virtual terrains is a perennial challenge in the creation of convincing synthetic landscapes. Particularly, there is a need for augmenting artist-controlled low-resolution models with consistent relief details. We present a structured noise that procedurally enhances terrains in real time by adding spatially varying erosion patterns. The patterns can be cascaded, i.e. narrow ones are nested into large ones. Our model builds upon the Phasor noise, which we adapt to the specific characteristics of terrains (water flow, slope orientation). Relief details correspond to the underlying terrain characteristics and align with the slope to preserve the coherence of generated landforms. Moreover, our model allows for artist control, providing a palette of control maps, and can be efficiently implemented in graphics hardware, thus allowing for real-time synthesis and rendering, therefore permitting effective and intuitive authoring.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1111/cgf.14992
+    \endverb
+    \verb{eprint}
+    \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14992
+    \endverb
+    \field{number}{1}
+    \field{pages}{e14992}
+    \field{title}{Real-time Terrain Enhancement with Controlled Procedural Patterns}
+    \verb{url}
+    \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14992
+    \endverb
+    \field{volume}{43}
+    \field{journaltitle}{Computer Graphics Forum}
+    \field{year}{2024}
+  \endentry
+
+  \entry{https://doi.org/10.1111/cgf.13345}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=AO}{%
+         family={Argudo},
+         familyi={A\bibinitperiod},
+         given={O.},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Chica},
+         familyi={C\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AC}{%
+         family={Andujar},
+         familyi={A\bibinitperiod},
+         given={C.},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \keyw{CCS Concepts, •Computing methodologies → Image processing, Shape modeling}
+    \strng{namehash}{AOCAAC1}
+    \strng{fullhash}{AOCAAC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Abstract Despite recent advances in surveying techniques, publicly available Digital Elevation Models (DEMs) of terrains are low-resolution except for selected places on Earth. In this paper we present a new method to turn low-resolution DEMs into plausible and faithful high-resolution terrains. Unlike other approaches for terrain synthesis/amplification (fractal noise, hydraulic and thermal erosion, multi-resolution dictionaries), we benefit from high-resolution aerial images to produce highly-detailed DEMs mimicking the features of the real terrain. We explore different architectures for Fully Convolutional Neural Networks to learn upsampling patterns for DEMs from detailed training sets (high-resolution DEMs and orthophotos), yielding up to one order of magnitude more resolution. Our comparative results show that our method outperforms competing data amplification approaches in terms of elevation accuracy and terrain plausibility.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1111/cgf.13345
+    \endverb
+    \verb{eprint}
+    \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.13345
+    \endverb
+    \field{number}{2}
+    \field{pages}{101\bibrangedash 110}
+    \field{title}{Terrain Super-resolution through Aerial Imagery and Fully Convolutional Networks}
+    \verb{url}
+    \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.13345
+    \endverb
+    \field{volume}{37}
+    \field{journaltitle}{Computer Graphics Forum}
+    \field{year}{2018}
+  \endentry
+
+  \entry{mateos_arlanzon_2023}{thesis}{}{}
+    \name{author}{1}{}{%
+      {{hash=MAD}{%
+         family={Mateos\bibnamedelima Arlanzón},
+         familyi={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Diego},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Graphics; 3D Modelling; Computer Simulation; Rocky Terrains; Mechanical Weathering; Gràfics per ordinador; Modelatge 3D; Simulació per ordinador; Terrenys Pedregosos; Erosió Mecànica}
+    \strng{namehash}{MAD1}
+    \strng{fullhash}{MAD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Simulation of mechanical weathering for modeling rocky terrains}
+    \verb{url}
+    \verb https://hdl.handle.net/2117/403778
+    \endverb
+    \list{institution}{1}{%
+      {UPC, Facultat d'Informàtica de Barcelona, Departament de Ciències de la Computació}%
+    }
+    \field{type}{Projecte Final de Màster Oficial}
+    \field{month}{10}
+    \field{year}{2023}
+  \endentry
+
   \entry{WILSON2012107}{article}{}{}
     \name{author}{1}{}{%
       {{hash=WJP}{%
@@ -273,74 +1084,6 @@
     \warn{\item Can't use 'location' + 'address'}
   \endentry
 
-  \entry{10.1145/3731201}{article}{}{}
-    \name{author}{6}{}{%
-      {{hash=YZ}{%
-         family={Yang},
-         familyi={Y\bibinitperiod},
-         given={Zhanyu},
-         giveni={Z\bibinitperiod},
-      }}%
-      {{hash=JA}{%
-         family={Jain},
-         familyi={J\bibinitperiod},
-         given={Aryamaan},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=CG}{%
-         family={Cordonnier},
-         familyi={C\bibinitperiod},
-         given={Guillaume},
-         giveni={G\bibinitperiod},
-      }}%
-      {{hash=CMP}{%
-         family={Cani},
-         familyi={C\bibinitperiod},
-         given={Marie-Paule},
-         giveni={M\bibinithyphendelim P\bibinitperiod},
-      }}%
-      {{hash=WZ}{%
-         family={Wang},
-         familyi={W\bibinitperiod},
-         given={Zhaopeng},
-         giveni={Z\bibinitperiod},
-      }}%
-      {{hash=BB}{%
-         family={Benes},
-         familyi={B\bibinitperiod},
-         given={Bedrich},
-         giveni={B\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Association for Computing Machinery}%
-    }
-    \keyw{physical simulation of natural phenomena}
-    \strng{namehash}{YZ+1}
-    \strng{fullhash}{YZJACGCMPWZBB1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{abstract}{%
-    We introduce Arenite, a novel physics-based approach for modeling sandstone structures. The key insight of our work is that simulating a combination of stress and multi-factor erosion enables the generation of a wide variety of sandstone structures observed in nature. We isolate the key shape-forming phenomena: multi-physics fabric interlocking, wind and fluvial erosion, and particle-based deposition processes. Complex 3D structures such as arches, alcoves, hoodoos, or buttes can be achieved by creating simple 3D structures with user-painted erodable areas and vegetation and running the simulation. We demonstrate the algorithm on a wide variety of structures, and our GPU-based implementation achieves the simulation in less than 5 minutes on a desktop computer for our most complex example.%
-    }
-    \verb{doi}
-    \verb 10.1145/3731201
-    \endverb
-    \field{issn}{0730-0301}
-    \field{number}{4}
-    \field{title}{Arenite: A Physics-based Sandstone Simulator}
-    \verb{url}
-    \verb https://doi.org/10.1145/3731201
-    \endverb
-    \field{volume}{44}
-    \list{location}{1}{%
-      {New York, NY, USA}%
-    }
-    \field{journaltitle}{ACM Trans. Graph.}
-    \field{month}{07}
-    \field{year}{2025}
-  \endentry
-
   \entry{natali2013modeling}{inproceedings}{}{}
     \name{author}{5}{}{%
       {{hash=NM}{%
@@ -382,6 +1125,51 @@
     \field{pages}{155\bibrangedash 173}
     \field{title}{Modeling Terrains and Subsurface Geology.}
     \field{year}{2013}
+  \endentry
+
+  \entry{10.1145/378456.378522}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=TD}{%
+         family={Terzopoulos},
+         familyi={T\bibinitperiod},
+         given={Demetri},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=FK}{%
+         family={Fleischer},
+         familyi={F\bibinitperiod},
+         given={Kurt},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{simulation, modeling, elasticity, dynamics, deformation, animation}
+    \strng{namehash}{TDFK1}
+    \strng{fullhash}{TDFK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    We continue our development of physically-based models for animating nonrigid objects in simulated physical environments. Our prior work treats the special case of objects that undergo perfectly elastic deformations. Real materials, however, exhibit a rich variety of inelastic phenomena. For instance, objects may restore themselves to their natural shapes slowly, or perhaps only partially upon removal of forces that cause deformation. Moreover, the deformation may depend on the history of applied forces. The present paper proposes inelastically deformable models for use in computer graphics animation. These dynamic models tractably simulate three canonical inelastic behaviors---viscoelasticity, plasticity, and fracture. Viscous and plastic processes within the models evolve a reference component, which describes the natural shape, according to yield and creep relationships that depend on applied force and/or instantaneous deformation. Simple fracture mechanics result from internal processes that introduce local discontinuities as a function of the instantaneous deformations measured through the model. We apply our inelastically deformable models to achieve novel computer graphics effects.%
+    }
+    \verb{doi}
+    \verb 10.1145/378456.378522
+    \endverb
+    \field{issn}{0097-8930}
+    \field{number}{4}
+    \field{pages}{269–278}
+    \field{title}{Modeling inelastic deformation: viscolelasticity, plasticity, fracture}
+    \verb{url}
+    \verb https://doi.org/10.1145/378456.378522
+    \endverb
+    \field{volume}{22}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{SIGGRAPH Comput. Graph.}
+    \field{month}{06}
+    \field{year}{1988}
   \endentry
 \enddatalist
 \endinput

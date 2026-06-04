@@ -2,35 +2,42 @@
 \contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Contributions}{6}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Set-up and tools}{7}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Previous work and Preliminaries}{8}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Preliminaries}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Terrains and Landscapes}{8}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}General weathering effects}{8}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Freeze-thaw cycle}{8}{subsection.2.1.2}%
 \contentsline {section}{\numberline {2.2}Terrain Representation and Modeling}{8}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Terrain Representations}{8}{subsection.2.2.1}%
 \contentsline {subsubsection}{Elevation Models}{8}{section*.4}%
-\contentsline {subsubsection}{Volumetric Models}{10}{section*.6}%
-\contentsline {subsection}{\numberline {2.2.2}Terrain Synthesis}{10}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Model Decompositions}{10}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Voxelization and Space Decompositions}{10}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Tetrahedralization}{10}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Voronoi Decomposition}{10}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Terrain Weathering}{10}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Physical Models for Erosion}{10}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Dynamic simulations}{10}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Previous Simulator}{10}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Model Decomposition}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Initial Method}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Problems and Solutions}{11}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Final Method}{11}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Extensions}{11}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Erosion}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Initial Method}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Multi-resolution}{12}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Physical Model}{12}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Extensions}{12}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Implementation}{13}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Results}{14}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusions}{15}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Future Work}{15}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Conclusions}{15}{section.7.2}%
+\contentsline {subsubsection}{Volumetric Models}{10}{section*.7}%
+\contentsline {subsection}{\numberline {2.2.2}Terrain Synthesis}{11}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Model Decompositions}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Tetrahedralization}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Voronoi Decomposition}{12}{subsection.2.3.2}%
+\contentsline {chapter}{\numberline {3}Previous Work}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Work in Applied sciences}{13}{section.3.1}%
+\contentsline {subsubsection}{Simulation of Crack propagation using eigenerosion}{13}{section*.10}%
+\contentsline {section}{\numberline {3.2}Work in Computer Graphics}{13}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Related Methods in Computer Graphics}{13}{subsection.3.2.1}%
+\contentsline {subsubsection}{Spring-Mass Systems and Brittle Fracture}{13}{section*.11}%
+\contentsline {subsubsection}{Modeling Wood Decay}{14}{section*.13}%
+\contentsline {subsection}{\numberline {3.2.2}Weathering in Computer Graphics}{14}{subsection.3.2.2}%
+\contentsline {subsubsection}{Physics-based Sandstone Simulator}{15}{section*.15}%
+\contentsline {subsubsection}{Layered representations to simulate erosion}{15}{section*.17}%
+\contentsline {subsubsection}{Machine Learning Approach}{16}{section*.19}%
+\contentsline {section}{\numberline {3.3}Base Simulator for this Project}{16}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Model Decomposition}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Initial Method}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Problems and Solutions}{18}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Final Method}{18}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Extensions}{18}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Erosion}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Initial Method}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Multi-resolution}{19}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Physical Model}{19}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Extensions}{19}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Implementation}{20}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Results}{21}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Conclusions}{22}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Future Work}{22}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Conclusions}{22}{section.8.2}%

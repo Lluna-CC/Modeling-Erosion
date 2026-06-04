@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.28)  29 MAY 2026 22:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.28)  3 JUN 2026 22:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1661,6 +1661,16 @@ Package biblatex Info: ... file 'Project.bbl' found.
  (./Project.bbl
 
 Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'Muller_2022':
+(biblatex)                - Invalid format of field 'month'.
+
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with '10.1145/1242073.1242200':
+(biblatex)                - Can't use 'location' + 'address'.
+
+
+Package biblatex Warning: BibTeX reported the following issues
 (biblatex)                with '10.1145/1294685.1294717':
 (biblatex)                - Can't use 'location' + 'address'.
 
@@ -1713,12 +1723,12 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<Title/portada.pdf, id=139, 597.23125pt x 845.1575pt>
+<Title/portada.pdf, id=143, 597.23125pt x 845.1575pt>
 File: Title/portada.pdf Graphic file (type pdf)
 <use Title/portada.pdf>
 Package pdftex.def Info: Title/portada.pdf  used on input line 79.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<Title/portada.pdf, id=141, page=1, 597.23125pt x 845.1575pt>
+<Title/portada.pdf, id=145, page=1, 597.23125pt x 845.1575pt>
 File: Title/portada.pdf Graphic file (type pdf)
 <use Title/portada.pdf, page 1>
 Package pdftex.def Info: Title/portada.pdf , page1 used on input line 79.
@@ -1756,7 +1766,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write8
 \openout8 = `Project.toc'.
 
-<Title/logo-upc.png, id=208, 1284.8pt x 224.84pt>
+<Title/logo-upc.png, id=213, 1284.8pt x 224.84pt>
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 89.
@@ -1787,62 +1797,161 @@ Chapter 2.
 [8
 
 ]
-<Background/aneto.png, id=262, 593.21625pt x 599.23875pt>
+<Background/aneto.png, id=304, 593.21625pt x 599.23875pt>
 File: Background/aneto.png Graphic file (type png)
 <use Background/aneto.png>
-Package pdftex.def Info: Background/aneto.png  used on input line 101.
-(pdftex.def)             Requested size: 113.81102pt x 114.96292pt.
-<Background/aneto-app.png, id=263, 1044.90375pt x 869.2475pt>
+Package pdftex.def Info: Background/aneto.png  used on input line 100.
+(pdftex.def)             Requested size: 127.46779pt x 128.76067pt.
+<Background/aneto-app.png, id=305, 1044.90375pt x 869.2475pt>
 File: Background/aneto-app.png Graphic file (type png)
 <use Background/aneto-app.png>
-Package pdftex.def Info: Background/aneto-app.png  used on input line 104.
-(pdftex.def)             Requested size: 136.57462pt x 113.61626pt.
-)
+Package pdftex.def Info: Background/aneto-app.png  used on input line 103.
+(pdftex.def)             Requested size: 152.50983pt x 126.86664pt.
+<Background/layeredRep.png, id=307, 391.4625pt x 145.54375pt>
+File: Background/layeredRep.png Graphic file (type png)
+<use Background/layeredRep.png>
+Package pdftex.def Info: Background/layeredRep.png  used on input line 120.
+(pdftex.def)             Requested size: 254.4476pt x 94.6023pt.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
-Package pdftex.def Info: Title/logo-upc.png  used on input line 94.
+Package pdftex.def Info: Title/logo-upc.png  used on input line 145.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 176.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [10 <./Background/aneto.png (PNG copy)> <./Background/aneto-app.png> <./Background/layeredRep.png>]
+Overfull \hbox (2.1295pt too wide) in paragraph at lines 176--179
+[]\T1/cmr/bx/n/10 Procedural Gen-er-a-tion: \T1/cmr/m/n/10 Pro-ce-du-ral gen-er-a-tion meth-ods ar-ti-fi-cially gen-er-ate ter-rains from scratch
+ []
+
+<Background/tetrahedralization.png, id=336, 611.28375pt x 341.275pt>
+File: Background/tetrahedralization.png Graphic file (type png)
+<use Background/tetrahedralization.png>
+Package pdftex.def Info: Background/tetrahedralization.png  used on input line 238.
+(pdftex.def)             Requested size: 244.50917pt x 136.50757pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 249.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+[11{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+<Background/voronoiDecomp.png, id=345, 1606.0pt x 1606.0pt>
+File: Background/voronoiDecomp.png Graphic file (type png)
+<use Background/voronoiDecomp.png>
+Package pdftex.def Info: Background/voronoiDecomp.png  used on input line 261.
+(pdftex.def)             Requested size: 160.6094pt x 160.6094pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 268.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [12 <./Background/tetrahedralization.png> <./Background/voronoiDecomp.png>]
+Chapter 3.
+<Background/DragonBreak.png, id=359, 753.81625pt x 183.68625pt>
+File: Background/DragonBreak.png Graphic file (type png)
+<use Background/DragonBreak.png>
+Package pdftex.def Info: Background/DragonBreak.png  used on input line 310.
+(pdftex.def)             Requested size: 489.97476pt x 119.39462pt.
+
+Overfull \hbox (34.73065pt too wide) in paragraph at lines 310--311
+ [][] 
+ []
+
+[13
+
+]
+<Background/woodDecay.png, id=375, 465.74pt x 269.005pt>
+File: Background/woodDecay.png Graphic file (type png)
+<use Background/woodDecay.png>
+Package pdftex.def Info: Background/woodDecay.png  used on input line 338.
+(pdftex.def)             Requested size: 302.72742pt x 174.85117pt.
+
+Underfull \vbox (badness 3229) has occurred while \output is active []
+
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 355.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [14 <./Background/DragonBreak.png> <./Background/woodDecay.png>]
+<Background/SandstoneArch.png, id=388, 890.32625pt x 239.89626pt>
+File: Background/SandstoneArch.png Graphic file (type png)
+<use Background/SandstoneArch.png>
+Package pdftex.def Info: Background/SandstoneArch.png  used on input line 377.
+(pdftex.def)             Requested size: 356.12419pt x 95.95679pt.
+<Background/layeredVeg.png, id=394, 414.54875pt x 178.6675pt>
+File: Background/layeredVeg.png Graphic file (type png)
+<use Background/layeredVeg.png>
+Package pdftex.def Info: Background/layeredVeg.png  used on input line 412.
+(pdftex.def)             Requested size: 269.45349pt x 116.13249pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 425.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [15 <./Background/SandstoneArch.png>]
+<Background/erosionDL.png, id=407, 837.1275pt x 235.88126pt>
+File: Background/erosionDL.png Graphic file (type png)
+<use Background/erosionDL.png>
+Package pdftex.def Info: Background/erosionDL.png  used on input line 441.
+(pdftex.def)             Requested size: 376.70389pt x 106.14558pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 473.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [16 <./Background/layeredVeg.png> <./Background/erosionDL.png>]
+<Background/waterInfiltration.png, id=423, 674.52pt x 558.085pt>
+File: Background/waterInfiltration.png Graphic file (type png)
+<use Background/waterInfiltration.png>
+Package pdftex.def Info: Background/waterInfiltration.png  used on input line 511.
+(pdftex.def)             Requested size: 236.08554pt x 195.33267pt.
+)
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 94.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [10 <./Background/aneto.png (PNG copy)> <./Background/aneto-app.png>] (./Decomposition/decomposition.tex
-Chapter 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--12
-
- []
-
-) [11
+ [17 <./Background/waterInfiltration.png>] (./Decomposition/decomposition.tex
+Chapter 4.
+) [18
 
 ] (./Erosion/erosion.tex
-Chapter 4.
-) [12
+Chapter 5.
+) [19
 
 ] (./Results/results.tex
-Chapter 5.
-[13
+Chapter 6.
+[20
 
 ]
-Chapter 6.
-) [14
+Chapter 7.
+) [21
 
 ] (./Conclusion/Conclusion.tex
-Chapter 7.
-) [15
+Chapter 8.
+) [22
 
 ]
-Overfull \hbox (3.14078pt too wide) in paragraph at lines 105--105
-\T1/cmr/m/n/10 AFRI-GRAPH '07. Gra-ham-stown, South Africa: As-so-ci-a-tion for Com-put-ing Ma-chin-ery, 2007, 197^^U204.
+Overfull \hbox (6.18672pt too wide) in paragraph at lines 105--105
+[]\T1/cmr/m/n/10 Giuseppe Turini, Fabio Ganov-elli, and Clau-dio Mon-tani. ^^P  Sim-u-lat-ing Drilling on Tetra-he-dral Meshes.^^Q
  []
 
-[16
+[23
 
 ]
-runsystem(latexminted cleantemp  --timestamp 20260529224644 9E727FDD3AEC8274F46685441900280D)...executed safely (allowed).
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 104.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [24]
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 107.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [25]
+runsystem(latexminted cleantemp  --timestamp 20260603223319 9E727FDD3AEC8274F46685441900280D)...executed safely (allowed).
 
  (./Project.aux)
  ***********
@@ -1854,7 +1963,7 @@ L3 programming layer <2026-01-19>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Project.out' has not changed.
-(rerunfilecheck)             Checksum: 03436FD91146A1FF0C9CA0AC875B38FB;4809.
+(rerunfilecheck)             Checksum: 0F07A22EE0AD1C387E865F8F67EB721D;4979.
 
 Package biblatex Warning: Please (re)run BibTeX on the file(s):
 (biblatex)                Project
@@ -1865,18 +1974,18 @@ Package logreq Info: Writing requests to 'Project.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 52274 strings out of 469515
- 1177125 string characters out of 5470807
- 2173888 words of memory out of 5000000
- 80050 multiletter control sequences out of 15000+600000
- 640339 words of font info for 63 fonts, out of 8000000 for 9000
+ 52500 strings out of 469515
+ 1185080 string characters out of 5470807
+ 2183495 words of memory out of 5000000
+ 80232 multiletter control sequences out of 15000+600000
+ 640674 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 84i,17n,104p,1939b,2333s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,104p,1939b,3001s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on Project.pdf (16 pages, 1327624 bytes).
+Output written on Project.pdf (25 pages, 5018310 bytes).
 PDF statistics:
- 418 PDF objects out of 1000 (max. 8388607)
- 346 compressed objects within 4 object streams
- 67 named destinations out of 1000 (max. 500000)
- 307 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 633 PDF objects out of 1000 (max. 8388607)
+ 522 compressed objects within 6 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 360 words of extra memory for PDF output out of 10000 (max. 10000000)
 
