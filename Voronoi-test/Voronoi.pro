@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
 CONFIG += c++11
 CONFIG(release, release|debug):QMAKE_CXXFLAGS += -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib
 LIBS += -lvoro++
-
+INCLUDEPATH += eigen
 
 SOURCES += \
     core.cpp \
@@ -27,7 +27,8 @@ SOURCES += \
     celldecomposition.cpp \
     erosionAlgorithm.cpp \
     cellGraph.cpp \
-    multiResolutionGraph.cpp
+    multiResolutionGraph.cpp \
+    mechanicalModel.cpp
 
 
 HEADERS += \
@@ -42,7 +43,8 @@ HEADERS += \
     celldecomposition.h \
     erosionAlgorithm.h \
     cellGraph.h \
-    multiResolutionGraph.h
+    multiResolutionGraph.h \
+    mechanicalModel.h
 
 FORMS += \
     mainwindow.ui

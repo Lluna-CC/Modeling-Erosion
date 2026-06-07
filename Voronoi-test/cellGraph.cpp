@@ -1,49 +1,53 @@
 #include "cellGraph.h"
 #include<float.h>
 
-void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside) {
+void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore) {
     c.neighbors(cells[pid].neighbors);
+    cells[pid].volume = c.volume();
 
     std::vector<int> auxiliarFaces;
     c.face_vertices(auxiliarFaces);
     int i = 0;
     int f = 0;
 
-    
+    std::vector<double> aux;
+    c.vertices(x,y,z, aux);
+    cells[pid].vertices.resize(aux.size());
+    for (int i = 0; i < aux.size(); ++i) cells[pid].vertices[i] = aux[i];
+
     while (i < auxiliarFaces.size()) {
         int nV = auxiliarFaces[i];
-        voroFace face;
-        face.vertices = std::vector<unsigned int>(nV);
         int faceID = cells[pid].neighbors[f];
-        cells[pid].faceData[faceID] = face;
+        cells[pid].faceData[faceID].vertices = std::vector<unsigned int>(nV);
         
-        
+        cells[pid].faceData[faceID].face_centroid = Vector3(0,0,0);
         for (int j = 1; j <= nV; ++j) {
             cells[pid].faceData[faceID].vertices[j - 1] = auxiliarFaces[i + j];
+            cells[pid].faceData[faceID].face_centroid = cells[pid].faceData[faceID].face_centroid + 
+                                                        Vector3(cells[pid].vertices[3*auxiliarFaces[i + j]],
+                                                            cells[pid].vertices[3*auxiliarFaces[i + j] + 1],
+                                                            cells[pid].vertices[3*auxiliarFaces[i + j] + 2]);
         }
         
-        
+        cells[pid].faceData[faceID].face_centroid = cells[pid].faceData[faceID].face_centroid/nV; 
         i = i + nV + 1;
         ++f;
     }
 
     
-    
-    
-    std::vector<double> aux;
-    c.vertices(x,y,z, aux);
-
-    cells[pid].vertices.resize(aux.size());
-    for (int i = 0; i < aux.size(); ++i) cells[pid].vertices[i] = (float) aux[i]; 
     cells[pid].centroid[0] = x;
     cells[pid].centroid[1] = y;
     cells[pid].centroid[2] = z;
     if (outside) {
         cells[pid].state = AIR;
     }
+    else if (isCore) {
+        cells[pid].state = CORE;
+    }
 
     
     addLinks(c,cells[pid].faceData, pid);
+    
 }
 
 void CellGraph::setNumCells(int n) {

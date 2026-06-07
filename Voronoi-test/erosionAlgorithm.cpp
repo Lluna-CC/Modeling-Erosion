@@ -99,6 +99,11 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
         for(int i = 0; i < links[actLink].neighbors.size(); ++i) {
             int a,b; 
             std::pair<int,int> neigh = links[actLink].neighbors[i];
+            if (links[neigh].state == EXTERIOR) {
+                propagationWeight[i] = 0;
+                continue;
+            }
+
             if (neigh.first == actLink.first || neigh.first == actLink.second) {
                 a = neigh.first;
                 b = neigh.second;

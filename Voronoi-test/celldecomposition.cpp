@@ -184,8 +184,8 @@ void CellDecomposition::fullMeshDecomposition(int l) {
         
         //std::cout << "Current Mesh Iteration: " << i << std::endl;
         if (cells[i].state == AIR) continue;
-        float cellDist = minMaxDistance(cells[i].vertices);
-        if (cellDist > 0.85*boxDist) continue;
+        //float cellDist = minMaxDistance(cells[i].vertices);
+        //if (cellDist > 0.85*boxDist) continue;
 
         cellToMesh(cells[i].vertices, cells[i].faceData, cellVAOs[l][i], bufferVerts[l][i], bufferIndices[l][i], cells[i].nTriangles);
     }
@@ -287,9 +287,10 @@ void CellDecomposition::renderParticles(int l) {
         model.translate((float) cells[i].centroid[0], (float) cells[i].centroid[1], (float) cells[i].centroid[2]);
         model.scale(1.5,1.5,1.5);
 
-        //std::cout << particles[i] << " " << particles[i + 1] << " " << particles [i + 2] << std::endl;
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
-        glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
+        if(cells[i].state == AIR) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
+        else if (cells[i].state == SOLID) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 0.45f,0.09f);
+        else if (cells[i].state == CORE) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.364f, 0.247f,0.827f);
         glDrawElements(GL_TRIANGLES, sphereIndicesSize, GL_UNSIGNED_INT, 0);
     }
 

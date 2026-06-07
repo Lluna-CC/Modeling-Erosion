@@ -1,5 +1,5 @@
 #include<celldecomposition.h>
-
+#include "mechanicalModel.h"
 
 
 class ErosionAlgorithm { 

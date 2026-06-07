@@ -239,8 +239,10 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
 
     int block = 1;
     double offset = offsetScale*Norm(hf->getCellSize());
-    int zSamples = 16;
+    int zSamples = 20;
 
+    max[2] = max[2] + 4*offset;
+    min[2] = min[2] - 4*offset;
     container con(min[0],max[0], min[1],max[1], min[2] - 4*offset,max[2] + 4*offset, nx, ny, nz, false, false, false, 2);
 
     int particles = 0;
@@ -287,24 +289,26 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
     std::cout << "Triangles: " << particles << std::endl;
     //Particles under the terrain
     
+    double sizeZ = (max[2] - min[2])/zSamples;
     for (int i = 0; i < nx; ++i) {
+        double x_block = min[0] + i*sizeX - 0.5*sizeX;
         for (int j = 0; j < ny; ++j) {
-            double x_block = min[0] + i*sizeX - 0.5*sizeX;
             double y_block = min[1] + j*sizeY - 0.5*sizeY;
-            double t = hf -> Height(Vector2(x_block,y_block));
-            t = 1.0 - (max[2] - t)/(max[2] - min[2]);
             
-            int actSamples = ceil(1.0 + zSamples*t);
-            
-            for (int k = 0; k < actSamples; ++k) {
-                x = x_block + rnd()*(sizeX) - 0.5*sizeX;
-                y = y_block + rnd()*(sizeY) - 0.5*sizeY;
-                double z_max = hf -> Height(Vector2(x,y)) - block/2;
+
+
+            for (int k = 0; k < zSamples;++k) {
+                double z_block = min[2] + k*sizeZ - 0.5*sizeZ;
+                x = x_block + (rnd() - 0.5)*(sizeX);
+                y = y_block + (rnd() - 0.5)*(sizeY);
+                z = z_block + (rnd() - 0.5)*(sizeZ);
                 
-                z = min[2] - 4*offset + rnd()*(z_max - min[2] + 2*offset);
-                
+                double z_max = hf -> Height(Vector2(x,y));
+                if (z > z_max - 1.5*offset) continue;
+
                 con.put(particles,x,y,z);
                 ++particles;
+            
             }
         }
     }
@@ -315,6 +319,9 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
      
     if(!loopAll.start()) return;
     graph -> setNumCells(particles);
+
+    Vector3 centr = Vector3(min[0] + (max[0] - min[0])/2.0, min[1] + (max[1] - min[1])/2.0, min[2] + (max[2] - min[2])/3.0);
+    float range = sizeX*5.0;
     do {
         voronoicell_neighbor c;
         //std::cout << "a" << std::endl;
@@ -324,7 +331,17 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        if (cellZ <= z_max) {
+
+            
+            if (cellX > (centr[0] - range) && cellX < (centr[0] + range) &&
+                cellY > centr[1] - range && cellY < centr[1] + range &&
+                cellZ > centr[2] - range && cellZ < centr[2] + range) {
+                    graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false, true);
+                } 
+                    
+                else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        }
         else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
         
     }while (loopAll.inc()); 

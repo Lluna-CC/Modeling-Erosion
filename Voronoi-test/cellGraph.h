@@ -26,6 +26,7 @@ struct voroFace {
   std::vector<unsigned int> vertices;
   double area;
   Vector3 normal;
+  Vector3 face_centroid;
 };
 
 
@@ -37,6 +38,7 @@ struct vorocell {
   int nTriangles;
   cellState state = SOLID;
   bool isExterior = false;
+  double volume = -1;
 };
 
 struct vorolink  {
@@ -53,8 +55,9 @@ class CellGraph {
   std::vector<vorocell>& getCells() {return cells;}
   std::map<std::pair<int,int>, vorolink>& getLinks() {return links;}
   std::set<std::pair<int,int>>& getExteriorLinks() {return exteriorLinks;}
+  
 
-  void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside);
+  void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore = false);
   void setNumCells(int n);
   
   void computeBounds();

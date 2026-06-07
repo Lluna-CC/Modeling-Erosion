@@ -613,12 +613,12 @@ void MainWindow::loadToy()
     if (idx == -1) return;
     
     int ncols = 0, nrows = 0;
-    float minLat = 0, minLon = 0, cellSize = 0;
+    float minLat = 0, minLon = 0, cellSizeX = 0, cellSizeY = 0;
     switch (idx) {
         case 0:
-            ncols = 100; nrows = 20;
-            minLat = -20; minLon = -10; cellSize = 5.0;
-            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            ncols = 100; nrows = 2;
+            minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
                     hf(i, j) = i*cos(i/3.0)*cos(i/3.0);
@@ -628,9 +628,9 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 1:
-            ncols = 100; nrows = 20;
-            minLat = -20; minLon = -10; cellSize = 5.0;
-            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            ncols = 100; nrows = 2;
+            minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
                     hf(i, j) = 20.0*sin(double(i)/double(ncols) * 2*M_PI);
@@ -639,9 +639,9 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 2:
-            ncols = 100; nrows = 20;
-            minLat = -20; minLon = -10; cellSize = 5.0;
-            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            ncols = 100; nrows = 2;
+            minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
                     //GAUSSIAN
@@ -654,9 +654,9 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 3:
-            ncols = 100; nrows = 20;
-            minLat = -20; minLon = -10; cellSize = 5.0;
-            hf = HeightField(HeightField(Box2((ncols - 1) * cellSize, (nrows - 1) * cellSize), ncols, nrows));
+            ncols = 100; nrows = 2;
+            minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
                 for (int j = 0; j < nrows; j++) {
                     if (i == 0) hf(i,j) = 0;
@@ -671,13 +671,13 @@ void MainWindow::loadToy()
 
     }
     
-    CellDecomposition* cellDecomp = new CellDecomposition();
-    double theta = ui -> theta_spinbox -> value();
-    double phi = ui -> phi_spinbox -> value();
+    //CellDecomposition* cellDecomp = new CellDecomposition();
+    //double theta = ui -> theta_spinbox -> value();
+    //double phi = ui -> phi_spinbox -> value();
 
-    cellDecomp -> toyVoronoi(&hf);
+    //cellDecomp -> toyVoronoi(&hf);
 
-    widget -> setToyDecomposition(cellDecomp, theta, phi);
+    //widget -> setToyDecomposition(cellDecomp, theta, phi);
 }
 
 
