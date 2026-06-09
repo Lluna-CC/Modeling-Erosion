@@ -537,3 +537,7 @@ void TerrainWidget::setAlpha(int mode, float value) {
 void TerrainWidget::setRenderLayer(int l) {
     renderLayer = l;
 }
+
+void TerrainWidget::computeStress() {
+    eroder.computeStress();
+}

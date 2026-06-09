@@ -44,6 +44,7 @@ public slots:
     void changeAlphaLinks();
     void changeAlphaPaths();
     void changeRenderLayer();
+    void computeStress();
 
     // terrain load actions
     void loadPNG();

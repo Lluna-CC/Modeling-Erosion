@@ -2,13 +2,15 @@
 #define MECHANICALMODEL_H
 #include "cellGraph.h"
 #include <Eigen/Sparse>
+#include <Eigen/Core>
 
 class MechanicalModel {
  public:
-    MechanicalModel();
-    void initializeModel(CellGraph* graph);
+   MechanicalModel() {}
+   void initializeModel(std::vector<vorocell>& cells);
 
-    void computeEquilibra();
+   void computeEquilibra();
+   void updateLinkStresses(std::map<std::pair<int,int>, vorolink>& links); 
 
  private:
     Eigen::SparseMatrix<double> K;

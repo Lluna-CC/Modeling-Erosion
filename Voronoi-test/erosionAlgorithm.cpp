@@ -1,5 +1,3 @@
-#ifndef EROSIONALGORITHM_H
-#define EROSIONALGORITHM_H
 #include<erosionAlgorithm.h>
 #include<random>
 #include<queue>
@@ -12,6 +10,7 @@ ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel) {
 
     graph = g;
     level = workLevel;
+    model.initializeModel(g -> getCells(level));
     computeAverageArea();
     
 }
@@ -415,4 +414,9 @@ void ErosionAlgorithm::computeAverageArea() {
     k_dmg *= avg_area;
 }
 
-#endif
+void ErosionAlgorithm::computeStress() {
+    if (graph == nullptr) return;
+    model.computeEquilibra();
+    model.updateLinkStresses(graph -> getLinks(level));
+}
+

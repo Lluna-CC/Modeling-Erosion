@@ -196,6 +196,7 @@ void MainWindow::createActions()
     connect(ui->alpha_paths, SIGNAL(valueChanged(double)), this, SLOT(changeAlphaPaths()));
 
     connect(ui->layer, SIGNAL(valueChanged(int)), this, SLOT(changeRenderLayer()));
+    connect(ui -> compute_stress, SIGNAL(clicked()), this, SLOT(computeStress()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -888,4 +889,8 @@ void MainWindow::changeAlphaPaths(){
 void MainWindow::changeRenderLayer() {
     int layer = ui -> layer -> value();
     widget -> setRenderLayer(layer);
+}
+
+void MainWindow::computeStress() {
+    widget -> computeStress();
 }

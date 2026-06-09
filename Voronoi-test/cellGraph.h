@@ -45,6 +45,8 @@ struct vorolink  {
   std::vector<std::pair<int,int>> neighbors;
   linkState state = INTERIOR;
   double life = 1.0;
+  double normalStress = 0.0;
+  double shearStress = 0.0;
 };
 
 class CellGraph {

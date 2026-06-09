@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
 CONFIG += c++11
 CONFIG(release, release|debug):QMAKE_CXXFLAGS += -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib
 LIBS += -lvoro++
-INCLUDEPATH += eigen
+INCLUDEPATH += eigen pastix
 
 SOURCES += \
     core.cpp \

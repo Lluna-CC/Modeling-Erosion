@@ -37,7 +37,7 @@ public:
     void computeWaterPath(int num);
     void changeErosionDirection(double theta, double phi);
     void setRenderLayer(int l);
-
+    void computeStress();
     
 public slots:
     virtual void mousePressEvent(QMouseEvent*);

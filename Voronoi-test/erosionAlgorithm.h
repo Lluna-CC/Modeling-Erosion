@@ -1,3 +1,5 @@
+#ifndef EROSIONALGORITHM_H
+#define EROSIONALGORITHM_H
 #include<celldecomposition.h>
 #include "mechanicalModel.h"
 
@@ -14,6 +16,7 @@ class ErosionAlgorithm {
     
     void setErosionDirection(double theta, double phi);
     bool waterPath(std::set<std::pair<int,int>>& visited);
+    void computeStress();
 
     //Returns true if the model changed
     
@@ -27,6 +30,7 @@ class ErosionAlgorithm {
     void updateExternalLinks(); 
     double resistanceField(double x, double y, double z);
     void computeAverageArea();
+    
 
     std::vector<double> weights; 
     std::vector<std::pair<int,int>> keys; 
@@ -52,4 +56,7 @@ class ErosionAlgorithm {
 
     int level;
 
+    MechanicalModel model;
   };
+
+#endif

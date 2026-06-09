@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_OPENGLWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -mno-direct-extern-access -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -Wall -O2 -I/usr/local/include/voro++ -L/usr/local/lib -O2 -Wall -Wextra -mno-direct-extern-access -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -Ieigen -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I. -I/usr/lib/qt6/mkspecs/linux-g++
+INCPATH       = -I. -Ieigen -Ipastix -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I. -I/usr/lib/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -1121,7 +1121,8 @@ moc_mainwindow.cpp: mainwindow.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -1262,75 +1263,76 @@ moc_mainwindow.cpp: mainwindow.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/eigen -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/eigen -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/pastix -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_terrainwidget.cpp: terrainwidget.h \
 		core.h \
@@ -1344,7 +1346,8 @@ moc_terrainwidget.cpp: terrainwidget.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -1485,75 +1488,76 @@ moc_terrainwidget.cpp: terrainwidget.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
-	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/eigen -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
+	/usr/lib/qt6/moc $(DEFINES) --include /home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/eigen -I/home/lluna/Documents/uni/Modeling-Erosion/Voronoi-test/pastix -I/usr/include/qt6 -I/usr/include/qt6/QtOpenGLWidgets -I/usr/include/qt6/QtOpenGL -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include terrainwidget.h -o moc_terrainwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1645,7 +1649,8 @@ main.o: main.cpp mainwindow.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -1786,72 +1791,73 @@ main.o: main.cpp mainwindow.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
@@ -1867,7 +1873,8 @@ mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -2008,72 +2015,73 @@ mainwindow-draw-metrics.o: mainwindow-draw-metrics.cpp mainwindow.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow-draw-metrics.o mainwindow-draw-metrics.cpp
 
@@ -2090,7 +2098,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -2231,72 +2240,73 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
@@ -2316,7 +2326,8 @@ terrainwidget.o: terrainwidget.cpp terrainwidget.h \
 		heightfieldWall.h \
 		erosionAlgorithm.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -2457,72 +2468,73 @@ terrainwidget.o: terrainwidget.cpp terrainwidget.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainwidget.o terrainwidget.cpp
 
 voronoi.o: voronoi.cpp voronoi.h \
@@ -2563,7 +2575,8 @@ erosionAlgorithm.o: erosionAlgorithm.cpp erosionAlgorithm.h \
 		scalarfield.h \
 		integerfield.h \
 		mechanicalModel.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -2704,72 +2717,73 @@ erosionAlgorithm.o: erosionAlgorithm.cpp erosionAlgorithm.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o erosionAlgorithm.o erosionAlgorithm.cpp
 
 cellGraph.o: cellGraph.cpp cellGraph.h \
@@ -2789,7 +2803,8 @@ multiResolutionGraph.o: multiResolutionGraph.cpp multiResolutionGraph.h \
 mechanicalModel.o: mechanicalModel.cpp mechanicalModel.h \
 		cellGraph.h \
 		core.h \
-		eigen/Eigen/Dense \
+		eigen/Eigen/Sparse \
+		eigen/Eigen/SparseCore \
 		eigen/Eigen/Core \
 		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
 		eigen/Eigen/src/Core/util/Macros.h \
@@ -2930,72 +2945,75 @@ mechanicalModel.o: mechanicalModel.cpp mechanicalModel.h \
 		eigen/Eigen/src/Core/Assign_MKL.h \
 		eigen/Eigen/src/Core/GlobalFunctions.h \
 		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		eigen/Eigen/LU \
-		eigen/Eigen/src/misc/Kernel.h \
-		eigen/Eigen/src/misc/Image.h \
-		eigen/Eigen/src/LU/FullPivLU.h \
-		eigen/Eigen/src/LU/PartialPivLU.h \
-		eigen/Eigen/src/misc/lapacke.h \
-		eigen/Eigen/src/misc/lapacke_mangling.h \
-		eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		eigen/Eigen/src/LU/Determinant.h \
-		eigen/Eigen/src/LU/InverseImpl.h \
-		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
-		eigen/Eigen/Cholesky \
-		eigen/Eigen/Jacobi \
-		eigen/Eigen/src/Jacobi/Jacobi.h \
-		eigen/Eigen/src/Cholesky/LLT.h \
-		eigen/Eigen/src/Cholesky/LDLT.h \
-		eigen/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		eigen/Eigen/QR \
-		eigen/Eigen/Householder \
-		eigen/Eigen/src/Householder/Householder.h \
-		eigen/Eigen/src/Householder/HouseholderSequence.h \
-		eigen/Eigen/src/Householder/BlockHouseholder.h \
-		eigen/Eigen/src/QR/HouseholderQR.h \
-		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
-		eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		eigen/Eigen/SVD \
-		eigen/Eigen/src/misc/RealSvd2x2.h \
-		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
-		eigen/Eigen/src/SVD/SVDBase.h \
-		eigen/Eigen/src/SVD/JacobiSVD.h \
-		eigen/Eigen/src/SVD/BDCSVD.h \
-		eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		eigen/Eigen/Geometry \
-		eigen/Eigen/src/Geometry/OrthoMethods.h \
-		eigen/Eigen/src/Geometry/EulerAngles.h \
-		eigen/Eigen/src/Geometry/Homogeneous.h \
-		eigen/Eigen/src/Geometry/RotationBase.h \
-		eigen/Eigen/src/Geometry/Rotation2D.h \
-		eigen/Eigen/src/Geometry/Quaternion.h \
-		eigen/Eigen/src/Geometry/AngleAxis.h \
-		eigen/Eigen/src/Geometry/Transform.h \
-		eigen/Eigen/src/Geometry/Translation.h \
-		eigen/Eigen/src/Geometry/Scaling.h \
-		eigen/Eigen/src/Geometry/Hyperplane.h \
-		eigen/Eigen/src/Geometry/ParametrizedLine.h \
-		eigen/Eigen/src/Geometry/AlignedBox.h \
-		eigen/Eigen/src/Geometry/Umeyama.h \
-		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		eigen/Eigen/Eigenvalues \
-		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur.h \
-		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
-		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
-		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/RealQZ.h \
-		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
-		eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
-		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h
+		eigen/Eigen/src/SparseCore/SparseUtil.h \
+		eigen/Eigen/src/SparseCore/SparseMatrixBase.h \
+		eigen/Eigen/src/SparseCore/SparseAssign.h \
+		eigen/Eigen/src/SparseCore/CompressedStorage.h \
+		eigen/Eigen/src/SparseCore/AmbiVector.h \
+		eigen/Eigen/src/SparseCore/SparseCompressedBase.h \
+		eigen/Eigen/src/SparseCore/SparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseMap.h \
+		eigen/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		eigen/Eigen/src/SparseCore/SparseVector.h \
+		eigen/Eigen/src/SparseCore/SparseRef.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		eigen/Eigen/src/SparseCore/SparseTranspose.h \
+		eigen/Eigen/src/SparseCore/SparseBlock.h \
+		eigen/Eigen/src/SparseCore/SparseDot.h \
+		eigen/Eigen/src/SparseCore/SparseRedux.h \
+		eigen/Eigen/src/SparseCore/SparseView.h \
+		eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		eigen/Eigen/src/SparseCore/SparseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseDenseProduct.h \
+		eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		eigen/Eigen/src/SparseCore/SparseTriangularView.h \
+		eigen/Eigen/src/SparseCore/TriangularSolver.h \
+		eigen/Eigen/src/SparseCore/SparsePermutation.h \
+		eigen/Eigen/src/SparseCore/SparseFuzzy.h \
+		eigen/Eigen/src/SparseCore/SparseSolverBase.h \
+		eigen/Eigen/OrderingMethods \
+		eigen/Eigen/src/OrderingMethods/Amd.h \
+		eigen/Eigen/src/Core/util/NonMPL2.h \
+		eigen/Eigen/src/OrderingMethods/Ordering.h \
+		eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		eigen/Eigen/SparseCholesky \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		eigen/Eigen/SparseLU \
+		eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Structs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		eigen/Eigen/src/SparseLU/SparseLUImpl.h \
+		eigen/Eigen/src/SparseCore/SparseColEtree.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Memory.h \
+		eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		eigen/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		eigen/Eigen/src/SparseLU/SparseLU_Utils.h \
+		eigen/Eigen/src/SparseLU/SparseLU.h \
+		eigen/Eigen/SparseQR \
+		eigen/Eigen/src/SparseQR/SparseQR.h \
+		eigen/Eigen/IterativeLinearSolvers \
+		eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+		eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+		eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
+		eigen/Eigen/PaStiXSupport \
+		eigen/Eigen/src/PaStiXSupport/PaStiXSupport.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mechanicalModel.o mechanicalModel.cpp
 
 qrc_resources.o: qrc_resources.cpp 
