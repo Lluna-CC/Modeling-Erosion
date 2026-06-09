@@ -39,13 +39,17 @@ formal way, a terrain is represented by a function $h: \mathbb{R}^2
 can easily extract the slope at one point $s(x,y)$ by using the norm of 
 the gradient:
 
-$$s(x,y) = \left \lVert \nabla h(x,y) \right \rVert = \left \lVert(\frac{\partial h}{\partial x}, \frac{\partial h}{\partial y}) \right \rVert$$
+\begin{equation}
+s(x,y) = \left \lVert \nabla h(x,y) \right \rVert = \left \lVert(\frac{\partial h}{\partial x}, \frac{\partial h}{\partial y}) \right \rVert    
+\end{equation}
 
 And from the gradient (projected to $\mathbb{R}^3$) we can easily obtain 
 the normal at one point $n(x,y)$:
 
-$$n(x,y) = \frac{(-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)}
-{\left \lVert (-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)\right \rVert }$$
+\begin{equation}
+n(x,y) = \frac{(-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)}
+{\left \lVert (-\frac{\partial h}{\partial x}, -\frac{\partial h}{\partial y}, 1)\right \rVert }
+\end{equation}
 
 With the height, normal and slope we have all that we need for a basic 
 representation of a terrain. Of course, as we are using a bivariate function
@@ -167,6 +171,36 @@ would produce more natural results in a more efficient manner. The main
 concepts of the decomposition that we have chosen will be explained on 
 section \ref{voronoiTheory}.
 
+\subsubsection{Implicit Surfaces}
+
+From a field function $f: \mathbb{R}^3 -> \mathbb{R}$ over the domain $\Omega$
+of the terrain you can implicity define a surface the following way:
+
+\begin{equation}
+\mathcal{S} = \{p \in \mathbb{R}^3 | f(p) = 0\}
+\end{equation}
+
+That is, your sourface would be the set of all points which map to 0 in your
+scalar field. Going from a heightfield $h$ to an implicit sourface is really
+straight-forward (although the opposite is not), you just need to define 
+field $f$ as $f(p) = h(p_{xy}) - p_z$, from that you can go to a usual 
+volumetric representation, defining $ \mu$ as $\mu(p) = 1$ if $f(p) < 0$
+and $\mu(p) = 0$ otherwise  (meaning the material will be rock if 
+and only if the function $f$ is negative) for example. 
+
+\vspace{10pt}
+
+Scalar fields defined from elevation functions are a type of distance fields: 
+for every point of the 3D space the field represents the vertical distance 
+to the surface, being negative if the point is inside and positive otherwise.
+You can also use other distance fields to define surfaces (with any definition of distance 
+that fits your situation) and you could easily transfom those distance fields 
+into standard volumetric models by asigning different distances to different 
+materials.
+
+\vspace{10pt}
+
+
 \subsection{Terrain Synthesis}
 
 Terrain generation techniques can be divided in three main groups (although
@@ -243,10 +277,21 @@ shapes, which better represents the shapes we can observe in nature.
 \subsection{Voronoi Decomposition} \label{voronoiTheory}
 Given a set of sample points, a voronoi decomposition is a partition of the space into 
 multiple regions, where every region is defined by the set of all points 
-that are closer to a given sample than any other sample. the boundary 
-of every region (or cell), is given by the plane where every point of it
-is at the same distance of two sample points.
+that are closer to a given sample than any other sample. In a more formal way,
+given a set of centroids $C = \{c_1,c_2 \hdots c_n\}$, the set of regions defined 
+by those centroids $\mathbf{R} = \{R_1,R_2, \hdots R_n\}$ is defined as follows:
 
+\begin{equation}
+R_i = \{p \in \Omega | \forall c_j \in C, \; \;  d(p, c_i) \leq d(p, c_j)\}
+\end{equation}
+
+Where $\Omega \subseteq \mathbb{R}^3$ is the domain we are dealing with 
+(In our case it will be the volume of the model we are subdividing), $c_i$ 
+is the centroid of region $R_i$ and function $d$ represents the euclidean 
+distance. Notice that a point might lie in more than a region, when 
+the distance from that point to multiple centroids is exactly the same. Points
+that lie on two regions create a plane defining the boundary between those 
+two regions.
 \vspace{10pt}
 
 In this thesis we decided to use voronoi cells for multiple reasons. First,
@@ -345,24 +390,39 @@ but the topic has interesting parallels.
 Here we will show a summary of methods for erosion simulation in 
 the literature.
 
-\subsubsection{Physics-based Sandstone Simulator}
+\subsubsection{Rock Erosion Simulation with Volumetric Models}
 
-A recent approach to rock erosion was presented by \cite{10.1145/3731201}. The 
+This section of the literature is the colsest to our line of work, as 
+we are approaching the problem using a decomposition of the terrain 
+into discrete cells that can be freely moved. This specific approach has 
+been tried multiple times before, although with different considerations.  
+\vspace{10pt}
+
+For example, on \cite{1214475} a similar approach to ours is 
+presented: a rocky object is decomposed into multiple voxels connected 
+by joints and then a physical simulation is run to determine the forces 
+that each block and joint has to whistand to determine which blocks 
+should be removed. In our case we also use cells and joints to represent 
+the terrain, but our project additionally deals with the effect of water 
+infiltrating the rock and destroying the joints.
+
+\vspace{10pt}
+
+Another example, and a highly recent one, was presented by \cite{10.1145/3731201}. The 
 goal of the paper was to simulate sandstone dynamics with multiple effects like
 wind and fluvial erosion. The presented method represents a sandstone structure 
 using a set of particles and then they modify the model using the following 
 equation for each particle:
 
-$$\frac{\partial b}{\partial t} = -\varepsilon (\sigma_c) (\mathcal{W} + \mathcal{F})$$
+\begin{equation}
+\frac{\partial b}{\partial t} = -\varepsilon (\sigma_c) (\mathcal{W} + \mathcal{F})
+\end{equation}
 
 Where $b$ represents the \textit{viability} which describes the 
 expectancy that the rock has not been eroded, $\varepsilon$ represents 
 the \textit{erodibility}, $\sigma_c$ is the Cauchy stress tensor, and 
 $\mathcal{W} and \mathcal{F}$ represent the wind and fluvial local 
-erosion effects. To compute that equation they divide te process into 
-four parts: First they use the Material Point Method for stress computation 
-and obtain $sigma_c$, then they compute the wind and fluvial erosion components, 
-and finally they perform computations on deposition.
+erosion effects.  
 
 \vspace{10pt}
 
@@ -379,8 +439,73 @@ situations not covered by this method.
     \label{fig:sandstoneArch}
 \end{figure}
 
+\vspace{10pt}
 
-\subsubsection{Layered representations to simulate erosion}
+
+\subsubsection{Terrain Amplification using Implicit Representations}
+
+The previous approaches use some sort of volumetric representation
+of the model (or at least attempt a volumetric decomposition) in order 
+to modify individual components of the terrain, but other representations 
+can also be used. 
+
+\vspace{10pt}
+
+Specifically, the method presented in \cite{paris:hal-02273097}
+is based on converting heighfields into implicit surface and then working
+on those implicit surfaces to generate complex 3D features such as arches 
+or caves. In order to achieve this they also present a geological model 
+to simulate different natural phenoma such as erosion and produce realistic
+results.
+
+\vspace{10pt}
+
+In order to represent the aforementioned features, the implicit funciton 
+for the terrain has to be modified, and the resulting terrain will also 
+be given as an implicit function. Implicit functions are really good
+at capturing smooth features, but representing sharp features such as 
+vertical walls of rocky cliffs is a challenging task. 
+For this reason, this method fails at capturing rough features generated 
+by the erosion process, and this is a limitation that we addressed in
+our project by using voronoi cells instead of an implicit representation.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Background/implicitErosion.png}
+    \caption{Example of erosion using implicit functions, the resulting 
+    terrain is smooth due to the nature of implicit functions.Taken from 
+    \cite{paris:hal-02273097}}
+\end{figure}
+
+\vspace{10pt}
+
+Another interesting work in the field is the one presented by \cite{paris:hal-02926218}.
+In the article they present a method to enhance smooth terrains by adding 
+realistical reproductions of rock fractures. The approch taken in the article
+consists on dividing the original terrain into blocks, whose shape and size 
+is based on the properties of the given rock, and then combining the blocks
+with some parts of the terrain to obtain a volumetric representation of the 
+fractured bedrock patterns. In this method, the resulting combined 
+model is given as an implicit surface that combines the original 
+terrain with the fractured blocks and, to achieve that, they proposed and
+applied an operator to reproduce the features of the fractured rock on 
+the implicit surface. 
+
+\vspace{10pt}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Background/implicitBlocks.png}
+    \caption{Terrain enhanced by generating fractured blocks according 
+    to the geology of the terrain. Taken from \cite{paris:hal-02926218}}
+\end{figure}
+
+To finish this section on implicit surfaces, the approach presented on 
+\cite{paris:hal-03331697} has some smilitudes with our method. PRESNET 
+KRAST NETWORKS.  
+
+\subsubsection{Erosion using Layered Representations}
 In section \ref{TerrainRep} we briefly discussed layered heightfield 
 represesentations andf how they can be used for erosion simulatio, 
 specially to simulate sediments and their interactions. 
@@ -396,8 +521,16 @@ appreciated on figure \ref{fig:layeredVeg}.
 
 \vspace{10pt}
 
-In our project we do not intend to deal with sediments and their interaction
-with the environment, as the main erosion mechansim that we study is the 
+Another approach that uses layered representations is the one presented by 
+\cite{cordonnier:hal-01517343} which tries to simulate the movement and 
+interaction of tectonic plates to generate mountains with commplex 
+folded strata. In the paper, a layered data structure was presented
+to represent the different tectonic plates and to compute the results 
+of their colisions. 
+
+\vspace{10pt}
+In our project layered representations are not suitable for our goal, 
+as the main erosion mechansim that we study is the 
 one caused by water entering the pores of the rock and breaking them 
 from inside, causing fractures and potentially separating chuncks of 
 rocks from the main structure. Layered representations can represent
@@ -405,7 +538,7 @@ different features of the landscape with much more memory efficiency
 than other approaches and can also be used for erosion simulations, 
 but they have limitations that make them not appropiate for certain 
 types of erosion simulation, specially those that consider damage done 
-on all the terrain and not just on the outer layers. 
+over all the terrain and not just the interaction of different layers. 
 
 \begin{figure}
     \centering
@@ -416,12 +549,17 @@ on all the terrain and not just on the outer layers.
     \label{fig:layeredVeg}
 \end{figure}
 
+
 \subsubsection{Machine Learning Approach}
-In the field of terrain erosion there have also been approaches that use 
-machine and deep learning to approximate the effect of erosion on a terrain 
-and improve the realism of the landscape. In our work we do not use any of
-these processes, so these methods are a little bit far of our proposed solution. 
-Despite that, there are interesting solutions using this approach
+In the field of terrain modeling there have also been approaches that use 
+machine and deep learning to improve the realism of the landscape and add 
+complex details. In these types of methods, the goal is usually to add 
+details to the terrain using machine learning models that are trained on 
+real terrains or other suitable synthetic terrains. As other example
+terrains are used to train the models, 
+erosion features can implicitly (and sometimes explicitly)
+be generated. These methods are a little bit far from our proposed solution 
+but, despite that, there are interesting techniques using this approach.
 
 
 \vspace{10pt}
@@ -452,7 +590,7 @@ the method presented in the previous project.
 
 \vspace{10pt}
 
-In the paper, \cite{10.2312:ceig.20241139} present an approach to simulate
+In the original paper \cite{10.2312:ceig.20241139} they present an approach to simulate
 terrain erosion that can be divided into two main parts: first they divide 
 the terrain into independent cells conected by \textit{links} between 
 neighboring pieces, and, then, they apply an erosion algorithm to degrade 
@@ -464,11 +602,11 @@ decomposed into voronoi cells.
 \vspace{10pt}
 
 To perform the decomposition of the terrain into cells they sampled multiple
-points of the model and then generated a voronoi tesellation. In our project
-we still use the voronoi tesellation to generate the cell graph, but we 
+points of the model and then generated a voronoi tessellation. In our project
+we still use the voronoi tessellation to generate the cell graph, but we 
 modified the sampling to obtain better results. The original method used
-boolean operations between the voronoi tesselation and the original model so
-that the tesellation would fit the base terrain, but we tried to improve 
+boolean operations between the voronoi tessellation and the original model so
+that the tessellation would fit the base terrain, but we tried to improve 
 the decomposition so it could better fit the terrain without extra operations.
 
 
@@ -480,7 +618,7 @@ those stress values once a link has been broken. This extension of the
 algorithm now modifies the state of the system after a fracture, instead 
 of just modifying the state of one link, which can produce an effect called
 crack propagation. The addition of this mechanical model makes the method 
-more based in real natural processes and it improves its realism.
+more based in natural and physical processes and it improves its realism.
 
 \vspace{10pt}
 
@@ -488,14 +626,17 @@ Additionally, we also experimented with multi-resolution decompositions in
 order to improve the efficiency of the simulation without compromising too
 much on its quality. The algorithm can be applied in a less granular 
 decomposition and then we can modify the more granular one according to the 
-changes on the higher level.
+changes on the simplified level.
 
 \vspace{10pt}
 
-Furthermore, this thesis also changes a lot the use tools and the testing 
+Furthermore, this thesis also changes a lot the used tools and the testing 
 framework. The original project implemented a blender plugin to demonstrate 
 their solution, while we implemented the algorithm into a C++ OpenGL 
-application.
+application. Moreover, we have also changed the models we use for 
+our application: On the original method, arbitrary models imported 
+on blender were used, while we decided to focus on just DEMs, which are 
+a pretty standard representation for terrains in computer graphics.
 
 \vspace{10pt}
 

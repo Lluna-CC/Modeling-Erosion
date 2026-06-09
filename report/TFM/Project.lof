@@ -5,16 +5,20 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto heightfield}}}{10}{figure.caption.5}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto model on the app}}}{10}{figure.caption.5}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Illustration of stacked height functions, figure taken from \blx@tocontentsinit {0}\cite {galin2019review}}}{10}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of a tetrahedalization, taken from \blx@tocontentsinit {0}\cite {Muller_2022}}}{12}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a voronoi decomposition of a cube, showing the particles and faces of the decomposition. Figure taken from the documentation of the C++ library Voro++ \blx@tocontentsinit {0}\cite {osti_code-54674}}}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of a tetrahedalization, taken from \blx@tocontentsinit {0}\cite {Muller_2022}}}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a voronoi decomposition of a cube, showing the particles and faces of the decomposition. Figure taken from the documentation of the C++ library Voro++ \blx@tocontentsinit {0}\cite {osti_code-54674}}}{13}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces A welsh dragon breaking. Taken from \blx@tocontentsinit {0}\cite {10.2312:sca.20141122}}}{14}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of wood dedcay of a cut tree trunk. Figure taken from \blx@tocontentsinit {0}\cite {YANG_SCHWARZ_2026}}}{14}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Arch produced by wind erosion. Figure taken from \blx@tocontentsinit {0}\cite {10.1145/3731201}}}{15}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Illustration of stacked height functions, used to simulate interactions between vegetation and erosion. figure taken from \blx@tocontentsinit {0}\cite {10.1145/3072959.3073667}}}{16}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Example of terrain enhancenment through adding erosion patterns. Taken from \blx@tocontentsinit {0}\cite {https://doi.org/10.1111/cgf.14992}}}{16}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Example of water infiltrating a terrain divided into a set of voronoi cells connected by links. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{17}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A welsh dragon breaking. Taken from \blx@tocontentsinit {0}\cite {10.2312:sca.20141122}}}{15}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of wood dedcay of a cut tree trunk. Figure taken from \blx@tocontentsinit {0}\cite {YANG_SCHWARZ_2026}}}{15}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Arch produced by wind erosion. Figure taken from \blx@tocontentsinit {0}\cite {10.1145/3731201}}}{16}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Example of erosion using implicit functions, the resulting terrain is smooth due to the nature of implicit functions.Taken from \blx@tocontentsinit {0}\cite {paris:hal-02273097}}}{17}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Terrain enhanced by generating fractured blocks according to the geology of the terrain. Taken from \blx@tocontentsinit {0}\cite {paris:hal-02926218}}}{17}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Illustration of stacked height functions, used to simulate interactions between vegetation and erosion. figure taken from \blx@tocontentsinit {0}\cite {10.1145/3072959.3073667}}}{18}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Example of terrain enhancenment through adding erosion patterns. Taken from \blx@tocontentsinit {0}\cite {https://doi.org/10.1111/cgf.14992}}}{19}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Example of water infiltrating a terrain divided into a set of voronoi cells connected by links. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{20}{figure.caption.25}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram of the original method. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{22}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Process of construction of a voronoi cell from the intersection of half-spaces. figures (b) to (f) show the process of cutting the space into multiple half-spaces, one half-space at a time. Figure taken from \blx@tocontentsinit {0}\cite {10.1119/5.0087591}}}{23}{figure.caption.27}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -4,14 +4,130 @@ In order to represent the internal structure of a model, we decomposed
 the base model into multiple cells covering the whole volume of the object.
 A core part of this project has been focused on the model decomposition,
 as well as on algorithms to produce and improve said decomposition. In this
-section of the thesis we are going to introduce some basic topics on 
-3D modeling, explore the potential representations that could be used for 
-terrain erosion and, finally, we are going to take a deep dive into the 
-method we implemented and the improvements we added to increase the quality
-of the decomposition. 
+section of the thesis we are going to take a deep dive into the basic method
+taken from \cite{10.2312:ceig.20241139} and all the improvements we added.
+
+\section{Base Method Overview}
+
+As statet eariler, the main idea of the decomposition process is to divide
+the original model into multiple shards that are connected with bonds (that 
+we call links). In order to generate the fragments of the models, which 
+will be called cells from now on, a voronoi tessellation is used, as they 
+produce a more natural rocky appearance than other possible decompositions like 
+voxelizations or tetrahedalizations. The process of generating is further 
+divided in multiple steps: \textbf{Point Extraction}, \textbf{Voronoi Cells 
+Generation} and \textbf{Links Generation}. Additionally we also experimented 
+with multi-resolution decompositions, where one cell on the lower resolution 
+contains multiple cells on the higher resolution level, this adds an additional
+step that consists on creating the lower resolution levels from the higher one.
 
 
-\section{Initial Method}
-\section{Problems and Solutions}
-\section{Final Method}
-\section{Extensions}
+\vspace{10pt}
+
+In the original project, they divided the decomposition process in different 
+steps, as it can be seen on \ref{fig:Decomposition_diagram}, due to some changes
+in the method we changed a the steps a little. Despite that, the main outline 
+of the process is similar and our changes reside in the specific steps. 
+ 
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.39]{Decomposition/BaseDecomposition.png}
+    \caption{Diagram of the original method. Taken from \cite{mateos_arlanzon_2023}}
+    \label{fig:Decomposition_diagram}
+\end{figure}
+
+\section{Point and Cell Generation}
+Remember that voronoi tessellations are partitions of a model into 
+different regions, where, given a set of centroids $C = \{c_1, c_2, \hdots , c_n\}$,
+the set of regions $\mathbf{R} = \{R_1, R_2, \hdots, R_n\}$ is defined by: 
+\begin{equation}
+R_i = \{p \in \Omega | \forall c_j \in C, \; \;  d(p, c_i) \leq d(p, c_j)\}
+\end{equation}
+Where $\Omega \in \mathbb{R}^3$ is the domain of our model, $d$ represents 
+the euclidean distance and $c_i$ is the centroid of region $i$.
+
+\vspace{10pt}
+
+This definition implies that the only thing we need in order to construct a 
+voronoi tessellation is a set of centroids that will define our regions, then the 
+regions will become our cells defined by the planes that form their boundaries. 
+The number of centroids chosen and their positions heavily affect the result
+of the tessellation, so the sampling method that we decide to implement will be 
+highly relevant for the end result. In addition to the sampling, one more
+thing that we will need to take into account is the fact that the regions
+that lie on the boundary of the region will be technically unbounded and 
+we will have to manually add walls to cut them so they do not leave the 
+boundary of the original model.
+ 
+\subsection{Cell Generation}
+
+The first step of the voronoi tessellation would be to sample the points 
+that we will use as centroids of our cells. Despite that, we think it is 
+better to first explain the process of constructing the cells from the 
+points, as we took it into account when designing our sampling.
+
+\vspace{10pt}
+
+In order to construct the cells from the centroids we offload the computation
+to the library Voro++ \cite{osti_code-54674}, which given a set of points 
+and a boundary (with restrictions on the boundary that will be discussed 
+in the future) gives us a set of polyhedra representing the different voronoi 
+cells. Even if this part of the computation is offloaded to another library 
+it is important to know about the process of construction of one voronoi cell.
+
+\vspace{10pt}
+
+Given a pair of centroids $c_i$ and $c_j$, the whole region is divided into 
+two half-spaces: $H_{ij}$, where points are closer to $c_i$ than $c_j$; 
+and $H_{ji}$, for points closer to $c_j$. More formally we can define $H_{ij}$
+the following way: 
+
+\begin{equation}
+    H_{ij} = \{p \in \Omega | d(p,c_i) \leq d(p,c_j)\}
+\end{equation}
+
+Every point in $R_i$ is closer to $c_i$ than any other centroid $c_k$, so 
+it follows that it also has to be in $H_{ik}$ for every $k \neq i$. Conversly,
+if we have a point $p \in \Omega$ in $H_{ik}$ for every $k \neq i$, it follows that 
+$p \in R_i$. This fact allows us to define the voronoi cell $R_i$ as the 
+intersection of a set of hall-spaces:
+
+\begin{equation}
+    R_i = \bigcap_{j = 1}^n H_{ij}
+\end{equation}
+
+Each half-space is defined by the plane that is equidistant to both centroids,
+so this converts the problem of creating a voronoi cell into computing the 
+intersection of multiple planes. Keep in mind that $H_{ii}$ would define 
+all the domain, since every point is at the same distance from $c_i$ and 
+$c_i$, so it does not have any effect adding it to the intersection. A 
+nice visual demonstration of the construction of a voronoi cell from 
+the intersection of half-spaces is shown in figure \ref{fig:voronoiConstruction}
+
+\begin{figure}
+    \centering 
+    \includegraphics[scale=0.65]{Decomposition/voronoiConstruction.png}
+    \caption{Process of construction of a voronoi cell from the intersection
+    of half-spaces. figures (b) to (f) show the process of cutting the space 
+    into multiple half-spaces, one half-space at a time. Figure taken from 
+    \cite{10.1119/5.0087591}}
+    \label{fig:voronoiConstruction}
+\end{figure}
+
+\vspace{10pt}
+
+To end this section about constructing cells it is important to keep in 
+mind that a pair of centroids define a plane where every point on the plane 
+is equidistant to both centroids. Let us define this plane more formally, 
+as we are going to use it later:
+
+\begin{equation}
+    P_{ij}  = P_{ji} = \{p \in \Omega | d(p,c_i) = d(p, c_j)\}
+\end{equation}
+\subsection{Point Sampling}
+\subsection{Wall Construction}
+
+\section{Cell Generation}
+\section{Link Generation}
+\section{Multi-Resolution Extension}

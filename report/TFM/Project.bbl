@@ -631,7 +631,7 @@
       {Association for Computing Machinery}%
     }
     \keyw{Ecosystem simulation, natural phenomena}
-    \strng{namehash}{PA+1}
+    \strng{namehash}{PA+2}
     \strng{fullhash}{PAGJGEAOGE1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
@@ -747,6 +747,47 @@
     \field{year}{2026}
   \endentry
 
+  \entry{1214475}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=IT}{%
+         family={Ito},
+         familyi={I\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=FT}{%
+         family={Fujimoto},
+         familyi={F\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=MK}{%
+         family={Muraoka},
+         familyi={M\bibinitperiod},
+         given={K.},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=CN}{%
+         family={Chiba},
+         familyi={C\bibinitperiod},
+         given={N.},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \keyw{Shape;Surface topography;Computational modeling;Computer graphics;Surface cracks;Chemicals;Character generation;Noise shaping;Noise generators;Indium tin oxide}
+    \strng{namehash}{IT+1}
+    \strng{fullhash}{ITFTMKCN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings Computer Graphics International 2003}
+    \verb{doi}
+    \verb 10.1109/CGI.2003.1214475
+    \endverb
+    \field{pages}{244\bibrangedash 247}
+    \field{title}{Modeling rocky scenery taking into account joints}
+    \field{year}{2003}
+  \endentry
+
   \entry{10.1145/3731201}{article}{}{}
     \name{author}{6}{}{%
       {{hash=YZ}{%
@@ -813,6 +854,235 @@
     \field{journaltitle}{ACM Trans. Graph.}
     \field{month}{07}
     \field{year}{2025}
+  \endentry
+
+  \entry{paris:hal-02273097}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=PA}{%
+         family={Paris},
+         familyi={P\bibinitperiod},
+         given={Axel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu{\'e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gain},
+         familyi={G\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{Association for Computing Machinery}}%
+    }
+    \keyw{Virtual Worlds ; Landscapes ; Implicit Surfaces}
+    \strng{namehash}{PA+1}
+    \strng{fullhash}{PAGEPAGEGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1145/3342765
+    \endverb
+    \field{number}{5}
+    \field{title}{{Terrain Amplification with Implicit 3D Features}}
+    \verb{url}
+    \verb https://hal.science/hal-02273097
+    \endverb
+    \field{volume}{38}
+    \verb{file}
+    \verb https://hal.science/hal-02273097v1/file/2019-tog.pdf
+    \endverb
+    \field{journaltitle}{{ACM Transactions on Graphics}}
+    \field{year}{2019}
+  \endentry
+
+  \entry{paris:hal-02926218}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=PA}{%
+         family={Paris},
+         familyi={P\bibinitperiod},
+         given={Axel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu{\'e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DJM}{%
+         family={Dischler},
+         familyi={D\bibinitperiod},
+         given={Jean-Michel},
+         giveni={J\bibinithyphendelim M\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{Springer Verlag}}%
+    }
+    \keyw{Procedural Modeling ; Terrain Synthesis ; Implicit surfaces}
+    \strng{namehash}{PA+1}
+    \strng{fullhash}{PAPAGEDJMGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s00371-020-01905-6
+    \endverb
+    \field{number}{10}
+    \field{pages}{2251\bibrangedash 2261}
+    \field{title}{{Modeling Rocky Scenery using Implicit Blocks}}
+    \verb{url}
+    \verb https://hal.science/hal-02926218
+    \endverb
+    \field{volume}{36}
+    \verb{file}
+    \verb https://hal.science/hal-02926218v2/file/2020-rocks-author.pdf
+    \endverb
+    \field{journaltitle}{{The Visual Computer}}
+    \field{year}{2020}
+  \endentry
+
+  \entry{paris:hal-03331697}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=PA}{%
+         family={Paris},
+         familyi={P\bibinitperiod},
+         given={Axel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Peytavie},
+         familyi={P\bibinitperiod},
+         given={Adrien},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Gu{\'e}rin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={Collon},
+         familyi={C\bibinitperiod},
+         given={Pauline},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{Wiley}}%
+    }
+    \keyw{Procedural modeling ; implicit surfaces ; karstic networks ; caves}
+    \strng{namehash}{PA+1}
+    \strng{fullhash}{PAPAGECPGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1111/cgf.14420
+    \endverb
+    \field{title}{{Synthesizing Geologically Coherent Cave Networks}}
+    \verb{url}
+    \verb https://hal.science/hal-03331697
+    \endverb
+    \verb{file}
+    \verb https://hal.science/hal-03331697v2/file/2021-caves-author.pdf
+    \endverb
+    \field{journaltitle}{{Computer Graphics Forum}}
+    \field{year}{2021}
+  \endentry
+
+  \entry{cordonnier:hal-01517343}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=CG}{%
+         family={Cordonnier},
+         familyi={C\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CMP}{%
+         family={Cani},
+         familyi={C\bibinitperiod},
+         given={Marie-Paule},
+         giveni={M\bibinithyphendelim P\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Benes},
+         familyi={B\bibinitperiod},
+         given={Bedrich},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Braun},
+         familyi={B\bibinitperiod},
+         given={Jean},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GE}{%
+         family={Galin},
+         familyi={G\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{Institute of Electrical and Electronics Engineers}}%
+    }
+    \keyw{Terrains ; Geology ; Mountains ; Interactive Design}
+    \strng{namehash}{CG+1}
+    \strng{fullhash}{CGCMPBBBJGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/TVCG.2017.2689022
+    \endverb
+    \field{number}{5}
+    \field{pages}{1756\bibrangedash 1769}
+    \field{title}{{Sculpting Mountains: Interactive Terrain Modeling Based on Subsurface Geology}}
+    \verb{url}
+    \verb https://hal.science/hal-01517343
+    \endverb
+    \field{volume}{24}
+    \verb{file}
+    \verb https://hal.science/hal-01517343v1/file/paper.pdf
+    \endverb
+    \field{journaltitle}{{IEEE Transactions on Visualization and Computer Graphics}}
+    \field{month}{05}
+    \field{year}{2018}
   \endentry
 
   \entry{10.1145/3130800.3130804}{article}{}{}
@@ -1011,6 +1281,54 @@
     \field{type}{Projecte Final de Màster Oficial}
     \field{month}{10}
     \field{year}{2023}
+  \endentry
+
+  \entry{10.1119/5.0087591}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=LEA}{%
+         family={Lazar},
+         familyi={L\bibinitperiod},
+         given={Emanuel\bibnamedelima A.},
+         giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Lu},
+         familyi={L\bibinitperiod},
+         given={Jiayin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=RCH}{%
+         family={Rycroft},
+         familyi={R\bibinitperiod},
+         given={Chris\bibnamedelima H.},
+         giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LEALJRCH1}
+    \strng{fullhash}{LEALJRCH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Many physical systems can be studied as collections of particles embedded in space, often evolving in time. Natural questions arise concerning how to characterize these arrangements—are they ordered or disordered? If they are ordered, how are they ordered and what kinds of defects do they possess? Voronoi tessellations, originally introduced to study problems in pure mathematics, have become a powerful and versatile tool for analyzing countless problems in pure and applied physics. We explain the basics of Voronoi tessellations and the shapes that they produce and describe how they can be used to characterize many physical systems.%
+    }
+    \verb{doi}
+    \verb 10.1119/5.0087591
+    \endverb
+    \verb{eprint}
+    \verb https://pubs.aip.org/aapt/ajp/article-pdf/90/6/469/20100696/469_1_5.0
+    \verb 087591.pdf
+    \endverb
+    \field{issn}{0002-9505}
+    \field{number}{6}
+    \field{pages}{469\bibrangedash 480}
+    \field{title}{Voronoi cell analysis: The shapes of particle systems}
+    \verb{url}
+    \verb https://doi.org/10.1119/5.0087591
+    \endverb
+    \field{volume}{90}
+    \field{journaltitle}{American Journal of Physics}
+    \field{month}{06}
+    \field{year}{2022}
   \endentry
 
   \entry{WILSON2012107}{article}{}{}
