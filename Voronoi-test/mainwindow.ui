@@ -3248,7 +3248,7 @@
           <x>20</x>
           <y>340</y>
           <width>281</width>
-          <height>251</height>
+          <height>301</height>
          </rect>
         </property>
         <property name="title">
@@ -3260,7 +3260,7 @@
            <x>10</x>
            <y>40</y>
            <width>261</width>
-           <height>201</height>
+           <height>241</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -3367,6 +3367,27 @@
             </item>
             <item>
              <widget class="QDoubleSpinBox" name="doubleSpinBox_7"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_36">
+            <item>
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>Z samples</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox"/>
             </item>
            </layout>
           </item>

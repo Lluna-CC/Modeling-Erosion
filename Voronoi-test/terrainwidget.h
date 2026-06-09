@@ -57,7 +57,6 @@ protected:
     virtual void resizeGL(int, int);
     virtual void paintGL();
     void checkGLError();
-    void downsampleVerts(const HeightField& hf, int down);
 
 protected:
 

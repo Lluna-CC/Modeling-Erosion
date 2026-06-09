@@ -289,22 +289,21 @@ void Voronoi::cellSamplingVoronoi(const HeightField* hf,CellGraph* graph) {
     std::cout << "Triangles: " << particles << std::endl;
     //Particles under the terrain
     
+    double cellScale = 0.75;
     double sizeZ = (max[2] - min[2])/zSamples;
     for (int i = 0; i < nx; ++i) {
         double x_block = min[0] + i*sizeX - 0.5*sizeX;
         for (int j = 0; j < ny; ++j) {
             double y_block = min[1] + j*sizeY - 0.5*sizeY;
             
-
-
             for (int k = 0; k < zSamples;++k) {
                 double z_block = min[2] + k*sizeZ - 0.5*sizeZ;
-                x = x_block + (rnd() - 0.5)*(sizeX);
-                y = y_block + (rnd() - 0.5)*(sizeY);
-                z = z_block + (rnd() - 0.5)*(sizeZ);
+                x = x_block + (rnd() - 0.5)*(sizeX)*cellScale;
+                y = y_block + (rnd() - 0.5)*(sizeY)*cellScale;
+                z = z_block + (rnd() - 0.5)*(sizeZ)*cellScale;
                 
                 double z_max = hf -> Height(Vector2(x,y));
-                if (z > z_max - 1.5*offset) continue;
+                if (z > z_max - 1.5*offset) break;
 
                 con.put(particles,x,y,z);
                 ++particles;
