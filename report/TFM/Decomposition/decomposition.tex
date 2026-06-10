@@ -117,15 +117,61 @@ the intersection of half-spaces is shown in figure \ref{fig:voronoiConstruction}
 
 \vspace{10pt}
 
-To end this section about constructing cells it is important to keep in 
+Before ending the explanation about constructing cells, it is important to keep in 
 mind that a pair of centroids define a plane where every point on the plane 
 is equidistant from both centroids. Let us define this plane more formally, 
 as we are going to use it later:
 
+
 \begin{equation}
     P_{ij}  = P_{ji} = \{p \in \Omega | d(p,c_i) = d(p, c_j)\}
 \end{equation}
-\subsection{Point Sampling}
+
+\subsubsection{Neighboring Information}
+To run the erosion simulation, we will additionally need to create \textins{links}
+between neighboring cells, which represent the bonds between different rocks. 
+Adjacency information is also given by the Voro++ \cite{osti_code-54674} library, 
+but we wll provide an overview of the method to compute this information.
+
+\vspace{10pt}
+
+We have just commented that in order to generate a voronoi cell you will 
+need to perform an intersection of halfspaces, which would imply incrementally 
+intersecting your partial solution by one plane at a time. Each time you cut 
+your partial solution by a plane $P_{ij}$, you can store the ID of the particle that 
+$j$ that generated said plane. At the end, just a few planes will remain as 
+faces of the voronoi cell, and those planes will have an ID that indicates which 
+other cell is sharing that specific face. Using this method we will compute 
+the neighboring information while we compute the voronoi cells and we can 
+use this information later to generate the links between cells.
+\subsubsection{Cell Attributes}
+
+To end this section about voronoi cells, it is important to hightlight 
+what attributes we will also store for each cell, besides the vertices 
+and edges that define its shape and its adjacency information.
+
+\begin{itemize}
+    \item \textbf{Shape Information:} For each cell we will store its 
+    vertices, whit their position, and its faces, with the vertices that 
+    conform said face.
+    \item \textbf{Additional Face Information:} For each face we will 
+    also keep its normal, its area, and the ID of the cell that is on 
+    the other side.
+    \item \textbf{Cell State:} We define 3 possible states for a cell:
+    \textbf{Solid}, which implies the cell belongs on the terrain (and 
+    it has not been removed yet by the erosion simulation); \textbf{Air},
+    which implies that the cell does not belong to the model; and \textbf{Core},
+    which makes the cell fixed and imposible to remove. A cell can not have 
+    two different states simultaniously.
+    \item \textbf{Volume:} For some computations we are also interested in 
+    keeping track of the volume of the cell.
+    \item \textbf{Boundary Information:} Finally, we will also need to 
+    keep track of the solid cells that are on the surface of the model,
+    as they will be in contact with the air and the water infiltration 
+    algorithm will start by one of those cells.
+\end{itemize}
+ 
+\subsection{Point Sampling} \label{sec:pointSampling}
 The first part of the method will be to sample multiple points inside 
 the model to construct a voronoi decomposition. In this thesis, and 
 unlike in the base method presented by \cite{mateos_arlanzon_2023}, we 
@@ -208,8 +254,55 @@ the model and the set of voronoi cells to cut the boundary cells, but in this
 project we have tried multiple methods to appropiately create the boundary 
 cells without relying on expensive boolean operations between models.
 
-\subsubsection{Using Custom Wall Classes}
+\begin{figure}
+    \centering
+
+    \subfigure[Voronoi cells of the decomposition]{\label{fig:cubeVoro}\includegraphics[width=0.35\linewidth]{Decomposition/cube.png}
+    }
+    \hspace{20pt}
+    \subfigure[Sample points with the base model as reference]{\label{fig:cubeParticle}\includegraphics[width=0.35\linewidth]{Decomposition/cubeParticles.png}
+        }
+    
+    \caption{Result of the voronoi decomposition without cutting the boundary cells vs. 
+    the samples used for the decomposition with the base model as reference}
+    \label{fig:cubeParticles}
+\end{figure}
+
+%\subsubsection{Using Custom Wall Classes}
 \subsubsection{Sampling out of Bounds}
+If we do nothing more than sampling points and computing its voronoi
+cells, some cells will extend until the bounding box of the terrain and the
+resulting decomposition will result on just a giant rectangular prism made of 
+internal voronoi cells. The problem, as we mentioned earlier, is that the 
+boundary voronoi cells are not cut, but we can trivially try to solve this 
+problem by adding more cells outside that boundary, so the cells on 
+the boundary of the terrain stop being the boundary and thus are cut by 
+other cells. The samples outside of the terrain generate \textit{air} cells 
+and thus they are not rendered, so the only rendered cells are the internal 
+ones, which are properly cut.
+
+\vspace{10pt}
+
+The problem of generating a giant rectangular prism is solved using this 
+method, but the surface of the terrain will have a really irregular 
+shape, as cells are arbitrarily cut. Despite that we can use this 
+idea as a base and then try to improvit so the surface of the model 
+resembles more closely the original.
+
+
+\begin{figure}
+    \centering
+
+    \subfigure[Voronoi cells of the decomposition]{\label{fig:OutBoundsVoro}\includegraphics[width=0.35\linewidth]{Decomposition/OutOfBoundsVoro.png}
+    }
+    \hspace{20pt}
+    \subfigure[Sample points with the base model as reference. White particles are out of bounds]{\label{fig:OutBoundsParticle}\includegraphics[width=0.35\linewidth]{Decomposition/OutOfBoundsParticles.png}
+        }
+    
+    \caption{Result of the voronoi decomposition when allowing sampling out of bounds}
+    \label{fig:OutBoundsParticlesVoro}
+\end{figure}
+
 \subsubsection{Using Additional Samples to Generate Cutting Planes}
 As explained on section \ref{sec:cellGen}, every pair of samples define a 
 plane $P_{ij}$ with all points that are equidistant from both samples. 
@@ -217,10 +310,114 @@ Additionally, we know that region $R_i$ will be cut by all planes $P_ij$
 such as $i \neq j$, so we can use this concept in order to generate new 
 cutting planes using more samples for the voronoi cell generation algorithm.
 
+
 \vspace{10pt}
 
 As we mentioned on the preliminaries \ref{TerrainRep}, we can sample 
 normal vectors from DEMs, which means we can extract a plane from every
-point of the terrain surface. 
+point of the terrain surface. If we use this concept, we can create 
+a plane for every cell, bound it using the size of the cell and place it
+on the height of the given cell (so it lies on the surface) to obtain a 
+decomposition of the terrain surface using quads. Moreover we can use 
+the idea of sampling points outside the boundary to cut the cells on 
+the surface of the terrain to create an approximation of this quad tesselation.
+
+\vspace{10pt}
+
+For every grid cell $(i,j)$ of the heightfield $\mathcal{H}$ we can extract its
+height at the center of the cell $h_{ij}$ and also its normal $n_{i,j}$ to 
+create a plane $\pi_{ij}$ going thorugh point $(x_{ij}, y_{ij}, h_{ij})$ with normal 
+$n_{ij}$. With this we can create two samples $p_{ij}$ and $q_{ij}$ such as:
+
+\begin{equation}
+    p_{ij} = \begin{bmatrix}x_{ij} \\ y_{ij} \\h_{ij}\end{bmatrix} - kn_{ij}
+\end{equation}
+
+\begin{equation}
+    q_{ij} = \begin{bmatrix}x_{ij} \\ y_{ij} \\h_{ij}\end{bmatrix} + kn_{ij}
+\end{equation}
+
+So that $p_{ij}$ is inside the terrain, $q_{ij}$ outside and 
+both points are at the same distance $k$ from the plane, which implies that the 
+plane $P_{pq}$ generated by those two points during the voronoi cell computation 
+will be exactly the plane $\pi_{ij}$. Applying this concept to every grid 
+cell will produce a better surface than the one generated by just sampling 
+out of bounds, as we cut the boundary cells following the shape of the 
+terrain. The only thing that we should take into account is to choose 
+an appropiate value of $k$.
+
+\vspace{10pt}
+
+Additionally, because we can interpolate the values of the grid to 
+obtain the height $h(x,y)$ and normal $n(x,y)$ for any point inside 
+the grid bounds, we can apply some jittering to break the regularity 
+and create differently shaped cells that follow the surface. Given  
+$x_{ij}' = x_{ij} + ms_x$ and $y_{ij}' = y_{ij} + ms_y$ (where $m$ and 
+$s$ have the same definition as the one we used in section \ref{sec:pointSampling}),
+we define the shifted points $p_{ij}'$ and $q_{ij}'$ as:
+
+\begin{equation}
+    p_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} - kn(x_{ij}, y_{ij})
+\end{equation}
+
+\begin{equation}
+    q_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} + kn(x_{ij}, y_{ij})
+\end{equation}
+
+
+\begin{figure}
+    \centering
+
+    \subfigure[Results sampling at cell center]{\label{fig:regularSampling}\includegraphics[width=0.35\linewidth]{Decomposition/regularSampling.png}
+    }
+    \hspace{20pt}
+    \subfigure[Results adding some jittering]{\label{fig:jitteredSampling}\includegraphics[width=0.35\linewidth]{Decomposition/jitteredSampling.png}
+        }
+    
+    \caption{Wall results sampling at the center of every cell vs. adding 
+    some jittering}
+    \label{fig:regularIrregularSampling}
+\end{figure}
+
+
+The idea of this method to generate an appropiate boundary is to mix it with 
+the general sampling method that we described, so we will have all samples 
+form the general method and an additional sample per cell that will represent 
+the surface. This mix of samples initially supposes a problem, as the minimum 
+distance bound that we showed in section \ref{sec:pointSampling} might not 
+hold between points sampled from different methods. When we tried to mix 
+bot sampling methods without further consideration, some bumps appeared (as seen in figure \ref{fig:bumpSampling})
+on the surface of the terrain due to a mix of samples close to the surface.
+To solve this we limited the allowed height for samples using the initial 
+sampling method so that the only samples close to the surface were the ones 
+generated with their corresponding pair. 
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Decomposition/bumpSampling.png}
+    \caption{Bumps appearing due to an unappropiate mix of the two 
+    sampling methods}
+    \label{fig:bumpSampling}
+\end{figure}
+
+Finally, there was another problem when using this method to create 
+the walls. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Base results of our wall generating method]{\label{fig:sharpSampling}\includegraphics[width=0.35\linewidth]{Decomposition/sharpSampling.png}
+    }
+    \hspace{20pt}
+    \subfigure[Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher
+    the rugosity of that point]{\label{fig:terrainRugosity}\includegraphics[width=0.35\linewidth]{Decomposition/terrainRugosity.png}
+        }
+    
+    \caption{Results of the wall generation process vs. a color map over 
+    the base terrain showing the rugosity at each point}
+    \label{fig:sharpVsRugosity}
+\end{figure}
 \section{Link Generation}
+\subsection{Link Adjacency Information}
+\subsection{Link Parameters}
 \section{Multi-Resolution Extension}
