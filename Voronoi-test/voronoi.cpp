@@ -14,7 +14,7 @@ double maxElevation(HeightField *hf) {
 
 }
 
-void Voronoi::heightfieldVoronoi(const HeightField *hf, CellGraph* graph) {
+void Voronoi::walledVoronoi(const HeightField *hf, CellGraph* graph) {
     
     std::cout << "Starting!" << std::endl;
     Box3 domain = hf -> getBox();
@@ -45,10 +45,10 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellGraph* graph) {
     for (int i = 0; i < nx/block; ++i) {
         for (int j = 0; j < ny/block; ++j) {
             for (int k = 0; k < zSamples; ++k) {
-                x = min[0] + i*block*sizeX + rnd()*(block*sizeX);
-                y = min[1] + j*block*sizeY  + rnd()*(block*sizeY);
-                //double z_max = hf -> Height(Vector2(x,y));
-                z = min[2] + rnd()*(max[2] - min[2]);
+                x = min[0] + i*block*sizeX + (rnd() - 0.5)*(block*sizeX) -0.5*sizeX;
+                y = min[1] + j*block*sizeY  + (rnd() - 0.5)*(block*sizeY)-0.5*sizeY;
+                double z_max = hf -> Height(Vector2(x,y));
+                z = min[2] + rnd()*(z_max - min[2]);
                 
                 //int idx = i*ny/block*zSamples + j*zSamples + k;
                 con.put(particles,x,y,z);
@@ -74,6 +74,92 @@ void Voronoi::heightfieldVoronoi(const HeightField *hf, CellGraph* graph) {
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
         if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
+        //else std::cout << "OUT OF RANGE!" << std::endl;
+        
+    }while (loopAll.inc()); 
+    std::cout << "Decomposition ended" << std::endl;
+    /*int i = 0;
+    while (i < particles) {
+        x = min[0] + rnd()*(max[0] - min[0]);
+        y = min[1] + rnd()*(max[1] - min[1]);
+        double z_max = hf -> Height(Vector2(x,y));
+        z = min[2] + rnd()*(z_max - min[2]);
+
+        if(con.point_inside(x,y,z)) {
+            con.put(i,x,y,z);
+            ++i;
+        }
+    }*/
+    
+}
+
+void Voronoi::outOfBoundsVoronoi(const HeightField *hf, CellGraph* graph) {
+    
+    std::cout << "Starting!" << std::endl;
+    Box3 domain = hf -> getBox();
+    Vector3 min = domain.getMin();
+    Vector3 max = domain.getMax();
+
+    int nx = hf -> getSizeX();
+    int ny = hf -> getSizeY();
+    double sizeX = hf -> getCellSize()[0];
+    double sizeY = hf -> getCellSize()[1];
+    int nz = (max[2] - min[2])/sizeX; 
+    
+    
+    container con(min[0],max[0], min[1],max[1], min[2],max[2], nx, ny, nz, false, false, false, 2);
+
+    double x,y,z;
+    
+    
+    int block = 3;
+    int zSamples = 20;
+    int particles = 0;
+    //int block = ny;
+    //int zSamples = 20;
+    
+    double cellScale = 0.75;
+    double sizeZ = (max[2] - min[2])/zSamples;
+    for (int i = 0; i < nx; ++i) {
+        double x_block = min[0] + i*sizeX - 0.5*sizeX;
+        for (int j = 0; j < ny; ++j) {
+            double y_block = min[1] + j*sizeY - 0.5*sizeY;
+            
+            for (int k = 0; k < zSamples;++k) {
+                double z_block = min[2] + k*sizeZ - 0.5*sizeZ;
+                x = x_block + (rnd() - 0.5)*(sizeX)*cellScale;
+                y = y_block + (rnd() - 0.5)*(sizeY)*cellScale;
+                z = z_block + (rnd() - 0.5)*(sizeZ)*cellScale;
+                
+                double z_max = hf -> Height(Vector2(x,y));
+
+                con.put(particles,x,y,z);
+                ++particles;
+            
+            }
+        }
+    }
+
+   
+    
+    c_loop_all loopAll(con);
+    std::cout << "number of particles: " << particles << " " << con.total_particles() << std::endl;
+     
+    if(!loopAll.start()) return;
+    graph -> setNumCells(particles);
+    do {
+        voronoicell_neighbor c;
+        //std::cout << "a" << std::endl;
+        con.compute_cell(c,loopAll);
+        if (loopAll.pid() >= particles) std::cout << loopAll.pid() << std::endl;
+        double cellX = loopAll.x();
+        double cellY = loopAll.y();
+        double cellZ = loopAll.z();
+        double z_max = hf -> Height(Vector2(cellX,cellY));
+
+        if (cellZ <= z_max) graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false);
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), true);
         //else std::cout << "OUT OF RANGE!" << std::endl;
         
     }while (loopAll.inc()); 

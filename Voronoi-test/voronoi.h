@@ -9,7 +9,8 @@
 class Voronoi {
 public:
 
-    static void heightfieldVoronoi(const HeightField *hf, CellGraph* graph);
+    static void walledVoronoi(const HeightField *hf, CellGraph* graph);
+    static void outOfBoundsVoronoi(const HeightField *hf, CellGraph* graph);
     static void triangleSamplingVoronoi(const HeightField *hf, std::vector<float>& v, std::vector<uint>& f, CellGraph* graph);
     static void cellSamplingVoronoi(const HeightField *hf, CellGraph* graph);
     static void toyVoronoi(const HeightField *hf, CellGraph* graph);

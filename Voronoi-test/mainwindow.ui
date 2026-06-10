@@ -92,6 +92,11 @@
               <string>Constant heightfield</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>3D Gaussian Bump</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
@@ -769,8 +774,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>324</width>
-             <height>629</height>
+             <width>316</width>
+             <height>472</height>
             </rect>
            </property>
            <attribute name="label">

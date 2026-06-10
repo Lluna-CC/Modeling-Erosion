@@ -476,6 +476,7 @@ public:
         cb_toy->addItem(QString());
         cb_toy->addItem(QString());
         cb_toy->addItem(QString());
+        cb_toy->addItem(QString());
         cb_toy->setObjectName("cb_toy");
 
         verticalLayout_10->addWidget(cb_toy);
@@ -877,7 +878,7 @@ public:
         demToolbox->setSizePolicy(sizePolicy5);
         pageMorhology = new QWidget();
         pageMorhology->setObjectName("pageMorhology");
-        pageMorhology->setGeometry(QRect(0, 0, 324, 629));
+        pageMorhology->setGeometry(QRect(0, 0, 316, 472));
         verticalLayout_11 = new QVBoxLayout(pageMorhology);
         verticalLayout_11->setObjectName("verticalLayout_11");
         dem_uniform = new QRadioButton(pageMorhology);
@@ -2380,7 +2381,7 @@ public:
         groupBox_7->setGeometry(QRect(20, 340, 281, 301));
         layoutWidget1 = new QWidget(groupBox_7);
         layoutWidget1->setObjectName("layoutWidget1");
-        layoutWidget1->setGeometry(QRect(10, 40, 261, 241));
+        layoutWidget1->setGeometry(QRect(10, 40, 306, 265));
         verticalLayout_9 = new QVBoxLayout(layoutWidget1);
         verticalLayout_9->setObjectName("verticalLayout_9");
         verticalLayout_9->setContentsMargins(0, 0, 0, 0);
@@ -2678,6 +2679,7 @@ public:
         cb_toy->setItemText(1, QCoreApplication::translate("MainWindow", "Sinus", nullptr));
         cb_toy->setItemText(2, QCoreApplication::translate("MainWindow", "Gaussain Bump", nullptr));
         cb_toy->setItemText(3, QCoreApplication::translate("MainWindow", "Constant heightfield", nullptr));
+        cb_toy->setItemText(4, QCoreApplication::translate("MainWindow", "3D Gaussian Bump", nullptr));
 
         label_48->setText(QCoreApplication::translate("MainWindow", "Dimensions", nullptr));
         label_preset->setText(QCoreApplication::translate("MainWindow", "0x0 cells, 0x0km", nullptr));

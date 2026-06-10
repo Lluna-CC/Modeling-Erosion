@@ -667,6 +667,23 @@ void MainWindow::loadToy()
 
             updateHeightfield();
             break;
+        case 4:
+            ncols = 50; nrows = 50;
+            minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 5.0;
+            hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
+            for (int i = 0; i < ncols; i++) {
+                for (int j = 0; j < nrows; j++) {
+                    double x = double(i)/(ncols) - 0.5;
+                    double y = double(j)/(nrows) - 0.5;
+                    double sig = 0.0001;
+                    hf(i, j) = 75*exp(-(x*x - 2*sig*x*y + y*y)/(2*(1 - sig)));
+                }
+            }
+
+            updateHeightfield();
+            break;
+
+        
         default:
             break;
 
