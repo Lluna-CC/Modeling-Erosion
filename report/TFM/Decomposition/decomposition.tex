@@ -1,4 +1,4 @@
-\chapter{Model Decomposition}
+\chapter{Model Decomposition} \label{chap:decomp}
 
 In order to represent the internal structure of a model, we decomposed 
 the base model into multiple cells covering the whole volume of the object.
@@ -9,25 +9,25 @@ taken from \cite{10.2312:ceig.20241139} and all the improvements we added.
 
 \section{Base Method Overview}
 
-As statet eariler, the main idea of the decomposition process is to divide
+As stated eariler, the main idea of the decomposition process is to divide
 the original model into multiple shards that are connected with bonds (that 
 we call links). In order to generate the fragments of the models, which 
-will be called cells from now on, a voronoi tessellation is used, as they 
-produce a more natural rocky appearance than other possible decompositions like 
+will be called cells from now on, a voronoi tessellation is used, as it 
+produces a more natural rocky appearance than other possible decompositions like 
 voxelizations or tetrahedalizations. The process of generating is further 
-divided in multiple steps: \textbf{Point Extraction}, \textbf{Voronoi Cells 
-Generation} and \textbf{Links Generation}. Additionally we also experimented 
+divided into multiple steps: \textbf{Point Extraction}, \textbf{Voronoi Cells 
+Generation} and \textbf{Links Generation}. Additionally, we also experimented 
 with multi-resolution decompositions, where one cell on the lower resolution 
-contains multiple cells on the higher resolution level, this adds an additional
-step that consists on creating the lower resolution levels from the higher one.
+contains multiple cells on the higher resolution level; this adds an additional
+step that consists in creating the lower resolution levels from the higher one.
 
 
 \vspace{10pt}
 
-In the original project, they divided the decomposition process in different 
-steps, as it can be seen on \ref{fig:Decomposition_diagram}, due to some changes
-in the method we changed a the steps a little. Despite that, the main outline 
-of the process is similar and our changes reside in the specific steps. 
+In the original project, they divided the decomposition process into different 
+steps, as it can be seen in \ref{fig:Decomposition_diagram}. However, due to some changes
+in the method, we slightly changed said steps. Despite that, the main outline 
+of the process is similar, and our changes reside in the specific steps. 
  
 
 \begin{figure}
@@ -50,13 +50,13 @@ the euclidean distance and $c_i$ is the centroid of region $i$.
 \vspace{10pt}
 
 This definition implies that the only thing we need in order to construct a 
-voronoi tessellation is a set of centroids that will define our regions, then the 
+voronoi tessellation is a set of centroids, which will define our regions, and then the 
 regions will become our cells defined by the planes that form their boundaries. 
 The number of centroids chosen and their positions heavily affect the result
 of the tessellation, so the sampling method that we decide to implement will be 
-highly relevant for the end result. In addition to the sampling, one more
+highly relevant to the end result. One more
 thing that we will need to take into account is the fact that the regions
-that lie on the boundary of the region will be technically unbounded and 
+that lie on the boundary of the domain will be technically unbounded, and 
 we will have to manually add walls to cut them so they do not leave the 
 boundary of the original model.
  
@@ -69,18 +69,18 @@ points, as we took it into account when designing our sampling.
 
 \vspace{10pt}
 
-In order to construct the cells from the centroids we offload the computation
-to the library Voro++ \cite{osti_code-54674}, which given a set of points 
+To construct the cells from the centroids, we offload the computation
+to the library Voro++ \cite{osti_code-54674}, which, given a set of points 
 and a boundary (with restrictions on the boundary that will be discussed 
 in the future) gives us a set of polyhedra representing the different voronoi 
-cells. Even if this part of the computation is offloaded to another library 
-it is important to know about the process of construction of one voronoi cell.
+cells. Even if this part of the computation is offloaded to another library, 
+it is important to know about the process of constructing of one voronoi cell.
 
 \vspace{10pt}
 
 Given a pair of centroids $c_i$ and $c_j$, the whole region is divided into 
 two half-spaces: $H_{ij}$, where points are closer to $c_i$ than $c_j$; 
-and $H_{ji}$, for points closer to $c_j$. More formally we can define $H_{ij}$
+and $H_{ji}$, for points closer to $c_j$. More formally, we can define $H_{ij}$
 the following way: 
 
 \begin{equation}
@@ -117,7 +117,7 @@ the intersection of half-spaces is shown in figure \ref{fig:voronoiConstruction}
 
 \vspace{10pt}
 
-Before ending the explanation about constructing cells, it is important to keep in 
+Before ending the explanation about cells construction, it is important to keep in 
 mind that a pair of centroids define a plane where every point on the plane 
 is equidistant from both centroids. Let us define this plane more formally, 
 as we are going to use it later:
@@ -131,32 +131,31 @@ as we are going to use it later:
 To run the erosion simulation, we will additionally need to create \textins{links}
 between neighboring cells, which represent the bonds between different rocks. 
 Adjacency information is also given by the Voro++ \cite{osti_code-54674} library, 
-but we wll provide an overview of the method to compute this information.
+but we will provide an overview of the method to compute this information.
 
 \vspace{10pt}
 
-We have just commented that in order to generate a voronoi cell you will 
+We have just commented that in order to generate a voronoi cell, you will 
 need to perform an intersection of halfspaces, which would imply incrementally 
 intersecting your partial solution by one plane at a time. Each time you cut 
-your partial solution by a plane $P_{ij}$, you can store the ID of the particle that 
-$j$ that generated said plane. At the end, just a few planes will remain as 
+your partial solution by a plane $P_{ij}$, you can store the ID of the particle $j$
+that generated said plane. At the end, just a few planes will remain as 
 faces of the voronoi cell, and those planes will have an ID that indicates which 
-other cell is sharing that specific face. Using this method we will compute 
+other cell is sharing that specific face. Using this method, we will compute 
 the neighboring information while we compute the voronoi cells and we can 
 use this information later to generate the links between cells.
 \subsubsection{Cell Attributes}
 
-To end this section about voronoi cells, it is important to hightlight 
-what attributes we will also store for each cell, besides the vertices 
+To end this section about voronoi cells, it is important to highlight 
+what attributes will be stored for each cell, besides the vertices 
 and edges that define its shape and its adjacency information.
 
 \begin{itemize}
     \item \textbf{Shape Information:} For each cell we will store its 
-    vertices, whit their position, and its faces, with the vertices that 
-    conform said face.
+    vertices (with positions), and its faces (with its vertices).
     \item \textbf{Additional Face Information:} For each face we will 
-    also keep its normal, its area, and the ID of the cell that is on 
-    the other side.
+    also keep its normal, its area, its centroid 
+    and the ID of the cell that is on the other side.
     \item \textbf{Cell State:} We define 3 possible states for a cell:
     \textbf{Solid}, which implies the cell belongs on the terrain (and 
     it has not been removed yet by the erosion simulation); \textbf{Air},
@@ -164,15 +163,17 @@ and edges that define its shape and its adjacency information.
     which makes the cell fixed and imposible to remove. A cell can not have 
     two different states simultaniously.
     \item \textbf{Volume:} For some computations we are also interested in 
-    keeping track of the volume of the cell.
+    keeping track of the volume of a cell.
     \item \textbf{Boundary Information:} Finally, we will also need to 
     keep track of the solid cells that are on the surface of the model,
     as they will be in contact with the air and the water infiltration 
-    algorithm will start by one of those cells.
+    algorithm will start by one of those cells. At the start of the 
+    algorithm, exterior cells would be those adjacent to air cells 
+    or a wall.
 \end{itemize}
  
 \subsection{Point Sampling} \label{sec:pointSampling}
-The first part of the method will be to sample multiple points inside 
+The first part of the method consits in sampling multiple points inside 
 the model to construct a voronoi decomposition. In this thesis, and 
 unlike in the base method presented by \cite{mateos_arlanzon_2023}, we 
 are using DEMs to represent and load our terrains, so we are going to make 
@@ -180,13 +181,13 @@ use of that.
 
 \vspace{10pt}
 
-A heightfield $\mathcal{H}$ is basically a 2D grid were each
-value $h_{ij}$ of the grid represents the height at one cell $(i,j)$ of the gird,
-we can then use the points of the grid to obtain the elevation on a continuos domain 
+A heightfield $\mathcal{H}$ is basically a 2D grid where each
+value $h_{ij}$ of the grid; represents the height at one specific cell $(i,j)$,
+we can then use the data points that we have to obtain the elevation on a continuous domain 
 using interpolation. Because we already have a defined grid, we can use 
-it to implement our sampling. The main idea is to make use of the 2D grid 
+it to implement our sampling. The main idea is to use the 2D grid 
 and extend it to a 3D grid by setting a number of vertical samples (which 
-will be a user-difine parameter) and then sample one point for each element 
+will be a user-difined parameter) and then sample one point for each element 
 of the grid, as long as the point lies inside the terrain (the 3D grid 
 will represent the bounding box of the terrain, so not every voxel will be 
 inside it). 
@@ -194,13 +195,13 @@ inside it).
 \vspace{10pt}
 
 Now that we have a way to uniformly sample points inside the model, we can 
-extend it and break the regularity a little bit by shifting each point by a 
+extend it and slightly break the regularity by shifting each point by a 
 certain quantity. Considering each point to initially be sampled at the 
 center of its grid cell, we are going to shift each point by \textit{strictly}
-less than half the cell size in a random direction, this way be will 
-obtain a sampling in between complete random sampling (white noise) and 
-a completly regular sampling, where we guarantee each point to not be to 
-close or to far to another. Specifically, from each grid cell center $c_{ijk}$
+less than half the cell size in a random direction. This way we will 
+obtain a sampling scheme between complete random sampling (white noise) and 
+a completely regular sampling, where we guarantee each point to not be too 
+close or too far from each other. Specifically, from each grid cell center $c_{ijk}$
 we create our sample $c_{ijk}'$ using the following equation:
 
 \begin{equation}
@@ -219,7 +220,7 @@ why we set $m$ to be \textit{strictly} smaller than $\frac{1}{2}$.
 
 Moreover, we can bound the distance between two arbitrary points in terms 
 of $m$ and the cell sizes $s_k$. Suppose $s_x$ is the smaller size, 
-then the minimum posible distance between two samples $c_{i,j,k}$ 
+then the minimum possible distance between two samples $c_{i,j,k}$ 
 and $c_{i + 1,j,k}'$ appears when $c_{i,j,k}' = (x + m s_x, y + \alpha s_y, z + \beta s_z)$ 
 and $c_{i + 1,j,k}' = (x + s_x - m s_x, y + \alpha s_y, z + \beta s_z)$, so the distance 
 is:
@@ -245,14 +246,17 @@ maximum distances between a sample and its closest pair, so it combines some
 regularity that comes with using a grid with some randomness that breaks the 
 monotony and creates more natural shapes.
 
-INSERT A FIGURE WITH LONGEST AND SHORTEST DISTANCE CASES???
 \subsection{Wall Construction}
 The last consideration we have to make to create the voronoi cells is about 
-what do we do with cells on the boundary of the terrain. The method 
-proposed on \cite{mateos_arlanzon_2023} relied on boolean operations between 
+dealing with cells on the boundary of the terrain. The method 
+proposed in \cite{mateos_arlanzon_2023} relied on boolean operations between 
 the model and the set of voronoi cells to cut the boundary cells, but in this 
-project we have tried multiple methods to appropiately create the boundary 
-cells without relying on expensive boolean operations between models.
+project we have tried multiple methods to appropriately create the boundary 
+cells without relying on expensive boolean operations between models. Moreover,
+the original method only used the boolean operations as a way to showcase the 
+results, but the algorithm relied on cells that were not properly cut, which is 
+another motivation to generate voronoi cells that directly fit the model without 
+additional visual tricks. 
 
 \begin{figure}
     \centering
@@ -270,23 +274,23 @@ cells without relying on expensive boolean operations between models.
 
 %\subsubsection{Using Custom Wall Classes}
 \subsubsection{Sampling out of Bounds}
-If we do nothing more than sampling points and computing its voronoi
-cells, some cells will extend until the bounding box of the terrain and the
-resulting decomposition will result on just a giant rectangular prism made of 
+If we do nothing more than sampling points and computing their voronoi
+cells, some cells will extend until the bounding box of the terrain, and the
+resulting decomposition will result in just a giant rectangular prism made of 
 internal voronoi cells. The problem, as we mentioned earlier, is that the 
 boundary voronoi cells are not cut, but we can trivially try to solve this 
 problem by adding more cells outside that boundary, so the cells on 
 the boundary of the terrain stop being the boundary and thus are cut by 
-other cells. The samples outside of the terrain generate \textit{air} cells 
-and thus they are not rendered, so the only rendered cells are the internal 
-ones, which are properly cut.
+other cells. The samples outside of the terrain generate \textit{air} cells, 
+so they will not be rendered and the only rendered cells will be the internal 
+ones, which are somehow cut.
 
 \vspace{10pt}
 
 The problem of generating a giant rectangular prism is solved using this 
 method, but the surface of the terrain will have a really irregular 
-shape, as cells are arbitrarily cut. Despite that we can use this 
-idea as a base and then try to improvit so the surface of the model 
+shape, as cells are arbitrarily cut. Despite that, we can use this 
+idea as a base and then try to improve it so the surface of the model 
 resembles more closely the original.
 
 
@@ -304,30 +308,30 @@ resembles more closely the original.
 \end{figure}
 
 \subsubsection{Using Additional Samples to Generate Cutting Planes}
-As explained on section \ref{sec:cellGen}, every pair of samples define a 
+As explained in section \ref{sec:cellGen}, every pair of samples defines a 
 plane $P_{ij}$ with all points that are equidistant from both samples. 
-Additionally, we know that region $R_i$ will be cut by all planes $P_ij$ 
-such as $i \neq j$, so we can use this concept in order to generate new 
-cutting planes using more samples for the voronoi cell generation algorithm.
+Additionally, we know that region $R_i$ will be cut by all planes $P_{ij}$ 
+such that $i \neq j$. We can use this concept to generate new 
+cutting planes using more samples to send to the voronoi cell generation algorithm.
 
 
 \vspace{10pt}
 
-As we mentioned on the preliminaries \ref{TerrainRep}, we can sample 
+As mentioned in the preliminaries \ref{TerrainRep}, we can sample 
 normal vectors from DEMs, which means we can extract a plane from every
-point of the terrain surface. If we use this concept, we can create 
-a plane for every cell, bound it using the size of the cell and place it
+point on the terrain surface. Using this concept, we can create 
+a plane for every cell, bound it using the size of the cell, and place it
 on the height of the given cell (so it lies on the surface) to obtain a 
-decomposition of the terrain surface using quads. Moreover we can use 
+decomposition of the terrain surface using quads. Moreover, we can use 
 the idea of sampling points outside the boundary to cut the cells on 
-the surface of the terrain to create an approximation of this quad tesselation.
+the surface of the terrain to create an approximation of this quad tessellation.
 
 \vspace{10pt}
 
-For every grid cell $(i,j)$ of the heightfield $\mathcal{H}$ we can extract its
+For every grid cell $(i,j)$ of the heightfield $\mathcal{H}$, we can extract its
 height at the center of the cell $h_{ij}$ and also its normal $n_{i,j}$ to 
-create a plane $\pi_{ij}$ going thorugh point $(x_{ij}, y_{ij}, h_{ij})$ with normal 
-$n_{ij}$. With this we can create two samples $p_{ij}$ and $q_{ij}$ such as:
+create a plane $\pi_{ij}$ going through point $(x_{ij}, y_{ij}, h_{ij})$ with normal 
+$n_{ij}$. With this, we can create two samples $p_{ij}$ and $q_{ij}$ such that:
 
 \begin{equation}
     p_{ij} = \begin{bmatrix}x_{ij} \\ y_{ij} \\h_{ij}\end{bmatrix} - kn_{ij}
@@ -344,24 +348,24 @@ will be exactly the plane $\pi_{ij}$. Applying this concept to every grid
 cell will produce a better surface than the one generated by just sampling 
 out of bounds, as we cut the boundary cells following the shape of the 
 terrain. The only thing that we should take into account is to choose 
-an appropiate value of $k$.
+an appropriate value of $k$.
 
 \vspace{10pt}
 
 Additionally, because we can interpolate the values of the grid to 
 obtain the height $h(x,y)$ and normal $n(x,y)$ for any point inside 
 the grid bounds, we can apply some jittering to break the regularity 
-and create differently shaped cells that follow the surface. Given  
-$x_{ij}' = x_{ij} + ms_x$ and $y_{ij}' = y_{ij} + ms_y$ (where $m$ and 
+and create differently shaped cells that still match the surface. Given  
+$x_{ij}' = x_{ij} + r_xs_x$ and $y_{ij}' = y_{ij} + r_ys_y$ (where $r$ and 
 $s$ have the same definition as the one we used in section \ref{sec:pointSampling}),
 we define the shifted points $p_{ij}'$ and $q_{ij}'$ as:
 
 \begin{equation}
-    p_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} - kn(x_{ij}, y_{ij})
+    p_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} - kn(x_{ij}', y_{ij}')
 \end{equation}
 
 \begin{equation}
-    q_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} + kn(x_{ij}, y_{ij})
+    q_{ij}' = \begin{bmatrix}x_{ij}' \\ y_{ij}' \\h(x_{ij}', y_{ij}')\end{bmatrix} + kn(x_{ij}', y_{ij}')
 \end{equation}
 
 
@@ -380,29 +384,65 @@ we define the shifted points $p_{ij}'$ and $q_{ij}'$ as:
 \end{figure}
 
 
-The idea of this method to generate an appropiate boundary is to mix it with 
+The idea of this wall generation method is to mix it with 
 the general sampling method that we described, so we will have all samples 
-form the general method and an additional sample per cell that will represent 
+from the general method and two additional samples per cell that will represent 
 the surface. This mix of samples initially supposes a problem, as the minimum 
 distance bound that we showed in section \ref{sec:pointSampling} might not 
 hold between points sampled from different methods. When we tried to mix 
-bot sampling methods without further consideration, some bumps appeared (as seen in figure \ref{fig:bumpSampling})
+both sampling methods without further consideration, some bumps appeared (as seen in figure \ref{fig:bumpSampling})
 on the surface of the terrain due to a mix of samples close to the surface.
-To solve this we limited the allowed height for samples using the initial 
-sampling method so that the only samples close to the surface were the ones 
-generated with their corresponding pair. 
+To solve this, we limited the allowed height for general samples so that the only samples close to the surface were the ones 
+that corresponded to the walls. 
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.2]{Decomposition/bumpSampling.png}
-    \caption{Bumps appearing due to an unappropiate mix of the two 
+    \caption{Bumps appearing due to an unappropriate mix of the two 
     sampling methods}
     \label{fig:bumpSampling}
 \end{figure}
 
-Finally, there was another problem when using this method to create 
-the walls. 
+\vspace{10pt}
 
+Finally, there was another problem when using this method to create 
+the walls. When we tried to execute the method as described, we obtained 
+great results on relatively flat surfaces, but for sharp peaks 
+and places with a lot of inclination, we obtained some sharp long faces 
+that extended beyond the limits of the terrain. An example of this problem is 
+shown in figure \ref{fig:sharpVsRugosity} along with a comparison to the 
+original model. 
+
+\vspace{10pt}
+
+After encountering these unexpected results, we hypothesized that these 
+artifacts could be related to the \textit{Area Ratio} of the terrain.
+Consider a 2D square box $\Omega$ with extremes $(x_{min}, y_{min})$ and $(x_{max}, y_{max})$, 
+then consider the portion of the terrain $\mathcal{T}$ that is defined 
+by the elevation function for $(x,y) \in  \Omega$: 
+
+\begin{equation}
+\mathcal{T}(x,y) = \begin{bmatrix} x \\ y \\ h(x,y) \end{bmatrix}
+\end{equation}
+
+With this, we can measure the ratio between the area of the box $A_{\Omega}$ and the surface 
+$A_\mathcal{T}$. Right now we are taking one sample for each grid cell in 
+order to construct a wall, which implies that every equally sized 
+subsection of the grid $\Omega$ will have the same number of samples, and 
+this leads to the following problem: A subsection $\Omega$ with 
+$\frac{A_{\mathcal{T}}}{A_{\Omega}} = 2$ will use the same samples as
+another section $\Omega'$ with $\frac{A_{\mathcal{T}'}}{A_{\Omega'}} = 1$ but
+it will be covering twice the area of the surface. In \cite{jenness2004calculating},
+this concept of the ratio between areas is defined for every point on a terrain with 
+the name of \textit{rugosity}:
+
+\begin{equation}
+    \rho (x,y) = \frac{A_{\mathcal{T}}(x,y)}{A_\Omega(x,y)}
+\end{equation}
+
+Where $\Omega$ is defined by a squared window centered at $(x,y)$.
+
+\vspace{10pt}
 \begin{figure}
     \centering
 
@@ -417,7 +457,133 @@ the walls.
     the base terrain showing the rugosity at each point}
     \label{fig:sharpVsRugosity}
 \end{figure}
+
+If our problem is caused by using too few samples to cover some 
+portions of the surface with a lot of area, we can decide to increase 
+the sampling rate on parts of the surface with high rugosity. Thanks to 
+our continuous normal and elevation surfaces, we can easily divide a grid 
+cell into four sub-cells, sampling the elevation and normal at the centroid 
+of each sub-cell (with optional jittering inside the sub-cell), and then 
+create a pair of samples for each one like we were doing before. 
+We can even go further than this and subdivide each sub-cell into four 
+pieces more. This way we could take $4^k$ samples per cell for 
+$k \in \{0,1, \hdots\}$ depending on the rugosity: lower amounts of rugosity
+would imply lower values of $k$. In our case, we have obtained good results 
+using $k \in \{0,1,2\}$, so we have not tested further subdivisions. 
+
+
+\vspace{10pt}
+
+As a final note, it is important to consider that the higher the elevation 
+variation (imagine a surface going up and down multiple times over a small 
+number of cells), the higher would be its rugosity, so the subsampling 
+method we implemented will cover us from those cases as well as cases 
+where we just have a really high slope.
+\begin{figure}
+    \centering
+
+    \subfigure[Results of our wall generating method after appliying subsampling based on rugosity]{\includegraphics[width=0.35\linewidth]{Decomposition/rugositySampling.png}
+    }
+    \hspace{20pt}
+    \subfigure[Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher
+    the rugosity of that point]{\includegraphics[width=0.35\linewidth]{Decomposition/terrainRugosity2.png}
+        }
+    
+    \caption{Results of the wall generation process vs. a color map over 
+    the base terrain showing the rugosity at each point}
+    \label{fig:sharpVsRugosity2}
+\end{figure}
+
+
 \section{Link Generation}
+After generating all voronoi cells and computing its neighboring information, 
+we are prepared to create the links between the cells, which will represent 
+different properties of the bonds between the rocks.
+
+\subsection{Link Parameters} \label{sec:linkParams}
+In order to properly describe link generation, we first have to understand
+which properties we will need to define for each link:
+
+\begin{itemize}
+    \item \textbf{Link State:} A link can be in one of three states:
+    \textbf{Exterior}, \textbf{Interior} and \textbf{Broken}. Exterior 
+    links are those that connect an exterior cell with an air cell.
+    \item \textbf{Link Life:} The erosion simulation will damage the 
+    bonds between the rocks, this damage is represented by the "life"
+    parameter.
+    \item \textbf{Normal and Shear Stresses:} For our erosion simulation 
+    we will also need to keep track of the stresses that each link has 
+    to withstand. We will explain how to compute the stresses in a future section.
+    \item \textbf{Neighbors:} The hardest thing to compute, but one 
+    of the most important, would be the adjacency information between 
+    links. For each link we need to know which links water can jump 
+    to. 
+\end{itemize}
+
 \subsection{Link Adjacency Information}
-\subsection{Link Parameters}
+
+Our erosion simulation method requires a graph between the links  
+to represent water movement. Water moves through the 
+cracks between rocks, which means that the water will move from one 
+face of a cell to another, and we cannot just use the general 
+adjacency information of the cells to represent these movements. 
+
+\vspace{10pt}
+
+On a 3D model formed by faces, vertices, and edges, we say that two 
+faces are adjacent if and only if they share an edge. Conceptually, 
+if two faces share an edge, then you can move from one face to the other 
+by crossing the common edge. As there will be a link for 
+each face of a cell, the adjacency information of the faces will also 
+tell us the adjacency information of the links: Given the neighbors 
+of each face of every cell, the neighbors of a given link can be computed 
+as the union of the neighbors of the two faces it connects (technically 
+a link only connects two cells that share one single face, but we can 
+split the face in two, as it will appear in two different 
+cells with different adjacency information). 
+
+\vspace{10pt}
+
+More formally, given face $f$ of cell $i$, defining the 
+set of edges of cell $i$ as $E_i$ and the set of faces as $F_i$, 
+then the set of neighbors of $f$ is defined as:
+
+\begin{equation}
+    \mathcal{N}(f) = \{f' \in F_i | \exists e \in E_i, \; e \in  f' \text{ and } e \in f\}
+\end{equation}
+
+And with the definition of $\mathcal{N}(f)$ we can define the neighbors 
+of a link $l$ that connects faces $f_1$ and $f_2$ as:
+
+\begin{equation}
+    \mathcal{N}(l) = \mathcal{N}(f_1) \cup \mathcal{N}(f_2) 
+\end{equation}
+
+And with this we can create a graph connecting all links of our decomposition, 
+which is the last thing we needed as preparation for the erosion simulation 
+algorithm.
+
 \section{Multi-Resolution Extension}
+
+With all we explained up to this point, we have enough information to 
+run the erosion simulation. Still, the algorithm can be quite heavy 
+for big terrains with hundreds of thousands of cells, or even 
+millions. For that reason, we present a method to speed up the erosion 
+computation without compromising on the quality of the decomposition.
+
+\vspace{10pt}
+
+The main idea is to compute everything normally as we mentioned (sample 
+points, generate the cells, and then create the links), and once the 
+decomposition is created, we then select a subset of all samples, construct 
+another voronoi tessellation from that subset, and store for every 
+original sample the closest point on the subsampled set. This will 
+result in two resolutions of voronoi tessellations that are linked, so
+we can execute the erosion simulation on the lower resolution decomposition 
+and then modify the higher resolution one according to the produced changes.
+The quality of the terrain that the user sees will be the same, and 
+the erosion simulation will be faster, although we will be sacrificing 
+some quality in the erosion process.
+
+\subsection{Subsampling of Cells}
+\subsection{Problems with the method}

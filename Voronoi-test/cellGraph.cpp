@@ -41,10 +41,12 @@ void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, doubl
     if (outside) {
         cells[pid].state = AIR;
     }
-    else if (isCore) {
-        cells[pid].state = CORE;
+    else {
+        if (isCore) {
+            cells[pid].state = CORE;
+        }
     }
-
+    
     
     addLinks(c,cells[pid].faceData, pid);
     
@@ -52,6 +54,8 @@ void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, doubl
 
 void CellGraph::setNumCells(int n) {
     cells.resize(n);
+    solidCells.resize(n, -1);
+    solidCells.push_back(0);
 }
 
 bool CellGraph::breakLink(std::pair<int,int> link) {return false;}
@@ -72,15 +76,16 @@ void CellGraph::updateExternalLinks() {
         std::pair<int,int>  key = it -> first;
         ++it;
 
+        vorolink& l = links[key];
         if ( (key.first < 0 || cells[key.first].state == AIR) && ( key.second < 0 ||cells[key.second].state == AIR) )  {
             
-            
-            for (int i = 0; i < links[key].neighbors.size(); ++i) {
-                std::pair<int,int> act = links[key].neighbors[i];
-                for (int j = 0; j < links[act].neighbors.size();) {
-                    if (links[act].neighbors[j] == key) {
-                        links[act].neighbors[j] = links[act].neighbors[links[act].neighbors.size() - 1];
-                        links[act].neighbors.pop_back();
+            for (int i = 0; i < l.neighbors.size(); ++i) {
+                std::pair<int,int> act = l.neighbors[i];
+                vorolink& actLink = links[act]; 
+                for (int j = 0; j < actLink.neighbors.size();) {
+                    if (actLink.neighbors[j] == key) {
+                        actLink.neighbors[j] = actLink.neighbors[actLink.neighbors.size() - 1];
+                        actLink.neighbors.pop_back();
                     }
                     else ++j;
                 }
@@ -90,8 +95,8 @@ void CellGraph::updateExternalLinks() {
         }
 
         else if ((key.first > 0 && cells[key.first].state == AIR) || (key.second > 0 && cells[key.second].state == AIR))  {
-            links[key].state = EXTERIOR;
-            links[key].life = 0.0;
+            l.state = EXTERIOR;
+            l.life = 0.0;
             exteriorLinks.insert(key);
             
         }
@@ -115,12 +120,12 @@ void CellGraph::addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& 
         int faceID = c.ne[face.vertices[0]][edg];
         std::pair<int,int> key;
         
-        if (links.find(std::make_pair(pid, faceID)) != links.end()) key = std::make_pair(pid, faceID); 
+        if (pid < faceID) key = std::make_pair(pid, faceID); 
         else key = std::make_pair(faceID,pid);
 
-        
+        vorolink& l = links[key];
         if (faceID < 0 || cells[faceID].state == AIR) {
-            links[key].state = EXTERIOR;
+            l.state = EXTERIOR;
             cells[pid].isExterior = true;
         }
 
@@ -136,13 +141,13 @@ void CellGraph::addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& 
 
             int neighID = c.ne[face.vertices[(j + 1)%face.vertices.size()]][edg];
             std::pair<int,int> neighKey;
-            if (links.find(std::make_pair(pid, neighID)) != links.end()) neighKey = std::make_pair(pid, neighID);
+            if (pid < neighID)  neighKey = std::make_pair(pid, neighID);
             else  {
                 neighKey = std::make_pair(neighID, pid);
-                if (links.find(std::make_pair(neighID, pid)) == links.end()) links[neighKey].neighbors = std::vector<std::pair<int,int>>();
+                //if (links.find(std::make_pair(neighID, pid)) == links.end()) links[neighKey].neighbors = std::vector<std::pair<int,int>>();
             } 
 
-            links[key].neighbors.push_back(neighKey);
+            l.neighbors.push_back(neighKey);
             //std::cout << "face: " << i << " ID: " << c.ne[face[(j + 1)%face.size()]][edg] << std::endl;   
         }
         
@@ -176,4 +181,16 @@ void CellGraph::clear() {
     cells.clear();
     links.clear();
     exteriorLinks.clear();
+}
+
+void CellGraph::updateSolidCells() {
+    int act = 0;
+    for (int i = 0; i < cells.size(); ++i) {
+        if (cells[i].state == AIR) solidCells[i] = -1;
+        else { 
+            solidCells[i] = act;
+            ++act;
+        }
+    }
+    solidCells[solidCells.size() - 1] = act;
 }

@@ -18,6 +18,7 @@ class ErosionAlgorithm {
     bool waterPath(std::set<std::pair<int,int>>& visited);
     void computeStress();
 
+    void setMechanicalModelMode(bool mode) {useModel = mode;}
     //Returns true if the model changed
     
   private:
@@ -55,6 +56,8 @@ class ErosionAlgorithm {
     double phi_dir;
 
     int level;
+
+    bool useModel = false;
 
     MechanicalModel model;
   };

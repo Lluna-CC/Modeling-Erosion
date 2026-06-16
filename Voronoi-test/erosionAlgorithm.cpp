@@ -10,7 +10,7 @@ ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel) {
 
     graph = g;
     level = workLevel;
-    model.initializeModel(g -> getCells(level));
+    model.initializeModel(g -> getCells(level), g -> getLinks(level), g -> getSolidCells(level));
     computeAverageArea();
     
 }
@@ -95,6 +95,7 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
     while (water > 0) {
         
         std::vector<double> propagationWeight(links[actLink].neighbors.size());
+        Vector3 centr_a = cells[actLink.first].faceData[actLink.second].face_centroid;
         for(int i = 0; i < links[actLink].neighbors.size(); ++i) {
             int a,b; 
             std::pair<int,int> neigh = links[actLink].neighbors[i];
@@ -103,23 +104,21 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
                 continue;
             }
 
-            if (neigh.first == actLink.first || neigh.first == actLink.second) {
-                a = neigh.first;
-                b = neigh.second;
-            }
-            else {
-                a = neigh.second;
-                b = neigh.first;
-            }
-
-            Vector3 centr_a = cells[a].centroid;
-            Vector3 centr_b = cells[b].centroid;
+            Vector3 centr_b = cells[neigh.first].faceData[neigh.second].face_centroid;
 
             propagationWeight[i] = dot(g, Normalized(centr_b - centr_a));
             if (propagationWeight[i] < 0) propagationWeight[i] = 0;
             propagationWeight[i] *= (1 - links[links[actLink].neighbors[i]].life * resistanceField(centr_b[0], centr_b[1], centr_b[2]));
         }
 
+        bool stop_path = true;
+        for (int i = 0; i < propagationWeight.size(); ++i) {
+            if (propagationWeight[i] > 0) {
+                stop_path = false;
+                break;
+            }
+        }
+        if(stop_path) break;
         std::discrete_distribution<int> nextLinkDist(propagationWeight.begin(), propagationWeight.end());
         
         int next = nextLinkDist(generator);
@@ -149,6 +148,30 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
                 break;
             }
         }
+
+        else if (useModel) {
+            double D = 1 - links[actLink].life;
+            if (links[actLink].normalStress > model.getTmax(D)) {
+                if (breakLink(actLink)) {
+                    model_update = true;
+                    break; 
+                }
+            }
+            else if (links[actLink].normalStress < -model.getUCS(D)) {
+                if (breakLink(actLink)) {
+                    model_update = true;
+                    break; 
+                }
+            }
+
+            else if (links[actLink].shearStress > model.getShearC(D) - links[actLink].normalStress * model.getTanPhi()) {
+                if (breakLink(actLink)) {
+                    model_update = true;
+                    break; 
+                }
+            }
+        }
+
         else if (links[actLink].life < k_break && links[actLink].state != BROKEN && links[actLink].state != EXTERIOR) {
             double break_prob = 1 - links[actLink].life/k_break;
             if (rand(generator) < break_prob) {
@@ -159,7 +182,9 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
                 }
                 
             } 
-        }
+        } 
+
+        
         
     }
 
@@ -171,47 +196,13 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     //std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
+    std::vector<vorocell>& cells = graph -> getCells(level);
     //std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
     
+    if (link.first < 0 || cells[link.first].state == AIR || link.second < 0 || cells[link.second].state == AIR) return false;
     links[link].state = BROKEN;
-    
-    //Delete Cell connection
-    /* if (link.first >= 0 && link.second >= 0) {
-        for (int i = 0; i < (*cells)[link.first].neighbors.size(); ++i) {
-            if ((*cells)[link.first].neighbors[i] == link.second) {
-                (*cells)[link.first].neighbors[i] = (*cells)[link.first].neighbors[(*cells)[link.first].neighbors.size() - 1];
-                (*cells)[link.first].neighbors.pop_back(); 
-            }
-        }
+    model.removeLink(link, graph -> getCells(level), graph -> getSolidCells(level));
 
-        for (int i = 0; i < (*cells)[link.second].neighbors.size(); ++i) {
-            if ((*cells)[link.second].neighbors[i] == link.first) {
-                (*cells)[link.second].neighbors[i] = (*cells)[link.second].neighbors[(*cells)[link.second].neighbors.size() - 1];
-                (*cells)[link.second].neighbors.pop_back(); 
-            }
-        }
-    } 
-        
-    
-    else {
-        //WE SHOULD NOT BE ABLE TO REMOVE EXTERIOR LINKS
-    }
-
-    */
-
-    //Delete edge, ask(?)
-    /*
-    std::vector<std::pair<int,int>> linkNeighbors;
-    links.erase(link);
-    for (int i = 0; i < linkNeighbors.size(); ++i) {
-        std::pair<int,int> act = linkNeighbors[i];
-        for (int j = 0; j < links[act].neighbors.size(); ++j) {
-            if (links[act].neighbors[j] == link) {
-                links[act].neighbors[j] = links[act].neighbors[links[act].neighbors.size() - 1];
-                links[act].neighbors.pop_back();
-            }
-        }
-    }*/
 
     //Check connected components
     bool update = false;
@@ -233,12 +224,16 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
                 update = exterior_one;
                 //std::cout << "Removing first" << std::endl;
                 removeComponent(link.first);
+                graph -> updateSolidCells(level);
+                model.initializeModel(graph -> getCells(level), graph -> getLinks(level), graph -> getSolidCells(level));
             }
             else if (containsCore_first && !containsCore_second) {
                 //Remove Second Component
                 update = exterior_two;
                 //std::cout << "Removing second" << std::endl;
                 removeComponent(link.second);
+                graph -> updateSolidCells(level);
+                model.initializeModel(graph -> getCells(level), graph -> getLinks(level), graph -> getSolidCells(level));
             }
 
             else if (!containsCore_first && !containsCore_second) {
@@ -252,10 +247,16 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
                     std::cout << "Removing first" << std::endl;
                     removeComponent(link.first);
                 }
+                graph -> updateSolidCells(level);
+                model.initializeModel(graph -> getCells(level), graph -> getLinks(level), graph -> getSolidCells(level));
             }
+
+            
         }
     }
 
+    
+    if (useModel) computeStress();
     //Update external links
     if (update) {
         std::cout << "Updating Links" << std::endl;
@@ -269,6 +270,7 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
         return true;
     }
     
+
     else return false;
 }
 
@@ -290,16 +292,19 @@ int ErosionAlgorithm::componentSize(int cell, int otherCell, bool& containsCore,
 
         count += 1;
         if (cells[actCell].state == CORE) containsCore = true;
-        if (actCell == otherCell) reachable = true;
+        if (actCell == otherCell) {
+            reachable = true;
+            return -1;
+        }
 
         for (int i = 0; i < cells[actCell].neighbors.size(); ++i) {
             int next = cells[actCell].neighbors[i];
             if (next < 0) continue;
 
             std::pair<int,int> key;
-            if (links.find(std::make_pair(actCell, next)) != links.end()) key = std::make_pair(actCell, next);
-            else if (links.find(std::make_pair(next, actCell)) != links.end()) key = std::make_pair(next, actCell);
-            else continue;
+            if (actCell < next) key = std::make_pair(actCell, next);
+            else key = std::make_pair(next, actCell);
+            if (links.find(key) == links.end()) continue;
 
             if (links[key].state == EXTERIOR) {
                 exterior = true;
@@ -336,9 +341,9 @@ void ErosionAlgorithm::removeComponent(int cell) {
         if (next < 0) continue;
 
         std::pair<int,int> key;
-        if (links.find(std::make_pair(cell, next)) != links.end()) key = std::make_pair(cell, next);
-        else if (links.find(std::make_pair(next, cell)) != links.end()) key = std::make_pair(next, cell);
-        else continue;
+        if (cell < next) key = std::make_pair(cell, next);
+        else key = std::make_pair(next, cell);
+        if (links.find(key) == links.end()) continue;
 
         if (cells[next].state != AIR && links[key].state != BROKEN) removeComponent(next); 
     }
@@ -416,7 +421,16 @@ void ErosionAlgorithm::computeAverageArea() {
 
 void ErosionAlgorithm::computeStress() {
     if (graph == nullptr) return;
+    
+    std::vector<std::pair<int,int>> brokenLinks;
     model.computeEquilibra();
-    model.updateLinkStresses(graph -> getLinks(level));
+    model.updateLinkStresses(graph -> getLinks(level), graph -> getCells(level), graph -> getSolidCells(level), brokenLinks);
+    for (int i = 0; i < brokenLinks.size(); ++i) {
+        breakLink(brokenLinks[i]);
+    }
+    if (brokenLinks.size() > 0) {
+        
+        computeStress();
+    }
 }
 

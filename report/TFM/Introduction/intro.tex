@@ -1,6 +1,6 @@
 \chapter{Introduction} \label{intro}
 
-Virtual terrains appear in a wide variety of applications: from entretainment
+Virtual terrains appear in a wide variety of applications: from entertainment
 to physical simulation or science visualization, a lot of virtual scenes 
 are set on a digital landscape. Despite the ubiquity of virtual terrains 
 on 3D scenes, the complex and fractal structure of natural landscapes still
@@ -23,10 +23,10 @@ like sharp ridges, loose blocks or steep cliffs.
 
 Many of these complex structures that can not be easily captured by 2D 
 heightfields, arise from different types of weathering events, like percolation
-and freeze-thaw cycles. To address this limitations on virtual terrain models, ç
+and freeze-thaw cycles. To address this limitations on virtual terrain models,
 our goal in this thesis is to study the mechanical weathering of rocky 
-terrians to enhance models given from 2D heightfields and add the complex features 
-that these fields fail to caputre. 
+terrains to enhance models given from 2D heightfields and add the complex features 
+that these fields fail to capture. 
 
 \vspace{10pt}
 
@@ -37,40 +37,40 @@ a terrain goes through over multiple years.
 
 \vspace{10pt}
 
-This project is built on a previous project on this same topic \cite{10.2312:ceig.20241139}, 
-using the same algorithm as a base, we worked on adressing some limitations 
-of the previous project.
+This project is built on a previous project on this same topic \cite{10.2312:ceig.20241139}. 
+Using the same algorithm as a base, we worked on addressing some of its 
+limitations and improving both its quality and efficiency.
 \section{Contributions}
 
-As mentioned before, this project is heavily based on a previous one, and
-our proposed algorithm is built on the previous one. Despite that, we add
-mulitple improvements to the base algorithm to increase the quality of 
-the results and its efficiency. 
+As we just mentioned, this project is heavily based on a previous one, and
+our proposed algorithm is built on the method they proposed. Despite that, 
+in this thesis we will provide 
+multiple improvements to the base algorithm to address some of its limitations. 
 
 \vspace{10pt}
 
-The main point we wanted to adress of the previous project was the lack of
+The main point we wanted to address of the previous project was the lack of
 a physically based approach to the algorithm, as the proposed algorithm
 made a lot of simplifications and ignored multiple physical interactions 
 which made the method less accurate and realistic. However, during this 
-thesis we also found other areas that could be improved and expanded 
-to improve both the quality and the efficiency of the algorithm.
+thesis we also found other areas that could be improved and expanded, 
+which also took a significant ammount of effort to solve.
 
 \vspace{10pt}
 
-The limitations of the previous project and our imporvements will be 
-discussed at length during these thesis, but our main contributions can
-be summarized in three large blocks: improvements to the decomposition of 
-the terrain into cells, improvements in the efficiency of the algorithm and
-improvement on the quality of the algorithm by extending the simulation to 
-a physically based one.  
+The limitations of the previous project and our improvements will be 
+discussed at length during this thesis, but our main contributions can
+be summarized in two large blocks: improvements to the decomposition of 
+the terrain into cells and
+improvements on the quality of the algorithm by including a mechanical 
+model to the simulation.  
 
 \section{Set-up and tools}
 
 Another difference between the project we base this thesis on, albeit less
-significant, is the tools used. In the project that presented the algorithm we 
-are extending, a blender pluging was implemented to show the method, however, 
-here we have implemented our erosion model using C++ and we showed the 
+significant, resides in the tools used. In the project that presented the algorithm we 
+are extending, a blender plugin was implemented to show the method, however, 
+here we have implemented our erosion simulation algorithm using C++ and we showed the 
 results in a QT application using OpenGL for rendering.
 
 \vspace{10pt}

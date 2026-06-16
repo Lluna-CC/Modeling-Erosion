@@ -135,12 +135,13 @@ void CellDecomposition::renderLinks(int l) {
             if (neigh < i) continue;
             
             std::pair<int,int> key;
-            if (links.find(std::make_pair(i, neigh)) != links.end()) key = std::make_pair(i, neigh);
-            else if (links.find(std::make_pair(neigh, i)) != links.end()) key = std::make_pair(neigh, i);
-            else continue;
+            if (i < neigh) key = std::make_pair(i, neigh);
+            else key = std::make_pair(neigh, i);
+            if (links.find(key) == links.end()) continue;
 
-            if (links[key].state == BROKEN || links[key].state == EXTERIOR) continue;
-            float t = links[key].life;
+            vorolink& l = links[key];
+            if (l.state == BROKEN || l.state == EXTERIOR) continue;
+            float t = l.life;
 
             glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
             
@@ -169,6 +170,7 @@ void CellDecomposition::renderLinks(int l) {
 void CellDecomposition::fullMeshDecomposition(int l) {
     computeBounds();
     graph.updateExternalLinks();
+    graph.updateSolidCells(l);
     std::vector<vorocell>& cells = graph.getCells(l);
 
     float diff[3];
@@ -337,9 +339,9 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths, int l) 
             if (neigh < i) continue;
             
             std::pair<int,int> key;
-            if (links.find(std::make_pair(i, neigh)) != links.end()) key = std::make_pair(i, neigh);
-            else if (links.find(std::make_pair(neigh, i)) != links.end()) key = std::make_pair(neigh, i);
-            else continue;
+            if (i < neigh) key = std::make_pair(i, neigh);
+            else key = std::make_pair(neigh, i);
+            if (links.find(key) == links.end()) continue;
 
             if (links[key].state == BROKEN || links[key].state == EXTERIOR) continue;
             if (links[key].state == MARKED) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.1f, 0.5f,1.0f);

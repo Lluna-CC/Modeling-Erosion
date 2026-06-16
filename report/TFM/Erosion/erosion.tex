@@ -1,8 +1,731 @@
 \chapter{Erosion}
 
-\section{Initial Method}
-\section{Multi-resolution}
-\section{Physical Model}
-\section{Extensions}
+In this chapter, we are going to look into the algorithm that we 
+implemented to simulate the erosion of rocky terrains. First, we are 
+going to review the original method that we are extending, and then 
+we are going to explain the mechanical model we implemented as an extension
+for the algorithm.
+
+\section{Base Method Overview}
+The algorithm described in \cite{10.2312:ceig.20241139} consists in simulating
+water infiltrating the cracks on the rocks, which are described by 
+the links between cells that we described how to create in the previous 
+section.
+\vspace{10pt}
+
+The water infiltration simulation is performed by generating different paths
+using a stochastic flow method. At the start of each path, one exterior 
+link (described in \ref{sec:linkParams}) is chosen, and then one of its neighbors 
+is selected to jump to. Then, the process of choosing a neighbor is repeated 
+iteratively until a stop condition is met. Every time the path crosses a 
+link, the amount of water in the path is 
+reduced and the link is damaged according to the amount of water absorbed. 
+When the damage exceeds a threshold (when the life of the link reaches 0), 
+then the link is broken and the adjacency information of the cells is updated.
+When a broken link separates the cell graph into multiple connected components, 
+then the smaller components are deleted, unless they contain core cells, in 
+which case the components that do not contain core cells are deleted.
+
+\vspace{10pt}
+
+In addition to this base algorithm, we propose a mechanical model to more 
+accurately measure the stress that each link has to withstand to maintain 
+the equilibrium of the system. This proposed model will change the method 
+used to determine when a link is broken and also create a \textit{crack propagation}
+effect: once a link is broken, the stresses being 
+applied on each link change (in order to maintain the new equilibrium), and 
+this could cause more links to break due to not being able to withstand 
+the new stresses. 
 
 
+\vspace{10pt}
+
+The criterion used to choose where the water jumps to next (or where 
+it starts), and the parameters that control how much water is absorbed or 
+when a link is considered broken will be explained  
+after we describe the mechanical model we implemented, as it has an influence 
+over these parameters that control the water infiltration process.
+
+
+
+
+\section{Mechanical Model}
+In this thesis we designed a mechanical method to simulate the terrain 
+situation and potentially modify it when link stresses go over a limit. 
+The model we present is based on the \textit{Bonded Discrete Element Method},
+which considers the terrain as a set of discrete elements connected by bonds
+that can move and rotate independently.
+
+\vspace{10pt}
+
+In our simulation, the terrain is at equilibrium with gravity as the only 
+force external force. Because the system is at equilibrium, the sum 
+of forces on all links, represented by virtual springs, must compensate for 
+the gravity pull, which implies that some cells might perceive tiny displacements
+(in order to produce the forces on the links). Based on the cell displacements, we 
+can obtain the stress that each link withstands, and this stress can be 
+used both for the water infiltration algorithm and also to perform crack propagation.  
+
+\subsection{Rotation Preliminaries and Notation}\label{sec:rotation}
+
+Before we start describing our model, it is important to clearly 
+explain what do we use to describe rotations, as we are making 
+some assumptions that significantly change the way we deal with them.
+
+\vspace{10pt}
+
+First, we are going to allow the cells to rotate, so every cell will have
+a potential angular displacement $\phi$ along the $(\hat{\theta_1}, \hat{\theta_2}, 
+\hat{\theta_3})$ axis. Angular displacements cannot be considered as vectors,
+as the addition between two displacements is not commutative, but despite 
+that we are going to abuse the notation and represent them as a vector 
+$\theta$ with magnitude $\phi$ and direction $(\hat{\theta_1}, \hat{\theta_2}, 
+\hat{\theta_3})$. In this thesis we are not going to add two different angular 
+displacement vectors (or not directly), so we are not going to have problems with 
+non-commutativity.
+\vspace{10pt}
+
+Additionally, the cells are supposed to have extremely small displacements 
+and rotations, so we can approximate angular displacements as 
+infinitesimal rotations. Infinitesimal rotation vectors describe 
+an infinitesimally small rotation and have some interesting properties.
+Given an infinitesimal rotation vector $\theta$, we can define an infinitesimal
+rotation matrix $\Theta$ as follows:
+
+\begin{equation}
+    \Theta = \begin{bmatrix}
+        0 & -\theta_3 & \theta_2 \\
+        \theta_3 & 0 & -\theta_1 \\
+        -\theta_2 & \theta_1 & 0
+    \end{bmatrix}
+\end{equation}
+
+$\Theta$ is a skew-symmetric matrix and it has the following property for 
+any vector $v \in \mathbb{R}^3$:
+
+\begin{equation}
+    \Theta v = \theta \times v
+\end{equation}
+
+
+So we can convert any rotation into a cross product. This treatment of 
+rotations as infinitesimal rotations is really useful to us as   
+we are getting rid of the non-linear terms ($sin$ and $cos$) of the usual
+rotation matrices so we can describe rotations on linear equations.
+\subsection{Basic Considerations}
+
+In order to properly define our model, we have to start by stating the different 
+assumptions and considerations that we make. First, we assume that we have 
+$N$ independent cells that are connected by some links. Defining $F_{ij}$
+as the force applied on the link that goes from cell $i$ to cell $j$, we 
+can define the total force that is applied to a cell $i$ from its links as:
+
+\begin{equation}
+    F_i = \sum_{j \in \mathcal{N}(i)} F_{ij}
+\end{equation}
+
+Where $\mathcal{N}(i)$ defines the set of neighbors of cell $i$. Because the 
+whole system is at rest, and the only external force that is applied to it 
+is gravity $\vec{g}$, we know that the following must hold:
+
+\begin{equation}
+    \sum_{i = 1}^{N} F_i = -m_i\vec{g}
+\end{equation}
+
+Using cell mass $m_i$. We assume that the cells can move and also rotate, so we need to 
+explicitly state that the total torque, also known as moment of force, applied to a cell has to 
+be null. Similarly to the forces, the torques are applied to a cell via its links, 
+so, defining $M_{ij}$ as the moment of force applied on the link that goes 
+from $i$ to $j$, then we can define $M_i$ as:
+
+\begin{equation}
+    M_i =  \sum_{j \in \mathcal{N}(i)} M_{ij}
+\end{equation}
+
+And if we consider the link to be placed on the centroid $c_{ij}$ of the interface 
+between cells $i$ and $j$, which have centroids $c_i$ and $c_j$, then we can define $M_{ij}$ as:
+
+\begin{equation}
+    M_{ij} = (c_{ij} - c_i) \times F_{ij}
+\end{equation}
+
+And given that the system is at rest we also have:
+
+\begin{equation}
+    \sum_{i = 1}^{N} M_i = 0
+\end{equation}
+
+Now, remember that we can move and rotate each cell, so we will also have to keep
+track of, for each cell, its displacement $s$ and its angular displacement 
+$\theta$.
+\footnote{$\theta$ is properly defined in section \ref{sec:rotation}}. 
+As we are simulating the links as virtual springs, these displacements and rotations have a direct influence 
+over the forces of each link. Given the displacements $s_i, s_j$ and rotations 
+$\theta_i, \theta_j$ of cells $i$ and $j$, the displacements $d_{ij}$ and $d_{ji}$ of
+face centroids $c_{ij}$ and $c_{ji}$ will be: 
+
+\begin{equation}
+    d_{ij} = s_i + \theta_i \times(c_{ij} - c_i) 
+\end{equation}
+
+\begin{equation}
+    d_{ji} =  s_j + \theta_j \times(c_{ji} - c_j) 
+\end{equation}
+
+Once we have the face centroid's displacements  
+we can compute the forces $F_{ij}$ and $F_{ji}$ applied to each link:
+
+\begin{equation} \label{eq:fij}
+    F_{ij} = k_t(d_{ij} - d_{ji})
+\end{equation}
+
+\begin{equation}\label{eq:fji}
+    F_{ji} = k_t(d_{ji} - d_{ij}) = -F_{ij}
+\end{equation}
+
+Where $k_t$ represents the \textit{total} stiffness of the string, and its exact definition
+will be provided later. Finally, up until now we have been separating 
+each link $(i,j)$ into two links $(i,j)$ and $(j,i)$ but we only have 
+one link for each interface, which will suffer a single stress (or rather 
+one single shear stress and one single normal stress), for that reason 
+we are only going to consider links $(i,j)$ where $i < j$ when performing
+stress measurements and computing link damage.
+\subsection{Cell Movement}
+
+After reviewing some basics, we are ready to define how we are going to 
+obtain cell displacements so we can compute the forces that are applied 
+on each link. First, we are going to define a displacement and roattion 
+vector $u_i$ for each cell $i$:
+
+\begin{equation}
+    u_i =
+    \begin{bmatrix}
+        s_i \\
+        \theta_i    
+    \end{bmatrix}
+\end{equation}
+
+Where $s_i$ and $\theta_i$ are 3x1 vectors, so $u_i$ is a 6x1 vector. Now, 
+in order to introduce the method, let us first consider a simple situation 
+with only two cells $i$ and $j$. Because we only have 2 cells,  
+$F_{ij} = F_i$, $F_{ji} = F_j$, $M_{ij} = M_i$, and $M_{ji} = M_j$ and we 
+can attempt to describe these values as a system of equations as follows:
+
+\begin{equation}
+    K \begin{bmatrix}
+        s_i \\
+        \theta_i \\
+        s_j \\
+        \theta_j\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        F_i \\
+        M_i \\
+        F_j \\
+        M_j\\
+    \end{bmatrix}
+\end{equation}
+
+Where we just have to define the 12x12 $K$ matrix to make the equation correct. In order 
+to define $K$, we are going to use the total stiffness $k_t$ (which will be
+properly defined later), the vectors $r_i = (c_{ij} - c_i)$ and $r_j = (c_{ji} - c_j)$
+and a \textit{skew-symmetric} operator $[ \cdot ]_\times$ defined as:
+
+\begin{equation}
+    [w]_\times = \begin{bmatrix}
+        0 & -w_3 & w_2 \\
+        w_3 & 0 & -w_1 \\
+        -w_2 & w_1 & 0 
+    \end{bmatrix}
+\end{equation}
+
+Which has the same structure as the infinitesimal rotation matrix  
+described in section \ref{sec:rotation}, also keeping the property 
+of $[w]_\times v  = w \times v$. Additionally, note that the generated 
+matrix has the property 
+$[w]_\times^T = -[w]_\times$. With this, we can define $K$ as:
+
+\begin{equation}
+    K = \begin{bmatrix}
+        k_t & k_t[r_i]_\times^T & -k_t & -k_t[r_j]_\times^T \\
+        [r_i]_\times k_t & [r_i]_\times k_t [r_i]_\times^T & -[r_i]_\times k_t & -[r_i]_\times k_t [r_j]_\times^T \\
+        -k_t & -k_t[r_i]_\times^T & k_t & k_t[r_j]_\times^T \\
+        -[r_j]_\times k_t & -[r_j]_\times k_t [r_i]_\times^T & [r_j]_\times k_t & [r_j]_\times k_t [r_j]_\times^T \\
+        
+    \end{bmatrix}
+\end{equation}
+
+Where every element is a 3x3 matrix, so $K$ is a 12x12 matrix. If we apply this matrix 
+to the displacements and rotations we get:
+
+\begin{equation}
+    \begin{bmatrix}
+        k_t & k_t[r_i]_\times^T & -k_t & -k_t[r_j]_\times^T \\
+        [r_i]_\times k_t & [r_i]_\times k_t [r_i]_\times^T & -[r_i]_\times k_t & -[r_i]_\times k_t [r_j]_\times^T \\
+        -k_t & -k_t[r_i]_\times^T & k_t & k_t[r_j]_\times^T \\
+        -[r_j]_\times k_t & -[r_j]_\times k_t [r_i]_\times^T & [r_j]_\times k_t & [r_j]_\times k_t [r_j]_\times^T \\
+        
+    \end{bmatrix}
+    \begin{bmatrix}
+        s_i \\
+        \theta_i \\
+        s_j \\
+        \theta_j\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        F_i \\
+        M_i \\
+        F_j \\
+        M_j\\
+    \end{bmatrix}
+\end{equation}
+
+If we perform the matrix multiplication to obtain $F_i$, $F_j$, $M_i$ and $M_j$ 
+we then get:
+
+\begin{equation}
+\begin{split}
+    F_i & = k_t(s_i + [r_i]_\times^T \theta_i - s_j - [r_j]_\times^T \theta_j) \\
+    & = k_t(s_i + \theta_i \times (c_{ij} - c_i) - (s_j + \theta_j \times (c_{ji} - c_j)))  \\
+    & = k_t(d_{ij} - d_{ji}) = F_{ij}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    M_i & = [r_i]_\times k_t(s_i + [r_i]_\times^T \theta_i - s_j - [r_j]_\times^T \theta_j) \\
+    & = (c_{ij} - c_i) \times F_i \\
+    & = (c_{ij} - c_i) \times F_{ij} = M_{ij}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    F_j & = k_t(s_j + [r_j]_\times^T \theta_j - s_i - [r_i]_\times^T \theta_i) \\
+    & = k_t(s_j + \theta_j \times (c_{ji} - c_j) - (s_i + \theta_i \times (c_{ij} - c_i)))  \\
+    & = k_t(d_{ji} - d_{ij}) = F_{ji}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    M_j & = [r_j]_\times k_t(s_j + [r_j]_\times^T \theta_j - s_i - [r_i]_\times^T \theta_i) \\
+    & = (c_{ji} - c_j) \times F_j \\
+    & = (c_{ji} - c_j) \times F_{ji} = M_{ji}
+\end{split}
+\end{equation}
+
+So we can confirm that the matrix $K$ is defined properly. We can write 
+this same multiplication using a more compact notation, grouping the
+force and moment of a cell in a single vector $\mathbf{F}$:
+
+\begin{equation} \label{eq:EqSystem}
+    \begin{bmatrix}
+        K_{ii} & K_{ij} \\
+        K_{ji} & K_{jj}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_i \\
+        u_j
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \mathbf{F}_i \\
+        \mathbf{F}_j
+    \end{bmatrix}
+\end{equation}
+
+And using this compact notation we are ready to define a full system 
+of equations describing 
+all the terrain:
+ 
+\begin{equation}\label{eq:system}
+    \begin{bmatrix}
+        K_{1,1} & \hdots & K_{1,N} \\
+        \vdots & \ddots & \vdots \\
+        K_{N, 1} & \hdots & K_{N, N}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_1 \\
+        \vdots \\
+        u_N
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \mathbf{F}_1 \\
+        \vdots \\
+        \mathbf{F}_N
+    \end{bmatrix}
+\end{equation}
+
+Where the non-diagonal entries $K_{ij}$ will describe the effect 
+of moving cell $j$ on $\mathbf{F_i}$ and the diagonal entries 
+$K_{ii}$ will describe the effect of moving cell $i$ in the resulting force.
+Keep in mind that, as we are considering multiple interfaces, the diagonal
+entries will contain a sum of contributions, one for each interface. Using
+any linear algebra solver (in our case, we are going to use the Eigen c++ library \cite{eigenweb}),
+we can obtain all displacements $\textbf{u}$ to then compute the different 
+link stresses.
+
+\vspace{10pt}
+
+To end this explanation of the system, we already stated that the only force being applied
+on the system is gravity, and the torques on each cell are also null, so 
+$\mathbf{F}_i$ is going to be defined as:
+
+\begin{equation}
+    \mathbf{F}_i = \begin{bmatrix}
+        F_i \\
+        M_i 
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        -m_ig \\
+        0 \\
+        0 \\
+        0
+    \end{bmatrix} 
+\end{equation} 
+
+Finally, there is one more thing to consider when solving and constructing
+the system. The terrain can translate and rotate in infiniteley many ways 
+with the constraints we have set. For that reason, we will
+have to add some \textit{fixed} cells that will constrain our problem 
+even more so we can find a concrete solution. For a fixed cell $k$, 
+we will set $\mathbf{F}_k = 0_{6,1}$, $K_{k,k} = I_{6,6}$ and for every other 
+cell $j$, $K_{k,j} = K_{j,k} = 0_{6,6}$. Our fixed cells will be the 
+cells with state \textit{Core}, which will be selected by the user.                  
+\subsection{Stiffness Matrices}
+We used multiple times the total stiffness matrix $k_t$ without explaining 
+how it is computed. If we consider a spr0ing with normal stiffness $k_n$ and 
+shear stiffness $k_s$ (which are scalar values representing stiffness per unit area), then the force 
+generated by a displacement $s$ of the spring is given as:
+
+\begin{equation}\label{eq:stiffness1}
+    F = k_nA(s\cdot \hat{n})\hat{n} + k_sA[1 - (s\cdot \hat{n})\hat{n}]
+\end{equation}
+
+Where $\hat{n}$ is the unit vector pointing in the direction of the spring, 
+which in our case will be the normal vector of the cell faces, and 
+$A$ is its surface area. The equation basically decomposes the displacement into displacement in the normal direction 
+(that will be affected by the normal stiffness) and displacement in any other 
+direction (affected by the shear stiffness). We need to isolate the 
+displacements in order to solve our system, so we can reorganize equation \ref{eq:stiffness1}
+into:
+
+\begin{equation}
+    F = A(k_n[\hat{n} \otimes \hat{n}] + k_s[I - (\hat{n} \otimes \hat{n})])s 
+\end{equation}
+
+Where $\otimes$ is the outer product \footnote{The outer product of two 
+vectors $u \otimes v$ is equivalent to $uv^T$, in case the reader is more familiar with that notation.} 
+and $I$ the identity matrix. This reorganization allows us to define $k_t$ 
+as:
+
+\begin{equation}
+    k_t = A[k_n(\hat{n} \otimes \hat{n}) + k_s(I - \hat{n} \otimes \hat{n})]
+\end{equation}
+
+Finally, $k_n$ and $k_s$ describe the stiffness per unit area and they are 
+defined in terms of the \textit{Young's Modulus} $E$ and \textit{Poisson's Ratio} $\upsilon$
+which are material properties. More Specifically:
+
+\begin{equation}
+    k_n = \frac{E}{L}
+\end{equation}
+\begin{equation}
+    k_s = \frac{E}{2(1 + \upsilon)L}
+\end{equation}
+
+Where $L$ is just a length scaling factor to adjust the properties to our situation. 
+\subsection{Link Damage Model}
+Once we computed the stiffness matrix $K$ and solved the system of equations 
+\ref{eq:system}, the only think left to do is computing the link 
+stresses and determine if the link breaks as a consequence of the stress
+it has to withstand. 
+
+\subsubsection{Link Stresses and Failure}
+ Using link force $F_{ij}$ 
+defined in equation \ref{eq:fij}, and only the force $F_{ij}$ to avoid 
+computing duplicate stresses, we define the normal stress $\sigma_n$ and 
+the shear stress $\tau$ as:
+
+\begin{equation}\label{eq:normal_stress}
+    \sigma_n = -\frac{F_{ij} \cdot \hat{n}_{ij}}{A_{ij}}
+\end{equation}
+\begin{equation}\label{eq:shear_stress}
+    \tau =  \frac{||F_{ij} - (F_{ij} \cdot \hat{n}_{ij})\hat{n}_{ij}||}{A_{ij}}
+\end{equation}
+
+$\sigma_n > 0$ defines tensile stress and $\sigma_n < 0$ defines compression. The 
+link $(i,j)$ will break when either of the following failure conditions is met:
+
+\begin{equation}
+    \sigma_n > T_{max}
+\end{equation}
+\begin{equation}
+    \tau > c - \sigma_n tan(\varphi)
+\end{equation}
+
+Where $T_{max}$, $c$ and $\varphi$ are parameters of the material that 
+describe the maximum possible stresses that a link can withstand. Once 
+a link $(i,j)$ has been broken, then tforce $F_{ij}$ disappears from 
+the system, breaking the equilibrium along the link. For that reason, 
+once a link breaks, we will have to recompute the new equilibrium, update 
+the stresses, and check again if any link surpasses the stress limit, and 
+recursively repeat the process in case any link breaks. The most physically 
+accurate way to approach crack propagation would be to break only the 
+link that surpasses the stress thresholds by the most (representing the one that 
+would break first) and then recompute 
+the system until all links are within the margins. However, in order to 
+speed up the computation, we will be removing all links above the threshold 
+each time we recompute the system.
+
+\vspace{10pt}
+
+\subsubsection{Link Damage}
+Now we can technically run our algorithm and possibly have some 
+links breaking, but at no point of the mechanical model are we considering
+the effect of water infiltrating the rock and damaging the links. 
+For this reason we will have a damage variable $D$ for every link, which will
+go from $0$ to $1$ and it will be the complement of the life of the 
+link: $D = 1 - life$. Using variable $D$, we will 
+modify the variables $T_{max}$ and $c$ that control the failure conditions, 
+so a damaged link will be less resistant to stress, and it will break 
+more easily. The criterion that we use to modify the failure parameters 
+is a simple interpolation:
+
+\begin{equation}
+    T_{max}'(D) = T_{max}(1 - D)
+\end{equation}
+\begin{equation}
+    c'(D) = c(1 - D)
+\end{equation}
+
+Notice how, when $D = 1$, then any amount of stress would break the 
+link, so the link will be automatically broken if it reaches this point.
+\subsection{Final Model Considerations}
+As we mentioned at the start of this section, our mechanical model is 
+heavily based on the \textit{Discrete Element Method}. Now that we have 
+explained our method we can explain the differences that our model has 
+with the standard DEM.
+
+\vspace{10pt}
+
+The standard DEM models dynamic systems solving differential equations
+using Newton's second law of motion. In essence, this means that 
+in order to compute the force $F_i$ and moment $M_i$ of each cell (or element using more general terms), 
+the following laws are used:
+
+\begin{equation}
+    m_i \frac{d^2s_i}{dt^2} = F_i
+\end{equation}
+
+\begin{equation}
+    I_i \frac{d^2\theta_i}{dt^2} = M_i
+\end{equation}
+
+Where $I_i$ is the second-order moment of inertia tensor. In order to 
+compute these equations, some integrator scheme is used, which implies
+dynamically updating all forces, moments, positions, and orientations for tiny 
+timesteps $\Delta t$. In  our case, we discarded the dynamic simulation, 
+and we considered the terrain as static, focusing just on 
+the state of the system at rest. However, we are also interested in 
+the changes in the terrain, so our model will be \textit{Quasi-static}
+instead of fully static, as we will be jumping from stable states 
+into stable states. 
+
+\vspace{10pt}
+
+Besides this change from dynamic to quasi-static, the rules that describe 
+the forces and stresses being applied to each link remain the same 
+(or mostly the same) as other DEM models, specially bonded DEMs, as they  
+model materials using a set of grains connected by virtual beams and springs.
+\section{Water Infiltration Process}
+After computing the decomposition, running the mechanical model, and 
+obtaining the initial state of the 
+system, we are ready to manipulate the terrain using the erosion process. The 
+water infiltration algorithm will be very similar to the original one 
+proposed by \cite{10.2312:ceig.20241139}, with a few necessary changes 
+to adapt it to our mechanical model.
+
+\vspace{10pt}
+
+As mentioned before, the idea is that an initial amount of water starts
+from an exterior link, and then it jumps from link to link following 
+a \textit{stochastic path}. For every link it goes through, some water 
+is absorbed, and the \textit{link is damaged}. When enough links are broken
+and cells are divided into disconnected components, then \textit{cell detachment}
+is produced. We are going to explain this process part by part. 
+\subsection{Water Paths}
+First, we start a water path by choosing an external link, which will initially 
+be links that connect solid cells to air cells (it can change with updates on the 
+simulation), using a random distribution. For a given external link $e_i$, 
+the probability $p_{start}(e_i)$ of being chosen will be set by:
+
+\begin{equation}\label{eq:p_exterior}
+    p_{start}(e_i) \propto A_i max(n_i \cdot \omega, 0)
+\end{equation}
+
+Where $A_i$ is the area of the face connected by $e_i$, $n_i$ is its normal 
+and $\omega$ is a direction chosen by the user. Parameter $\omega$ basically 
+represents the direction where water is infiltarting the terrain; it can 
+represent the direction of rainfall, the presence of the sea or lakes
+at some point of the terrain borders, etc. With the initial link chosen, 
+the water path then selects a new candidate to jump to, following another 
+random distribution. Given an internal link $l_i$, the probability of 
+jumping to another link $l_j \in \mathcal{N}(l_i)$ will be defined by:
+
+\begin{equation}\label{eq:p_flow}
+    p_{flow}(l_i, l_j) \propto max(\vec{g} \cdot \frac{c_j - c_i}{||c_j - c_i||}, 0)(1 - \lambda_j\rho(c_j))
+\end{equation}
+
+Where $c_i$ is the centroid of face $l_i$ and $c_j$ the centroid of $l_j$, 
+$\lambda_j = 1 - D_j$ is the life of link $l_j$ and, finally, $\rho: \mathbb{R}^3 \to \mathbb{R}$ is a resistance field 
+set by the user. The dot product of gravity and the direction defined by 
+$(c_j - c_i)$ assigns higher probabilities to jumping directions aligned 
+with gravity, and makes it impossible for the water to go "up", or against 
+gravity. The other term assigns higher probability to jump to eroded
+links, this is because when water infiltrates through the terrain, it 
+makes further infiltration easier. In some situations, we can find that 
+there is no neighbor $l_j$ with $p_{flow}(l_i, l_j) > 0$ (for example when 
+we reach the bottom of the terrain and every jump would imply going against 
+gravity), in that case we stop the path. The other situation were we can 
+stop the water path is if all water has been absorbed by the links. 
+
+\vspace{10pt}
+
+We start every path with $w_{in}$ water, which will be a fixed quantity, then 
+every link will absorb a quantity of water that will depend on its state. 
+More specifically, the water absorbed by link $l_i$, $w_{abs}(l_i)$
+will be defined as:
+
+\begin{equation}\label{eq:w_abs}
+    w_{abs}(l_i) = \begin{cases}
+        A_ik_{solid} + (1 - \lambda_i \rho(c_i))k_{res} & if \; \; \lambda_i > 0\\
+        A_ik_{air} & Otherwise
+    \end{cases}
+\end{equation}
+
+Where $k_{solid}$, $k_{res}$ and $k_{air}$ are constants that control the 
+behavior of water absorption for solid links, the increase on absorption 
+due to erosion and the amount of water that is lost going through broken 
+links. We need to scale absorption by the area $A_i$, as the bigger 
+the face, the more opportunity there is for water to be trapped there.
+Of course, once water is absorbed, we modify the remaining amount of water 
+before jumping to the next link:
+
+\begin{equation}
+    w_{act}' = w_{act} - w_{abs}
+\end{equation}
+
+Where $w_{act}$ is the amount of water before the absorption and 
+$w_{act}'$ is the new amount of water after the absorption. Finally,
+we also include the possibility of a \textit{full absorption} event, 
+where $w_{abs}$ becomes $w_{act}$ and all water is absorbed by the link. 
+The probability of this event happening is proportional to the remaining 
+fraction of water $1 - \frac{w_{act}}{w_{in}}$.
+\subsection{Updating Links}
+After a water path crosses a link, the link absorbs part of the water,
+but it has to be damaged accordingly.
+\subsection{Cell detachment}\label{sec:detachment}
+Now, the only step left to implement is the cell detachment protocol.
+After a link has been broken, we do not remove it from the link 
+graph, as water can still go through the broken link, but we do 
+remove the link from the cell graph. After link $l_k$ connecting 
+cells $C_i$ and $C_j$ has been broken, we update the cell neighboring 
+information and compute $\mathcal{N}(C_i)'$ and $\mathcal{N}(C_j)'$ as 
+\footnote{Technically, in the implementation we are not going to fully 
+remove the adjacency, just mark it as broken. That is because we are 
+interested on keeping broken links for some purposes}:
+
+\begin{equation}\label{eq:neigh_update}
+    \mathcal{N}(C_i)' = \mathcal{N}(C_i) \setminus \{C_j\}
+\end{equation}
+
+\begin{equation}
+    \mathcal{N}(C_j)' = \mathcal{N}(C_j) \setminus \{C_i\}
+\end{equation}
+
+Notice how this removal might make cells $C_i$ and $C_j$ completly 
+disconnected, making it impossible to reach $C_j$ from $C_i$ by any path 
+and vice versa. If this happens, it means that the rupture of the 
+link has divided the terrain into two separated components. Conceptually 
+this separation implies that a group of rocks has been disconnected from 
+the terrain, and we will have to erase said group of rocks.
+
+\vspace{10pt}
+
+In order to distinguish the \textit{terrain} from the rock that has been 
+separated, we will first look at the core cells. A component that contains 
+a core cell cannot be erased, so if just one of the components contains 
+core cells, then the other component will be erased, but if both components
+contain core cells, then we leave both groups there. Then, the idea proposed 
+by \cite{10.2312:ceig.20241139} was that if none of the groups had core
+cells, then we should remove the component with less cell count. We
+technically keep the same idea, but core cells are mandatory for our 
+mechanical model, so a situation where none of the two components have 
+a core cell can never happen.
+
+\vspace{10pt}
+
+Once a component has been separeted, we will need to perform some tasks
+to keep everything consistent. First, we will mark the removed 
+cells as air, and we will remove them from the mechanical system, recomputing 
+all positions and forces of the new structure without the removed chunk. Then, 
+we will also delete all links that go from an air cell to an air cell, as 
+they should not be accessible anymore. Moreover, if an external portion 
+of the terrain is removed, then some interior cells will now be exposed 
+to the exterior and they will become external, making the links connecting them 
+with the removed part exterior links. Recomputing the exterior
+links and cells is a bit tricky, as simply marking all cells 
+adjacent to air as exterior does not work (we could have air pockets 
+inside the terrain!), but we can do it the following way: Before removing 
+a component, we check if said component contains exterior cells, and if it does,
+then every cell adjacent to the removed component \footnote{In order to perform this operation we need to store 
+the removed cell adjacencies, as this cells will be connected with 
+the detatched part only through broken links} will be marked as exterior. Finally, if our 
+exterior links have changed, we will have to update the probabilities 
+described in equation \ref{eq:p_exterior}.
+ 
+
+\section{Final Algorithm Summary}\label{sec:finalAlgo}
+
+To end this chapter, after describing every step of the algorithm 
+in detail, we will give step-by-step summary of the method to put it 
+all together.
+
+\vspace{10pt}
+
+First we start with a model decomposed into voronoi cells, obtained 
+using the method described in chapter \ref{chap:decomp}, and using 
+this decomposition we compute the system of equations 
+described in \ref{eq:EqSystem} to obtain the displacements of all 
+solid cells. Using said displacements, we obtain the force 
+being applied on each link $F_{ij}$ using \ref{eq:fij} and then 
+the corresponding stresses with \ref{eq:normal_stress} and \ref{eq:shear_stress}.
+We break any stress that passes the failure conditions and, when a link breaks, recompute 
+everything until the system is stable. 
+
+\vspace{10pt}
+
+Once we have a stable system, we can proceed to the water infiltration 
+protocol. We select an exterior link using \ref{eq:p_exterior}, and 
+from there we start a water path with an initial amount of water $w_{ini}$.
+The water path will jump from link to link using \ref{eq:p_flow}, reducing 
+the amount of water by \ref{eq:w_abs} and damaging the link by \ref{aa}.
+If the damage applied to the link makes it break, we update the cell 
+adjacency information with \ref{eq:neigh_update}, and if the graph becomes
+disconnected, then we update the terrain using the method described 
+in section \ref{sec:detachment}. Additionally, we will have to repeat 
+the process of computing the mechanical model (described in the previous 
+paragraph) every time a link breaks, even if it does not cause cell 
+detachment.
+
+\vspace{10pt}
+
+Finally, a water path will stop once there is no amount of water 
+left ($w_{act}' = 0$ after updating the amount of water) or when 
+there are no more links to jump to ($p_{flow}(l_i,l_j) = 0$ for every 
+$l_j \in \mathcal{N}(l_i)$ or $\mathcal{N}(l_i) = \emptyset$).

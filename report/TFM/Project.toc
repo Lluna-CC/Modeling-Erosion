@@ -4,8 +4,7 @@
 \contentsline {section}{\numberline {1.2}Set-up and tools}{7}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Preliminaries}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Terrains and Landscapes}{8}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}General weathering effects}{8}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Freeze-thaw cycle}{8}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.1}Freeze-thaw cycle}{8}{subsection.2.1.1}%
 \contentsline {section}{\numberline {2.2}Terrain Representation and Modeling}{8}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Terrain Representations}{8}{subsection.2.2.1}%
 \contentsline {subsubsection}{Elevation Models}{8}{section*.4}%
@@ -17,38 +16,51 @@
 \contentsline {subsection}{\numberline {2.3.2}Voronoi Decomposition}{12}{subsection.2.3.2}%
 \contentsline {chapter}{\numberline {3}Previous Work}{14}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Work in Applied sciences}{14}{section.3.1}%
-\contentsline {subsubsection}{Simulation of Crack propagation using eigenerosion}{14}{section*.11}%
-\contentsline {section}{\numberline {3.2}Work in Computer Graphics}{14}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Related Methods in Computer Graphics}{14}{subsection.3.2.1}%
-\contentsline {subsubsection}{Spring-Mass Systems and Brittle Fracture}{14}{section*.12}%
-\contentsline {subsubsection}{Modeling Wood Decay}{15}{section*.14}%
-\contentsline {subsection}{\numberline {3.2.2}Weathering in Computer Graphics}{15}{subsection.3.2.2}%
-\contentsline {subsubsection}{Rock Erosion Simulation with Volumetric Models}{16}{section*.16}%
-\contentsline {subsubsection}{Terrain Amplification using Implicit Representations}{16}{section*.18}%
-\contentsline {subsubsection}{Erosion using Layered Representations}{17}{section*.21}%
-\contentsline {subsubsection}{Machine Learning Approach}{18}{section*.23}%
+\contentsline {subsection}{\numberline {3.1.1}Models to Simulate Rock Systems}{14}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Discrete Element Method for Rock Simulation}{14}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Work in Computer Graphics}{15}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Related Methods in Computer Graphics}{15}{subsection.3.2.1}%
+\contentsline {subsubsection}{Spring-Mass Systems and Brittle Fracture}{15}{section*.11}%
+\contentsline {subsubsection}{Modeling Wood Decay}{15}{section*.13}%
+\contentsline {subsection}{\numberline {3.2.2}Weathering in Computer Graphics}{16}{subsection.3.2.2}%
+\contentsline {subsubsection}{Rock Erosion Simulation with Volumetric Models}{16}{section*.15}%
+\contentsline {subsubsection}{Terrain Amplification using Implicit Representations}{17}{section*.17}%
+\contentsline {subsubsection}{Erosion using Layered Representations}{18}{section*.20}%
+\contentsline {subsubsection}{Machine Learning Approach}{19}{section*.22}%
 \contentsline {section}{\numberline {3.3}Base Simulator for this Project}{19}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Model Decomposition}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Base Method Overview}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Point and Cell Generation}{21}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Cell Generation}{22}{subsection.4.2.1}%
-\contentsline {subsubsection}{Neighboring Information}{23}{section*.28}%
-\contentsline {subsubsection}{Cell Attributes}{23}{section*.29}%
-\contentsline {subsection}{\numberline {4.2.2}Point Sampling}{24}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Wall Construction}{25}{subsection.4.2.3}%
-\contentsline {subsubsection}{Sampling out of Bounds}{25}{section*.31}%
-\contentsline {subsubsection}{Using Additional Samples to Generate Cutting Planes}{26}{section*.33}%
-\contentsline {section}{\numberline {4.3}Link Generation}{29}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Link Adjacency Information}{29}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Link Parameters}{29}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Multi-Resolution Extension}{29}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Erosion}{30}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Initial Method}{30}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Multi-resolution}{30}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Physical Model}{30}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Extensions}{30}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Implementation}{31}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Results}{32}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Conclusions}{33}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Future Work}{33}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Conclusions}{33}{section.8.2}%
+\contentsline {chapter}{\numberline {4}Model Decomposition}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Base Method Overview}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Point and Cell Generation}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Cell Generation}{23}{subsection.4.2.1}%
+\contentsline {subsubsection}{Neighboring Information}{24}{section*.27}%
+\contentsline {subsubsection}{Cell Attributes}{24}{section*.28}%
+\contentsline {subsection}{\numberline {4.2.2}Point Sampling}{25}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Wall Construction}{26}{subsection.4.2.3}%
+\contentsline {subsubsection}{Sampling out of Bounds}{27}{section*.30}%
+\contentsline {subsubsection}{Using Additional Samples to Generate Cutting Planes}{27}{section*.32}%
+\contentsline {section}{\numberline {4.3}Link Generation}{30}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Link Parameters}{30}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Link Adjacency Information}{31}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Multi-Resolution Extension}{31}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Subsampling of Cells}{32}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Problems with the method}{32}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}Erosion}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Base Method Overview}{33}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Mechanical Model}{34}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Rotation Preliminaries and Notation}{34}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Basic Considerations}{34}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Cell Movement}{36}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Stiffness Matrices}{38}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Link Damage Model}{38}{subsection.5.2.5}%
+\contentsline {subsubsection}{Link Stresses and Failure}{39}{section*.37}%
+\contentsline {subsubsection}{Link Damage}{39}{section*.38}%
+\contentsline {subsection}{\numberline {5.2.6}Final Model Considerations}{39}{subsection.5.2.6}%
+\contentsline {section}{\numberline {5.3}Water Infiltration Process}{40}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Water Paths}{40}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Updating Links}{41}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Cell detachment}{41}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Final Algorithm Summary}{42}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Implementation and Results}{44}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusions}{45}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Future Work}{45}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Conclusions}{45}{section.7.2}%

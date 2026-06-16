@@ -495,7 +495,7 @@ void Voronoi::toyVoronoi(const HeightField *hf, CellGraph *graph) {
 }
 
 void Voronoi::voronoiFromCentroids(const std::vector<Vector3>& centroids, const std::vector<bool>& exterior, CellGraph* graph, const HeightField* hf) {
-     Box3 domain = hf -> getBox();
+    Box3 domain = hf -> getBox();
     Vector3 min = domain.getMin();
     Vector3 max = domain.getMax();
 
@@ -516,6 +516,8 @@ void Voronoi::voronoiFromCentroids(const std::vector<Vector3>& centroids, const 
 
     
     if(!loopAll.start()) return;
+    Vector3 centr = Vector3(min[0] + (max[0] - min[0])/2.0, min[1] + (max[1] - min[1])/2.0, min[2] + (max[2] - min[2])/3.0);
+    float range = sizeX*5.0;
     graph -> setNumCells(particles);
     do {
         voronoicell_neighbor c;
@@ -526,7 +528,14 @@ void Voronoi::voronoiFromCentroids(const std::vector<Vector3>& centroids, const 
         double cellZ = loopAll.z();
         double z_max = hf -> Height(Vector2(cellX,cellY));
 
-        graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), exterior[loopAll.pid()] && cellZ >= z_max);
+        
+        if (!(exterior[loopAll.pid()] && cellZ >= z_max) && cellX > (centr[0] - range) && cellX < (centr[0] + range) &&
+                cellY > centr[1] - range && cellY < centr[1] + range &&
+                cellZ > centr[2] - range && cellZ < centr[2] + range) {
+                    graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), false, true);
+        } 
+        
+        else graph -> addCell(c,cellX, cellY, cellZ, loopAll.pid(), exterior[loopAll.pid()] && cellZ >= z_max);
     
     }while (loopAll.inc()); 
 }

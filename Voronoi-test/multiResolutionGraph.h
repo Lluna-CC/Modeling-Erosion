@@ -15,6 +15,7 @@ class MultiResolutionGraph {
     std::vector<vorocell>& getCells(int l) {return levels[l].getCells();}
     std::map<std::pair<int,int>, vorolink>& getLinks(int l) {return levels[l].getLinks();}
     std::set<std::pair<int,int>>& getExteriorLinks(int l) {return levels[l].getExteriorLinks();}
+    std::vector<int>& getSolidCells(int l) {return levels[l].getSolidCells();}
 
     void computeBounds();
     Vector3 getMin() {return levels[0].getMin();}
@@ -30,6 +31,7 @@ class MultiResolutionGraph {
     void removeLowerLevel(int l, int cell);
     void updateLowerLevelCells(int l, int cell);
     void updateExternalCells(int l);
+    void updateSolidCells(int l) {levels[l].updateSolidCells();}
 
   private:
     int nLevels = 2;

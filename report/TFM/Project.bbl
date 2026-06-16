@@ -389,6 +389,271 @@
     \warn{\item Invalid format of field 'month'}
   \endentry
 
+  \entry{mohammadnejad2021overview}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=MM}{%
+         family={Mohammadnejad},
+         familyi={M\bibinitperiod},
+         given={Mojtaba},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Hongyuan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Chan},
+         familyi={C\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DS}{%
+         family={Dehkhoda},
+         familyi={D\bibinitperiod},
+         given={Sevda},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FD}{%
+         family={Fukuda},
+         familyi={F\bibinitperiod},
+         given={Daisuke},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{MM+1}
+    \strng{fullhash}{MMLHCADSFD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{206\bibrangedash 229}
+    \field{title}{An overview on advances in computational fracture mechanics of rock}
+    \field{volume}{24}
+    \field{journaltitle}{Geosystem Engineering}
+    \field{year}{2021}
+  \endentry
+
+  \entry{book}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=MA}{%
+         family={Munjiza},
+         familyi={M\bibinitperiod},
+         given={Ante},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MA1}
+    \strng{fullhash}{MA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1002/0470020180
+    \endverb
+    \field{isbn}{9780470841990}
+    \field{pages}{1\bibrangedash 333}
+    \field{title}{The Combined Finite‐Discrete Element Method}
+    \field{month}{12}
+    \field{year}{2004}
+  \endentry
+
+  \entry{tojaga2025advances}{article}{}{}
+    \name{author}{9}{}{%
+      {{hash=TV}{%
+         family={Tojaga},
+         familyi={T\bibinitperiod},
+         given={Vedad},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=NM}{%
+         family={Nikoli{\'c}},
+         familyi={N\bibinitperiod},
+         given={Mijo},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Denzel},
+         familyi={D\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=UJ}{%
+         family={Ulloa},
+         familyi={U\bibinitperiod},
+         given={Jacinto},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=IA}{%
+         family={Ibrahimbegovic},
+         familyi={I\bibinitperiod},
+         given={Adnan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=EM}{%
+         family={Evertsson},
+         familyi={E\bibinitperiod},
+         given={Magnus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Bilock},
+         familyi={B\bibinitperiod},
+         given={Adam},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Saksala},
+         familyi={S\bibinitperiod},
+         given={Timo},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=QJ}{%
+         family={Quist},
+         familyi={Q\bibinitperiod},
+         given={Johannes},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{TV+1}
+    \strng{fullhash}{TVNMDMUJIAEMBASTQJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{6}
+    \field{pages}{4431\bibrangedash 4449}
+    \field{title}{Advances in discrete element modeling of rock fracture for next-generation comminution models}
+    \field{volume}{12}
+    \field{journaltitle}{Computational Particle Mechanics}
+    \field{year}{2025}
+  \endentry
+
+  \entry{POTYONDY20041329}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=PD}{%
+         family={Potyondy},
+         familyi={P\bibinitperiod},
+         given={D.O.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={Cundall},
+         familyi={C\bibinitperiod},
+         given={P.A.},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \keyw{Rock fracture, Distinct-element method, Numerical model, Micromechanics}
+    \strng{namehash}{PDCP1}
+    \strng{fullhash}{PDCP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    A numerical model for rock is proposed in which the rock is represented by a dense packing of non-uniform-sized circular or spherical particles that are bonded together at their contact points and whose mechanical behavior is simulated by the distinct-element method using the two- and three-dimensional discontinuum programs PFC2D and PFC3D. The microproperties consist of stiffness and strength parameters for the particles and the bonds. Damage is represented explicitly as broken bonds, which form and coalesce into macroscopic fractures when load is applied. The model reproduces many features of rock behavior, including elasticity, fracturing, acoustic emission, damage accumulation producing material anisotropy, hysteresis, dilation, post-peak softening and strength increase with confinement. These behaviors are emergent properties of the model that arise from a relatively simple set of microproperties. A material-genesis procedure and microproperties to represent Lac du Bonnet granite are presented. The behavior of this model is described for two- and three-dimensional biaxial, triaxial and Brazilian tests and for two-dimensional tunnel simulations in which breakout notches form in the region of maximum compressive stress. The sensitivity of the results to microproperties, including particle size, is investigated. Particle size is not a free parameter that only controls resolution; instead, it affects the fracture toughness and thereby influences damage processes (such as notch formation) in which damage localizes at macrofracture tips experiencing extensile loading.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1016/j.ijrmms.2004.09.011
+    \endverb
+    \field{issn}{1365-1609}
+    \field{note}{Rock Mechanics Results from the Underground Research Laboratory, Canada}
+    \field{number}{8}
+    \field{pages}{1329\bibrangedash 1364}
+    \field{title}{A bonded-particle model for rock}
+    \verb{url}
+    \verb https://www.sciencedirect.com/science/article/pii/S1365160904002874
+    \endverb
+    \field{volume}{41}
+    \field{journaltitle}{International Journal of Rock Mechanics and Mining Sciences}
+    \field{year}{2004}
+  \endentry
+
+  \entry{orozco2019discrete}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=OLF}{%
+         family={Orozco},
+         familyi={O\bibinitperiod},
+         given={Luisa\bibnamedelima Fernanda},
+         giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=DJY}{%
+         family={Delenne},
+         familyi={D\bibinitperiod},
+         given={Jean-Yves},
+         giveni={J\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Sornay},
+         familyi={S\bibinitperiod},
+         given={Philippe},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=RF}{%
+         family={Radjai},
+         familyi={R\bibinitperiod},
+         given={Farhang},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{OLF+1}
+    \strng{fullhash}{OLFDJYSPRF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{47\bibrangedash 56}
+    \field{title}{Discrete-element model for dynamic fracture of a single particle}
+    \field{volume}{166}
+    \field{journaltitle}{International Journal of Solids and Structures}
+    \field{year}{2019}
+  \endentry
+
+  \entry{cantor2017three}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=CD}{%
+         family={Cantor},
+         familyi={C\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=AE}{%
+         family={Az{\'e}ma},
+         familyi={A\bibinitperiod},
+         given={E},
+         giveni={E},
+      }}%
+      {{hash=SP}{%
+         family={Sornay},
+         familyi={S\bibinitperiod},
+         given={Philippe},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=RF}{%
+         family={Radjai},
+         familyi={R\bibinitperiod},
+         given={Farhang},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{CD+1}
+    \strng{fullhash}{CDAESPRF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{441\bibrangedash 450}
+    \field{title}{Three-dimensional bonded-cell model for grain fragmentation}
+    \field{volume}{4}
+    \field{journaltitle}{Computational Particle Mechanics}
+    \field{year}{2017}
+  \endentry
+
   \entry{10.1007/BF01900837}{article}{}{}
     \name{author}{5}{}{%
       {{hash=NA}{%
@@ -1331,6 +1596,56 @@
     \field{year}{2022}
   \endentry
 
+  \entry{jenness2004calculating}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=JJS}{%
+         family={Jenness},
+         familyi={J\bibinitperiod},
+         given={Jeff\bibnamedelima S},
+         giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Wiley Online Library}%
+    }
+    \strng{namehash}{JJS1}
+    \strng{fullhash}{JJS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{829\bibrangedash 839}
+    \field{title}{Calculating landscape surface area from digital elevation models}
+    \field{volume}{32}
+    \field{journaltitle}{Wildlife Society Bulletin}
+    \field{year}{2004}
+  \endentry
+
+  \entry{eigenweb}{misc}{}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{2}{}{%
+      {{hash=GG}{%
+         family={Guennebaud},
+         familyi={G\bibinitperiod},
+         given={Ga\"{e}l},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=JB}{%
+         family={Jacob},
+         familyi={J\bibinitperiod},
+         given={Beno\^{i}t},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GGJB+1}
+    \strng{fullhash}{GGJB+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{https://libeigen.gitlab.io}
+    \field{title}{Eigen}
+    \field{year}{2010}
+  \endentry
+
   \entry{WILSON2012107}{article}{}{}
     \name{author}{1}{}{%
       {{hash=WJP}{%
@@ -1488,6 +1803,31 @@
     \field{journaltitle}{SIGGRAPH Comput. Graph.}
     \field{month}{06}
     \field{year}{1988}
+  \endentry
+
+  \entry{zhao2016timederivativerotationmatrices}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=ZS}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Shiyu},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZS1}
+    \strng{fullhash}{ZS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1609.06088
+    \endverb
+    \field{title}{Time Derivative of Rotation Matrices: A Tutorial}
+    \verb{url}
+    \verb https://arxiv.org/abs/1609.06088
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{year}{2016}
   \endentry
 \enddatalist
 \endinput

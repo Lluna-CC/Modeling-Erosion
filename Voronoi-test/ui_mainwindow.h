@@ -2381,7 +2381,7 @@ public:
         groupBox_7->setGeometry(QRect(20, 340, 281, 301));
         layoutWidget1 = new QWidget(groupBox_7);
         layoutWidget1->setObjectName("layoutWidget1");
-        layoutWidget1->setGeometry(QRect(10, 40, 306, 265));
+        layoutWidget1->setGeometry(QRect(10, 40, 261, 241));
         verticalLayout_9 = new QVBoxLayout(layoutWidget1);
         verticalLayout_9->setObjectName("verticalLayout_9");
         verticalLayout_9->setContentsMargins(0, 0, 0, 0);

@@ -57,7 +57,7 @@ class CellGraph {
   std::vector<vorocell>& getCells() {return cells;}
   std::map<std::pair<int,int>, vorolink>& getLinks() {return links;}
   std::set<std::pair<int,int>>& getExteriorLinks() {return exteriorLinks;}
-  
+  std::vector<int>& getSolidCells() {return solidCells;}
 
   void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore = false);
   void setNumCells(int n);
@@ -71,6 +71,7 @@ class CellGraph {
   void removeComponent(int cell);
   int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior);
   void updateExternalLinks(); 
+  void updateSolidCells();
 
   void clear();
   
@@ -82,6 +83,7 @@ class CellGraph {
   std::vector<vorocell> cells;
   std::map<std::pair<int,int>, vorolink> links;
   std::set<std::pair<int,int>> exteriorLinks;
+  std::vector<int> solidCells;
   void addLinks(voro::voronoicell_neighbor& c, std::map<int,voroFace>& faces, int pid);
 
 
