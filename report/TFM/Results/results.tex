@@ -164,19 +164,285 @@ next to each render option to modfiy the opacity of each of them.
 \begin{figure}
     \centering
 
-    \subfigure[Salenques mountain sampled using a 256x184 grid (with 20 vertical samples)]{\includegraphics[width=0.45\linewidth]{Results/gaussianParticles.png}
+    \subfigure[Example of the particle rendering mode]{\includegraphics[width=0.45\linewidth]{Results/gaussianParticles.png}
     }
     \hspace{20pt}    
-    \subfigure[Salenques mountain sampled using a 64x46 grid (with 20 vertical samples)]{\label{fig:linksViz}\includegraphics[width=0.45\linewidth]{Results/gaussianLinks.png}}
+    \subfigure[Example of link rendering]{\label{fig:linksViz}\includegraphics[width=0.45\linewidth]{Results/gaussianLinks.png}}
     
-    \caption{Results of modifying the heightfield dimensions on the terrain 
-    \textit{Salenques}}
+    \caption{Examples of diverse rendering options of our application. REMAKE THIS FIGURE}
     \label{fig:particlesVsLinks}
 \end{figure}
 
 
-\subsection{Base Decomposition Results}
-In order to test and analyze our method, we performed three 
-experiments on the base decomoposition.
-\subsection{Multi-Resolution Experiments}
+\subsection{Decomposition and Sampling Size}
+In order to analyze our decomposition method, we performed multiple 
+experiments varying the sampling size and the sampling method 
+used to create the decomposition. By doing these tests, our 
+intention was to better understand the relationship between 
+the computational cost and the quality of the results, as well 
+as obtaining a set of parameters that provide a good balance 
+between cost and quality.
+
+\vspace{10pt}
+
+\subsubsection{Heightfield Dimensions Experiment}
+Our first experiment tested the relationship between the heightfield 
+dimensions (the base 2D grid) and the final results, both in terms of 
+computation time and visual appearance. For this experiment we disabled
+cell subdivision that is produced on high rugosity cells, as changing 
+the terrain dimensions might also have an effect on the rugosity and 
+we wanted to guarantee that the only change on the model are the heightfield
+dimensions. We also only used the terrain \textit{Punta Alta}, to avoid 
+encountering differences between terrains.
+
+\vspace{10pt}
+
+We tried multiple sizes, but the results of the minmum, maximum and median 
+tested dimensions can be appreciated in figure \ref{fig:2DdimensionResults}.
+The terrain sampled using a 50x50 is really different from the other two, 
+but the 200x200 does not have that much difference with the highest 
+resolution tested, so it provides a good trade-off between efficiency and 
+quality. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Punta alta using a 50x50 grid]{\includegraphics[width=0.3\linewidth]{Results/timeResults2D/puntaAlta50x50.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Punta alta using a 200x200 grid]{\includegraphics[width=0.3\linewidth]{Results/timeResults2D/puntaAlta200x200.png}}
+    \hspace{10pt}
+    \subfigure[Punta alta using a 350x350 grid]{\includegraphics[width=0.3\linewidth]{Results/timeResults2D/puntaAlta350x350.png}}
+
+    \caption{Results of modifying the heightfield dimensions on the terrain 
+    \textit{Punta Alta}}
+    \label{fig:2DdimensionResults}
+\end{figure}
+
+\vspace{10pt}
+
+Regarding the computational cost, if we consider a square heightfield $NxN$,
+the number of particles generated is, of course, $O(N^2)$; however, the 
+time required to compute is not as easy to obtain. In the worst case scenario,
+comptuing a voronoi cell requires intersecting one plan for every other 
+particle, so, the computational cost would be $O(N^3)$. In practice, the library
+voro++ \cite{osti_code-54674} implements this very efficiently, so this 
+high theoretical cost might not appear in practice. In our empirical test, 
+we found that the number of particles increased quadratically with 
+the dimension $N$, but we also found that the time spent per particle 
+also increased when increasing dimensions, so we can conclude that the 
+relationship between number of particles and time is not fully linear.
+This results can be seen in figure \ref{fig:2DtimeResults}. As a final note,
+keep in mind that some aspects of the sampling depend on the terrain, as we 
+avoid sampling outside the terrain (so the number of samples in the z 
+direction change depending on the coordinates $(x,y)$), so the number 
+of particles is not just $kN^2$ for some constant $k$.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Number of Dimensions vs Number of Particles]{\includegraphics[width=0.35\linewidth]{Results/timeResults2D/dimensionParticles.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Number of Dimensions vs Time spent per Particle]{\includegraphics[width=0.35\linewidth]{Results/timeResults2D/timePerParticle.png}}
+    
+    \caption{Results of modifying the heightfield dimensions on the terrain 
+    \textit{Punta Alta}}
+    \label{fig:2DtimeResults}
+\end{figure}
+
+\subsubsection{Changing the Samples in the z-direction}
+
+So far we only changed the dimensions of the heightfield, which is a 
+2D-grid. However, we sample points on a 3D grid, defined by the 
+heightfield dimensions and the variable \textit{zSamples}. We also
+experimented with this variable and the results have been a little 
+bit surprising. First, the main factor for the visual quality of 
+the decomposition is the accuracy at the surface, as anything below 
+that can not be seen until we perform erosion, which implies that 
+increasing the amount of samples in the z direction would be 
+innitially unappreciable (as seen in figure \ref{fig:zSamples10v99}). 
+ 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Results using $zSamples = 10$]{\includegraphics[width=0.3\linewidth]{Results/timeResultsZ/z10.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Results using $zSamples = 99$]{\includegraphics[width=0.3\linewidth]{Results/timeResultsZ/z99.png}}
+    
+    \caption{Results of modifying the variable $zSamples$ on the terrain 
+    \textit{Punta Alta}}
+    \label{fig:zSamples10v99}
+\end{figure}
+
+\vspace{10pt}
+
+The neglegible effect on visual results was expected, but the unexpected 
+part comes from the time spent to perform the computation. From the 
+results that we got trying different values of $zSamples$, we extracted 
+the time spent per particle, and we observed that this value decreases 
+as we increase the number of samples in the z direction (and thus 
+the number of particles), which is exactly the opposite of what happened
+when increasing the dimensions of the heightfield. We hypothesise 
+that the particles on the surface are the ones with more computational 
+cost, so increasing the number of samples in the z direction reduces 
+the proportion of particles with high complexity.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{Results/timeResultsZ/zSamplesTimePerParticle.png}
+    \caption{Number of samples in the z direction vs computation time 
+    spent per particle}
+\end{figure}
+
+\subsubsection{Experimenting with Rugosity Thresholds}
+
+For our final test of the terrain decomposition, we reactivated the 
+cell subdivision and we experimented with different rugosity thresholds 
+for subdivisions. First, we tested only perorming one subdivision changing 
+the rugosity threshold (all rugosities are mesured using a window 
+size of $8$). The results of this experiment can be seen in figure 
+\ref{fig:rugosityResults1}.
+
+
+\begin{figure}
+    \centering
+
+    \subfigure[bassiero terrain using a 151x138 grid. Subdivision performed 
+    for cells with rugosity $> 1.5$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/division1.5.png}
+    }
+    \hspace{10pt}    
+    \subfigure[bassiero terrain using a 151x138 grid. Subdivision performed 
+    for cells with rugosity $> 2.0$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/divison2.0.png}}
+    \hspace{10pt}
+    \subfigure[bassiero terrain using a 151x138 grid.Subdivision performed 
+    for cells with rugosity $> 3.0$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/division3.0.png}}
+
+    \caption{Results of changing the rugosity threshold on the  
+    \textit{bassiero} terrain} 
+    \label{fig:rugosityResults1}
+\end{figure}
+
+\vspace{10pt}
+
+Then, because we are not limited to subdividing a cell only once, we 
+experimented setting two or even three subdivision thresholds. That 
+implies that we will collect $2 \cdot 4^k$ per cell at the surface, where 
+$k$ is the number of thresholds surpased on that specific cell. In this 
+test we tried setting the threshold combinations $\{1.5,2.0\}$ (the one 
+definitively implemented in the application), $\{2.0, 2.5\}$ and $\{1.5, 
+2.0, 2.5\}$. There is a marked difference between the first and the 
+second test, while the difference between the first and the last 
+(which is the one with highest quality) is more subtle, and only appreciated 
+in the sections with highest rugosity. 
+\begin{figure}
+    \centering
+
+    \subfigure[Bassiero terrain using a 151x138 grid. Subdivision performed 
+    for cells with rugosity $> 1.5$ and further subdivision for cells above $2.0$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/division1.5_2.0.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Bassiero terrain using a 151x138 grid. Subdivision performed 
+    for cells with rugosity $> 2.0$ and further subdivision for cells above $2.5$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/division2.0_2.5.png}}
+    \hspace{10pt}
+    \subfigure[Bassiero terrain using a 151x138 grid.Subdivision performed 
+    at three levels with thresholds $1.5$, $2.0$ and $2.5$]{\includegraphics[width=0.3\linewidth]{Results/rugosityResults/division1.5_2.0_2.5.png}}
+
+    \caption{Results of changing the rugosity threshold on the  
+    \textit{Bassiero} terrain. In this case, we perform further subdivisions 
+    when the rugosity is too high.} 
+    \label{fig:rugosityResults2}
+\end{figure}
+
+\vspace{10pt}
+
+Finally, we also measured the number of samples generated for every 
+test, as well as its computation time. Table \ref{tab:rugosity} shows 
+all measures we have taken for this batch of experiments. Remember 
+that the computation time is not linear with respect to the number 
+of particles, so it is important to choose a good balance between 
+time spent and visual quality. In our case, the final application 
+that the user can test uses the threshold combination $\{1.5, 2.0\}$, as 
+we found that it provides a good balance.
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Thresholds             & Particles Generated & Time (ms) \\ \hline
+Base (No subdivisions) & 231713              & 12639     \\ \hline
+1.5                    & 293204              & 16719     \\ \hline
+2.0                    & 255445              & 14180     \\ \hline
+3.0                    & 233918              & 12844     \\ \hline
+1.5 \& 2.0              & 388023              & 22715     \\ \hline
+2.0 \& 2.5              & 285736              & 16147     \\ \hline
+1.5 \& 2.0 \& 2.5        & 509009              & 32446     \\ \hline
+\end{tabular}
+\caption{Measures of our tests with different rugosity thresholds}
+\label{tab:rugosity}
+\end{table}
+
+\subsection{Multi-Resolution Comparison}
+
+In addition to all tests regarding the initial decomposition, we also 
+compared our two proposed methods for subsampling. The two methods 
+are hard to compare, as the method of subsampling in a grid does 
+not allow for an easy manipulation on the total size of the subsampling 
+(The grid that we use to sample and subsample is terrain dependent). 
+Despite this limitations, we decided to take some measures for each 
+method in order to perform some comparisons. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Bassiero terrain subsampled using furthest point with a downscale factor of $3$]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/furthest3.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Bassiero terrain subsampled using furthest point with a downscale factor of $5$]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/furthest5.png}}
+    \hspace{10pt}
+    \subfigure[Bassiero terrain subsampled using furthest point with a downscale factor of $10$]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/furthest10.png}}
+
+    \caption{Different downscaling factors for the furthest point sampling method 
+    applied to the \textit{Bassiero} terrain. 
+    } 
+    \label{fig:furthestComparison}
+\end{figure}
+
+\begin{figure}
+    \centering
+
+    \subfigure[Bassiero terrain subsampled using a subgrid made of 2x2x2 blocks]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/grid2x2.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Bassiero terrain subsampled using a subgrid made of 3x3x3 blocks]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/grid3x3.png}}
+    \hspace{10pt}
+    \subfigure[Bassiero terrain subsampled using a subgrid made of 4x4x4 blocks]{\includegraphics[width=0.3\linewidth]{Results/MultiResComparison/grid4x4.png}}
+
+    \caption{Comparison of different block sizes used to make a subsampled gird. Applied to 
+    the \textit{Bassiero} Terrain.} 
+    \label{fig:gridMultiRes}
+\end{figure}
+
+\begin{table}[]
+\centering
+
+\begin{tabular}{|l|l|l|}
+\hline
+Multi-Resolution factor  & Particles Generated & Time (ms) \\ \hline
+Base (single resolution) & 411635              & 22813     \\ \hline
+Furthest Point: 3        & 137211              & 283913    \\ \hline
+Furthest Point:5         & 82327               & 183684    \\ \hline
+Furthest Point:10        & 41163               & 103141    \\ \hline
+Furthest Point:20        & 20581               & 64237     \\ \hline
+Grid: 2x2x2              & 26208               & 25673     \\ \hline
+Grid: 3x3x3              & 10294               & 24210     \\ \hline
+Grid: 4x4x4              & 5398                & 23775     \\ \hline
+\end{tabular}
+\caption{Comparison between the two subsampling methods that we implemented}
+\label{tab:subsamplingTable}
+\end{table}
+
 \section{Erosion Simulation}

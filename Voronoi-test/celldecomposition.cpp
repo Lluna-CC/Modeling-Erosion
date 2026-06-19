@@ -594,5 +594,5 @@ void CellDecomposition::voronoiDecomposition(std::vector<float>& v, std::vector<
                                             Vector3 core_center, Vector3 core_range, int zSamples, bool furthest) {
 
     if (furthest) graph.multiLevelVoronoiDecompositionFurthestPoint(v,f,hf, multiRes_factor, core_center, core_range, zSamples);
-    else graph.multiLevelVoronoiDecompositionGridSampling(v,f,hf, 2, core_center, core_range, zSamples);
+    else graph.multiLevelVoronoiDecompositionGridSampling(v,f,hf, 4, core_center, core_range, zSamples);
 }

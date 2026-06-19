@@ -1,0 +1,9 @@
+[rugosity subsampling deactivated]
+
+Punta Alta 200x200, zSamples = 10: 286195 particles, 24706 ms --> 0.086 ms/particle
+Punta Alta 200x200, zSamples = 20: 493312 particles, 31615 ms --> 0.064 ms/particle
+Punta Alta 200x200, zSamples = 30: 700357 particles, 38354 ms --> 0.056 ms/particle
+Punta Alta 200x200, zSamples = 40: 907749 particles, 45180 ms --> 0.050 ms/particle
+Punta Alta 200x200, zSamples = 50: 1114983 particles, 52677 ms --> 0.047 ms/particle
+Punta Alta 200x200, zSamples = 99: 2129585 particles, 90759 ms --> 0.043 ms/particle
+

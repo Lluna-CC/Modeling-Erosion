@@ -1,0 +1,9 @@
+[All tests on Bassierro 151x138, zSamples = 20]
+Base Bassierro: 231713 particles, 12639 ms
+Subvidivision at 1.5: 293204 particles, 16719 ms
+Subvidivision at 2.0: 255445 particles, 14180 ms 
+Subvidivision at 3.0: 233918 particles, 12844 ms
+
+Subdivision at 1.5 and 2.0: 388023 particles, 22715 ms
+Subdivision at 2.0 and 2.5: 285736 particles, 16147 ms
+Subdivisiom at 1.5, 2.0 and 2.5: 509009 particles, 32446 ms 

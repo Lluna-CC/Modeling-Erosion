@@ -1,0 +1,8 @@
+[zSamples Always = 20, rugosity subsampling deactivated]
+Punta Alta 350x350 1529075 particles, 133194 ms --> 0.087 ms/particle
+Punta Alta 300x300: 1120414 particles, 93306 ms --> 0.083 ms/particle
+Punta Alta 250x250: 775251 particles, 55890 ms --> 0.072 ms/particle
+Punta Alta 200x200: 493312 particles, 31552 ms --> 0.064 ms/particle
+Punta Alta 150x150: 274996 particles, 15235 ms --> 0.055 ms/particle
+Punta Alta 100x100: 119998 particles, 5532 ms --> 0.046 ms/particle
+Punta Alta 50x50: 28567 particles, 1025 ms --> 0.036 ms/particle
