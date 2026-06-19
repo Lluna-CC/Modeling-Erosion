@@ -21,7 +21,8 @@ class MultiResolutionGraph {
     Vector3 getMin() {return levels[0].getMin();}
     Vector3 getMax() {return levels[0].getMax();}
     
-    void multiLevelVoronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int scale); 
+    void multiLevelVoronoiDecompositionFurthestPoint(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int scale, Vector3 core_center, Vector3 core_range, int zSamples); 
+    void multiLevelVoronoiDecompositionGridSampling(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int window, Vector3 core_center, Vector3 core_range, int zSamples); 
     void toyVoronoi(const HeightField *hf) {levels.resize(1); Voronoi::toyVoronoi(hf, &levels[0]);};
 
     void clear();
@@ -39,6 +40,7 @@ class MultiResolutionGraph {
     std::vector<CellGraph> levels;
     std::vector<std::vector<int>> upperLevel; //For each level and for each cell of that level, the centroid on the upper level
     std::vector<std::vector<std::vector<int>>> lowerLevel; //For each level and cell a vector of "children"
+    
     
  };
 

@@ -197,6 +197,8 @@ void MainWindow::createActions()
 
     connect(ui->layer, SIGNAL(valueChanged(int)), this, SLOT(changeRenderLayer()));
     connect(ui -> compute_stress, SIGNAL(clicked()), this, SLOT(computeStress()));
+    connect(ui -> useMechanicalModel, SIGNAL(clicked()), this, SLOT(setMechanicalModelMode()));
+    connect(ui -> comboLink, SIGNAL(currentIndexChanged(int)), this, SLOT(setLinkVisualizationMode()));
 }
 
 void MainWindow::updateHeightfield(bool resetCam)
@@ -617,7 +619,7 @@ void MainWindow::loadToy()
     float minLat = 0, minLon = 0, cellSizeX = 0, cellSizeY = 0;
     switch (idx) {
         case 0:
-            ncols = 100; nrows = 2;
+            ncols = 100; nrows = 4;
             minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
             hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
@@ -629,7 +631,7 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 1:
-            ncols = 100; nrows = 2;
+            ncols = 100; nrows = 4;
             minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
             hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
@@ -640,7 +642,7 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 2:
-            ncols = 100; nrows = 2;
+            ncols = 100; nrows = 3;
             minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
             hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
@@ -655,7 +657,7 @@ void MainWindow::loadToy()
             updateHeightfield();
             break;
         case 3:
-            ncols = 100; nrows = 2;
+            ncols = 100; nrows = 3;
             minLat = -20; minLon = -10; cellSizeX = 5.0; cellSizeY = 20.0;
             hf = HeightField(HeightField(Box2((ncols - 1) * cellSizeX, (nrows - 1) * cellSizeY), ncols, nrows));
             for (int i = 0; i < ncols; i++) {
@@ -839,9 +841,17 @@ void MainWindow::computeVoronoi() {
     double theta = ui -> theta_spinbox -> value();
     double phi = ui -> phi_spinbox -> value();
     int multiRes_factor = ui -> multiRes_factor -> value();
+    double x = ui -> core_x -> value();
+    double y = ui -> core_y -> value();
+    double z = ui -> core_z -> value();
+    double rx = ui -> core_rx -> value();
+    double ry = ui -> core_ry -> value();
+    double rz = ui -> core_rz -> value();
+    int zSamples = ui -> zSamples -> value();
+    bool useModel = ui ->useMechanicalModel -> isChecked();
     //Voronoi::heightfieldVoronoi(&hf, cellDecomp);
 
-    widget -> setDecomposition(&hf, theta, phi, multiRes_factor);
+    widget -> setDecomposition(&hf, theta, phi, multiRes_factor, Vector3(x, y, z), Vector3(rx, ry, rz), zSamples, useModel);
     
 }
 
@@ -851,23 +861,23 @@ void MainWindow::computeWaterPath() {
 }
 
 void MainWindow::changeRenderCells() {
-    widget -> setRenderMode(1);
+    widget -> toggleRenderMode(1);
 }
 
 void MainWindow::changeRenderParticles() {
-    widget -> setRenderMode(2);
+    widget -> toggleRenderMode(2);
 }
 
 void MainWindow::changeRenderOriginal() {
-    widget -> setRenderMode(0);
+    widget -> toggleRenderMode(0);
 }
 
 void MainWindow::changeRenderLinkViz() {
-    widget -> setRenderMode(3);
+    widget -> toggleRenderMode(3);
 }
 
 void MainWindow::changeRenderPathViz() {
-    widget -> setRenderMode(4);
+    widget -> toggleRenderMode(4);
 }
 
 void MainWindow::changeErosionDirection() {
@@ -910,4 +920,14 @@ void MainWindow::changeRenderLayer() {
 
 void MainWindow::computeStress() {
     widget -> computeStress();
+}
+
+void MainWindow::setMechanicalModelMode() {
+    bool mode = ui -> useMechanicalModel -> isChecked();
+    widget -> setMechanicalModelMode(mode);
+}
+
+void MainWindow::setLinkVisualizationMode() {
+    int mode = ui -> comboLink -> currentIndex();
+    widget -> setLinkVisualizationMode(mode);
 }

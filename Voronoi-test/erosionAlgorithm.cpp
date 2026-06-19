@@ -12,7 +12,6 @@ ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel) {
     level = workLevel;
     model.initializeModel(g -> getCells(level), g -> getLinks(level), g -> getSolidCells(level));
     computeAverageArea();
-    
 }
 
 double ErosionAlgorithm::resistanceField(double x, double y, double z) {
@@ -139,11 +138,19 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
             water = 0;
         }
 
-        //std::cout << "Link area: " << link_area << std::endl << std::endl;
-        links[actLink].life -= k_dmg*(absorption/link_area);
+        double M_n = 1.0;
+        double M_s = 0.0;
+       
+        if (useModel) {
+            M_n = model.normalModifier(links[actLink]);
+            M_s = model.shearModifier(links[actLink]);
+        }
+
+        links[actLink].life -= k_dmg*(absorption/link_area) * (M_n + M_s);
+        
         if (links[actLink].life <= 0 && links[actLink].state != BROKEN && links[actLink].state != EXTERIOR) {
             //BREAK
-            if(breakLink(actLink)) {
+            if(breakLink(actLink, true)) {
                 model_update = true; 
                 break;
             }
@@ -152,20 +159,20 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
         else if (useModel) {
             double D = 1 - links[actLink].life;
             if (links[actLink].normalStress > model.getTmax(D)) {
-                if (breakLink(actLink)) {
+                if (breakLink(actLink), true) {
                     model_update = true;
                     break; 
                 }
             }
             else if (links[actLink].normalStress < -model.getUCS(D)) {
-                if (breakLink(actLink)) {
+                if (breakLink(actLink, true)) {
                     model_update = true;
                     break; 
                 }
             }
 
             else if (links[actLink].shearStress > model.getShearC(D) - links[actLink].normalStress * model.getTanPhi()) {
-                if (breakLink(actLink)) {
+                if (breakLink(actLink), true) {
                     model_update = true;
                     break; 
                 }
@@ -176,7 +183,7 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
             double break_prob = 1 - links[actLink].life/k_break;
             if (rand(generator) < break_prob) {
                 links[actLink].life = 0;
-                if (breakLink(actLink)) {
+                if (breakLink(actLink), true) {
                     model_update = true;
                     break; 
                 }
@@ -193,7 +200,7 @@ bool ErosionAlgorithm::waterPath(std::set<std::pair<int,int>>& visited) {
 }
 
 
-bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
+bool ErosionAlgorithm::breakLink(std::pair<int,int> link, bool updateStresses) {
     //std::cout << "Breaking link: " << link.first << " " << link.second << std::endl;
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
     std::vector<vorocell>& cells = graph -> getCells(level);
@@ -256,7 +263,7 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link) {
     }
 
     
-    if (useModel) computeStress();
+    if (useModel && updateStresses) computeStress();
     //Update external links
     if (update) {
         std::cout << "Updating Links" << std::endl;
@@ -426,7 +433,7 @@ void ErosionAlgorithm::computeStress() {
     model.computeEquilibra();
     model.updateLinkStresses(graph -> getLinks(level), graph -> getCells(level), graph -> getSolidCells(level), brokenLinks);
     for (int i = 0; i < brokenLinks.size(); ++i) {
-        breakLink(brokenLinks[i]);
+        breakLink(brokenLinks[i], false);
     }
     if (brokenLinks.size() > 0) {
         

@@ -77,6 +77,10 @@ namespace Math {
         for (double d : v) s += d;
         return s/double(v.size());
     }
+
+    // This function returns a random double between 0 and 1
+    inline double rnd() {return double(rand())/RAND_MAX;}
+    
 }
 
 

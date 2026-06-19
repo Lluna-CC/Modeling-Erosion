@@ -1,7 +1,9 @@
 #include "cellGraph.h"
 #include<float.h>
 
-void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore) {
+
+void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore, bool discarded) {
+
     c.neighbors(cells[pid].neighbors);
     cells[pid].volume = c.volume();
 
@@ -44,6 +46,9 @@ void CellGraph::addCell(voro::voronoicell_neighbor& c, double x, double y, doubl
     else {
         if (isCore) {
             cells[pid].state = CORE;
+        }
+        else {
+            cells[pid].state = SOLID;
         }
     }
     
@@ -186,7 +191,7 @@ void CellGraph::clear() {
 void CellGraph::updateSolidCells() {
     int act = 0;
     for (int i = 0; i < cells.size(); ++i) {
-        if (cells[i].state == AIR) solidCells[i] = -1;
+        if (cells[i].state == AIR || cells[i].state == DISCARDED) solidCells[i] = -1;
         else { 
             solidCells[i] = act;
             ++act;

@@ -1,2 +1,182 @@
-\chapter{Implementation and Results}
+\chapter{Implementation and Results} \label{sec:implementationResults}
+All methods developed in this project have been implemented in a 
+QT application that allows for testing and debuging the process. In 
+this section we are going to explain the structure of the application, 
+describing which features are implemented and how can the user control 
+different parameters of the method. additionally, we are going to 
+show different results of our techniques, comparing results with 
+different parameters and providing some benchmarks.
 
+\vspace{10pt}
+
+All code used for this project can be found on the 
+\href{https://github.com/Lluna-CC/Modeling-Erosion}{Github page of the project},
+for everyone to check and test. It is important to state that we reused the code from a previous 
+project \cite{Argudo2025descriptors} (made by the tutor of this thesis). This 
+previous project provides tools for terrain analysis and synthesis, so it 
+has all tool that we need to load and work with terrains represented as 
+DEMs. Many of the tool provided by the original code are irrelevant to our 
+purposes, so we removed many functionalities; however, we left some tools 
+for terrain analysis as they still provide some utility for debugging. 
+
+
+\vspace{10pt}
+
+Finally, before starting this section, all tests have been performed 
+INCLUDE SYSTEM SPECIFICATIONS!!!
+\section{Voronoi Decomposition}
+Taking a terrain given by a DEM and converting it to a collection of voronoi
+cells representing the same (or roughly the same) surface is one of the 
+core aspect of this thesis. We have tested multiple methods and tried 
+multiple parameters to get the most quality posible with resonable 
+efficiency. In this section we are going to describe the tools we give 
+to the user to experiment with the decomposition as well as an analysis 
+and comparison of different methods and parameters tested. 
+\subsection{User Interaction}
+
+\subsubsection{Voronoi Generation Options}
+First of all, the user has the option to load heightfields into the 
+application using either ASCII files or pictures in png format.Additionally,
+we have also provided some \textit{toy examples} that the user can 
+load in order to test all algorithms and see extreme examples. The toy 
+heightfields are designed so it is easy to see the process of both the 
+decomposition and the erosion simulation and therefore they are also 
+small. Most tests have been performed on these toy examples and we left 
+the real terrains for some final simulations, as the final erosion 
+algorithm can be quite heavy on bigger and more detailed terrains.
+
+
+\vspace{10pt}
+
+Once a heightfield is loaded into the application, the user has multiple 
+options to modfiy the resulting voronoi decomposition. First, the most
+direct way to control the results of the decomposition is the 
+\textit{Voronoi Options} section (found on the voronoi window on the 
+part of the UI at the right side of the application), as seen in figure 
+\ref{fig:voronoiOptions}. This section 
+has a button to compute the decomposition and also has the option 
+to modify multiple parameters of the process. First, the lower resolution 
+level is always automatically computed using the \textit{furthest points sampling}
+described in \ref{sec:multiResolution} and the number of points in the 
+lower resolution layer is the total number of points divided by the 
+\textit{Multi-Resolution factor} in the voronoi options. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Voronoi options section]{\label{fig:voronoiOptions}\includegraphics[width=0.28\linewidth]{Results/VoronoiOptions.png}
+    }
+    \hspace{20pt}
+    \subfigure[Terrain dimensions section]{\label{fig:heightfieldDimensions}\includegraphics[width=0.35\linewidth]{Results/heightFieldSizes.png}
+        }
+    
+    \caption{Voronoi options and Terrain dimensions windows of our applicaiton.
+    Both windows can control the results of the decomposition}
+    \label{fig:voronoiOptionsGeneral}
+\end{figure}
+
+\vspace{10pt}
+
+Second, the user can also determine the generation of core cells (that will not be eroded
+during the erosion algorithm). A rectangular block of core cells is 
+always generated at a position specified by the user with a size 
+specified by the user. The three parameters $(x,y,z)$ are numbers in 
+the range $[0,1]$ and define the \textit{center} of the core cell block, the parameters 
+are normalized using the bounding box of the terrain so $(0.5, 0.5, 0.5)$ 
+represent the center of said bounding box. Next, $(r_x, r_y, r_z)$ define 
+the \textit{range} of the core cell block. In order to normalize those 
+values, they measure the range in \textit{cell sizes}, that is, $r_x = 2$
+represents a value of 2 times the size of a grid cell in the x dimension.
+When performing operations with the bounding box of the terrain, keep 
+in mind that the bounding box of the decomposition extends a little 
+bit beyond the highest peak in the $z$ direction, so that we can take samples 
+outside of the terrain.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Core cells when using center $(0.2,0.2,0.1)$ and 
+    range $(1,1,1)$]{\label{fig:coreCells02_02_01_1}\includegraphics[width=0.45\linewidth]{Results/coreCells_02_02_01_1.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Core cells when using center $(0.8,0.8,0.1)$ and 
+    range $(3,3,3)$]{\label{fig:coreCells08_08_08_3}\includegraphics[width=0.45\linewidth]{Results/coreCells_08_08_01_3_2_3.png}}
+    
+    \caption{Results of modifying the parameters controlling the core 
+    cell generation. Particles in purple represent core cells. Figure 
+    taken using the \textit{Gaussian Bump} toy heightfield}
+    \label{fig:voronoiCoreCells}
+\end{figure}
+
+\vspace{10pt}
+
+Finally, the user can also modify the amount of samples used for the 
+decomposition using two options. The \textit{Terrain Dimensions} section 
+on the left side of the UI (figure \ref{fig:heightfieldDimensions}) 
+allows the user to modify the size of the heightfield. Because 
+we are taking multiple samples for each cell of the heightfield, modifying 
+the terrain dimensions will also modify the number of samples taken. 
+Additionally, in the \textit{Voronoi Options} section, we also can 
+modify the \textit{zSamples} value, which will modify the number 
+of vertical blocks of the 3D grid we construct to sample points.
+As a final note, there is a button in the \textit{Terrain Dimensions} 
+section called \textit{Recommended Values} that, for bigger terrains, 
+will cap the dimensions (maintaining aspect ration) so they are feasible 
+to compute. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Salenques mountain sampled using a 256x184 grid (with 20 vertical samples)]{\label{fig:salenques256x184}\includegraphics[width=0.4\linewidth]{Results/salenques256x184.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Salenques mountain sampled using a 64x46 grid (with 20 vertical samples)]{\label{fig:salenques64x46}\includegraphics[width=0.4\linewidth]{Results/salenques64x46.png}}
+    
+    \caption{Results of modifying the heightfield dimensions on the terrain 
+    \textit{Salenques}}
+    \label{fig:salenquesDimensionChange}
+\end{figure}
+
+\subsubsection{Visualization Options}
+
+\begin{figure}
+    \centering
+    
+    \includegraphics[scale=0.5]{Results/VoronoiVisuals.png}
+    \caption{Voronoi Visuals section of the UI options}
+    \label{fig:vorovisuals}
+\end{figure}
+
+In addition to the decomposition options, we also provided some options  
+to visualize the results of said decomposition. Just above the 
+\textit{Voronoi Options} section, there is a \textit{Voronoi Visuals} 
+section (figure \ref{fig:vorovisuals}). Using these options we can 
+visualize the original surface of the terrain, the decomposed terrain
+made of cells, a visualization of the particles used to make the voronoi cells,
+a visualization of the connections between cells (and their state, which 
+will be useful when debugging the erosion simulation part), and a visualization 
+of most recently generated water paths (also useful for the erosion 
+part). The user can select multiple options to view multiple representations
+simultaniously (like visualizing the original surface along other things, 
+as seen in figure \ref{fig:particlesVsLinks}), and there is a variable 
+next to each render option to modfiy the opacity of each of them. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Salenques mountain sampled using a 256x184 grid (with 20 vertical samples)]{\includegraphics[width=0.45\linewidth]{Results/gaussianParticles.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Salenques mountain sampled using a 64x46 grid (with 20 vertical samples)]{\label{fig:linksViz}\includegraphics[width=0.45\linewidth]{Results/gaussianLinks.png}}
+    
+    \caption{Results of modifying the heightfield dimensions on the terrain 
+    \textit{Salenques}}
+    \label{fig:particlesVsLinks}
+\end{figure}
+
+
+\subsection{Base Decomposition Results}
+In order to test and analyze our method, we performed three 
+experiments on the base decomoposition.
+\subsection{Multi-Resolution Experiments}
+\section{Erosion Simulation}

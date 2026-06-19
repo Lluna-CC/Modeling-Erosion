@@ -1,0 +1,16 @@
+[All experiments used Bassierro 151x138, zSamples = 20]
+
+Base particles: 411635
+
+Furthest Point, factor 3: 137211 particles, 283913 ms
+Furthest Point, factor 5: 82327 particles, 183684 ms 
+Furthest Point, factor 10: 41163 particles, 103141 ms
+Furthest Point, factor 20: 20581 particles, 64237 ms
+
+Grid, factor 2: 26208 particles, 25673 ms
+Grid, factor 3: 10294 particles, 24210 ms
+Grid, factor 4: 5398 particles, 23775 ms
+
+Remember base computation: ~22813 ms
+
+

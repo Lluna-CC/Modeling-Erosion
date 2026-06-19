@@ -18,13 +18,14 @@ class ErosionAlgorithm {
     bool waterPath(std::set<std::pair<int,int>>& visited);
     void computeStress();
 
-    void setMechanicalModelMode(bool mode) {useModel = mode;}
+    void setMechanicalModelMode(bool mode) {useModel = mode; if(mode) computeStress();}
+    MechanicalModel& getMechanicalModel() {return model;}
     //Returns true if the model changed
     
   private:
     void getLinkDistibution(Vector3 dir);
   
-    bool breakLink(std::pair<int,int > link);
+    bool breakLink(std::pair<int,int > link, bool updateStresses = true);
     void removeComponent(int cell);
     int componentSize(int cell, int otherCell, bool& containsCore, bool& reachable, bool& exterior);
     int componentSize_rec(int cell, int otherCell, bool& containsCore, bool& reachable, std::vector<bool>& visited);

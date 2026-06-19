@@ -100,7 +100,7 @@ void CellDecomposition::renderCells(int l) {
 
 }
 
-void CellDecomposition::renderLinks(int l) {
+void CellDecomposition::renderLinks(int l, int mode, MechanicalModel& mechModel) {
     QMatrix4x4 model;
     std::vector<vorocell>& cells = graph.getCells(l);
     std::map<std::pair<int,int>, vorolink>& links = graph.getLinks(l);
@@ -141,9 +141,32 @@ void CellDecomposition::renderLinks(int l) {
 
             vorolink& l = links[key];
             if (l.state == BROKEN || l.state == EXTERIOR) continue;
-            float t = l.life;
-
-            glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+            
+            float t;
+            float D;
+            switch (mode) {
+                case 0:
+                    t = l.life;
+                    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+                    
+                    break;
+                case 1:
+                    D = 1 - l.life;
+                    t = 1 - l.normalStress/mechModel.getTmax(D);
+                    std::cout << "Link Normal Stress: " << l.normalStress << " AND: " << l.normalStress/mechModel.getTmax(D) << std::endl;
+                    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+                    break;
+                case 2:
+                    D = 1 - l.life;
+                    t = 1 - l.shearStress/(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi());
+                    std::cout << "Link Shear Stress: " << l.shearStress << " AND: " << l.shearStress/(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi()) << std::endl;
+                    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+                    break;
+                default:
+                    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.0f, 1.0f,0.0f);
+                    break;
+            }
+            
             
             float dist = Norm(cells[neigh].centroid - cells[i].centroid);
             Vector3 dir = Normalized(cells[neigh].centroid - cells[i].centroid);
@@ -185,9 +208,9 @@ void CellDecomposition::fullMeshDecomposition(int l) {
         
         
         //std::cout << "Current Mesh Iteration: " << i << std::endl;
-        if (cells[i].state == AIR) continue;
-        //float cellDist = minMaxDistance(cells[i].vertices);
-        //if (cellDist > 0.85*boxDist) continue;
+        if (cells[i].state == AIR || cells[i].state == DISCARDED) continue;
+        float cellDist = minMaxDistance(cells[i].vertices);
+        if (cellDist > 0.85*boxDist) continue;
 
         cellToMesh(cells[i].vertices, cells[i].faceData, cellVAOs[l][i], bufferVerts[l][i], bufferIndices[l][i], cells[i].nTriangles);
     }
@@ -221,7 +244,7 @@ void CellDecomposition::cellToMesh(std::vector<float>& v, std::map<int,voroFace>
         Vector3 b = v3 - v1;
         face.normal = Normalized(cross(a,b));
         double area = Norm(cross(a,b))/2;
-        if (area == 0) face.normal = Vector3(0,0,0);
+        if (area < 1e-5) face.normal = Vector3(0,0,0);
 
 
         for (int j = 3; j < face.vertices.size(); ++j) {
@@ -293,6 +316,8 @@ void CellDecomposition::renderParticles(int l) {
         if(cells[i].state == AIR) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
         else if (cells[i].state == SOLID) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 0.45f,0.09f);
         else if (cells[i].state == CORE) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.364f, 0.247f,0.827f);
+        else if (cells[i].state == DISCARDED) continue;
+
         glDrawElements(GL_TRIANGLES, sphereIndicesSize, GL_UNSIGNED_INT, 0);
     }
 
@@ -308,16 +333,28 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths, int l) 
     
     glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0f,1.0f);
     //int renderedCells = 0;
+    for (auto it = paths.begin(); it != paths.end(); ++it) {
+        if (links[*it].state == INTERIOR) {
+            links[*it].state = MARKED;
+            
+        } 
+        cells[(*it).first].marked = true;
+        cells[(*it).second].marked = true;
+
+    }
+
     for (int i = 0; i < cells.size(); ++i) {
         if (!cells[i].isExterior || cells[i].state == AIR) continue;
         model.setToIdentity();
         model.translate((float) cells[i].centroid[0], (float) cells[i].centroid[1], (float) cells[i].centroid[2]);
-        model.scale(0.35,0.35,0.35);
+        model.scale(1.0,1.0,1.0);
         model.translate(-(float) cells[i].centroid[0], -(float) cells[i].centroid[1], -(float) cells[i].centroid[2]);
 
         glUniformMatrix4fv(glGetUniformLocation(cellShader -> programId(), "ModelMatrix"), 1, GL_FALSE, model.data()); 
 
-        if (!cells[i].isExterior || cells[i].state == AIR) continue;
+        
+        if (cells[i].marked) glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.1f, 0.7f,0.9f);
+        else glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f, 1.0,1.0f);
         glBindVertexArray(cellVAOs[l][i]);
         glDrawElements(GL_TRIANGLES, cells[i].nTriangles * 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
@@ -325,9 +362,7 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths, int l) 
 
     }
 
-    for (auto it = paths.begin(); it != paths.end(); ++it) {
-        if (links[*it].state == INTERIOR) links[*it].state = MARKED; 
-    }
+    /*    
     glBindVertexArray(cylinderVAO);
     
 
@@ -368,12 +403,18 @@ void CellDecomposition::renderPaths(std::set<std::pair<int,int>>& paths, int l) 
             glDrawElements(GL_TRIANGLES, 12*3, GL_UNSIGNED_INT, 0);
         }
         
-    }
+    } */
     glBindVertexArray(0);
 
     for (auto it = paths.begin(); it != paths.end(); ++it) {
-        if (links[*it].state == MARKED) links[*it].state = INTERIOR; 
+        if (links[*it].state == MARKED) {
+            links[*it].state = INTERIOR;
+        
+        } 
+        cells[(*it).first].marked = false;
+        cells[(*it).second].marked = false;
     }
+        
 }
 
 void CellDecomposition::initializeSphereVAO(unsigned int numSubdivisions) {
@@ -547,4 +588,11 @@ void CellDecomposition::updateMesh(const std::vector<int>& newC, const std::vect
 	    
     }
     glUseProgram(0);
+}
+
+void CellDecomposition::voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int multiRes_factor, 
+                                            Vector3 core_center, Vector3 core_range, int zSamples, bool furthest) {
+
+    if (furthest) graph.multiLevelVoronoiDecompositionFurthestPoint(v,f,hf, multiRes_factor, core_center, core_range, zSamples);
+    else graph.multiLevelVoronoiDecompositionGridSampling(v,f,hf, 2, core_center, core_range, zSamples);
 }

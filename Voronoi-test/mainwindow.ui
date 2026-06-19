@@ -383,7 +383,7 @@
           <item>
            <widget class="QPushButton" name="btn_recommendedDEM">
             <property name="text">
-             <string>Recomended Values</string>
+             <string>Recommended Values</string>
             </property>
            </widget>
           </item>
@@ -667,57 +667,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Info cursor (right mouse button)</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_27">
-            <property name="text">
-             <string>Cell id</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineClickInfoCell">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_26">
-            <property name="text">
-             <string>Elevation</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineClickInfoElev">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_30">
-            <property name="text">
-             <string>Metric</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineClickInfoMetric">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
@@ -774,8 +723,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>316</width>
-             <height>472</height>
+             <width>324</width>
+             <height>629</height>
             </rect>
            </property>
            <attribute name="label">
@@ -3094,7 +3043,7 @@
           <rect>
            <x>10</x>
            <y>40</y>
-           <width>261</width>
+           <width>262</width>
            <height>266</height>
           </rect>
          </property>
@@ -3199,8 +3148,27 @@
               <item>
                <widget class="QCheckBox" name="viz_links">
                 <property name="text">
-                 <string>Visualize Links</string>
+                 <string>Render Link</string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboLink">
+                <item>
+                 <property name="text">
+                  <string>Life</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Normal</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Shear</string>
+                 </property>
+                </item>
                </widget>
               </item>
               <item>
@@ -3265,7 +3233,7 @@
            <x>10</x>
            <y>40</y>
            <width>261</width>
-           <height>241</height>
+           <height>251</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -3303,7 +3271,7 @@
           <item>
            <widget class="QLabel" name="label_47">
             <property name="text">
-             <string>Core Cells (Center and Range r )</string>
+             <string>Core Cells (Center and Range)</string>
             </property>
            </widget>
           </item>
@@ -3317,7 +3285,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+             <widget class="QDoubleSpinBox" name="core_x">
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_41">
@@ -3327,7 +3305,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+             <widget class="QDoubleSpinBox" name="core_y">
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_42">
@@ -3337,7 +3325,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+             <widget class="QDoubleSpinBox" name="core_z">
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.300000000000000</double>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -3351,7 +3349,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+             <widget class="QDoubleSpinBox" name="core_rx">
+              <property name="maximum">
+               <double>50.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>3.000000000000000</double>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_52">
@@ -3361,7 +3369,20 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+             <widget class="QDoubleSpinBox" name="core_ry">
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>50.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>3.000000000000000</double>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_57">
@@ -3371,7 +3392,20 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_7"/>
+             <widget class="QDoubleSpinBox" name="core_rz">
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>50.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>3.000000000000000</double>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -3392,7 +3426,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBox"/>
+             <widget class="QSpinBox" name="zSamples">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="value">
+               <number>20</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -3408,6 +3449,63 @@
           </item>
          </layout>
         </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>680</y>
+          <width>297</width>
+          <height>156</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Info cursor (right mouse button)</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_27">
+           <property name="text">
+            <string>Cell id</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineClickInfoCell">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_26">
+           <property name="text">
+            <string>Elevation</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineClickInfoElev">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_30">
+           <property name="text">
+            <string>Metric</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineClickInfoMetric">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="tabVisualVoro">
@@ -3547,24 +3645,37 @@
           <x>10</x>
           <y>290</y>
           <width>291</width>
-          <height>101</height>
+          <height>141</height>
          </rect>
         </property>
         <property name="title">
          <string>Physical Model Options</string>
         </property>
-        <widget class="QPushButton" name="compute_stress">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>40</y>
-           <width>231</width>
-           <height>36</height>
+           <y>30</y>
+           <width>241</width>
+           <height>96</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Compute Stresses</string>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QCheckBox" name="useMechanicalModel">
+            <property name="text">
+             <string>Use Mechanical Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="compute_stress">
+            <property name="text">
+             <string>Compute Stresses</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
       </widget>

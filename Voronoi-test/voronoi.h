@@ -6,19 +6,21 @@
 #include "heightfieldWall.h"
 #include "cellGraph.h"
 
+
 class Voronoi {
 public:
-
+    
     static void walledVoronoi(const HeightField *hf, CellGraph* graph);
     static void outOfBoundsVoronoi(const HeightField *hf, CellGraph* graph);
     static void triangleSamplingVoronoi(const HeightField *hf, std::vector<float>& v, std::vector<uint>& f, CellGraph* graph);
-    static void cellSamplingVoronoi(const HeightField *hf, CellGraph* graph);
+    static void cellSamplingVoronoi(const HeightField *hf, CellGraph* graph, Vector3 core_center, Vector3 core_range, int zSamples);
     static void toyVoronoi(const HeightField *hf, CellGraph* graph);
-    static void voronoiFromCentroids(const std::vector<Vector3>& centroids, const std::vector<bool>& exterior, CellGraph* graph, const HeightField* hf);
+    static void voronoiFromCentroids(const std::vector<Vector3>& centroids, const std::vector<bool>& exterior, CellGraph* graph, const HeightField* hf, Vector3 core_center, Vector3 core_range, int zSamples, std::vector<bool>& discard);
+    static void voronoiFromCentroids(const std::vector<Vector3>& centroids, const std::vector<bool>& exterior, CellGraph* graph, const HeightField* hf, Vector3 core_center, Vector3 core_range, int zSamples);
 private:
     static const double offsetScale; 
     static const double areaRatioLimit;
-    static const int areRatioWindow;
+    static const int areaRatioWindow;
 };
 
 #endif

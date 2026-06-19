@@ -438,7 +438,15 @@ which are material properties. More Specifically:
     k_s = \frac{E}{2(1 + \upsilon)L}
 \end{equation}
 
-Where $L$ is just a length scaling factor to adjust the properties to our situation. 
+Where $L$ represents a length. The force applied to a link is proportional 
+to its displacement, so if we used a fixed stiffness that only depended 
+on $E$ and $\upsilon$, we would have huge variations of results depending 
+on the scale we used to represent the model. For that reason, we are going 
+to use the average of the three sizes of the grid $s_x$, $s_y$ and $s_z$
+to define $L = \frac{s_x + s_y + s_z}{3}$. Additionally, we can also 
+look at the dimensions of $E$ (Which represents pressure) to obtain that 
+it has to be divided by a lenght so that everything fits (remember 
+that stiffness is then multiplied by area and lenght to obtain a force). 
 \subsection{Link Damage Model}
 Once we computed the stiffness matrix $K$ and solved the system of equations 
 \ref{eq:system}, the only think left to do is computing the link 
@@ -459,18 +467,37 @@ the shear stress $\tau$ as:
 \end{equation}
 
 $\sigma_n > 0$ defines tensile stress and $\sigma_n < 0$ defines compression. The 
-link $(i,j)$ will break when either of the following failure conditions is met:
+link $(i,j)$ will break when either of the three failure conditions is met.
+\vspace{10pt}
+
+First, the \textit{Ultimate Tensile Strenght} $T_{max}$ defines the maximum tension
+a material can withstand, so the tensile failure condition will be defined as:
 
 \begin{equation}
     \sigma_n > T_{max}
 \end{equation}
+
+Then, for compression, the \textit{Uniaxial Compressive Strength} $UCS$ of a material
+defines the compressive limit:
+
 \begin{equation}
-    \tau > c - \sigma_n tan(\varphi)
+    \sigma_n < -UCS
 \end{equation}
 
-Where $T_{max}$, $c$ and $\varphi$ are parameters of the material that 
-describe the maximum possible stresses that a link can withstand. Once 
-a link $(i,j)$ has been broken, then tforce $F_{ij}$ disappears from 
+Finally, the \textit{Mohr-Coulomb Criterion} \cite{labuz2014mohr}, widely used in fracture 
+and material analysis, defines the maximum shear 
+stress a material can withstand. Compression makes shear failure harder, 
+and tension makes it easier, so modeling shear failure is more complex 
+than modeling tensile or compressive failure. Still, using the cohesion 
+$c$ of a material and the coefficient of internal friction $tan(\phi)$ we can 
+represent the third failure condition as:
+
+\begin{equation}
+    \tau > c - \sigma_n tan(\phi)
+\end{equation}
+
+Once 
+a link $(i,j)$ has been broken, force $F_{ij}$ disappears from 
 the system, breaking the equilibrium along the link. For that reason, 
 once a link breaks, we will have to recompute the new equilibrium, update 
 the stresses, and check again if any link surpasses the stress limit, and 
@@ -491,20 +518,30 @@ the effect of water infiltrating the rock and damaging the links.
 For this reason we will have a damage variable $D$ for every link, which will
 go from $0$ to $1$ and it will be the complement of the life of the 
 link: $D = 1 - life$. Using variable $D$, we will 
-modify the variables $T_{max}$ and $c$ that control the failure conditions, 
+modify the variables $T_{max}$, $UCS$ and $c$ that control the failure conditions, 
 so a damaged link will be less resistant to stress, and it will break 
 more easily. The criterion that we use to modify the failure parameters 
-is a simple interpolation:
+is a simple interpolation using the baseline parameters $T_0$, $UCS_0$ and 
+$c_0$:
 
 \begin{equation}
-    T_{max}'(D) = T_{max}(1 - D)
+    T_{max}(D) = T_0(1 - D)
 \end{equation}
 \begin{equation}
-    c'(D) = c(1 - D)
+    c(D) = c_0(1 - D)
 \end{equation}
+\begin{equation}
+    UCS(D) = UCS_0(1 - D)
+\end{equation}
+
 
 Notice how, when $D = 1$, then any amount of stress would break the 
 link, so the link will be automatically broken if it reaches this point.
+The method we use to modify the damage variable of a link depends 
+on the water absorbed by said link, and because of that dependency, 
+the specific damage equations will be 
+described in section \ref{sec:linkUpdate}, after an explanation of 
+water infiltration and absorption. 
 \subsection{Final Model Considerations}
 As we mentioned at the start of this section, our mechanical model is 
 heavily based on the \textit{Discrete Element Method}. Now that we have 
@@ -612,12 +649,12 @@ Where $k_{solid}$, $k_{res}$ and $k_{air}$ are constants that control the
 behavior of water absorption for solid links, the increase on absorption 
 due to erosion and the amount of water that is lost going through broken 
 links. We need to scale absorption by the area $A_i$, as the bigger 
-the face, the more opportunity there is for water to be trapped there.
+the face, the more opportunity there is for water to be trapped there. 
 Of course, once water is absorbed, we modify the remaining amount of water 
 before jumping to the next link:
 
 \begin{equation}
-    w_{act}' = w_{act} - w_{abs}
+    w_{act}' = w_{act} - w_{abs}(l_i)
 \end{equation}
 
 Where $w_{act}$ is the amount of water before the absorption and 
@@ -626,9 +663,110 @@ we also include the possibility of a \textit{full absorption} event,
 where $w_{abs}$ becomes $w_{act}$ and all water is absorbed by the link. 
 The probability of this event happening is proportional to the remaining 
 fraction of water $1 - \frac{w_{act}}{w_{in}}$.
-\subsection{Updating Links}
+\subsection{Updating Links} \label{sec:linkUpdate}
 After a water path crosses a link, the link absorbs part of the water,
-but it has to be damaged accordingly.
+but it has to be damaged accordingly. The criterion used to modify link's
+life $\lambda$ after water absoprtion in \cite{10.2312:ceig.20241139} was 
+the followiong:
+
+\begin{equation}
+    \lambda_i' = \lambda_i - k_{dmg}\frac{w_{abs}(l_i)}{A_i}
+\end{equation}
+
+Where $k_{dmg}$ is a parameter controling how much damage is produced 
+after absorbing a certain quantity per unit area. The idea of this equation 
+works, but we can add the link stresses to extend it. The main idea is 
+that a link under tension lets water pass through more easily, and it is 
+more vulnerable to damage produced by water infiltration, while a link under
+compression initially produces the opposite effect, not letting water pass through easily and
+protecting against 
+erosion; however, if the compression stress is too high, it can produce 
+microfractures on the rock that weaken the link. Regarding shear stress, 
+the effect is similar to tension; the closer the stress is to the limit, 
+the weaker the link will be.
+
+\vspace{10pt}
+
+Putting it all toghether, the damage applied on link $l_i$ will be affected
+by modifiers due to the normal and shear stresses:
+
+\begin{equation}
+    \lambda_i' = \lambda_i' - k_{dmg}\frac{w_{abs}(l_i)}{A_i}(M_n + M_s)
+\end{equation}
+
+Where $M_n$ and $M_s$ are the modifiers produced by normal and shear stresses
+respectively. The normal stress modifier will depend on wether the link 
+is under tension or compression, so we will have 2 equations for $M_n$ 
+that should have the same value when $\sigma_n = 0$ (to preserve continuity). 
+
+\vspace{10pt}
+
+For the tensile part of $M_n$, when $\sigma_n > 0$, we propose an 
+equation based in Griffith's brittle fracture theory \cite{WU201820}. The 
+link weakens exponentially under tension, so we define $M_n$ as an exponential:
+
+\begin{equation}
+    M_n = e^{\alpha_t(\frac{\sigma_n}{T_{max}(D)})^p}
+\end{equation}
+
+Where $\alpha_t$ controls how sensitive the rock is to tension (how much 
+tension facilitates damage) and 
+$p$ controls the \textit{brittleness}, higher values of p makes the 
+modifier smaller but with sudden growth when approacing the tension limit. 
+Notice how, regardless of the chosen parameters, $M_n = 1$ when $\sigma_n = 0$, 
+as $e^0 = 1$, so the compression criterion that we use also needs to 
+evaluate to $1$ at $\sigma_n = 0$. In addition to evaluating to $1$ under 
+no stress, the modifier should also get smaller when reducing $\sigma_n$, 
+as compression provides some protection against damage. However, after 
+$\sigma_n$ surpasses a (negative) threshold, microfractures due to compression 
+are produced and the modifier should increase again. In order to represent 
+this phenomenon we can use the following equation using $x = \frac{|\sigma_n|}{UCS(D)}$:
+
+\begin{equation}
+    M_n = \frac{1}{1 + sx - \alpha_c x^2}
+\end{equation}
+
+Notice how the denominator is $1$ when $x = 0$ (so $\sigma_n = 0$) and then 
+as we increase compression, the denominator starts to grow controlled by 
+parameter $s$ (as the squared term grows slower at first). Then, after 
+$sx - \alpha_cx^2 $ reaches its maximum, the denominator starts to decrease 
+in value, making $M_n$ grow bigger. We will have to tune $s$ and $\alpha_c$ 
+to properly control the amount of protection given by compression and the 
+threshold where microfractures appear, making the modifier start growing 
+hyperbolically. Putting our two equations toghether, we can define $M_n$ 
+as:
+
+\begin{equation}
+    M_n = \begin{cases}
+        exp(\alpha_t(\frac{\sigma_n}{T_{max}(D)})^p) & if \; \; \sigma_n > 0\\
+        \frac{1}{1 + sx - \alpha_c x^2} & Otherwise
+    \end{cases}
+\end{equation}
+
+Finally, we will use the ratio between the current shear stress $\tau$ 
+and the maximum allowed shear stress $\tau_{limit} = c(D) - \sigma_n tan(\phi)$ provided by the 
+Mohr-Coulomb criterion to define our shear modifier $M_s$: 
+
+\begin{equation}
+    M_s = \alpha_s (\frac{\tau}{\tau_{limit}})^q
+\end{equation}
+
+Similarly to the tensile modifier, $\alpha_s$ will control 
+how much damage is produced on a link under shear stress, and $q$ will 
+control how suddenly or progressively the modifier will grow. Higher 
+values of $p$ will start with a lower value but they will produce 
+a sudden growth when the ratio approaches 1. 
+
+\vspace{10pt}
+
+As a final note, notice how $0 \leq M_s \leq \alpha_s$ and, under tension, 
+$1 \leq M_n \leq e^{\alpha_t}$ with $p$ and $q$ controling how sudden is 
+the transition from the minimum to the maximum. On the other hand, $M_n$
+under compression is harder to bound, and we need to carefuly choose 
+$s$ and $\alpha_c$ to avoid an asimptote when $1 + sx - \alpha_cx^2 = 0$.
+Additionally, all failure limits tend to $0$ as $D$ increases, which 
+could produce an asymptote; however, the link will be broken way before
+the limits reach $0$, so we do not have to worry about that.
 \subsection{Cell detachment}\label{sec:detachment}
 Now, the only step left to implement is the cell detachment protocol.
 After a link has been broken, we do not remove it from the link 
@@ -694,7 +832,7 @@ described in equation \ref{eq:p_exterior}.
 
 To end this chapter, after describing every step of the algorithm 
 in detail, we will give step-by-step summary of the method to put it 
-all together.
+all toghether.
 
 \vspace{10pt}
 

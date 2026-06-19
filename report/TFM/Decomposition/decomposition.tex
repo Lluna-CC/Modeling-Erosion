@@ -466,7 +466,7 @@ cell into four sub-cells, sampling the elevation and normal at the centroid
 of each sub-cell (with optional jittering inside the sub-cell), and then 
 create a pair of samples for each one like we were doing before. 
 We can even go further than this and subdivide each sub-cell into four 
-pieces more. This way we could take $4^k$ samples per cell for 
+pieces more. This way we could take $2 \cdot 4^k$ samples per cell for 
 $k \in \{0,1, \hdots\}$ depending on the rugosity: lower amounts of rugosity
 would imply lower values of $k$. In our case, we have obtained good results 
 using $k \in \{0,1,2\}$, so we have not tested further subdivisions. 
@@ -563,7 +563,7 @@ And with this we can create a graph connecting all links of our decomposition,
 which is the last thing we needed as preparation for the erosion simulation 
 algorithm.
 
-\section{Multi-Resolution Extension}
+\section{Multi-Resolution Extension} \label{sec:multiResolution}
 
 With all we explained up to this point, we have enough information to 
 run the erosion simulation. Still, the algorithm can be quite heavy 
@@ -585,5 +585,186 @@ The quality of the terrain that the user sees will be the same, and
 the erosion simulation will be faster, although we will be sacrificing 
 some quality in the erosion process.
 
-\subsection{Subsampling of Cells}
-\subsection{Problems with the method}
+\subsection{Furthest Point Subsampling}
+If the goal is to obtain a subset of the original $N$ samples 
+to represent a lower-resolution version of the terrain, the easiest thing we 
+can do is pick at random $N/s$ elements of the original set, where $1/s$ 
+is the fraction of samples we want to pick; however, choosing points 
+at random leads to many problems. For example, we could have some 
+regions packed with subsamples, each representing a small portion 
+of the terrain, and some regions with very few subsamples, producing the opposite 
+problem.
+
+\vspace{10pt}
+
+Random subsampling is highly irregular, so we need a better sampling 
+method to guarantee some amount of regularity and that every subsample 
+represents a roughly equal region of the terrain. To achieve this goal, 
+we have chosen the \textit{Furthest Point Sampling} method. Given 
+a set of points $P = \{p_1, \hdots , p_N\}$ we want to create a subset $S$
+of size $|S| = N/s$. In order to achieve this, we first pick one element of $P$
+at random to be the first one of $S$; then, we compute the distance of every
+point $p_i \in P$ to the set $S$ and add the furthest point to $S$. We repeat 
+this process iteratively
+until we have added $N/s$ samples to $S$. Algorithm \ref{alg:furthest} shows the pseudocode of the method we used 
+to obtain a subsample.
+
+\vspace{10pt}
+
+\begin{algorithm}
+\caption{Furthest Point Sampling} \label{alg:furthest}
+\begin{algorithmic}
+\State $p_r \gets$ random sample from $P$
+\State $S \gets S \cup \{p_r\}$
+\While{$|S| < N/s$} 
+    \State $p_k \gets \arg \max_{p_i \in P} d(p_i, S)$
+    \State $S \gets S \cup \{p_k\}$
+\EndWhile
+
+\end{algorithmic}
+\end{algorithm}
+
+We define the distance between a point and a set, using the minimum euclidean distance:
+
+\begin{equation}
+    d(p_i, S) = \min_{s_i \in S} (d(p_i, s_i))
+\end{equation}
+
+
+
+After obtaining subset $S$, the only thing left to do is linking the points of 
+$P$ to the closest subsample of $S$. This way, we could perform our erosion 
+algorithm with only the cells on $S$, and when a cell $s_i$ of the subsample is removed, 
+we can remove all cells of $P$ that are linked to $s_i$.
+
+\vspace{10pt}
+
+Before ending this section, there is a final consideration that we have 
+to take into account. The original group of points $P$ contains points 
+marked as solid (inside the terrain) as well as points marked as air (outside the terrain),
+so the subsample $S$ may also contain points outside the terrain. If we 
+mark the subsampled points as air when they are outside of the terrain, a 
+huge problem arises: Because we will never remove air cells in the erosion 
+algorithm, a solid point of $P$ linked with an air point of $S$ will never 
+be removed. To solve this, we will mark as solid all subsamples from $S$ 
+that are linked to at least one solid point on $P$. This ends up in 
+cells clearly outside the terrain limits marked as solid, which will
+produce some artifacts in the low-resolution version. Figure \ref{fig:initialVsSubsalingPoints} shows 
+how some solid cells end up outside of the terrain using this method.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Base sampling along the original surface of the terrain separating air and solid cells]{\includegraphics[width=0.4\linewidth]{Decomposition/initialSampling.png}
+    }
+    \hspace{20pt}
+    \subfigure[Subsampling using furthest point, some points corresponding to solid cells lie outside of the terrain]{\includegraphics[width=0.4\linewidth]{Decomposition/subsamplingFurthest.png}
+        }
+    
+    \caption{Results of the furthest point sampling. Some points outside of 
+    the terrain are marked as solid because they are linked with solid cells 
+    of the original sampling}
+    \label{fig:initialVsSubsalingPoints}
+\end{figure}
+
+
+\subsection{Subsampling Improvement}
+
+The current subsampling method will produce some artifacts in the resulting 
+decomposition due to some cells being marked as solid when they are completely
+outside the terrain (the artifacts can be appreciated in figure \ref{fig:initialVsSubsalingCells}). 
+The low-resolution terrain is not intended to be seen, 
+just to be used to simplify the erosion algorithm, so the visual quality 
+is not highly relevant for our needs. Despite this, even if we do not 
+care about the visual quality, having a decomposition that properly fits 
+the terrain is also important to produce better results during the simulation.
+For this reason, we dedicated some time to improve this subsampling.  
+
+\begin{figure}
+    \centering
+
+    \subfigure[Decomposition results using the base sampling]{\includegraphics[width=0.4\linewidth]{Decomposition/3DgaussianBase.png}
+    }
+    \hspace{20pt}
+    \subfigure[Low-resolution decomposition using furthest point 
+    to collect a subsample
+    ]{\includegraphics[width=0.4\linewidth]{Decomposition/3DgaussianFurthest.png}
+        }
+    
+    \caption{Results of the furthest point sampling. Some artifacts arise 
+    due to cells outside of the terrain being marked as solid}
+    \label{fig:initialVsSubsalingCells}
+\end{figure}
+
+\vspace{10pt}
+
+Our current method has the issue of cells outside of the terrain being 
+classified as solid, but it also has another problem: because we are not 
+using anything to explicitly cut the cells at the surface, 
+the results will be similar to the ones obtained when drawing random 
+samples outside of the terrain (figure \ref{fig:OutBoundsParticlesVoro}). 
+We can solve both problems at the same time by reusing the sampling 
+method we designed for the high-resolution decomposition.
+
+\vspace{10pt}
+
+The proposed base sampling method is actually a combination of two methods: 
+one to obtain samples inside the terrain representing the interior, and another 
+that obtains samples to reproduce the surface. Using this information, we can also produce the subsampling 
+in two rounds: one subsampling for the internal sampling and another 
+for the surface.
+
+\vspace{10pt}
+
+To obtain the internal samples, we divide all space into a 3D grid and 
+we take one sample per cell of the grid. We can reuse the 3D grid used 
+for the base sampling and create a low-resolution 3D grid made of blocks of cells 
+(for example, we can group a block of 2x2x2 cells into a bigger cell). 
+Using this low-resolution 3D grid, we classify all points in the original
+set $P$ depending on which block of cells they fall into. Next, for each 
+block of samples $P_{ijk}$ we will choose a \textit{representative} to 
+add it to our subsampled set $S$. Defining $q_{ijk}$ as the centroid 
+of the block of cells, our representative $s_{ijk}$ will be chosen using:
+
+\begin{equation}
+    s_{ijk} = \arg \min_{p \in P_{ijk}} d(p, q_{ijk})
+\end{equation}
+
+That is, we will choose the colsest sample to the centroid as a representative.
+
+\vspace{10pt}
+
+For the second phase of the sampling, the one that generates the walls, 
+we are using the 2D grid of the DEM to generate pairs of samples at the surface 
+of the terrain. We can use the same idea as with the 3D grid and divide 
+the 2D grid into blocks, choosing a pair of samples per block of cells. Basically,
+we will 
+create two groups $P_{ij}$ and $Q_{ij}$ for each block and choose a 
+representative of each of those groups. The representative of group $P_{ij}$
+will be marked as solid, and the one of group $Q_{ij}$ will be air. 
+$P_{ij}$ will only contain the members of the pairs that belong to 
+the inside of the terrain, and $Q_{ij}$ only the members that lie outside, 
+so we solve the problem of \textit{hybrid blocks} (which
+contain both air and solid samples) using this method. Additionally, because the members of $P_{ij}$ 
+and $Q_{ij}$ are sampled in pairs to create a wall representing the 
+surface of the terrain, the representatives of each group will also create a
+wall (although not as precise) that roughly represents the surface, solving
+our second problem. 
+
+\begin{figure}
+    \centering
+
+    \subfigure[Subsampling using the improved method. Notice how 
+    there are no solid cells outside of the terrain]{\includegraphics[width=0.4\linewidth]{Decomposition/gridSamplingPoints.png}
+    }
+    \hspace{20pt}
+    \subfigure[Low-resolution decomposition using the improved method. 
+    The walls are not perfect, but they approximate the shape of the terrain, 
+    unlike the results generated using furthest point sampling
+    ]{\includegraphics[width=0.4\linewidth]{Decomposition/gridSamplingCells.png}
+        }
+    
+    \caption{Results of the improved method. The left image shows 
+    the subsamples obtained, while the right one shows the final result}
+    \label{fig:samplingVsCellsGrid}
+\end{figure}

@@ -10,7 +10,8 @@
 enum cellState {
   SOLID,
   AIR,
-  CORE
+  CORE,
+  DISCARDED
 };
 
 enum linkState {
@@ -36,8 +37,9 @@ struct vorocell {
   std::map<int,voroFace> faceData;
   std::vector<int> neighbors;
   int nTriangles;
-  cellState state = SOLID;
+  cellState state = DISCARDED;
   bool isExterior = false;
+  bool marked = false;
   double volume = -1;
 };
 
@@ -59,7 +61,7 @@ class CellGraph {
   std::set<std::pair<int,int>>& getExteriorLinks() {return exteriorLinks;}
   std::vector<int>& getSolidCells() {return solidCells;}
 
-  void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore = false);
+  void addCell(voro::voronoicell_neighbor& c, double x, double y, double z, int pid, bool outside, bool isCore = false, bool discarded = false);
   void setNumCells(int n);
   
   void computeBounds();

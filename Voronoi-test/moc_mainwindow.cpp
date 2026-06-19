@@ -64,6 +64,8 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "changeAlphaPaths",
         "changeRenderLayer",
         "computeStress",
+        "setMechanicalModelMode",
+        "setLinkVisualizationMode",
         "loadPNG",
         "loadASC",
         "updateDEM",
@@ -136,42 +138,46 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'computeStress'
         QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPNG'
+        // Slot 'setMechanicalModelMode'
         QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadASC'
+        // Slot 'setLinkVisualizationMode'
         QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updateDEM'
+        // Slot 'loadPNG'
         QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'recommendedDEM'
+        // Slot 'loadASC'
         QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadToy'
+        // Slot 'updateDEM'
         QtMocHelpers::SlotData<void()>(30, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'loadPreset'
+        // Slot 'recommendedDEM'
         QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'updatePresetInfo'
+        // Slot 'loadToy'
         QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayersCombined'
+        // Slot 'loadPreset'
         QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerMetric'
+        // Slot 'updatePresetInfo'
         QtMocHelpers::SlotData<void()>(34, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRivers'
+        // Slot 'saveLayersCombined'
         QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveLayerRidges'
+        // Slot 'saveLayerMetric'
         QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'saveMetric'
+        // Slot 'saveLayerRivers'
         QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editFillDepressions'
+        // Slot 'saveLayerRidges'
         QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editBreaching'
+        // Slot 'saveMetric'
         QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'editGaussianSmooth'
+        // Slot 'editFillDepressions'
         QtMocHelpers::SlotData<void()>(40, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'editBreaching'
+        QtMocHelpers::SlotData<void()>(41, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'editGaussianSmooth'
+        QtMocHelpers::SlotData<void()>(42, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'queryRay'
-        QtMocHelpers::SlotData<void(const Ray &)>(41, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 42, 43 },
+        QtMocHelpers::SlotData<void(const Ray &)>(43, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 44, 45 },
         }}),
         // Slot 'updateViewshedLocation'
-        QtMocHelpers::SlotData<void()>(44, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(46, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -218,23 +224,25 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 20: _t->changeAlphaPaths(); break;
         case 21: _t->changeRenderLayer(); break;
         case 22: _t->computeStress(); break;
-        case 23: _t->loadPNG(); break;
-        case 24: _t->loadASC(); break;
-        case 25: _t->updateDEM(); break;
-        case 26: _t->recommendedDEM(); break;
-        case 27: _t->loadToy(); break;
-        case 28: _t->loadPreset(); break;
-        case 29: _t->updatePresetInfo(); break;
-        case 30: _t->saveLayersCombined(); break;
-        case 31: _t->saveLayerMetric(); break;
-        case 32: _t->saveLayerRivers(); break;
-        case 33: _t->saveLayerRidges(); break;
-        case 34: _t->saveMetric(); break;
-        case 35: _t->editFillDepressions(); break;
-        case 36: _t->editBreaching(); break;
-        case 37: _t->editGaussianSmooth(); break;
-        case 38: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
-        case 39: _t->updateViewshedLocation(); break;
+        case 23: _t->setMechanicalModelMode(); break;
+        case 24: _t->setLinkVisualizationMode(); break;
+        case 25: _t->loadPNG(); break;
+        case 26: _t->loadASC(); break;
+        case 27: _t->updateDEM(); break;
+        case 28: _t->recommendedDEM(); break;
+        case 29: _t->loadToy(); break;
+        case 30: _t->loadPreset(); break;
+        case 31: _t->updatePresetInfo(); break;
+        case 32: _t->saveLayersCombined(); break;
+        case 33: _t->saveLayerMetric(); break;
+        case 34: _t->saveLayerRivers(); break;
+        case 35: _t->saveLayerRidges(); break;
+        case 36: _t->saveMetric(); break;
+        case 37: _t->editFillDepressions(); break;
+        case 38: _t->editBreaching(); break;
+        case 39: _t->editGaussianSmooth(); break;
+        case 40: _t->queryRay((*reinterpret_cast<std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 41: _t->updateViewshedLocation(); break;
         default: ;
         }
     }
@@ -259,14 +267,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 40)
+        if (_id < 42)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 40;
+        _id -= 42;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 40)
+        if (_id < 42)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 40;
+        _id -= 42;
     }
     return _id;
 }

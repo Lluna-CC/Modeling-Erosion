@@ -45,6 +45,8 @@ public slots:
     void changeAlphaPaths();
     void changeRenderLayer();
     void computeStress();
+    void setMechanicalModelMode();
+    void setLinkVisualizationMode();
 
     // terrain load actions
     void loadPNG();

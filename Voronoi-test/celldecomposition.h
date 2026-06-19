@@ -13,6 +13,7 @@
 #include <map>
 #include <set>
 #include "voronoi.h"
+#include "mechanicalModel.h"
 
 
 
@@ -26,7 +27,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    
    void renderCells(int l);
    void renderParticles(int l);
-   void renderLinks(int l);
+   void renderLinks(int l, int mode, MechanicalModel& mechModel);
    void renderPaths(std::set<std::pair<int,int>>& paths, int l);
 
    void fullMeshDecomposition(int l);
@@ -41,7 +42,8 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    
    MultiResolutionGraph* getGraph() {return &graph;}
 
-   void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int multiRes_factor) {graph.multiLevelVoronoiDecomposition(v,f,hf, multiRes_factor);}
+   void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int multiRes_factor, 
+                            Vector3 core_center, Vector3 core_range, int zSamples, bool furthest = true); 
    void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};
 
  private:

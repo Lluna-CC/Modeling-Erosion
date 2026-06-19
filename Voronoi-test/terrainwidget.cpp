@@ -196,7 +196,8 @@ void TerrainWidget::paintGL()
 
     if (renderMode[3]) {
         glUniform1f(glGetUniformLocation(shader, "u_alpha"), alphas[3]);
-        cellDecomp -> renderLinks(renderLayer);
+        MechanicalModel& model = eroder.getMechanicalModel();
+        cellDecomp -> renderLinks(renderLayer, linkVizMode, model);
     }
 
     if (renderMode[4]) {
@@ -407,11 +408,11 @@ void TerrainWidget::wheelEvent(QWheelEvent* e)
     update();
 }
 
-void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi, int multiRes_factor) {
+void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi, int multiRes_factor, Vector3 core_center, Vector3 core_range, int zSamples, bool useModel) {
     delete cellDecomp;
     cellDecomp = new CellDecomposition();
     
-    cellDecomp -> voronoiDecomposition(verts, indices, hf, multiRes_factor);
+    cellDecomp -> voronoiDecomposition(verts, indices, hf, multiRes_factor, core_center, core_range, zSamples);
     
     makeCurrent();
     cellDecomp -> setShader(&shaderVoro); 
@@ -428,10 +429,11 @@ void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi, 
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
     eroder = ErosionAlgorithm(cellDecomp -> getGraph(), 1);
     eroder.setErosionDirection(theta,phi);
+    eroder.setMechanicalModelMode(useModel);
 }
 
 
-void TerrainWidget::setRenderMode(int mode) {
+void TerrainWidget::toggleRenderMode(int mode) {
     renderMode[mode] = !renderMode[mode];
     update();
 }
@@ -461,7 +463,7 @@ void TerrainWidget::computeWaterPath(int num) {
     for (int i = 0; i < num; ++i) {
         //std::cout << "Path n: " << i << std::endl;
         if (eroder.waterPath(paths)) {
-            std::cout << "Part removed! " << std::endl;
+            //std::cout << "Part removed! " << std::endl;
             //eroder.getNewExteriorCells(newC, oldC);
             //cellDecomp -> updateMesh(newC, oldC);
         };
@@ -504,4 +506,9 @@ void TerrainWidget::setRenderLayer(int l) {
 
 void TerrainWidget::computeStress() {
     eroder.computeStress();
+}
+
+void TerrainWidget::setMechanicalModelMode(bool mode) {
+    if (cellDecomp == nullptr) return;
+    eroder.setMechanicalModelMode(mode);
 }

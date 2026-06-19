@@ -99,8 +99,10 @@ void MechanicalModel::updateLinkStresses(std::map<std::pair<int,int>, vorolink>&
         if (it -> second.state == EXTERIOR || it -> second.state == BROKEN) continue;
         int i = it -> first.first;
         int j = it -> first.second;
+        if (i < 0 || j < 0) continue;
         int solid_i = solidCells[i];
         int solid_j = solidCells[j];
+        if (solid_i == -1 || solid_j == -1) continue;
 
         Vector3 s_i = Vector3(u(6*solid_i), u(6*solid_i + 1), u(6*solid_i + 2));
         Vector3 theta_i = Vector3(u(6*solid_i + 3), u(6*solid_i + 4), u(6*solid_i + 5));
@@ -187,4 +189,32 @@ double MechanicalModel::getShearC(double damage) {
 
 double MechanicalModel::getUCS(double damage) {
     return UCS*(1 - damage);
+}
+
+double MechanicalModel::normalModifier(vorolink& l) {
+    
+
+    if (l.normalStress > 0) {
+        double alph = 1.0; //??
+        double p = 1.0;
+        double T = getTmax(1 - l.life); 
+        return exp(alph * pow(l.normalStress/T,p));
+    }
+
+    else {
+        double u = abs(l.normalStress)/getUCS(1 - l.life);
+        double s = 1.0;
+        double alph = 1.0;
+        double Ic = 1 + s*u - alph*u*u;  
+        return 1.0/Ic;
+    }
+    
+}
+
+double MechanicalModel::shearModifier(vorolink& l) {
+    double c = getShearC(1 - l.life);
+    double t_limit = c - l.normalStress * tanPhi;
+    double alph = 1.0;
+    double q = 1.0;
+    return alph * pow(l.shearStress/t_limit, q);
 }
