@@ -427,7 +427,11 @@ void TerrainWidget::setDecomposition(HeightField* hf, double theta, double phi, 
 
     camera = Camera::View(decompBox);
     //camera = Camera::View(Box3(Vector3(-400,-300, 2600),Vector3(400,300,2800)));
-    eroder = ErosionAlgorithm(cellDecomp -> getGraph(), 1);
+    double sx = hf -> getSizeX();
+    double sy = hf -> getSizeY();
+    
+    eroder = ErosionAlgorithm(cellDecomp -> getGraph(), 1, (sx + sy)/2);
+    
     eroder.setErosionDirection(theta,phi);
     eroder.setMechanicalModelMode(useModel);
 }

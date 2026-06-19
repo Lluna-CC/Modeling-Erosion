@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex Project"] 1781894933.20455 "Project.aux" "Project.bbl" "Project" 1781894937.39262 0
+["bibtex Project"] 1781902918.63684 "Project.aux" "Project.bbl" "Project" 1781902922.6945 0
   "./Bibs/sample.bib" 1781711056.25399 40352 5dd0c42b892564af8ed3d1c4b7ee3bb5 ""
-  "./Project-blx.bib" 1781894937.25128 343 bf1f0c75b5bafd473925320ac9611e26 ""
+  "./Project-blx.bib" 1781902922.55061 343 bf1f0c75b5bafd473925320ac9611e26 ""
   "/usr/share/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1775415801 65510 9a2a51799b543ff279b8ea2dd91ec499 ""
-  "Project.aux" 1781894937.24028 54431 f3fcd5b9df7daac4a0e7ad6f2425908d "pdflatex"
+  "Project.aux" 1781902922.54061 55439 978b168c91551f6f5066094518340d54 "pdflatex"
   (generated)
   "Project.bbl"
   "Project.blg"
   (rewritten before read)
-["pdflatex"] 1781894933.22915 "/home/lluna/Documents/uni/Modeling-Erosion/report/TFM/Project.tex" "Project.pdf" "Project" 1781894937.39283 0
+["pdflatex"] 1781902918.6657 "/home/lluna/Documents/uni/Modeling-Erosion/report/TFM/Project.tex" "Project.pdf" "Project" 1781902922.69484 0
   "/home/lluna/Documents/uni/Modeling-Erosion/report/TFM/Project.tex" 1781689869.77028 2748 2c2448e8b2258ac4232e73d73e2e7678 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1775415801 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1775415801 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -377,14 +377,14 @@
   "Erosion/erosion.tex" 1781790850.97347 37848 af44d54140d5e5821d465a6c5d4b1eb0 ""
   "Introduction/intro.tex" 1781793181.6202 4567 f19fb1e0b32060b1fba246e215f7af0a ""
   "Misc/misc.tex" 1779956642 1746 f3157720ab75ef6b5c0ae1fcc060b8cd ""
-  "Project.aux" 1781894937.24028 54431 f3fcd5b9df7daac4a0e7ad6f2425908d "pdflatex"
-  "Project.bbl" 1781894933.22561 73979 aa9f3e90dae4e933944492394ededc2f "bibtex Project"
-  "Project.lof" 1781894937.25267 14214 2aad19bd78503686ddb4a02eb0634740 "pdflatex"
-  "Project.lot" 1781894937.25267 452 330ccd7a147ab5f670fed76636079368 "pdflatex"
-  "Project.out" 1781894937.2487 9073 19e88cdf56ed4bdf01050b294259610a "pdflatex"
-  "Project.run.xml" 1781894937.25267 2625 b4922b953c88c688fa14273693c5bfcc "pdflatex"
+  "Project.aux" 1781902922.54061 55439 978b168c91551f6f5066094518340d54 "pdflatex"
+  "Project.bbl" 1781902918.66214 73979 aa9f3e90dae4e933944492394ededc2f "bibtex Project"
+  "Project.lof" 1781902922.55152 14214 2aad19bd78503686ddb4a02eb0634740 "pdflatex"
+  "Project.lot" 1781902922.55152 452 330ccd7a147ab5f670fed76636079368 "pdflatex"
+  "Project.out" 1781902922.54761 9807 277f736ec11f4d760ea1aebde6c9513e "pdflatex"
+  "Project.run.xml" 1781902922.55152 2625 b4922b953c88c688fa14273693c5bfcc "pdflatex"
   "Project.tex" 1781689869.77028 2748 2c2448e8b2258ac4232e73d73e2e7678 ""
-  "Project.toc" 1781894937.25267 6334 c5905123c23b53d509146e960bec6a9e "pdflatex"
+  "Project.toc" 1781902922.55152 6995 cebcb2440dbdf2a5df53dbcebecc7813 "pdflatex"
   "Results/MultiResComparison/furthest10.png" 1781865396.78373 30191 cbe11d8d746c4f01c269ebb5f60fff7f ""
   "Results/MultiResComparison/furthest3.png" 1781864949.81879 121014 4a96a3f254c1ad614d872576367d9ba3 ""
   "Results/MultiResComparison/furthest5.png" 1781865669.70682 76643 c4c5906398f6284c9c8c4bf976820041 ""
@@ -398,7 +398,7 @@
   "Results/gaussianLinks.png" 1781810474.63561 260020 9ce82bd2f2be2bdc32f8aa728de8fc59 ""
   "Results/gaussianParticles.png" 1781810459.98024 91218 f40d867594bd5e95f769921bad486d74 ""
   "Results/heightFieldSizes.png" 1781804663.78309 11193 4f198f9be76b335d3bc9fcb79f1bf016 ""
-  "Results/results.tex" 1781894928.86111 21640 0b2d94855b63e220c0d3f641bccceef3 ""
+  "Results/results.tex" 1781902910.6874 21942 7b75d2e1b0c75bdcddcf8a67507af3d2 ""
   "Results/rugosityResults/division1.5.png" 1781861547.09231 220724 3d7f67a8fd623f19a3f79ce87ca6d49a ""
   "Results/rugosityResults/division1.5_2.0.png" 1781862075.92517 231608 01af332e8b378482e2e4496d9cd8e953 ""
   "Results/rugosityResults/division1.5_2.0_2.5.png" 1781862692.72846 252445 bc8c19f86e63f9c2dade66d3b6154b25 ""

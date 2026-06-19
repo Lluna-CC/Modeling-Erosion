@@ -43,7 +43,7 @@ class CellDecomposition: protected QOpenGLFunctions_3_3_Core, QOpenGLContext {
    MultiResolutionGraph* getGraph() {return &graph;}
 
    void voronoiDecomposition(std::vector<float>& v, std::vector<uint>& f, const HeightField *hf, int multiRes_factor, 
-                            Vector3 core_center, Vector3 core_range, int zSamples, bool furthest = false); 
+                            Vector3 core_center, Vector3 core_range, int zSamples, bool furthest = true); 
    void toyVoronoi(const HeightField *hf) {graph.toyVoronoi(hf);};
 
  private:

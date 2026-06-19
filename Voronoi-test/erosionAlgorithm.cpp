@@ -6,12 +6,13 @@ ErosionAlgorithm::ErosionAlgorithm() {
     
 }
 
-ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel) {
+ErosionAlgorithm::ErosionAlgorithm(MultiResolutionGraph* g, int workLevel, double L) {
 
     graph = g;
     level = workLevel;
-    model.initializeModel(g -> getCells(level), g -> getLinks(level), g -> getSolidCells(level));
-    computeAverageArea();
+    model.initializeModel(g -> getCells(level), g -> getLinks(level), g -> getSolidCells(level)); 
+    model.setAvgLen(L); 
+    computeAverageArea();               
 }
 
 double ErosionAlgorithm::resistanceField(double x, double y, double z) {
@@ -366,7 +367,7 @@ void ErosionAlgorithm::updateExternalLinks() {
     
     graph -> updateExternalCells(0);
     for (int i = 0; i < cells.size(); ++i) {
-        if (cells[i].state == AIR) continue;
+        if (cells[i].state == AIR || cells[i].state == DISCARDED) continue;
         for (int k = 0; k < cells[i].neighbors.size(); ++k) {
             if (cells[i].neighbors[k] < 0 || recentlyRemoved.find(cells[i].neighbors[k]) != recentlyRemoved.end()) {
                 

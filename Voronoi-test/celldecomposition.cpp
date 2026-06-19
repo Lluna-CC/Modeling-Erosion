@@ -152,14 +152,21 @@ void CellDecomposition::renderLinks(int l, int mode, MechanicalModel& mechModel)
                     break;
                 case 1:
                     D = 1 - l.life;
-                    t = 1 - l.normalStress/mechModel.getTmax(D);
-                    std::cout << "Link Normal Stress: " << l.normalStress << " AND: " << l.normalStress/mechModel.getTmax(D) << std::endl;
-                    glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+                    if (l.normalStress > 0) {
+                        t = 1 - log(l.normalStress)/log(mechModel.getTmax(D));
+                        glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
+                    }
+                    else {
+                        t = 1 - log(-l.normalStress)/log(mechModel.getUCS(D));
+                        glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 0.0f, t,1.0f - t);  
+                    }
+                    //std::cout << "Link Normal Stress: " << l.normalStress << " AND: " << l.normalStress/mechModel.getTmax(D) << std::endl;
+                   
                     break;
                 case 2:
                     D = 1 - l.life;
-                    t = 1 - l.shearStress/(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi());
-                    std::cout << "Link Shear Stress: " << l.shearStress << " AND: " << l.shearStress/(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi()) << std::endl;
+                    t = 1 - log(l.shearStress)/log(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi());
+                    //std::cout << "Link Shear Stress: " << l.shearStress << " AND: " << l.shearStress/(mechModel.getShearC(D) - l.normalStress*mechModel.getTanPhi()) << std::endl;
                     glUniform3f(glGetUniformLocation(cellShader -> programId(), "u_color"), 1.0f - t, t,0.0f);
                     break;
                 default:
@@ -594,5 +601,5 @@ void CellDecomposition::voronoiDecomposition(std::vector<float>& v, std::vector<
                                             Vector3 core_center, Vector3 core_range, int zSamples, bool furthest) {
 
     if (furthest) graph.multiLevelVoronoiDecompositionFurthestPoint(v,f,hf, multiRes_factor, core_center, core_range, zSamples);
-    else graph.multiLevelVoronoiDecompositionGridSampling(v,f,hf, 4, core_center, core_range, zSamples);
+    else graph.multiLevelVoronoiDecompositionGridSampling(v,f,hf, 2, core_center, core_range, zSamples);
 }

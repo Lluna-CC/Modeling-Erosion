@@ -14,13 +14,16 @@ void MechanicalModel::initializeModel(std::vector<vorocell>& cells, std::map<std
         if (cells[i].state == SOLID) {
 
             double mass = cells[i].volume * rockDensity;
+            
             F(6*cell) = g[0]*mass; F(6*cell + 1) = g[1]*mass; F(6*cell + 2) = g[2]*mass;
-        
+            
             for (int j = 0; j < cells[i].neighbors.size(); ++j) {
+                
                 
                 int neigh = cells[i].neighbors[j];
                 if (i > neigh || cells[neigh].state != SOLID || links[std::make_pair(i, neigh)].state == BROKEN) continue;
                 int cell_j = solidCells[neigh];
+                
 
                 voroFace& interface = cells[i].faceData[neigh]; 
                 double area = interface.area;
@@ -83,11 +86,13 @@ void MechanicalModel::initializeModel(std::vector<vorocell>& cells, std::map<std
 
     K.resize(6*N,6*N);
     K.setFromTriplets(K_coeff.begin(), K_coeff.end());
+    
+    
 }
 
 void MechanicalModel::computeEquilibra() {
     std::cout << "Finding Equilibria" << std::endl;
-    Eigen::ConjugateGradient<Eigen::SparseMatrix<double>> solver(K);
+    Eigen::LeastSquaresConjugateGradient<Eigen::SparseMatrix<double>> solver(K);
     u = solver.solve(F);
     std::cout << "Equilibria Found" << std::endl;
 }
@@ -113,25 +118,25 @@ void MechanicalModel::updateLinkStresses(std::map<std::pair<int,int>, vorolink>&
 
         Vector3 d_i = s_i + cross(theta_i, r_i);
         Vector3 d_j = s_j + cross(theta_j, r_j);
-        Vector3 d_ij = d_i - d_j;
+        Vector3 d_ij = d_j - d_i;
 
         double area = cells[i].faceData[j].area;
         Vector3 n = cells[i].faceData[j].normal;
-        Vector3 F_ij = kn * (dot(d_ij, n) * n) + ks * (d_ij - dot(d_ij, n) * n); 
+        Vector3 F_ij = kn * area * (dot(d_ij, n) * n) + ks * area* (d_ij - dot(d_ij, n) * n); 
         it -> second.normalStress = -dot(F_ij, n)/area;
         it -> second.shearStress = Norm(F_ij - dot(F_ij, n)*n)/area;
 
         double D = 1 - it -> second.life;
         if (it -> second.normalStress > getTmax(D)) {
-            std::cout << "Normal stress: " << it -> second.normalStress << std::endl;
+            std::cout << "Crack Propagation. Normal stress: " << it -> second.normalStress << std::endl;
             brokenLinks.push_back(it -> first);
         }
         else if (it -> second.shearStress > (getShearC(D) - it -> second.normalStress * tanPhi)) {
-            std::cout << "Shear stress: " << it -> second.shearStress << std::endl;
+            std::cout << "Crack Propagation. Shear stress: " << it -> second.shearStress << std::endl;
             brokenLinks.push_back(it -> first);
         }
         else if (it -> second.normalStress < -getUCS(D)) {
-            std::cout << "Normal stress: " << it -> second.normalStress << std::endl;
+            std::cout << "Crack Propagation.  Normal stress: " << it -> second.normalStress << std::endl;
             brokenLinks.push_back(it -> first);
         }
     }
@@ -195,17 +200,15 @@ double MechanicalModel::normalModifier(vorolink& l) {
     
 
     if (l.normalStress > 0) {
-        double alph = 1.0; //??
-        double p = 1.0;
+        
         double T = getTmax(1 - l.life); 
-        return exp(alph * pow(l.normalStress/T,p));
+        return exp(alph_tt * pow(l.normalStress/T,p));
     }
 
     else {
         double u = abs(l.normalStress)/getUCS(1 - l.life);
-        double s = 1.0;
-        double alph = 1.0;
-        double Ic = 1 + s*u - alph*u*u;  
+       
+        double Ic = 1 + s*u - alph_c*u*u;  
         return 1.0/Ic;
     }
     
@@ -214,7 +217,11 @@ double MechanicalModel::normalModifier(vorolink& l) {
 double MechanicalModel::shearModifier(vorolink& l) {
     double c = getShearC(1 - l.life);
     double t_limit = c - l.normalStress * tanPhi;
-    double alph = 1.0;
-    double q = 1.0;
-    return alph * pow(l.shearStress/t_limit, q);
+    
+    return alph_s * pow(l.shearStress/t_limit, q);
+}
+
+void MechanicalModel::setAvgLen(double L) {
+    kn = E/L;
+    ks = E/(2*(1+v)*L);
 }

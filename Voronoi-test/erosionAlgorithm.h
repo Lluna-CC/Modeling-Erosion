@@ -8,7 +8,7 @@ class ErosionAlgorithm {
 
   public:
 
-    ErosionAlgorithm(MultiResolutionGraph* g, int workLevel = 0);
+    ErosionAlgorithm(MultiResolutionGraph* g, int workLevel = 0, double L = 1.0);
     ErosionAlgorithm();
 
     Vector3 sampleDirection(double theta_base, double phi_base);
@@ -44,7 +44,7 @@ class ErosionAlgorithm {
     std::discrete_distribution<int> externalLinkDistribution;
     std::set<int> recentlyRemoved;
     
-    double initialFlow = 10.0;
+    double initialFlow = 20.0;
     Vector3 g = Vector3(0.0,0.0,-1.0);
 
     double k_air = 0.05;
