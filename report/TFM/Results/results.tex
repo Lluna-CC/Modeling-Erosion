@@ -27,7 +27,7 @@ INCLUDE SYSTEM SPECIFICATIONS!!!
 \section{Voronoi Decomposition}
 Taking a terrain given by a DEM and converting it to a collection of voronoi
 cells representing the same (or roughly the same) surface is one of the 
-core aspect of this thesis. We have tested multiple methods and tried 
+core aspects of this thesis. We have tested multiple methods and tried 
 multiple parameters to get the most quality posible with resonable 
 efficiency. In this section we are going to describe the tools we give 
 to the user to experiment with the decomposition as well as an analysis 
@@ -372,18 +372,43 @@ we found that it provides a good balance.
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-Thresholds             & Particles Generated & Time (ms) \\ \hline
-Base (No subdivisions) & 231713              & 12639     \\ \hline
-1.5                    & 293204              & 16719     \\ \hline
-2.0                    & 255445              & 14180     \\ \hline
-3.0                    & 233918              & 12844     \\ \hline
-1.5 \& 2.0              & 388023              & 22715     \\ \hline
-2.0 \& 2.5              & 285736              & 16147     \\ \hline
-1.5 \& 2.0 \& 2.5        & 509009              & 32446     \\ \hline
+Thresholds             & Particles Generated & Time (s) \\ \hline
+Base (No subdivisions) & 231713              & 12.639     \\ \hline
+1.5                    & 293204              & 16.719     \\ \hline
+2.0                    & 255445              & 14.180     \\ \hline
+3.0                    & 233918              & 12.844     \\ \hline
+1.5 \& 2.0              & 388023              & 22.715     \\ \hline
+2.0 \& 2.5              & 285736              & 16.147     \\ \hline
+1.5 \& 2.0 \& 2.5        & 509009              & 32.446     \\ \hline
 \end{tabular}
 \caption{Measures of our tests with different rugosity thresholds}
 \label{tab:rugosity}
 \end{table}
+
+\subsubsection{Different Lighting Test}
+The lighting method the we use highlights the borders between cells, 
+as each face has a different normal. The lighting method chosen is 
+useful to debug, but it can reduce the visual quality in some situations. 
+As an experiment, we decided to reuse the same lighting method used to render 
+the base heightfield (the one that the base application used) to 
+properly compare the base model with its decomposition. Figure \ref{fig:lightingTest}
+show the results of this experiment: the terrain looks basically the 
+same except for the walls (generated during th decomposition). It is 
+important to note that the lighting method used assigns a color based 
+on the position of a point in the 2D grid of the DEM, so all points 
+with the same $(x,y)$ coordinates will have the same color.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Base Aneto terrain]{\includegraphics[width=0.4\linewidth]{Results/BaseAneto.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Aneto terrain after the decomposition]{\includegraphics[width=0.4\linewidth]{Results/AnetoCells.png}}
+  
+    \caption{Comparison of the base terrain and the decomposition result} 
+    \label{fig:lightingTest}
+\end{figure}
 
 \subsection{Multi-Resolution Comparison}
 
@@ -394,6 +419,30 @@ not allow for an easy manipulation on the total size of the subsampling
 (The grid that we use to sample and subsample is terrain dependent). 
 Despite this limitations, we decided to take some measures for each 
 method in order to perform some comparisons. 
+
+\vspace{10pt}
+
+First, tested both the time to compute and the final result of the 
+furthest point sampling using $N/s$ subsamples where $s \in \{3,5,10,20\}$, 
+and then, we tested the subsampling method based on a grid using 2x2x2, 
+3x3x3 and 4x4x4 blocks of grid cells. The visual results can be appreciated 
+in figures \ref{fig:furthestComparison} and \ref{fig:gridMultiRes} and 
+the computation time of each situation is written in table \ref{tab:subsamplingTable}.
+All times are computed from the start of the decomposition to the 
+completion of the subsample, so they all include the base time 
+to produce the initial sampling. 
+
+\vspace{10pt}
+
+Even if these two methods are hard to compare, we can see that, 
+with a similar amount of particles (using a downsampling factor of 
+20 vs a 2x2x2 grid), the grid method is much more efficient in producing 
+the computation, and also produces shapes that more closely resemble 
+the base terrain. Additionally, the examples that use the grid 
+method add very little overhead over the initial sampling of the 
+decomposition, if we substracted the time of the initial computation 
+to all total computation times, we will see a sharper difference 
+between the furthest point and the grid methods. 
 
 \begin{figure}
     \centering
@@ -431,26 +480,310 @@ method in order to perform some comparisons.
 
 \begin{tabular}{|l|l|l|}
 \hline
-Multi-Resolution factor  & Particles Generated & Time (ms) \\ \hline
-Base (single resolution) & 411635              & 22813     \\ \hline
-Furthest Point: 3        & 137211              & 283913    \\ \hline
-Furthest Point:5         & 82327               & 183684    \\ \hline
-Furthest Point:10        & 41163               & 103141    \\ \hline
-Furthest Point:20        & 20581               & 64237     \\ \hline
-Grid: 2x2x2              & 26208               & 25673     \\ \hline
-Grid: 3x3x3              & 10294               & 24210     \\ \hline
-Grid: 4x4x4              & 5398                & 23775     \\ \hline
+Multi-Resolution factor  & Particles Generated & Time (s) \\ \hline
+Base (single resolution) & 411635              & 22.813     \\ \hline
+Furthest Point: 3        & 137211              & 283.913    \\ \hline
+Furthest Point: 5         & 82327               & 183.684    \\ \hline
+Furthest Point: 10        & 41163               & 103.141    \\ \hline
+Furthest Point: 20        & 20581               & 64.237     \\ \hline
+Grid: 2x2x2              & 26208               & 25.673     \\ \hline
+Grid: 3x3x3              & 10294               & 24.210     \\ \hline
+Grid: 4x4x4              & 5398                & 23.775     \\ \hline
 \end{tabular}
 \caption{Comparison between the two subsampling methods that we implemented}
 \label{tab:subsamplingTable}
 \end{table}
 
+
 \section{Erosion Simulation}
+In this project we deeply tested the erosion simulation algorithm, trying 
+different paramaters, different decompositions and comparing the old 
+algorithm versus the new one. In this section we are going to go over 
+our implementation of the erosion process as well as explaining all our 
+findings over our experiments.
+
 \subsection{UI For Erosion}
+Before explining our findings, we are going to show how the user can 
+control the different aspects of the simulation. Most parameters, 
+like the material properties are set in the \textit{mechanicalModel.h} 
+header with no option to control them on the UI, but the user still 
+has some freedom using just the UI.
+
 \subsubsection{Erosion Menu}
+
+From the erosiin menu of the UI (shown in figure \ref{fig:erosionMenu}), the 
+user can modify the direction of water infiltration (as explained in section
+\ref{sec:waterPaths}) and wheter the mechanical model is used or not 
+(keep in mind that an initial stress computation will be performed 
+every time you activate the mechanical model option). 
+Even if the user decides to not use the mechanical model, the button 
+\textit{Compute Stresses} computes all stresses of the system and removes 
+the links meeting the failure conditions, this way be can simulate the 
+process without mechanical model up to a point, and then compute the 
+state of the system in that position. 
+
+\vspace{10pt}
+
+Finally, the user will have to select the number of paths to be generated 
+simultaneously and press the button \textit{Compute Water Paths} to 
+start the simulation.  
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.45]{Results/erosionMenu.png}
+    \caption{Erosion menu of the UI}
+    \label{fig:erosionMenu}
+\end{figure}
 \subsubsection{Visualization Options}
+In addition to the options used to control the simulation, the 
+visualization menu \ref{fig:vorovisuals} also contains two options 
+that are useful to debug the erosion process. First, we can visualize
+the life of the links and their shear and normal stresses using 
+the \textit{Render Links} option (figure \ref{fig:linkVisualization}), 
+and second, we can paint blue the cells touched by the last batch of 
+water paths (remember that the size of the batch is controlled using the 
+erosion options), as shown in figure \ref{fig:waterPaths}.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Link life visualization. From Green (full life) to red (fully damaged)]{\includegraphics[width=0.278\linewidth]{Results/linkLife.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Link normal stress visualization. From blue to green for negative 
+    normal stress (compression) and green to red for tension]{\includegraphics[width=0.3\linewidth]{Results/linkNormalStress.png}}
+    \hspace{10pt}
+    \subfigure[Link shear stress visualization. From green (0 stress) to red]{\includegraphics[width=0.3\linewidth]{Results/linkShearStres.png}}
+
+    \caption{Different link visualization options} 
+    \label{fig:linkVisualization}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Results/waterPaths.png}
+    \caption{Simulation of 5 water paths on the \textit{Gausssian Bump}
+    toy example}
+    \label{fig:waterPaths}
+\end{figure}
 \subsection{Base Algorithm Experimentation}
+The first set of experiments that we conducted were all centered on 
+the base algorithm as designed in \cite{10.2312:ceig.20241139}, without the inclusion of the mechanical model.
+Having a set of experiments on the base method allows us to better 
+compare both techniques and pinpoint the advantadges of adding 
+the mechanical model on top of the base one. 
+
+\vspace{10pt}
+
+Our first batch of experiments consited in comparing both 
+multi-resolution methods that we implemented to check the difference 
+in results, and additionally take measures of computational time. For 
+these experiments we tested 5 consecutive rounds of 10 thousand paths for 
+each multi-resolution method using the terrain \textit{Aneto}, and then 
+3 consecutive rounds of 100 thousand paths on a fresh instance of the 
+same terrain. We decided to take multiple rounds of paths instead 
+of just one single round with the combined number of paths to observe 
+the evolution of the terrain step by step and check the influence 
+of the current state of the terrain on the computational cost.
+
+\vspace{10pt}
+
+Regarding the final results, figure \ref{fig:100K Comparison} shows 
+the base Aneto terrain compared against the final result of simulating 
+300 thousand water paths on each multi-resolution method. The 
+furthest point method generated more cells than the grid method 
+(66491 vs 18736), so a slower erosion process was expected. Still, 
+as we mentioned in section \ref{sec:multiResolution}, the furthest 
+point method has to consider some cells outside of the terrain 
+as solid; this means that in order to start appreciating results on 
+the terrain, we will have to wait for the outside cells to be removed, 
+which makes the full simulation slower. 
+
+\vspace{10pt}
+
+In terms of the computational cost, we have seen that it increased 
+for every consecutive round 10 thousand paths with both subsampling 
+methods (figure \ref{fig:10KTime}). We think that the more damaged the 
+links are, the more removal events will be triggered, which are the 
+most coputationally expensive procedures of the algorithm, so the total 
+time to compute will increase. Additionally, the more eroded the 
+terrain is and the less cells remaining, the faster the algorithm 
+should run, as the size of the problem is smaller. Following this logic, 
+there should be a threshold where the cost of each consecutive round 
+starts decreasing instead of increasing, as the size of the terrain 
+starts getting significantlly smaller.
+Figure \ref{fig:100KTime}, 
+seems to confirm this idea, as the computational cost 
+of the 100 thousand path rounds decreases for each consecutive run 
+in the grid method case. In the case of the furthest point sampling, 
+we have already seen that the erosion process is slower, so we think 
+that 300 thousand paths was not enough to reach the threshold where 
+the time starts decreasing instead of increasing.
+
+
+\begin{figure}
+    \centering
+
+    \subfigure[Aneto terrain before any erosion process]{\includegraphics[width=0.3\linewidth]{Results/AnetoBefore300k.png}
+    }
+    \hspace{10pt}    
+    \subfigure[Aneto terrain after 300 thousand paths using the furthest point method to subsample]{\includegraphics[width=0.3\linewidth]{Results/Aneto300K_general.png}}
+    \hspace{10pt}
+    \subfigure[Aneto terrain after 300 thousand paths using the grid method to subsample]{\includegraphics[width=0.3\linewidth]{Results/AnetoAfter300k.png}}
+
+    \caption{Result of 300 thousand water paths on the Aneto terrain using different 
+    subsampling methods to create the low-resolution decomposition} 
+    \label{fig:100K Comparison}
+\end{figure}
+
+\begin{figure}
+    \centering
+
+    \subfigure[Time to complete different runs of 10K paths. The runs have been 
+    executed one after the other on the same model]{\label{fig:10KTime}\includegraphics[width=0.4\linewidth]{Results/10KTime.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Time to complete different runs of 100K paths. The runs have been 
+    executed one after the other on the same model]{\label{fig:100KTime}\includegraphics[width=0.41\linewidth]{Results/100KTime.png}}
+
+    \caption{Time to complete of different consecutive runs with 10K 
+    and 100K paths for run} 
+    \label{fig:timeTestsBase}
+\end{figure}
+
+
+
 \subsection{Mechanical Model Experimentation}
-\subsubsection{Failure Tunning}
-\subsubsection{Setting Limits as a Resistance Field}
+After doing some experimentation with the base model, we are ready to test 
+the algorithm including the mechanical model. The mechanical model is 
+much more computationally expensive than the base algorithm, due to the 
+constant recomputation of the system of equations, so we need a simpler 
+model to test. We used the \textit{Aneto} terrain with heightfield dimensions 
+50x50 and a grid 3x3x3 to perfeorm all tests on our mechanical model.
+
+\subsubsection{Simulating Different Materials}
+
+The number of parameters influencing our mechanical model is huge, and 
+independently trying to tune every single parameter would be a challenging 
+task. For that reason we decided to first look in nature and try the 
+mechanical properties of different rocks. We do not really need 
+the parameters to exactly match the real ones, and we can work with 
+an approximation, so we took the data from the website \cite{MakeitFrom}, 
+that lists some of the material properties of different materials. However,
+that website does not list cohesion (c) and the coefficient of internal 
+friction ($\varphi$), so we checked for those propoerties in other 
+parts of the literature like \cite{article}, \cite{article2} and \cite{app15137481}.
+
+\vspace{10pt}
+
+Using the collected data on material properties, we did a test run for granite, 
+just to check whether the model runs properly or not. In the test run 
+we found that most links were, innitially, over the shear stress limit, 
+producing an initial crack propagation effect that destroyed a huge portion
+the terrain without starting the first path. For that reason we decided 
+to multiply by 10 the cohesion of all materials, and then we tried again 
+using granite. In the second test run, some links broke initially due to 
+tension and a few cells were separated, but the initial damage was minor.
+To avoid this initial damage we decided to increase the tensile strength 
+by 50\% on all materials. Figure \ref{fig:initialShearTension} shows 
+the results of these two test runs.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Results using the initial cohesion, without modification]{\includegraphics[width=0.38\linewidth]{Results/lowShearTest.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Minor damage initial damage on the terrain using the updated cohesion]{\includegraphics[width=0.38\linewidth]{Results/lowTensionTest.png}}
+
+    \caption{Results of our test runs to tune the material properties} 
+    \label{fig:initialShearTension}
+\end{figure}
+
+\vspace{10pt} 
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+                             & Granite       & Marble        & Sandstone     \\ \hline
+Density                      & $2650 \; kg/m^3$ & $2700 \; kg/m^3$ & $2600 \;  kg/m^3$ \\ \hline
+Young's Modulus (E)          & 70 GPa          & 54 GPa          & 38 GPa          \\ \hline
+Poisson's Ratio ($\upsilon$) & 0.255         & 0.2           & 0.25          \\ \hline
+Tensile Strength ($T_{max}$)     & 60 MPa          & 12 MPa          & 6 MPa           \\ \hline
+Compressive Strength (UCS)   & 2.2 GPa         & 540 MPa         & 120 MPa         \\ \hline
+Cohesion (c)                 & 200 MPa         & 700 MPa         & 200 MPa         \\ \hline
+$tan(\varphi)$                  & 0.267949      & 0.57735026    & 0.83909963   \\ \hline
+\end{tabular}
+\caption{Parameters of the tested materials. Some properties have 
+been adjusted to our algorithm and might not fully represent the true 
+material properties}
+\label{tab:baseMaterialProperties}
+\end{table}
+
+After these test runs, we set the material poperties of granite, marble and 
+sandstone to the values shown in table \ref{tab:baseMaterialProperties} and 
+then started some experiments to compare the three. Granite show 
+pretty good results after simulating 100 paths, the simulation took 
+arround 1000 seconds and it produced a big hole in the middle of the 
+mountain (somwhat resembling a volcano). Regarding the other two materials, 
+marble showed some fractures after the initial stress computation (before 
+generating any water path) and then completly collapsed after just 10 
+paths, while sandstone did not even survive the initial stress computation. 
+We based our parameters on the initial test runs on granite (which is 
+the only one that survived a few paths) but it seems that our takeaways 
+from the test runs were not really applicable to the other two materials.
+
+\begin{figure}
+    \centering
+
+    \subfigure[Results of a granite Aneto after 100 water paths]{\includegraphics[width=0.4\linewidth]{Results/GraniteBase100.png}
+    }
+    \hspace{20pt}    
+    \subfigure[Results of a marble Aneto after the initial stress computation (0 paths)]{\includegraphics[width=0.4\linewidth]{Results/MarbleBase0.png}}
+
+    \caption{Results of our experiments with different materials} 
+    \label{fig:initialMaterials}
+\end{figure}
+
+\subsubsection{Reinforced Materials}
+
+In response to the poor results of the first experiments with different 
+materials, we decided to reinforce their tensile strenght in order 
+to make them resist at least a few water paths. We decided to adjust 
+just the tensile strenght because most links were breaking due to tension 
+and not due to shear or compression stresses. To differentiate these 
+modified materials with the base materials that we tried previously, 
+we decided to call them \textit{reinforced materials}, with properties 
+shown in table \ref{tab:reinforcedMaterials}.
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+                             & Reinforced Granite       & Reinforced Marble        & Reinforced Sandstone     \\ \hline
+Density                      & $2650 \; kg/m^3$ & $2700 \; kg/m^3$ & $2600 \;  kg/m^3$ \\ \hline
+Young's Modulus (E)          & 70 GPa          & 54 GPa          & 38 GPa          \\ \hline
+Poisson's Ratio ($\upsilon$) & 0.255         & 0.2           & 0.25          \\ \hline
+Tensile Strength ($T_{max}$)     & 390 MPa         & 120 MPa          & 60 MPa           \\ \hline
+Compressive Strength (UCS)   & 2.2 GPa         & 540 MPa         & 120 MPa         \\ \hline
+Cohesion (c)                 & 200 MPa         & 700 MPa         & 200 MPa         \\ \hline
+$tan(\varphi)$                  & 0.267949      & 0.57735026    & 0.83909963   \\ \hline
+\end{tabular}
+\caption{Parameters that we used as our \textit{reinforced} materials}
+\label{tab:reinforcedMaterials}
+\end{table}
+
+\vspace{10pt}
+
+Using these new reinforced materials, our experiments looked much better and 
+we were able to compare the effect of changing the material on the 
+overall results. After 300 water paths on each material, granite 
+produced multiple wide but shallow holes, sandstone produced deep holes 
+with a stair pattern produced by different depths on the hole, and, finally, 
+marble seemed the most resistant, producing thin and shallow holes. 
+
+\subsubsection{Failure Parameter Tunning}
+\subsubsection{Computational Time Results}
+
 \subsection{Method Comparison}

@@ -1711,6 +1711,166 @@
     \field{year}{2018}
   \endentry
 
+  \entry{MakeitFrom}{misc}{}{}
+    \list{publisher}{1}{%
+      {Iron Boar Labs Ltd}%
+    }
+    \verb{url}
+    \verb https://www.makeitfrom.com/
+    \endverb
+    \field{journaltitle}{Make it From}
+  \endentry
+
+  \entry{article}{article}{}{}
+    \name{author}{5}{}{%
+      {{hash=SZ}{%
+         family={Song},
+         familyi={S\bibinitperiod},
+         given={Zhixiang},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=ZJW}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Jun-Wen},
+         giveni={J\bibinithyphendelim W\bibinitperiod},
+      }}%
+      {{hash=DXK}{%
+         family={Dong},
+         familyi={D\bibinitperiod},
+         given={Xu-Kai},
+         giveni={X\bibinithyphendelim K\bibinitperiod},
+      }}%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yang},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZYJ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yu-Jie},
+         giveni={Y\bibinithyphendelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SZ+1}
+    \strng{fullhash}{SZZJWDXKZYZYJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s11771-022-5207-2
+    \endverb
+    \field{pages}{4002\bibrangedash 4020}
+    \field{title}{Time-dependent behaviors and volumetric recovery phenomenon of sandstone under triaxial loading and unloading}
+    \field{volume}{29}
+    \field{journaltitle}{Journal of Central South University}
+    \field{month}{01}
+    \field{year}{2023}
+  \endentry
+
+  \entry{article2}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=JQ}{%
+         family={Jiang},
+         familyi={J\bibinitperiod},
+         given={Quan},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Xiaopei},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Shaojun},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Jian},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LQ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Qiang},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=SW}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Wenliang},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JQ+1}
+    \strng{fullhash}{JQLXLSLJLQSW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s00603-023-03268-5
+    \endverb
+    \field{pages}{1\bibrangedash 26}
+    \field{title}{Coupling Deterioration Model of Mechanical Parameters for the Jinping Marble Under Progressive Damage Conditions}
+    \field{volume}{56}
+    \field{journaltitle}{Rock Mechanics and Rock Engineering}
+    \field{month}{03}
+    \field{year}{2023}
+  \endentry
+
+  \entry{app15137481}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=YJ}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Jincai},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Cheng},
+         familyi={C\bibinitperiod},
+         given={Cheng},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=XY}{%
+         family={Xie},
+         familyi={X\bibinitperiod},
+         given={Yuan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Peng},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YJ+1}
+    \strng{fullhash}{YJCCXYCP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Granite is the main rock type in hot dry rock reservoirs, and hydraulic fracturing is always required during the process of geothermal production. It is necessary to understand the strength parameters and failure criterion of granite after high-temperature and water-cooling treatment. In this paper, laboratory uniaxial and triaxial compression experiments are carried out on granite samples after high-temperature and water-cooling treatment. Combined with some experimental data collected from pre-existing studies, the variation behaviors of cohesion (c), the internal friction angle (φ) and tensile strength σt are systematically studied considering the heating and cooling treatment. It is found that c and φ generally show two different types of variation behaviors with the increasing heating temperature. Tensile strength decreases in a similar way for the different granite samples with the increasing treatment temperature. Empirical equations are provided to describe these strength parameters. Finally, a modified Mohr–Coulomb failure criterion with a “tension cut-off” is established for the granite samples, considering the effects of high-temperature and water-cooling treatment. This study should be helpful for understanding the mechanical behavior of hot dry rock during hydraulic fracturing in geothermal production, and the proposed failure criterion can be applied for the numerical modeling of reservoirs.%
+    }
+    \verb{doi}
+    \verb 10.3390/app15137481
+    \endverb
+    \field{issn}{2076-3417}
+    \field{number}{13}
+    \field{title}{Strength Parameters and Failure Criterion of Granite After High-Temperature and Water-Cooling Treatment}
+    \verb{url}
+    \verb https://www.mdpi.com/2076-3417/15/13/7481
+    \endverb
+    \field{volume}{15}
+    \field{journaltitle}{Applied Sciences}
+    \field{year}{2025}
+  \endentry
+
   \entry{WILSON2012107}{article}{}{}
     \name{author}{1}{}{%
       {{hash=WJP}{%

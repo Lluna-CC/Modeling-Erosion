@@ -460,7 +460,7 @@ computing duplicate stresses, we define the normal stress $\sigma_n$ and
 the shear stress $\tau$ as:
 
 \begin{equation}\label{eq:normal_stress}
-    \sigma_n = -\frac{F_{ij} \cdot \hat{n}_{ij}}{A_{ij}}
+    \sigma_n = \frac{F_{ij} \cdot \hat{n}_{ij}}{A_{ij}}
 \end{equation}
 \begin{equation}\label{eq:shear_stress}
     \tau =  \frac{||F_{ij} - (F_{ij} \cdot \hat{n}_{ij})\hat{n}_{ij}||}{A_{ij}}
@@ -595,7 +595,7 @@ a \textit{stochastic path}. For every link it goes through, some water
 is absorbed, and the \textit{link is damaged}. When enough links are broken
 and cells are divided into disconnected components, then \textit{cell detachment}
 is produced. We are going to explain this process part by part. 
-\subsection{Water Paths}
+\subsection{Water Paths}\label{sec:waterPaths}
 First, we start a water path by choosing an external link, which will initially 
 be links that connect solid cells to air cells (it can change with updates on the 
 simulation), using a random distribution. For a given external link $e_i$, 
@@ -819,11 +819,13 @@ to the exterior and they will become external, making the links connecting them
 with the removed part exterior links. Recomputing the exterior
 links and cells is a bit tricky, as simply marking all cells 
 adjacent to air as exterior does not work (we could have air pockets 
-inside the terrain!), but we can do it the following way: Before removing 
-a component, we check if said component contains exterior cells, and if it does,
-then every cell adjacent to the removed component \footnote{In order to perform this operation we need to store 
-the removed cell adjacencies, as this cells will be connected with 
-the detatched part only through broken links} will be marked as exterior. Finally, if our 
+inside the terrain!), but we can do it the following way: We pick a random 
+exterior link \footnote{Scenarios where removing a chunk of rock implies 
+removing all exterior cells are incredibly rare and we do not contemplate 
+that case.} and perform a graph traversal algorithm (like BFS or DFS) jumping 
+to only the neighbors that are adjacent to an air cell; then, we mark all 
+cells travered during the algorithm as exterior (and the links connecting 
+them to an air cell as exterior links). Finally, if our 
 exterior links have changed, we will have to update the probabilities 
 described in equation \ref{eq:p_exterior}.
  

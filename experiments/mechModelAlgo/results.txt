@@ -1,0 +1,310 @@
+Base Granite:
+double rockDensity = 2650;
+double E = 70e9;
+double v = 0.255;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 60e6;
+double UCS = 2.2e9;
+double c = 200e6;
+double tanPhi = 0.267949;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+Multiple Craks at begining
+
+1649 Particles 
+1369 to 1367 Solid Cells at the begining
+
+1. 100 Paths --> 1007.870 ms
+    1318 Solid cells
+2. 100 Paths --> 432292 ms
+    6 solid Cells --> terminate
+
+--------------
+Granite Low T: 
+
+T_max = 30e6
+
+1649 Particles
+1369 to 1361 Solid Cells at the begining
+
+1. 100 Paths --> 1180077 ms
+    1338 Solid Cells
+2. 100 Paths --> 1148419 ms
+    6 Solid Cells --> Terminate
+
+
+-------------
+Granite High T:
+
+T_max = 90e6
+1649 Particles
+1369 to 1368 solid cells at the begining
+
+1.100 Paths --> 1210186 ms
+    1364 Solid Cells
+2. 100 Paths --> 1428974 ms
+    1364 Solid Cells
+3. 100 Paths --> 1301055 ms
+    1343 Solid Cells
+------------
+
+Granite Low c:
+c = 100e6
+
+1649 particles 
+1369 to 1359 Solid Cells at the begining
+
+1. 100 --> 269873 ms
+    6 Solid cells --> Terminate
+
+Second try with 
+c = 150e6
+1649 Particles
+1369 to 1367 solid cells
+
+1. 100 Paths --> 1478917 ms
+    1261 solid Cells
+2. 100 Paths --> 700459 ms
+    5 solid cells --> terminate
+-----------
+Granite High c: 
+
+c= 300e6
+
+1649 Particles
+1369 to 1365 Solid Cells at the Begining
+
+1. 100 paths --> 1373706 ms
+    1332 Solid Cells 
+2. 100 paths --> 1333922 ms
+    1246 Solid Cells
+3. 100 paths --> 765674 ms
+    1178 Solid Cells
+
+--------
+Granite Low UCS:
+
+UCS = 1.1e9
+
+1649 Particles
+1369 to 1367 Solid Celsl at the Begining
+
+1. 100 paths --> 1805190 ms
+    1314 solid cells
+2. 100 paths --> 1036033 ms 
+    1280 solid cells
+3. 100 paths --> 782301 ms
+    1206 Solid Cells
+--------
+Granite High UCS:
+
+UCS = 3.3e9
+
+1649 Particles
+1369 to 1367 Solid Cells at the begining
+
+1. 100 paths --> 1435101 ms
+    5 solid cells --> terminate 
+
+Second try 
+
+1649 particles
+1369 to 1367 solid cells at the begining
+
+1. 100 paths --> 1067210 ms 
+    1281 solid cells
+2. 100 paths --> 538332 ms
+    collapse
+
+-------------------------------
+MARBLE TEST 
+double rockDensity = 2700;
+double E = 54e9;
+double v = 0.2;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 12e6;
+double UCS = 540e6;
+double c = 700e6;
+double tanPhi = 0.57735026;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+1649 particles 
+1369 to 1344 solid cells
+
+1. 100 paths --> 406691 ms
+    Collapse 
+
+
+Second try:
+
+1. 25 paths --> 5909 ms 
+    Total collapse
+
+10 paths --> 143532 ms
+    collapse 
+
+----------------------
+
+SANDSTONE 
+double rockDensity = 2600;
+double E = 38e9;
+double v = 0.25;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 6e6;
+double UCS = 120e6;
+double c = 200e6;
+double tanPhi = 0.83909963;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+
+Immediate collapse 
+
+
+
+----------------
+
+Spicy Sandstone
+
+double rockDensity = 2600;
+double E = 38e9;
+double v = 0.25;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 60e6;
+double UCS = 120e6;
+double c = 200e6;
+double tanPhi = 0.83909963;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+1649 particles 
+1369 to 1368 solid cells
+
+100 paths --> 678372 
+    collapse 
+
+1. 25 paths --> 237544 ms 
+    1368 solid cells (no change)
+2. 25 paths --> 267982 ms 
+    No change 
+3. 25 paths --> 190390 ms
+    No change
+4. 25 paths --> 212771 ms
+    1366 cells
+5. 25 paths --> 226942 ms
+    1362 cells
+6. 25 paths --> 219239 ms
+    1357 cells
+7. 25 paths --> 213193 ms 
+    1347 cells
+8 . 25 paths --> 193810 ms 
+    1341 cells 
+9. 25 paths --> 228128 ms 
+    1322 cells 
+10. 25 paths --> 249444 ms 
+    1303 cells 
+11. 25 paths --> 274214 ms 
+    1221 cells
+12. 25 paths --> 178177 ms 
+    1190 cells
+13 25 paths --> 239076 ms 
+    1115 cells 
+14. 25 paths --> 116527 ms 
+    1085 cells 
+15. 25 paths --> 134560 ms
+    1067 cells
+
+There is a point of total collapse, from all to 0
+
+
+---------------
+
+REINFORCED MARBLE
+double rockDensity = 2700;
+double E = 54e9;
+double v = 0.2;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 120e6;
+double UCS = 540e6;
+double c = 700e6;
+double tanPhi = 0.57735026;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+1369 to 1368 solid cells begining 
+
+1. 100 paths --> 1059357 ms
+    1365 cells 
+2. 100 paths --> 853873 ms
+
+3. 100 paths --> 818299 ms
+    1329 cells
+
+------------------
+
+REINFORCED GRANITE 
+double rockDensity = 2650;
+double E = 70e9;
+double v = 0.255;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 390e6;
+double UCS = 2.2e9;
+double c = 200e6;
+double tanPhi = 0.267949;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+
+1369 to 1368 solid cells
+
+1. 100 paths --> 749044 ms
+    1366 cells
+2. 100 paths --> 860717 ms 
+    1346 cells
+
+second version
+
+1. 100 paths --> 804405 ms
+    1368 cells, no change
+2.. 100 paths --> 856485 ms 
+    1354 cells
+3. 100 paths --> 899576 ms
+    1312 cells

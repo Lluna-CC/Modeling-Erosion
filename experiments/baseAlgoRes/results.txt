@@ -1,0 +1,38 @@
+FIRST EXPERIMENT
+[Aneto 197x199, grid 3x3x3]
+18736 particles
+1. 10k --> 2726 ms
+2. 10k --> 7844 ms
+3. 10k --> 7139 ms
+4. 10k --> 10626 ms
+5. 10k --> 11590 ms
+
+SECOND EXPERIMENT
+[Aneto 197x199, grid 3x3x3]
+18736 particles
+1. 100k --> 95462 ms
+2. 100k --> 79263 ms
+3. 100k --> 62240 ms
+
+THIRD
+[Aneto 197x199, furthest 10]
+66491 particles
+1. 10K --> 11898 ms
+2. 10K --> 26646 ms
+3. 10K --> 47415 ms
+4. 10K --> 47144 ms
+5. 10K --> 66887 ms
+
+FOURTH 
+[Aneto 197x199, furthest 10]
+66491 particles 
+1. 100K --> 538594 ms
+2. 100K --> 594916 ms
+3. 100K --> 608479 ms
+
+FIFTH
+[Aneto 50x50, grid 3x3x3]
+1649 Particles
+1. 10K --> 1555 ms
+2. 10K --> 1271 ms
+3. 10K --> 732 ms

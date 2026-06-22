@@ -1,0 +1,28 @@
+First try:
+double rockDensity = 2650;
+double E = 70e9;
+double v = 0.255;
+double kn = 1e9;
+double ks = 1e8;
+double T_max = 39e6;
+double UCS = 2.2e9;
+double c = 200e6;
+double tanPhi = 0.267949;
+
+double alph_s = 5.0;
+double q = 2.0;
+double s = 2.0;
+double alph_c = 6.0;
+double alph_tt = 2.0; 
+double p = 2.0;
+
+Multiple Craks at begining
+
+1649 Particles
+1369 Solid Particles
+
+-------
+
+1. 100 Paths --> 858794 ms
+2. 100 Paths --> 825432 ms
+3. 100 Paths --> 699796 ms

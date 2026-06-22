@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.18)  19 JUN 2026 23:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.18)  22 JUN 2026 11:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1812,7 +1812,7 @@ Package pdftex.def Info: Title/logo-upc.png  used on input line 92.
  [3 <./Title/logo-upc.png>] (./Project.lof [4
 
 ]
-Overfull \hbox (0.98334pt too wide) in paragraph at lines 81--81
+Overfull \hbox (0.98334pt too wide) in paragraph at lines 84--84
  [][] [][]\T1/cmr/m/n/10 Different down-scal-ing fac-tors for the fur-thest point sam-pling method ap-plied to the \T1/cmr/m/it/10 Bassiero 
  []
 
@@ -1844,17 +1844,17 @@ Chapter 2.
 [9
 
 ]
-<Background/aneto.png, id=516, 593.21625pt x 599.23875pt>
+<Background/aneto.png, id=538, 593.21625pt x 599.23875pt>
 File: Background/aneto.png Graphic file (type png)
 <use Background/aneto.png>
 Package pdftex.def Info: Background/aneto.png  used on input line 105.
 (pdftex.def)             Requested size: 127.46779pt x 128.76067pt.
-<Background/aneto-app.png, id=517, 1044.90375pt x 869.2475pt>
+<Background/aneto-app.png, id=539, 1044.90375pt x 869.2475pt>
 File: Background/aneto-app.png Graphic file (type png)
 <use Background/aneto-app.png>
 Package pdftex.def Info: Background/aneto-app.png  used on input line 108.
 (pdftex.def)             Requested size: 152.50983pt x 126.86664pt.
-<Background/layeredRep.png, id=519, 391.4625pt x 145.54375pt>
+<Background/layeredRep.png, id=541, 391.4625pt x 145.54375pt>
 File: Background/layeredRep.png Graphic file (type png)
 <use Background/layeredRep.png>
 Package pdftex.def Info: Background/layeredRep.png  used on input line 125.
@@ -1883,7 +1883,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 251.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
 [12{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<Background/tetrahedralization.png, id=556, 611.28375pt x 341.275pt>
+<Background/tetrahedralization.png, id=578, 611.28375pt x 341.275pt>
 File: Background/tetrahedralization.png Graphic file (type png)
 <use Background/tetrahedralization.png>
 Package pdftex.def Info: Background/tetrahedralization.png  used on input line 273.
@@ -1893,7 +1893,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 304.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [13 <./Background/tetrahedralization.png>]
-<Background/voronoiDecomp.png, id=568, 1606.0pt x 1606.0pt>
+<Background/voronoiDecomp.png, id=590, 1606.0pt x 1606.0pt>
 File: Background/voronoiDecomp.png Graphic file (type png)
 <use Background/voronoiDecomp.png>
 Package pdftex.def Info: Background/voronoiDecomp.png  used on input line 307.
@@ -1907,7 +1907,7 @@ Chapter 3.
 [15
 
 ]
-<Background/DragonBreak.png, id=594, 753.81625pt x 183.68625pt>
+<Background/DragonBreak.png, id=616, 753.81625pt x 183.68625pt>
 File: Background/DragonBreak.png Graphic file (type png)
 <use Background/DragonBreak.png>
 Package pdftex.def Info: Background/DragonBreak.png  used on input line 399.
@@ -1922,7 +1922,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 424.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
 [16 <./Background/DragonBreak.png>]
-<Background/woodDecay.png, id=615, 465.74pt x 269.005pt>
+<Background/woodDecay.png, id=637, 465.74pt x 269.005pt>
 File: Background/woodDecay.png Graphic file (type png)
 <use Background/woodDecay.png>
 Package pdftex.def Info: Background/woodDecay.png  used on input line 427.
@@ -1932,12 +1932,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 477.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [17 <./Background/woodDecay.png>]
-<Background/SandstoneArch.png, id=628, 890.32625pt x 239.89626pt>
+<Background/SandstoneArch.png, id=651, 890.32625pt x 239.89626pt>
 File: Background/SandstoneArch.png Graphic file (type png)
 <use Background/SandstoneArch.png>
 Package pdftex.def Info: Background/SandstoneArch.png  used on input line 481.
 (pdftex.def)             Requested size: 356.12419pt x 95.95679pt.
-<Background/implicitErosion.png, id=632, 394.47375pt x 136.51pt>
+<Background/implicitErosion.png, id=655, 394.47375pt x 136.51pt>
 File: Background/implicitErosion.png Graphic file (type png)
 <use Background/implicitErosion.png>
 Package pdftex.def Info: Background/implicitErosion.png  used on input line 518.
@@ -1947,12 +1947,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 537.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [18 <./Background/SandstoneArch.png> <./Background/implicitErosion.png>]
-<Background/implicitBlocks.png, id=644, 385.44pt x 143.53625pt>
+<Background/implicitBlocks.png, id=666, 385.44pt x 143.53625pt>
 File: Background/implicitBlocks.png Graphic file (type png)
 <use Background/implicitBlocks.png>
 Package pdftex.def Info: Background/implicitBlocks.png  used on input line 543.
 (pdftex.def)             Requested size: 269.80615pt x 100.47467pt.
-<Background/layeredVeg.png, id=652, 414.54875pt x 178.6675pt>
+<Background/layeredVeg.png, id=674, 414.54875pt x 178.6675pt>
 File: Background/layeredVeg.png Graphic file (type png)
 <use Background/layeredVeg.png>
 Package pdftex.def Info: Background/layeredVeg.png  used on input line 598.
@@ -1962,7 +1962,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 616.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [19 <./Background/implicitBlocks.png>]
-<Background/erosionDL.png, id=667, 837.1275pt x 235.88126pt>
+<Background/erosionDL.png, id=689, 837.1275pt x 235.88126pt>
 File: Background/erosionDL.png Graphic file (type png)
 <use Background/erosionDL.png>
 Package pdftex.def Info: Background/erosionDL.png  used on input line 632.
@@ -1972,7 +1972,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 656.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [20 <./Background/layeredVeg.png> <./Background/erosionDL.png>]
-<Background/waterInfiltration.png, id=683, 674.52pt x 558.085pt>
+<Background/waterInfiltration.png, id=705, 674.52pt x 558.085pt>
 File: Background/waterInfiltration.png Graphic file (type png)
 <use Background/waterInfiltration.png>
 Package pdftex.def Info: Background/waterInfiltration.png  used on input line 706.
@@ -1989,7 +1989,7 @@ Package pdftex.def Info: Title/logo-upc.png  used on input line 1.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [22 <./Background/waterInfiltration.png>]
 Chapter 4.
-<Decomposition/BaseDecomposition.png, id=697, 613.29124pt x 797.98125pt>
+<Decomposition/BaseDecomposition.png, id=719, 613.29124pt x 797.98125pt>
 File: Decomposition/BaseDecomposition.png Graphic file (type png)
 <use Decomposition/BaseDecomposition.png>
 Package pdftex.def Info: Decomposition/BaseDecomposition.png  used on input line 35.
@@ -2004,7 +2004,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 88.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [24 <./Decomposition/BaseDecomposition.png>]
-<Decomposition/voronoiConstruction.png, id=712, 702.625pt x 94.3525pt>
+<Decomposition/voronoiConstruction.png, id=734, 702.625pt x 94.3525pt>
 File: Decomposition/voronoiConstruction.png Graphic file (type png)
 <use Decomposition/voronoiConstruction.png>
 Package pdftex.def Info: Decomposition/voronoiConstruction.png  used on input line 110.
@@ -2024,12 +2024,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 227.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [26]
-<Decomposition/cube.png, id=735, 777.90625pt x 534.99875pt>
+<Decomposition/cube.png, id=757, 777.90625pt x 534.99875pt>
 File: Decomposition/cube.png Graphic file (type png)
 <use Decomposition/cube.png>
 Package pdftex.def Info: Decomposition/cube.png  used on input line 265.
 (pdftex.def)             Requested size: 159.33821pt x 109.57748pt.
-<Decomposition/cubeParticles.png, id=736, 777.90625pt x 534.99875pt>
+<Decomposition/cubeParticles.png, id=758, 777.90625pt x 534.99875pt>
 File: Decomposition/cubeParticles.png Graphic file (type png)
 <use Decomposition/cubeParticles.png>
 Package pdftex.def Info: Decomposition/cubeParticles.png  used on input line 268.
@@ -2042,12 +2042,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 287.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [27 <./Decomposition/cube.png> <./Decomposition/cubeParticles.png>]
-<Decomposition/OutOfBoundsVoro.png, id=747, 989.6975pt x 614.295pt>
+<Decomposition/OutOfBoundsVoro.png, id=769, 989.6975pt x 614.295pt>
 File: Decomposition/OutOfBoundsVoro.png Graphic file (type png)
 <use Decomposition/OutOfBoundsVoro.png>
 Package pdftex.def Info: Decomposition/OutOfBoundsVoro.png  used on input line 301.
 (pdftex.def)             Requested size: 159.33821pt x 98.89847pt.
-<Decomposition/OutOfBoundsParticles.png, id=748, 989.6975pt x 614.295pt>
+<Decomposition/OutOfBoundsParticles.png, id=770, 989.6975pt x 614.295pt>
 File: Decomposition/OutOfBoundsParticles.png Graphic file (type png)
 <use Decomposition/OutOfBoundsParticles.png>
 Package pdftex.def Info: Decomposition/OutOfBoundsParticles.png  used on input line 304.
@@ -2057,17 +2057,17 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 342.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [28 <./Decomposition/OutOfBoundsVoro.png (PNG copy)> <./Decomposition/OutOfBoundsParticles.png (PNG copy)>]
-<Decomposition/regularSampling.png, id=761, 1202.4925pt x 875.27pt>
+<Decomposition/regularSampling.png, id=784, 1202.4925pt x 875.27pt>
 File: Decomposition/regularSampling.png Graphic file (type png)
 <use Decomposition/regularSampling.png>
 Package pdftex.def Info: Decomposition/regularSampling.png  used on input line 376.
 (pdftex.def)             Requested size: 159.33821pt x 115.9794pt.
-<Decomposition/jitteredSampling.png, id=762, 1202.4925pt x 875.27pt>
+<Decomposition/jitteredSampling.png, id=785, 1202.4925pt x 875.27pt>
 File: Decomposition/jitteredSampling.png Graphic file (type png)
 <use Decomposition/jitteredSampling.png>
 Package pdftex.def Info: Decomposition/jitteredSampling.png  used on input line 379.
 (pdftex.def)             Requested size: 159.33821pt x 115.9794pt.
-<Decomposition/bumpSampling.png, id=765, 1202.4925pt x 875.27pt>
+<Decomposition/bumpSampling.png, id=788, 1202.4925pt x 875.27pt>
 File: Decomposition/bumpSampling.png Graphic file (type png)
 <use Decomposition/bumpSampling.png>
 Package pdftex.def Info: Decomposition/bumpSampling.png  used on input line 400.
@@ -2077,7 +2077,7 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 415.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [29 <./Decomposition/regularSampling.png (PNG copy)> <./Decomposition/jitteredSampling.png (PNG copy)>]
-<Decomposition/sharpSampling.png, id=778, 1184.425pt x 904.37875pt>
+<Decomposition/sharpSampling.png, id=800, 1184.425pt x 904.37875pt>
 File: Decomposition/sharpSampling.png Graphic file (type png)
 <use Decomposition/sharpSampling.png>
 Package pdftex.def Info: Decomposition/sharpSampling.png  used on input line 450.
@@ -2087,17 +2087,17 @@ Underfull \hbox (badness 1708) in paragraph at lines 450--450
 []\T1/cmr/m/n/8 (a) Base re-sults of our wall gen-er-at-ing
  []
 
-<Decomposition/terrainRugosity.png, id=779, 1184.425pt x 904.37875pt>
+<Decomposition/terrainRugosity.png, id=801, 1184.425pt x 904.37875pt>
 File: Decomposition/terrainRugosity.png Graphic file (type png)
 <use Decomposition/terrainRugosity.png>
 Package pdftex.def Info: Decomposition/terrainRugosity.png  used on input line 454.
 (pdftex.def)             Requested size: 159.33821pt x 121.65807pt.
-<Decomposition/rugositySampling.png, id=780, 1184.425pt x 904.37875pt>
+<Decomposition/rugositySampling.png, id=802, 1184.425pt x 904.37875pt>
 File: Decomposition/rugositySampling.png Graphic file (type png)
 <use Decomposition/rugositySampling.png>
 Package pdftex.def Info: Decomposition/rugositySampling.png  used on input line 486.
 (pdftex.def)             Requested size: 159.33821pt x 121.65807pt.
-<Decomposition/terrainRugosity2.png, id=781, 1184.425pt x 904.37875pt>
+<Decomposition/terrainRugosity2.png, id=803, 1184.425pt x 904.37875pt>
 File: Decomposition/terrainRugosity2.png Graphic file (type png)
 <use Decomposition/terrainRugosity2.png>
 Package pdftex.def Info: Decomposition/terrainRugosity2.png  used on input line 490.
@@ -2118,12 +2118,12 @@ Package pdftex.def Info: Title/logo-upc.png  used on input line 587.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [32]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 615.
-<Decomposition/initialSampling.png, id=810, 1177.39874pt x 638.385pt>
+<Decomposition/initialSampling.png, id=832, 1177.39874pt x 638.385pt>
 File: Decomposition/initialSampling.png Graphic file (type png)
 <use Decomposition/initialSampling.png>
 Package pdftex.def Info: Decomposition/initialSampling.png  used on input line 659.
 (pdftex.def)             Requested size: 182.09486pt x 98.7246pt.
-<Decomposition/subsamplingFurthest.png, id=811, 1177.39874pt x 638.385pt>
+<Decomposition/subsamplingFurthest.png, id=833, 1177.39874pt x 638.385pt>
 File: Decomposition/subsamplingFurthest.png Graphic file (type png)
 <use Decomposition/subsamplingFurthest.png>
 Package pdftex.def Info: Decomposition/subsamplingFurthest.png  used on input line 662.
@@ -2133,12 +2133,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 682.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [33]
-<Decomposition/3DgaussianBase.png, id=820, 1107.13625pt x 593.21625pt>
+<Decomposition/3DgaussianBase.png, id=842, 1107.13625pt x 593.21625pt>
 File: Decomposition/3DgaussianBase.png Graphic file (type png)
 <use Decomposition/3DgaussianBase.png>
 Package pdftex.def Info: Decomposition/3DgaussianBase.png  used on input line 687.
 (pdftex.def)             Requested size: 182.09486pt x 97.5687pt.
-<Decomposition/3DgaussianFurthest.png, id=821, 1107.13625pt x 593.21625pt>
+<Decomposition/3DgaussianFurthest.png, id=843, 1107.13625pt x 593.21625pt>
 File: Decomposition/3DgaussianFurthest.png Graphic file (type png)
 <use Decomposition/3DgaussianFurthest.png>
 Package pdftex.def Info: Decomposition/3DgaussianFurthest.png  used on input line 692.
@@ -2148,12 +2148,12 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 728.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [34 <./Decomposition/initialSampling.png (PNG copy)> <./Decomposition/subsamplingFurthest.png (PNG copy)> <./Decomposition/3DgaussianBase.png (PNG copy)> <./Decomposition/3DgaussianFurthest.png (PNG copy)>]
-<Decomposition/gridSamplingPoints.png, id=831, 1059.96pt x 655.44875pt>
+<Decomposition/gridSamplingPoints.png, id=853, 1059.96pt x 655.44875pt>
 File: Decomposition/gridSamplingPoints.png Graphic file (type png)
 <use Decomposition/gridSamplingPoints.png>
 Package pdftex.def Info: Decomposition/gridSamplingPoints.png  used on input line 759.
 (pdftex.def)             Requested size: 182.09486pt x 112.59496pt.
-<Decomposition/gridSamplingCells.png, id=832, 1059.96pt x 655.44875pt>
+<Decomposition/gridSamplingCells.png, id=854, 1059.96pt x 655.44875pt>
 File: Decomposition/gridSamplingCells.png Graphic file (type png)
 <use Decomposition/gridSamplingCells.png>
 Package pdftex.def Info: Decomposition/gridSamplingCells.png  used on input line 765.
@@ -2226,7 +2226,7 @@ Package pdftex.def Info: Title/logo-upc.png  used on input line 808.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [46]
 
-LaTeX Warning: Reference `aa' on page 47 undefined on input line 855.
+LaTeX Warning: Reference `aa' on page 47 undefined on input line 857.
 
 )
 File: Title/logo-upc.png Graphic file (type png)
@@ -2238,22 +2238,22 @@ Chapter 6.
 [48
 
 ]
-<Results/VoronoiOptions.png, id=994, 299.1175pt x 319.1925pt>
+<Results/VoronoiOptions.png, id=1017, 299.1175pt x 319.1925pt>
 File: Results/VoronoiOptions.png Graphic file (type png)
 <use Results/VoronoiOptions.png>
 Package pdftex.def Info: Results/VoronoiOptions.png  used on input line 68.
 (pdftex.def)             Requested size: 127.46779pt x 136.02274pt.
-<Results/heightFieldSizes.png, id=995, 303.1325pt x 231.86626pt>
+<Results/heightFieldSizes.png, id=1018, 303.1325pt x 231.86626pt>
 File: Results/heightFieldSizes.png Graphic file (type png)
 <use Results/heightFieldSizes.png>
 Package pdftex.def Info: Results/heightFieldSizes.png  used on input line 71.
 (pdftex.def)             Requested size: 159.33821pt x 121.88019pt.
-<Results/coreCells_02_02_01_1.png, id=996, 1107.13625pt x 491.8375pt>
+<Results/coreCells_02_02_01_1.png, id=1019, 1107.13625pt x 491.8375pt>
 File: Results/coreCells_02_02_01_1.png Graphic file (type png)
 <use Results/coreCells_02_02_01_1.png>
 Package pdftex.def Info: Results/coreCells_02_02_01_1.png  used on input line 100.
 (pdftex.def)             Requested size: 204.85846pt x 91.00351pt.
-<Results/coreCells_08_08_01_3_2_3.png, id=997, 1107.13625pt x 491.8375pt>
+<Results/coreCells_08_08_01_3_2_3.png, id=1020, 1107.13625pt x 491.8375pt>
 File: Results/coreCells_08_08_01_3_2_3.png Graphic file (type png)
 <use Results/coreCells_08_08_01_3_2_3.png>
 Package pdftex.def Info: Results/coreCells_08_08_01_3_2_3.png  used on input line 103.
@@ -2263,27 +2263,27 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 126.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [49 <./Results/VoronoiOptions.png> <./Results/heightFieldSizes.png> <./Results/coreCells_02_02_01_1.png> <./Results/coreCells_08_08_01_3_2_3.png>]
-<Results/salenques256x184.png, id=1014, 1106.1325pt x 781.92125pt>
+<Results/salenques256x184.png, id=1036, 1106.1325pt x 781.92125pt>
 File: Results/salenques256x184.png Graphic file (type png)
 <use Results/salenques256x184.png>
 Package pdftex.def Info: Results/salenques256x184.png  used on input line 131.
 (pdftex.def)             Requested size: 182.09486pt x 128.71315pt.
-<Results/salenques64x46.png, id=1015, 1106.1325pt x 781.92125pt>
+<Results/salenques64x46.png, id=1037, 1106.1325pt x 781.92125pt>
 File: Results/salenques64x46.png Graphic file (type png)
 <use Results/salenques64x46.png>
 Package pdftex.def Info: Results/salenques64x46.png  used on input line 133.
 (pdftex.def)             Requested size: 182.09486pt x 128.71315pt.
-<Results/VoronoiVisuals.png, id=1016, 309.155pt x 333.245pt>
+<Results/VoronoiVisuals.png, id=1038, 309.155pt x 333.245pt>
 File: Results/VoronoiVisuals.png Graphic file (type png)
 <use Results/VoronoiVisuals.png>
 Package pdftex.def Info: Results/VoronoiVisuals.png  used on input line 145.
 (pdftex.def)             Requested size: 154.57712pt x 166.62209pt.
-<Results/gaussianParticles.png, id=1019, 1183.42125pt x 461.725pt>
+<Results/gaussianParticles.png, id=1041, 1183.42125pt x 461.725pt>
 File: Results/gaussianParticles.png Graphic file (type png)
 <use Results/gaussianParticles.png>
 Package pdftex.def Info: Results/gaussianParticles.png  used on input line 168.
 (pdftex.def)             Requested size: 204.85846pt x 79.92241pt.
-<Results/gaussianLinks.png, id=1020, 1183.42125pt x 461.725pt>
+<Results/gaussianLinks.png, id=1042, 1183.42125pt x 461.725pt>
 File: Results/gaussianLinks.png Graphic file (type png)
 <use Results/gaussianLinks.png>
 Package pdftex.def Info: Results/gaussianLinks.png  used on input line 170.
@@ -2293,17 +2293,17 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 174.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [50 <./Results/salenques256x184.png> <./Results/salenques64x46.png> <./Results/VoronoiVisuals.png>]
-<Results/timeResults2D/puntaAlta50x50.png, id=1032, 940.51375pt x 819.06pt>
+<Results/timeResults2D/puntaAlta50x50.png, id=1054, 940.51375pt x 819.06pt>
 File: Results/timeResults2D/puntaAlta50x50.png Graphic file (type png)
 <use Results/timeResults2D/puntaAlta50x50.png>
 Package pdftex.def Info: Results/timeResults2D/puntaAlta50x50.png  used on input line 211.
 (pdftex.def)             Requested size: 136.57462pt x 118.92937pt.
-<Results/timeResults2D/puntaAlta200x200.png, id=1033, 940.51375pt x 819.06pt>
+<Results/timeResults2D/puntaAlta200x200.png, id=1055, 940.51375pt x 819.06pt>
 File: Results/timeResults2D/puntaAlta200x200.png Graphic file (type png)
 <use Results/timeResults2D/puntaAlta200x200.png>
 Package pdftex.def Info: Results/timeResults2D/puntaAlta200x200.png  used on input line 213.
 (pdftex.def)             Requested size: 136.57462pt x 118.92937pt.
-<Results/timeResults2D/puntaAlta350x350.png, id=1034, 940.51375pt x 819.06pt>
+<Results/timeResults2D/puntaAlta350x350.png, id=1056, 940.51375pt x 819.06pt>
 File: Results/timeResults2D/puntaAlta350x350.png Graphic file (type png)
 <use Results/timeResults2D/puntaAlta350x350.png>
 Package pdftex.def Info: Results/timeResults2D/puntaAlta350x350.png  used on input line 215.
@@ -2313,22 +2313,22 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 240.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [51 <./Results/gaussianParticles.png> <./Results/gaussianLinks.png> <./Results/timeResults2D/puntaAlta50x50.png> <./Results/timeResults2D/puntaAlta200x200.png> <./Results/timeResults2D/puntaAlta350x350.png>]
-<Results/timeResults2D/dimensionParticles.png, id=1052, 380.42125pt x 350.30875pt>
+<Results/timeResults2D/dimensionParticles.png, id=1074, 380.42125pt x 350.30875pt>
 File: Results/timeResults2D/dimensionParticles.png Graphic file (type png)
 <use Results/timeResults2D/dimensionParticles.png>
 Package pdftex.def Info: Results/timeResults2D/dimensionParticles.png  used on input line 245.
 (pdftex.def)             Requested size: 159.33821pt x 146.72777pt.
-<Results/timeResults2D/timePerParticle.png, id=1053, 354.32375pt x 350.30875pt>
+<Results/timeResults2D/timePerParticle.png, id=1075, 354.32375pt x 350.30875pt>
 File: Results/timeResults2D/timePerParticle.png Graphic file (type png)
 <use Results/timeResults2D/timePerParticle.png>
 Package pdftex.def Info: Results/timeResults2D/timePerParticle.png  used on input line 247.
 (pdftex.def)             Requested size: 159.33821pt x 157.53592pt.
-<Results/timeResultsZ/z10.png, id=1055, 838.13126pt x 743.77875pt>
+<Results/timeResultsZ/z10.png, id=1077, 838.13126pt x 743.77875pt>
 File: Results/timeResultsZ/z10.png Graphic file (type png)
 <use Results/timeResultsZ/z10.png>
 Package pdftex.def Info: Results/timeResultsZ/z10.png  used on input line 271.
 (pdftex.def)             Requested size: 136.57462pt x 121.1974pt.
-<Results/timeResultsZ/z99.png, id=1056, 838.13126pt x 743.77875pt>
+<Results/timeResultsZ/z99.png, id=1078, 838.13126pt x 743.77875pt>
 File: Results/timeResultsZ/z99.png Graphic file (type png)
 <use Results/timeResultsZ/z99.png>
 Package pdftex.def Info: Results/timeResultsZ/z99.png  used on input line 273.
@@ -2338,37 +2338,37 @@ File: Title/logo-upc.png Graphic file (type png)
 Package pdftex.def Info: Title/logo-upc.png  used on input line 292.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [52 <./Results/timeResults2D/dimensionParticles.png> <./Results/timeResults2D/timePerParticle.png> <./Results/timeResultsZ/z10.png> <./Results/timeResultsZ/z99.png>]
-<Results/timeResultsZ/zSamplesTimePerParticle.png, id=1070, 355.3275pt x 350.30875pt>
+<Results/timeResultsZ/zSamplesTimePerParticle.png, id=1092, 355.3275pt x 350.30875pt>
 File: Results/timeResultsZ/zSamplesTimePerParticle.png Graphic file (type png)
 <use Results/timeResultsZ/zSamplesTimePerParticle.png>
 Package pdftex.def Info: Results/timeResultsZ/zSamplesTimePerParticle.png  used on input line 296.
 (pdftex.def)             Requested size: 177.6633pt x 175.15395pt.
-<Results/rugosityResults/division1.5.png, id=1072, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/division1.5.png, id=1094, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/division1.5.png Graphic file (type png)
 <use Results/rugosityResults/division1.5.png>
 Package pdftex.def Info: Results/rugosityResults/division1.5.png  used on input line 316.
 (pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/rugosityResults/divison2.0.png, id=1073, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/divison2.0.png, id=1095, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/divison2.0.png Graphic file (type png)
 <use Results/rugosityResults/divison2.0.png>
 Package pdftex.def Info: Results/rugosityResults/divison2.0.png  used on input line 319.
 (pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/rugosityResults/division3.0.png, id=1074, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/division3.0.png, id=1096, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/division3.0.png Graphic file (type png)
 <use Results/rugosityResults/division3.0.png>
 Package pdftex.def Info: Results/rugosityResults/division3.0.png  used on input line 322.
 (pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/rugosityResults/division1.5_2.0.png, id=1075, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/division1.5_2.0.png, id=1097, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/division1.5_2.0.png Graphic file (type png)
 <use Results/rugosityResults/division1.5_2.0.png>
 Package pdftex.def Info: Results/rugosityResults/division1.5_2.0.png  used on input line 346.
 (pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/rugosityResults/division2.0_2.5.png, id=1076, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/division2.0_2.5.png, id=1098, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/division2.0_2.5.png Graphic file (type png)
 <use Results/rugosityResults/division2.0_2.5.png>
 Package pdftex.def Info: Results/rugosityResults/division2.0_2.5.png  used on input line 349.
 (pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/rugosityResults/division1.5_2.0_2.5.png, id=1077, 894.34125pt x 732.7375pt>
+<Results/rugosityResults/division1.5_2.0_2.5.png, id=1099, 894.34125pt x 732.7375pt>
 File: Results/rugosityResults/division1.5_2.0_2.5.png Graphic file (type png)
 <use Results/rugosityResults/division1.5_2.0_2.5.png>
 Package pdftex.def Info: Results/rugosityResults/division1.5_2.0_2.5.png  used on input line 352.
@@ -2382,60 +2382,185 @@ Package pdftex.def Info: Title/logo-upc.png  used on input line 359.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 371.
 
-<Results/MultiResComparison/furthest3.png, id=1091, 894.34125pt x 732.7375pt>
-File: Results/MultiResComparison/furthest3.png Graphic file (type png)
-<use Results/MultiResComparison/furthest3.png>
-Package pdftex.def Info: Results/MultiResComparison/furthest3.png  used on input line 402.
-(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/MultiResComparison/furthest5.png, id=1092, 894.34125pt x 732.7375pt>
-File: Results/MultiResComparison/furthest5.png Graphic file (type png)
-<use Results/MultiResComparison/furthest5.png>
-Package pdftex.def Info: Results/MultiResComparison/furthest5.png  used on input line 404.
-(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/MultiResComparison/furthest10.png, id=1093, 894.34125pt x 732.7375pt>
-File: Results/MultiResComparison/furthest10.png Graphic file (type png)
-<use Results/MultiResComparison/furthest10.png>
-Package pdftex.def Info: Results/MultiResComparison/furthest10.png  used on input line 406.
-(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/MultiResComparison/grid2x2.png, id=1094, 894.34125pt x 732.7375pt>
-File: Results/MultiResComparison/grid2x2.png Graphic file (type png)
-<use Results/MultiResComparison/grid2x2.png>
-Package pdftex.def Info: Results/MultiResComparison/grid2x2.png  used on input line 418.
-(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/MultiResComparison/grid3x3.png, id=1095, 894.34125pt x 732.7375pt>
-File: Results/MultiResComparison/grid3x3.png Graphic file (type png)
-<use Results/MultiResComparison/grid3x3.png>
-Package pdftex.def Info: Results/MultiResComparison/grid3x3.png  used on input line 420.
-(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
-<Results/MultiResComparison/grid4x4.png, id=1096, 933.4875pt x 712.6625pt>
-File: Results/MultiResComparison/grid4x4.png Graphic file (type png)
-<use Results/MultiResComparison/grid4x4.png>
-Package pdftex.def Info: Results/MultiResComparison/grid4x4.png  used on input line 422.
-(pdftex.def)             Requested size: 136.57462pt x 104.26317pt.
+<Results/BaseAneto.png, id=1114, 948.54375pt x 756.8275pt>
+File: Results/BaseAneto.png Graphic file (type png)
+<use Results/BaseAneto.png>
+Package pdftex.def Info: Results/BaseAneto.png  used on input line 405.
+(pdftex.def)             Requested size: 182.09486pt x 145.28844pt.
+<Results/AnetoCells.png, id=1115, 948.54375pt x 756.8275pt>
+File: Results/AnetoCells.png Graphic file (type png)
+<use Results/AnetoCells.png>
+Package pdftex.def Info: Results/AnetoCells.png  used on input line 407.
+(pdftex.def)             Requested size: 182.09486pt x 145.28844pt.
 
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 429.
-
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4686) has occurred while \output is active []
 
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
-Package pdftex.def Info: Title/logo-upc.png  used on input line 103.
+Package pdftex.def Info: Title/logo-upc.png  used on input line 422.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
  [54 <./Results/rugosityResults/division1.5_2.0.png> <./Results/rugosityResults/division2.0_2.5.png> <./Results/rugosityResults/division1.5_2.0_2.5.png>]
+<Results/MultiResComparison/furthest3.png, id=1130, 894.34125pt x 732.7375pt>
+File: Results/MultiResComparison/furthest3.png Graphic file (type png)
+<use Results/MultiResComparison/furthest3.png>
+Package pdftex.def Info: Results/MultiResComparison/furthest3.png  used on input line 451.
+(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
+<Results/MultiResComparison/furthest5.png, id=1131, 894.34125pt x 732.7375pt>
+File: Results/MultiResComparison/furthest5.png Graphic file (type png)
+<use Results/MultiResComparison/furthest5.png>
+Package pdftex.def Info: Results/MultiResComparison/furthest5.png  used on input line 453.
+(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
+<Results/MultiResComparison/furthest10.png, id=1132, 894.34125pt x 732.7375pt>
+File: Results/MultiResComparison/furthest10.png Graphic file (type png)
+<use Results/MultiResComparison/furthest10.png>
+Package pdftex.def Info: Results/MultiResComparison/furthest10.png  used on input line 455.
+(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
+<Results/MultiResComparison/grid2x2.png, id=1133, 894.34125pt x 732.7375pt>
+File: Results/MultiResComparison/grid2x2.png Graphic file (type png)
+<use Results/MultiResComparison/grid2x2.png>
+Package pdftex.def Info: Results/MultiResComparison/grid2x2.png  used on input line 467.
+(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
+<Results/MultiResComparison/grid3x3.png, id=1134, 894.34125pt x 732.7375pt>
+File: Results/MultiResComparison/grid3x3.png Graphic file (type png)
+<use Results/MultiResComparison/grid3x3.png>
+Package pdftex.def Info: Results/MultiResComparison/grid3x3.png  used on input line 469.
+(pdftex.def)             Requested size: 136.57462pt x 111.89604pt.
+<Results/MultiResComparison/grid4x4.png, id=1135, 933.4875pt x 712.6625pt>
+File: Results/MultiResComparison/grid4x4.png Graphic file (type png)
+<use Results/MultiResComparison/grid4x4.png>
+Package pdftex.def Info: Results/MultiResComparison/grid4x4.png  used on input line 471.
+(pdftex.def)             Requested size: 136.57462pt x 104.26317pt.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 478.
+
+
+Underfull \vbox (badness 3439) has occurred while \output is active []
+
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 504.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [55 <./Results/BaseAneto.png> <./Results/AnetoCells.png>]
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 504.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [56 <./Results/MultiResComparison/furthest3.png> <./Results/MultiResComparison/furthest5.png> <./Results/MultiResComparison/furthest10.png> <./Results/MultiResComparison/grid2x2.png> <./Results/MultiResComparison/grid3x3.png> <./Results/MultiResComparison/grid4x4.png>]
+<Results/erosionMenu.png, id=1164, 308.15125pt x 435.6275pt>
+File: Results/erosionMenu.png Graphic file (type png)
+<use Results/erosionMenu.png>
+Package pdftex.def Info: Results/erosionMenu.png  used on input line 532.
+(pdftex.def)             Requested size: 138.66676pt x 196.03056pt.
+<Results/linkLife.png, id=1168, 955.57pt x 676.5275pt>
+File: Results/linkLife.png Graphic file (type png)
+<use Results/linkLife.png>
+Package pdftex.def Info: Results/linkLife.png  used on input line 550.
+(pdftex.def)             Requested size: 126.5578pt x 89.593pt.
+<Results/linkNormalStress.png, id=1169, 1082.0425pt x 703.62875pt>
+File: Results/linkNormalStress.png Graphic file (type png)
+<use Results/linkNormalStress.png>
+Package pdftex.def Info: Results/linkNormalStress.png  used on input line 553.
+(pdftex.def)             Requested size: 136.57462pt x 88.80156pt.
+<Results/linkShearStres.png, id=1170, 1082.0425pt x 703.62875pt>
+File: Results/linkShearStres.png Graphic file (type png)
+<use Results/linkShearStres.png>
+Package pdftex.def Info: Results/linkShearStres.png  used on input line 555.
+(pdftex.def)             Requested size: 136.57462pt x 88.80156pt.
+<Results/waterPaths.png, id=1171, 955.57pt x 676.5275pt>
+File: Results/waterPaths.png Graphic file (type png)
+<use Results/waterPaths.png>
+Package pdftex.def Info: Results/waterPaths.png  used on input line 563.
+(pdftex.def)             Requested size: 191.11061pt x 135.3031pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 574.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [57 <./Results/erosionMenu.png>]
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 621.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [58 <./Results/linkLife.png> <./Results/linkNormalStress.png> <./Results/linkShearStres.png> <./Results/waterPaths.png>]
+<Results/AnetoBefore300k.png, id=1195, 1055.945pt x 805.0075pt>
+File: Results/AnetoBefore300k.png Graphic file (type png)
+<use Results/AnetoBefore300k.png>
+Package pdftex.def Info: Results/AnetoBefore300k.png  used on input line 627.
+(pdftex.def)             Requested size: 136.57462pt x 104.11418pt.
+<Results/Aneto300K_general.png, id=1196, 1055.945pt x 805.0075pt>
+File: Results/Aneto300K_general.png Graphic file (type png)
+<use Results/Aneto300K_general.png>
+Package pdftex.def Info: Results/Aneto300K_general.png  used on input line 629.
+(pdftex.def)             Requested size: 136.57462pt x 104.11418pt.
+<Results/AnetoAfter300k.png, id=1197, 1055.945pt x 805.0075pt>
+File: Results/AnetoAfter300k.png Graphic file (type png)
+<use Results/AnetoAfter300k.png>
+Package pdftex.def Info: Results/AnetoAfter300k.png  used on input line 631.
+(pdftex.def)             Requested size: 136.57462pt x 104.11418pt.
+<Results/10KTime.png, id=1198, 544.0325pt x 382.42876pt>
+File: Results/10KTime.png Graphic file (type png)
+<use Results/10KTime.png>
+Package pdftex.def Info: Results/10KTime.png  used on input line 643.
+(pdftex.def)             Requested size: 182.09486pt x 128.005pt.
+<Results/100KTime.png, id=1199, 547.04375pt x 369.38pt>
+File: Results/100KTime.png Graphic file (type png)
+<use Results/100KTime.png>
+Package pdftex.def Info: Results/100KTime.png  used on input line 646.
+(pdftex.def)             Requested size: 186.65175pt x 126.03279pt.
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 675.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+ [59 <./Results/AnetoBefore300k.png> <./Results/Aneto300K_general.png> <./Results/AnetoAfter300k.png> <./Results/10KTime.png> <./Results/100KTime.png>]
+<Results/lowShearTest.png, id=1219, 841.1425pt x 738.76pt>
+File: Results/lowShearTest.png Graphic file (type png)
+<use Results/lowShearTest.png>
+Package pdftex.def Info: Results/lowShearTest.png  used on input line 694.
+(pdftex.def)             Requested size: 172.99498pt x 151.93149pt.
+<Results/lowTensionTest.png, id=1220, 841.1425pt x 738.76pt>
+File: Results/lowTensionTest.png Graphic file (type png)
+<use Results/lowTensionTest.png>
+Package pdftex.def Info: Results/lowTensionTest.png  used on input line 696.
+(pdftex.def)             Requested size: 172.99498pt x 151.93149pt.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 704.
+
+File: Title/logo-upc.png Graphic file (type png)
+<use Title/logo-upc.png>
+Package pdftex.def Info: Title/logo-upc.png  used on input line 735.
+(pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
+[60 <./Results/lowShearTest.png> <./Results/lowTensionTest.png>]
+<Results/GraniteBase100.png, id=1235, 904.37875pt x 754.82pt>
+File: Results/GraniteBase100.png Graphic file (type png)
+<use Results/GraniteBase100.png>
+Package pdftex.def Info: Results/GraniteBase100.png  used on input line 740.
+(pdftex.def)             Requested size: 182.09486pt x 151.97487pt.
+<Results/MarbleBase0.png, id=1236, 904.37875pt x 754.82pt>
+File: Results/MarbleBase0.png Graphic file (type png)
+<use Results/MarbleBase0.png>
+Package pdftex.def Info: Results/MarbleBase0.png  used on input line 742.
+(pdftex.def)             Requested size: 182.09486pt x 151.97487pt.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 760.
+
+)
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 103.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [55 <./Results/MultiResComparison/furthest3.png> <./Results/MultiResComparison/furthest5.png> <./Results/MultiResComparison/furthest10.png> <./Results/MultiResComparison/grid2x2.png> <./Results/MultiResComparison/grid3x3.png> <./Results/MultiResComparison/grid4x4.png>]
+ [61 <./Results/GraniteBase100.png (PNG copy)> <./Results/MarbleBase0.png (PNG copy)>]
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 103.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [56] (./Conclusion/Conclusion.tex
+ [62] (./Conclusion/Conclusion.tex
 Chapter 7.
-) [57
+) [63
 
 ]
 Overfull \hbox (6.18672pt too wide) in paragraph at lines 108--108
@@ -2447,25 +2572,25 @@ Overfull \hbox (26.7791pt too wide) in paragraph at lines 108--108
 []\T1/cmr/m/n/10 Ante Munjiza. \T1/cmr/m/it/10 The Com-bined Finite-Discrete El-e-ment Method\T1/cmr/m/n/10 . Dec. 2004, pp. 1^^U333. \T1/cmr/m/sc/10 isbn\T1/cmr/m/n/10 : 9780470841990.
  []
 
-[58
+[64
 
 ]
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 107.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [59]
+ [65]
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 107.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [60]
+ [66]
 File: Title/logo-upc.png Graphic file (type png)
 <use Title/logo-upc.png>
 Package pdftex.def Info: Title/logo-upc.png  used on input line 110.
 (pdftex.def)             Requested size: 215.80704pt x 37.76599pt.
- [61]
-runsystem(latexminted cleantemp  --timestamp 20260619230158 9E727FDD3AEC8274F46685441900280D)...executed safely (allowed).
+ [67]
+runsystem(latexminted cleantemp  --timestamp 20260622110943 9E727FDD3AEC8274F46685441900280D)...executed safely (allowed).
 
  (./Project.aux)
  ***********
@@ -2488,10 +2613,10 @@ Package logreq Info: Writing requests to 'Project.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 54464 strings out of 469515
- 1229686 string characters out of 5470807
- 2217989 words of memory out of 5000000
- 81918 multiletter control sequences out of 15000+600000
+ 54644 strings out of 469515
+ 1234619 string characters out of 5470807
+ 2219527 words of memory out of 5000000
+ 82061 multiletter control sequences out of 15000+600000
  649182 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,17n,104p,1939b,3001s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2508,10 +2633,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on Project.pdf (61 pages, 13505493 bytes).
+Output written on Project.pdf (67 pages, 15826333 bytes).
 PDF statistics:
- 1449 PDF objects out of 1728 (max. 8388607)
- 1181 compressed objects within 12 object streams
- 352 named destinations out of 1000 (max. 500000)
- 810 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1582 PDF objects out of 1728 (max. 8388607)
+ 1277 compressed objects within 13 object streams
+ 389 named destinations out of 1000 (max. 500000)
+ 890 words of extra memory for PDF output out of 10000 (max. 10000000)
 

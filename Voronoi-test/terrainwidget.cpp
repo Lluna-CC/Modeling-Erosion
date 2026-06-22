@@ -5,6 +5,7 @@
 #include <QCursor>
 #include <iostream>
 #include "voronoi.h"
+#include<chrono>
 
 TerrainWidget::TerrainWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -464,14 +465,17 @@ void TerrainWidget::computeWaterPath(int num) {
     if (cellDecomp == nullptr) return;
     std::vector<int> newC,oldC;
     paths.clear();
+    std::cout << "Starting " << num << " water paths" << std::endl;
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0; i < num; ++i) {
         //std::cout << "Path n: " << i << std::endl;
         if (eroder.waterPath(paths)) {
             //std::cout << "Part removed! " << std::endl;
-            //eroder.getNewExteriorCells(newC, oldC);
-            //cellDecomp -> updateMesh(newC, oldC);
+          
         };
     }
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::cout << num << " Paths completed. Elapsed time = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " ms" << std::endl;
 }
 
 void TerrainWidget::changeErosionDirection(double theta, double phi) {

@@ -32,21 +32,21 @@ class MechanicalModel {
     
     Vector3 g = Vector3(0.0,0.0,-9.81);
     double rockDensity = 2650;
-    double E = 70e9;
-    double v = 0.2;
-    double kn = 1e9;
-    double ks = 1e8;
-    double T_max = 5e8;
-    double UCS = 2e9;
-    double c = 4e7;
-    double tanPhi = 0.363502;
+   double E = 70e9;
+   double v = 0.255;
+   double kn = 1e9;
+   double ks = 1e8;
+   double T_max = 39e6;
+   double UCS = 2.2e9;
+   double c = 20e6;
+   double tanPhi = 0.267949;
 
-    double alph_s = 5.0;
-    double q = 2.0;
-    double s = 2.0;
-    double alph_c = 6.0;
-    double alph_tt = 2.0; 
-    double p = 2.0;
+   double alph_s = 5.0;
+   double q = 2.0;
+   double s = 2.0;
+   double alph_c = 6.0;
+   double alph_tt = 2.0; 
+   double p = 2.0;
 };
 
 #endif

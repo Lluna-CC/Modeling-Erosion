@@ -78,12 +78,34 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 1.5$ and further subdivision for cells above $2.0$}}}{54}{figure.caption.57}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 2.0$ and further subdivision for cells above $2.5$}}}{54}{figure.caption.57}%
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain using a 151x138 grid.Subdivision performed at three levels with thresholds $1.5$, $2.0$ and $2.5$}}}{54}{figure.caption.57}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Different downscaling factors for the furthest point sampling method applied to the \textit {Bassiero} terrain. }}{55}{figure.caption.59}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $3$}}}{55}{figure.caption.59}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $5$}}}{55}{figure.caption.59}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $10$}}}{55}{figure.caption.59}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Comparison of different block sizes used to make a subsampled gird. Applied to the \textit {Bassiero} Terrain.}}{55}{figure.caption.60}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 2x2x2 blocks}}}{55}{figure.caption.60}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 3x3x3 blocks}}}{55}{figure.caption.60}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 4x4x4 blocks}}}{55}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Comparison of the base terrain and the decomposition result}}{55}{figure.caption.60}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base Aneto terrain}}}{55}{figure.caption.60}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after the decomposition}}}{55}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Different downscaling factors for the furthest point sampling method applied to the \textit {Bassiero} terrain. }}{56}{figure.caption.61}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $3$}}}{56}{figure.caption.61}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $5$}}}{56}{figure.caption.61}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $10$}}}{56}{figure.caption.61}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Comparison of different block sizes used to make a subsampled gird. Applied to the \textit {Bassiero} Terrain.}}{56}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 2x2x2 blocks}}}{56}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 3x3x3 blocks}}}{56}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 4x4x4 blocks}}}{56}{figure.caption.62}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Erosion menu of the UI}}{57}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Different link visualization options}}{58}{figure.caption.67}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Link life visualization. From Green (full life) to red (fully damaged)}}}{58}{figure.caption.67}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Link normal stress visualization. From blue to green for negative normal stress (compression) and green to red for tension}}}{58}{figure.caption.67}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Link shear stress visualization. From green (0 stress) to red}}}{58}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Simulation of 5 water paths on the \textit {Gausssian Bump} toy example}}{58}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Result of 300 thousand water paths on the Aneto terrain using different subsampling methods to create the low-resolution decomposition}}{59}{figure.caption.69}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto terrain before any erosion process}}}{59}{figure.caption.69}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after 300 thousand paths using the furthest point method to subsample}}}{59}{figure.caption.69}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Aneto terrain after 300 thousand paths using the grid method to subsample}}}{59}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Time to complete of different consecutive runs with 10K and 100K paths for run}}{59}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time to complete different runs of 10K paths. The runs have been executed one after the other on the same model}}}{59}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Time to complete different runs of 100K paths. The runs have been executed one after the other on the same model}}}{59}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Results of our test runs to tune the material properties}}{60}{figure.caption.72}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results using the initial cohesion, without modification}}}{60}{figure.caption.72}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Minor damage initial damage on the terrain using the updated cohesion}}}{60}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Results of our experiments with different materials}}{61}{figure.caption.74}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of a granite Aneto after 100 water paths}}}{61}{figure.caption.74}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results of a marble Aneto after the initial stress computation (0 paths)}}}{61}{figure.caption.74}%
 \addvspace {10\p@ }

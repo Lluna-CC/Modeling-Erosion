@@ -355,12 +355,10 @@ void MultiResolutionGraph::updateExternalCells(int l) {
     if (l < 0 || l > levels.size()) return;
     std::vector<vorocell>& cells = levels[l].getCells();
     for (int i = 0; i < cells.size(); ++i) {
-        if (cells[i].state == AIR) continue;
+        if (cells[i].state == AIR || cells[i].state == DISCARDED) continue;
         for (int k = 0; k < cells[i].neighbors.size(); ++k) {
             if (cells[i].neighbors[k] < 0 || cells[cells[i].neighbors[k]].state == AIR) {
-                if (!cells[i].isExterior) {
-                    
-                }
+                
                 //graph -> updateLowerLevelCells(1, i);
                 cells[i].isExterior = true;     
                 break;

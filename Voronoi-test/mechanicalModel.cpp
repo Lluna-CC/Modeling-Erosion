@@ -118,12 +118,12 @@ void MechanicalModel::updateLinkStresses(std::map<std::pair<int,int>, vorolink>&
 
         Vector3 d_i = s_i + cross(theta_i, r_i);
         Vector3 d_j = s_j + cross(theta_j, r_j);
-        Vector3 d_ij = d_j - d_i;
+        Vector3 d_ij = d_i - d_j;
 
         double area = cells[i].faceData[j].area;
         Vector3 n = cells[i].faceData[j].normal;
         Vector3 F_ij = kn * area * (dot(d_ij, n) * n) + ks * area* (d_ij - dot(d_ij, n) * n); 
-        it -> second.normalStress = -dot(F_ij, n)/area;
+        it -> second.normalStress = dot(F_ij, n)/area;
         it -> second.shearStress = Norm(F_ij - dot(F_ij, n)*n)/area;
 
         double D = 1 - it -> second.life;

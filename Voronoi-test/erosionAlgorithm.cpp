@@ -221,7 +221,7 @@ bool ErosionAlgorithm::breakLink(std::pair<int,int> link, bool updateStresses) {
         
         if (!reachable) {
             std::cout << "Seprated components !!" << std::endl;
-            recentlyRemoved.clear();
+            //recentlyRemoved.clear();
 
             bool containsCore_second, exterior_two;
             int secondComp_count = componentSize(link.second, link.first, containsCore_second, reachable, exterior_two);
@@ -341,7 +341,7 @@ void ErosionAlgorithm::removeComponent(int cell) {
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
 
     cells[cell].state = AIR;
-    recentlyRemoved.insert(cell);
+    //recentlyRemoved.insert(cell);
     if (level > 0) graph -> removeLowerLevel(level, cell);
 
     for (int i = 0; i < cells[cell].neighbors.size(); ++i) {
@@ -365,19 +365,7 @@ void ErosionAlgorithm::updateExternalLinks() {
     std::map<std::pair<int,int>, vorolink>& links = graph -> getLinks(level);
     std::set<std::pair<int,int>>& exteriorLinks = graph -> getExteriorLinks(level);
     
-    graph -> updateExternalCells(0);
-    for (int i = 0; i < cells.size(); ++i) {
-        if (cells[i].state == AIR || cells[i].state == DISCARDED) continue;
-        for (int k = 0; k < cells[i].neighbors.size(); ++k) {
-            if (cells[i].neighbors[k] < 0 || recentlyRemoved.find(cells[i].neighbors[k]) != recentlyRemoved.end()) {
-                
-                //graph -> updateLowerLevelCells(1, i);
-                cells[i].isExterior = true;     
-                break;
-            }
-        }
-    }
-
+    //Remove links air-to-air
     for (auto it = links.begin(); it != links.end();) {
         std::pair<int,int>  key = it -> first;
         ++it;
@@ -401,9 +389,47 @@ void ErosionAlgorithm::updateExternalLinks() {
 
         }
 
-        else if ((key.first > 0 && recentlyRemoved.find(key.first) != recentlyRemoved.end()) || (key.second > 0 && recentlyRemoved.find(key.second) != recentlyRemoved.end()))  {
-            links[key].state = EXTERIOR;
-            exteriorLinks.insert(key);
+    }
+
+    graph -> updateExternalCells(0);
+    
+    std::queue<int> candidateCells;
+    std::vector<bool> visited(cells.size(), false);
+    if (exteriorLinks.size() == 0) std::cout << "all external cells removed??" << std::endl;
+    std::pair<int,int> l = *exteriorLinks.begin();
+    int first_cell = (cells[l.first].state == AIR) ? l.second : l.first;
+    candidateCells.push(first_cell);
+    visited[first_cell] = true;
+    while (!candidateCells.empty()) {
+        int actCell = candidateCells.front();
+        candidateCells.pop();
+        cells[actCell].isExterior = true;
+
+
+        for (int i = 0; i < cells[actCell].neighbors.size(); ++i) {
+            int next = cells[actCell].neighbors[i];
+            if (next < 0) continue;
+
+            std::pair<int,int> key;
+            if (actCell < next) key = std::make_pair(actCell, next);
+            else key = std::make_pair(next, actCell);
+            if (links.find(key) == links.end()) continue;
+
+            if (cells[next].state == AIR) {
+                exteriorLinks.insert(key);
+                links[key].state = EXTERIOR;
+                continue;
+            }
+
+            
+            for (int j = 0; j < cells[next].neighbors.size(); ++j) {
+                if (cells[cells[next].neighbors[j]].state == AIR && !visited[next]) {
+                    candidateCells.push(next);
+                    visited[next] = true;
+                }
+            }
+            
+            
         }
     }
 
