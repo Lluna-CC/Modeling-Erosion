@@ -1,0 +1,15 @@
+[Aneto 150x150, downscaling factor of 10]
+37334 particles generated
+Time to 100K paths: 437482 ms
+
+
+[Aneto 150x150, high res]
+373340 particles generated 
+Time to 100K paths: 1661258 ms
+
+[Aneto 25x25 3x3x3 grid]
+372 Solid cells, 587 ms for 1 path
+
+[Aneto 25x25 high res]
+5722 cells, 468149 ms
+

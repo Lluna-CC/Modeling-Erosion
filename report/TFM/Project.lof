@@ -1,111 +1,127 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Heightfield of the mountain Aneto as a monochromatic image and the terrain produced by said heightfield on our application}}{11}{figure.caption.5}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto heightfield}}}{11}{figure.caption.5}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto model on the app}}}{11}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Illustration of stacked height functions, figure taken from \blx@tocontentsinit {0}\cite {galin2019review}}}{11}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of a tetrahedralization, taken from \blx@tocontentsinit {0}\cite {Muller_2022}}}{13}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a voronoi decomposition of a cube, showing the particles and faces of the decomposition. Figure taken from the documentation of the C++ library Voro++ \blx@tocontentsinit {0}\cite {osti_code-54674}}}{14}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Examples of rocky high mountain environments, that show some sharp and straight features that can be difficult to capture with digital elevation models. Images by Oscar Argudo}}{11}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Heightfield of the mountain Aneto as a monochromatic image and the terrain produced by said heightfield on our application}}{12}{figure.caption.6}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto heightfield}}}{12}{figure.caption.6}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto model on the app}}}{12}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Illustration of stacked height functions, figure taken from \blx@tocontentsinit {0}\cite {galin2019review}}}{13}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a tetrahedralization, taken from \blx@tocontentsinit {0}\cite {Muller_2022}}}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of a voronoi decomposition of a cube, showing the particles and faces of the decomposition. Figure taken from the documentation of the C++ library Voro++ \blx@tocontentsinit {0}\cite {osti_code-54674}}}{15}{figure.caption.11}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces A welsh dragon breaking. Taken from \blx@tocontentsinit {0}\cite {10.2312:sca.20141122}}}{16}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of wood dedcay of a cut tree trunk. Figure taken from \blx@tocontentsinit {0}\cite {YANG_SCHWARZ_2026}}}{17}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Arch produced by wind erosion. Figure taken from \blx@tocontentsinit {0}\cite {10.1145/3731201}}}{18}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Example of erosion using implicit functions, the resulting terrain is smooth due to the nature of implicit functions.Taken from \blx@tocontentsinit {0}\cite {paris:hal-02273097}}}{18}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Terrain enhanced by generating fractured blocks according to the geology of the terrain. Taken from \blx@tocontentsinit {0}\cite {paris:hal-02926218}}}{19}{figure.caption.19}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Illustration of stacked height functions, used to simulate interactions between vegetation and erosion. figure taken from \blx@tocontentsinit {0}\cite {10.1145/3072959.3073667}}}{20}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Example of terrain enhancenment through adding erosion patterns. Taken from \blx@tocontentsinit {0}\cite {https://doi.org/10.1111/cgf.14992}}}{20}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Example of water infiltrating a terrain divided into a set of voronoi cells connected by links. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{22}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A welsh dragon breaking. Taken from \blx@tocontentsinit {0}\cite {10.2312:sca.20141122}}}{18}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of wood dedcay of a cut tree trunk. Figure taken from \blx@tocontentsinit {0}\cite {YANG_SCHWARZ_2026}}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Arch produced by wind erosion. Figure taken from \blx@tocontentsinit {0}\cite {10.1145/3731201}}}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Example of erosion using implicit functions, the resulting terrain is smooth due to the nature of implicit functions.Taken from \blx@tocontentsinit {0}\cite {paris:hal-02273097}}}{20}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Terrain enhanced by generating fractured blocks according to the geology of the terrain. Taken from \blx@tocontentsinit {0}\cite {paris:hal-02926218}}}{21}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Illustration of stacked height functions, used to simulate interactions between vegetation and erosion. figure taken from \blx@tocontentsinit {0}\cite {10.1145/3072959.3073667}}}{22}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Example of terrain enhancenment through adding erosion patterns. Taken from \blx@tocontentsinit {0}\cite {https://doi.org/10.1111/cgf.14992}}}{22}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Example of water infiltrating a terrain divided into a set of voronoi cells connected by links. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{23}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram of the original method. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{24}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Process of construction of a voronoi cell from the intersection of half-spaces. figures (b) to (f) show the process of cutting the space into multiple half-spaces, one half-space at a time. Figure taken from \blx@tocontentsinit {0}\cite {10.1119/5.0087591}}}{25}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Result of the voronoi decomposition without cutting the boundary cells vs. the samples used for the decomposition with the base model as reference}}{27}{figure.caption.29}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi cells of the decomposition}}}{27}{figure.caption.29}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Sample points with the base model as reference}}}{27}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Result of the voronoi decomposition when allowing sampling out of bounds}}{28}{figure.caption.31}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi cells of the decomposition}}}{28}{figure.caption.31}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Sample points with the base model as reference. White particles are out of bounds}}}{28}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Wall results sampling at the center of every cell vs. adding some jittering}}{29}{figure.caption.33}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results sampling at cell center}}}{29}{figure.caption.33}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results adding some jittering}}}{29}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Bumps appearing due to an unappropriate mix of the two sampling methods}}{30}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Results of the wall generation process vs. a color map over the base terrain showing the rugosity at each point}}{31}{figure.caption.35}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base results of our wall generating method}}}{31}{figure.caption.35}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher the rugosity of that point}}}{31}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Results of the wall generation process vs. a color map over the base terrain showing the rugosity at each point}}{31}{figure.caption.36}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of our wall generating method after appliying subsampling based on rugosity}}}{31}{figure.caption.36}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher the rugosity of that point}}}{31}{figure.caption.36}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Results of the furthest point sampling. Some points outside of the terrain are marked as solid because they are linked with solid cells of the original sampling}}{34}{figure.caption.37}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base sampling along the original surface of the terrain separating air and solid cells}}}{34}{figure.caption.37}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Subsampling using furthest point, some points corresponding to solid cells lie outside of the terrain}}}{34}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Results of the furthest point sampling. Some artifacts arise due to cells outside of the terrain being marked as solid}}{34}{figure.caption.38}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Decomposition results using the base sampling}}}{34}{figure.caption.38}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Low-resolution decomposition using furthest point to collect a subsample }}}{34}{figure.caption.38}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Results of the improved method. The left image shows the subsamples obtained, while the right one shows the final result}}{35}{figure.caption.39}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Subsampling using the improved method. Notice how there are no solid cells outside of the terrain}}}{35}{figure.caption.39}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Low-resolution decomposition using the improved method. The walls are not perfect, but they approximate the shape of the terrain, unlike the results generated using furthest point sampling }}}{35}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram of the original method. Taken from \blx@tocontentsinit {0}\cite {mateos_arlanzon_2023}}}{25}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Process of construction of a voronoi cell from the intersection of half-spaces. figures (b) to (f) show the process of cutting the space into multiple half-spaces, one half-space at a time. Figure taken from \blx@tocontentsinit {0}\cite {10.1119/5.0087591}}}{26}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Result of the voronoi decomposition without cutting the boundary cells vs. the samples used for the decomposition with the base model as reference}}{28}{figure.caption.30}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi cells of the decomposition}}}{28}{figure.caption.30}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Sample points with the base model as reference}}}{28}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Result of the voronoi decomposition when allowing sampling out of bounds}}{29}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi cells of the decomposition}}}{29}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Sample points with the base model as reference. White particles are out of bounds}}}{29}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Wall results sampling at the center of every cell vs. adding some jittering}}{30}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results sampling at cell center}}}{30}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results adding some jittering}}}{30}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Bumps appearing due to an unappropriate mix of the two sampling methods}}{31}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Results of the wall generation process vs. a color map over the base terrain showing the rugosity at each point}}{32}{figure.caption.36}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base results of our wall generating method}}}{32}{figure.caption.36}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher the rugosity of that point}}}{32}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Results of the wall generation process vs. a color map over the base terrain showing the rugosity at each point}}{32}{figure.caption.37}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of our wall generating method after appliying subsampling based on rugosity}}}{32}{figure.caption.37}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Base terrain painted with a Cool-Warm color gradient. The warmer the color the higher the rugosity of that point}}}{32}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Results of the furthest point sampling. Some points outside of the terrain are marked as solid because they are linked with solid cells of the original sampling}}{35}{figure.caption.38}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base sampling along the original surface of the terrain separating air and solid cells}}}{35}{figure.caption.38}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Subsampling using furthest point, some points corresponding to solid cells lie outside of the terrain}}}{35}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Results of the furthest point sampling. Some artifacts arise due to cells outside of the terrain being marked as solid}}{35}{figure.caption.39}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Decomposition results using the base sampling}}}{35}{figure.caption.39}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Low-resolution decomposition using furthest point to collect a subsample }}}{35}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Results of the improved method. The left image shows the subsamples obtained, while the right one shows the final result}}{36}{figure.caption.40}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Subsampling using the improved method. Notice how there are no solid cells outside of the terrain}}}{36}{figure.caption.40}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Low-resolution decomposition using the improved method. The walls are not perfect, but they approximate the shape of the terrain, unlike the results generated using furthest point sampling }}}{36}{figure.caption.40}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Voronoi options and Terrain dimensions windows of our applicaiton. Both windows can control the results of the decomposition}}{49}{figure.caption.43}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi options section}}}{49}{figure.caption.43}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Terrain dimensions section}}}{49}{figure.caption.43}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Results of modifying the parameters controlling the core cell generation. Particles in purple represent core cells. Figure taken using the \textit {Gaussian Bump} toy heightfield}}{49}{figure.caption.44}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Core cells when using center $(0.2,0.2,0.1)$ and range $(1,1,1)$}}}{49}{figure.caption.44}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Core cells when using center $(0.8,0.8,0.1)$ and range $(3,3,3)$}}}{49}{figure.caption.44}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Results of modifying the heightfield dimensions on the terrain \textit {Salenques}}}{50}{figure.caption.45}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Salenques mountain sampled using a 256x184 grid (with 20 vertical samples)}}}{50}{figure.caption.45}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Salenques mountain sampled using a 64x46 grid (with 20 vertical samples)}}}{50}{figure.caption.45}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Voronoi Visuals section of the UI options}}{50}{figure.caption.47}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Examples of diverse rendering options of our application. REMAKE THIS FIGURE}}{51}{figure.caption.48}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Example of the particle rendering mode}}}{51}{figure.caption.48}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Example of link rendering}}}{51}{figure.caption.48}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Results of modifying the heightfield dimensions on the terrain \textit {Punta Alta}}}{51}{figure.caption.50}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Punta alta using a 50x50 grid}}}{51}{figure.caption.50}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Punta alta using a 200x200 grid}}}{51}{figure.caption.50}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Punta alta using a 350x350 grid}}}{51}{figure.caption.50}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Results of modifying the heightfield dimensions on the terrain \textit {Punta Alta}}}{52}{figure.caption.51}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Number of Dimensions vs Number of Particles}}}{52}{figure.caption.51}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Number of Dimensions vs Time spent per Particle}}}{52}{figure.caption.51}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Results of modifying the variable $zSamples$ on the terrain \textit {Punta Alta}}}{52}{figure.caption.53}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results using $zSamples = 10$}}}{52}{figure.caption.53}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results using $zSamples = 99$}}}{52}{figure.caption.53}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Number of samples in the z direction vs computation time spent per particle}}{53}{figure.caption.54}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Results of changing the rugosity threshold on the \textit {bassiero} terrain}}{53}{figure.caption.56}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 1.5$}}}{53}{figure.caption.56}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 2.0$}}}{53}{figure.caption.56}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {bassiero terrain using a 151x138 grid.Subdivision performed for cells with rugosity $> 3.0$}}}{53}{figure.caption.56}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Results of changing the rugosity threshold on the \textit {Bassiero} terrain. In this case, we perform further subdivisions when the rugosity is too high.}}{54}{figure.caption.57}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 1.5$ and further subdivision for cells above $2.0$}}}{54}{figure.caption.57}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 2.0$ and further subdivision for cells above $2.5$}}}{54}{figure.caption.57}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain using a 151x138 grid.Subdivision performed at three levels with thresholds $1.5$, $2.0$ and $2.5$}}}{54}{figure.caption.57}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Comparison of the base terrain and the decomposition result}}{55}{figure.caption.60}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base Aneto terrain}}}{55}{figure.caption.60}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after the decomposition}}}{55}{figure.caption.60}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Different downscaling factors for the furthest point sampling method applied to the \textit {Bassiero} terrain. }}{56}{figure.caption.61}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $3$}}}{56}{figure.caption.61}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $5$}}}{56}{figure.caption.61}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $10$}}}{56}{figure.caption.61}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Comparison of different block sizes used to make a subsampled gird. Applied to the \textit {Bassiero} Terrain.}}{56}{figure.caption.62}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 2x2x2 blocks}}}{56}{figure.caption.62}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 3x3x3 blocks}}}{56}{figure.caption.62}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 4x4x4 blocks}}}{56}{figure.caption.62}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Erosion menu of the UI}}{57}{figure.caption.65}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Different link visualization options}}{58}{figure.caption.67}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Link life visualization. From Green (full life) to red (fully damaged)}}}{58}{figure.caption.67}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Link normal stress visualization. From blue to green for negative normal stress (compression) and green to red for tension}}}{58}{figure.caption.67}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Link shear stress visualization. From green (0 stress) to red}}}{58}{figure.caption.67}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Simulation of 5 water paths on the \textit {Gausssian Bump} toy example}}{58}{figure.caption.68}%
-\contentsline {figure}{\numberline {6.18}{\ignorespaces Result of 300 thousand water paths on the Aneto terrain using different subsampling methods to create the low-resolution decomposition}}{59}{figure.caption.69}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto terrain before any erosion process}}}{59}{figure.caption.69}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after 300 thousand paths using the furthest point method to subsample}}}{59}{figure.caption.69}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Aneto terrain after 300 thousand paths using the grid method to subsample}}}{59}{figure.caption.69}%
-\contentsline {figure}{\numberline {6.19}{\ignorespaces Time to complete of different consecutive runs with 10K and 100K paths for run}}{59}{figure.caption.70}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time to complete different runs of 10K paths. The runs have been executed one after the other on the same model}}}{59}{figure.caption.70}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Time to complete different runs of 100K paths. The runs have been executed one after the other on the same model}}}{59}{figure.caption.70}%
-\contentsline {figure}{\numberline {6.20}{\ignorespaces Results of our test runs to tune the material properties}}{60}{figure.caption.72}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results using the initial cohesion, without modification}}}{60}{figure.caption.72}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Minor damage initial damage on the terrain using the updated cohesion}}}{60}{figure.caption.72}%
-\contentsline {figure}{\numberline {6.21}{\ignorespaces Results of our experiments with different materials}}{61}{figure.caption.74}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of a granite Aneto after 100 water paths}}}{61}{figure.caption.74}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results of a marble Aneto after the initial stress computation (0 paths)}}}{61}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Voronoi options and Terrain dimensions windows of our applicaiton. Both windows can control the results of the decomposition}}{50}{figure.caption.44}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Voronoi options section}}}{50}{figure.caption.44}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Terrain dimensions section}}}{50}{figure.caption.44}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Results of modifying the parameters controlling the core cell generation. Particles in purple represent core cells. Figure taken using the \textit {Gaussian Bump} toy heightfield}}{51}{figure.caption.45}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Core cells when using center $(0.2,0.2,0.1)$ and range $(1,1,1)$}}}{51}{figure.caption.45}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Core cells when using center $(0.8,0.8,0.1)$ and range $(3,3,3)$}}}{51}{figure.caption.45}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Results of modifying the heightfield dimensions on the terrain Salenques}}{51}{figure.caption.46}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Salenques mountain sampled using a 256x184 grid (with 20 vertical samples)}}}{51}{figure.caption.46}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Salenques mountain sampled using a 64x46 grid (with 20 vertical samples)}}}{51}{figure.caption.46}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Voronoi Visuals section of the UI options}}{52}{figure.caption.48}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Examples of diverse rendering options of our application. }}{52}{figure.caption.49}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Example of the particle rendering mode}}}{52}{figure.caption.49}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Example of link rendering}}}{52}{figure.caption.49}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Results of modifying the heightfield dimensions in the terrain Punta Alta}}{53}{figure.caption.51}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Punta alta using a 50x50 grid}}}{53}{figure.caption.51}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Punta alta using a 200x200 grid}}}{53}{figure.caption.51}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Punta alta using a 350x350 grid}}}{53}{figure.caption.51}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Results of modifying the heightfield dimensions in the terrain Punta Alta on computation time}}{53}{figure.caption.52}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Number of Dimensions vs Number of Particles}}}{53}{figure.caption.52}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Number of Dimensions vs Time spent per Particle}}}{53}{figure.caption.52}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Results of modifying the variable $zSamples$ on the terrain Punta Alta}}{54}{figure.caption.54}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results using $zSamples = 10$}}}{54}{figure.caption.54}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results using $zSamples = 99$}}}{54}{figure.caption.54}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Number of samples in the z direction vs computation time spent per particle}}{54}{figure.caption.55}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Results of changing the rugosity threshold on the Bassiero terrain}}{55}{figure.caption.57}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 1.5$}}}{55}{figure.caption.57}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 2.0$}}}{55}{figure.caption.57}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain using a 151x138 grid.Subdivision performed for cells with rugosity $> 3.0$}}}{55}{figure.caption.57}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Results of changing the rugosity threshold on the Bassiero terrain. In this case, we performed further subdivisions in cells where the rugosity is too high.}}{55}{figure.caption.58}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 1.5$ and further subdivision for cells above $2.0$}}}{55}{figure.caption.58}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain using a 151x138 grid. Subdivision performed for cells with rugosity $> 2.0$ and further subdivision for cells above $2.5$}}}{55}{figure.caption.58}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain using a 151x138 grid.Subdivision performed at three levels with thresholds $1.5$, $2.0$ and $2.5$}}}{55}{figure.caption.58}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Comparison of the base terrain and the decomposition result using the same lighting}}{56}{figure.caption.61}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Base Aneto terrain}}}{56}{figure.caption.61}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after the decomposition}}}{56}{figure.caption.61}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Different downscaling factors for the furthest point sampling method applied to the \textit {Bassiero} terrain. }}{57}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $3$}}}{57}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $5$}}}{57}{figure.caption.62}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using furthest point with a downscale factor of $10$}}}{57}{figure.caption.62}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Comparison of different block sizes used to make a subsampled gird. Applied to the \textit {Bassiero} Terrain.}}{57}{figure.caption.63}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 2x2x2 blocks}}}{57}{figure.caption.63}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 3x3x3 blocks}}}{57}{figure.caption.63}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bassiero terrain subsampled using a subgrid made of 4x4x4 blocks}}}{57}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Erosion menu of the UI}}{58}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Different link visualization options}}{59}{figure.caption.68}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Link life visualization. From Green (full life) to red (fully damaged)}}}{59}{figure.caption.68}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Link normal stress visualization. From blue to green for negative normal stress (compression) and green to red for tension}}}{59}{figure.caption.68}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Link shear stress visualization. From green (0 stress) to red}}}{59}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Simulation of 10 water paths on the \textit {Gaussian Bump} toy example. Cells that are touched by the water are painted in blue}}{59}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Result of 300 thousand water paths on the Aneto terrain using different subsampling methods to create the low-resolution decomposition}}{60}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto terrain before any erosion process}}}{60}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto terrain after 300 thousand paths using the furthest point method to subsample}}}{60}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Aneto terrain after 300 thousand paths using the grid method to subsample}}}{60}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Time to complete of different consecutive runs with 10K and 100K paths for run}}{60}{figure.caption.71}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Time to complete different runs of 10K paths. The runs have been executed one after the other on the same model}}}{60}{figure.caption.71}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Time to complete different runs of 100K paths. The runs have been executed one after the other on the same model}}}{60}{figure.caption.71}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Results of 100,000 paths of the erosion simulation. Using a multi-resolution method versus using the high resolution directly}}{61}{figure.caption.73}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of 100,000 paths using the furthest point method for multi-resolution}}}{61}{figure.caption.73}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results of 100,000 paths directly on the high resolution terrain}}}{61}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Results of our test runs to tune the material properties}}{62}{figure.caption.75}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results using the initial cohesion, without modification}}}{62}{figure.caption.75}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Minor damage initial damage on the terrain using the updated cohesion}}}{62}{figure.caption.75}%
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Results of our experiments with different materials, just before the terrains fully collapsed. Granite sill retained some stability after 100 water paths, but marble collapsed after less than 10}}{63}{figure.caption.77}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Results of a granite Aneto after 100 water paths. The terrain fully collapsed after just a few more paths}}}{63}{figure.caption.77}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Results of a marble Aneto after the initial stress computation (0 paths). The terrain collapsed when we tried to simulate a few paths}}}{63}{figure.caption.77}%
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Erosion simulation after 400 paths on different reinforced materials. All images have been rendered on Blender using the exported eroded terrain from our application}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Eroion simulation after 400 paths on reinforced granite. Overview}}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Eroion simulation after 400 paths on reinforced granite. Zoomed}}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Eroion simulation after 400 paths on reinforced marble. Overview}}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Eroion simulation after 400 paths on reinforced marble. Zoomed}}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Eroion simulation after 400 paths on reinforced sandstone. Overview}}}{64}{figure.caption.80}%
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {Eroion simulation after 400 paths on reinforced sandstone. Zoomed}}}{64}{figure.caption.80}%
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Time per path on different consecutive 25 path runs using the reinforced sandstone material}}{65}{figure.caption.82}%
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Remaining cells at the begining of each consecutive round of 25 paths}}{65}{figure.caption.83}%
+\contentsline {figure}{\numberline {6.26}{\ignorespaces Figure comparing the base algorithm with our improved algorithm using reinforced sandstone as a material. All images have been rendered using Blender after exporting the eroded terrain}}{66}{figure.caption.84}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aneto terrain after applying the base algorithm (without mechanical model). A big portion of the bottom of the terrain is removed but parts of the surface still survive almost floating}}}{66}{figure.caption.84}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aneto mountain after applying the mechanical model using our reinforced sandstone. In this case the surface of the mountain has mostly fallen along the bottom section of the terrain}}}{66}{figure.caption.84}%
 \addvspace {10\p@ }

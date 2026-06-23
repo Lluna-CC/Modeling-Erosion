@@ -1,87 +1,84 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Contributions}{7}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Set-up and tools}{8}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Preliminaries}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Terrains and Landscapes}{9}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Freeze-thaw cycle}{9}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Terrain Representation and Modeling}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Terrain Representations}{9}{subsection.2.2.1}%
-\contentsline {subsubsection}{Elevation Models}{9}{section*.4}%
-\contentsline {subsubsection}{Volumetric Models}{11}{section*.7}%
-\contentsline {subsubsection}{Implicit Surfaces}{12}{section*.8}%
-\contentsline {subsection}{\numberline {2.2.2}Terrain Synthesis}{12}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Model Decompositions}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Tetrahedralization}{13}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Voronoi Decomposition}{13}{subsection.2.3.2}%
-\contentsline {chapter}{\numberline {3}Previous Work}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Work in Applied sciences}{15}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Models to Simulate Rock Systems}{15}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Discrete Element Method for Rock Simulation}{15}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Work in Computer Graphics}{16}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Related Methods in Computer Graphics}{16}{subsection.3.2.1}%
-\contentsline {subsubsection}{Spring-Mass Systems and Brittle Fracture}{16}{section*.11}%
-\contentsline {subsubsection}{Modeling Wood Decay}{16}{section*.13}%
-\contentsline {subsection}{\numberline {3.2.2}Weathering in Computer Graphics}{17}{subsection.3.2.2}%
-\contentsline {subsubsection}{Rock Erosion Simulation with Volumetric Models}{17}{section*.15}%
-\contentsline {subsubsection}{Terrain Amplification using Implicit Representations}{18}{section*.17}%
-\contentsline {subsubsection}{Erosion using Layered Representations}{19}{section*.20}%
-\contentsline {subsubsection}{Machine Learning Approach}{20}{section*.22}%
-\contentsline {section}{\numberline {3.3}Base Simulator for this Project}{20}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Model Decomposition}{23}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Base Method Overview}{23}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Point and Cell Generation}{23}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Cell Generation}{24}{subsection.4.2.1}%
-\contentsline {subsubsection}{Neighboring Information}{25}{section*.27}%
-\contentsline {subsubsection}{Cell Attributes}{25}{section*.28}%
-\contentsline {subsection}{\numberline {4.2.2}Point Sampling}{26}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Wall Construction}{27}{subsection.4.2.3}%
-\contentsline {subsubsection}{Sampling out of Bounds}{28}{section*.30}%
-\contentsline {subsubsection}{Using Additional Samples to Generate Cutting Planes}{28}{section*.32}%
-\contentsline {section}{\numberline {4.3}Link Generation}{31}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Link Parameters}{31}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Link Adjacency Information}{32}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Multi-Resolution Extension}{32}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Furthest Point Subsampling}{33}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Subsampling Improvement}{34}{subsection.4.4.2}%
-\contentsline {chapter}{\numberline {5}Erosion}{36}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Base Method Overview}{36}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Mechanical Model}{37}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Rotation Preliminaries and Notation}{37}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Basic Considerations}{37}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Cell Movement}{39}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Stiffness Matrices}{41}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Link Damage Model}{42}{subsection.5.2.5}%
-\contentsline {subsubsection}{Link Stresses and Failure}{42}{section*.40}%
-\contentsline {subsubsection}{Link Damage}{43}{section*.41}%
-\contentsline {subsection}{\numberline {5.2.6}Final Model Considerations}{43}{subsection.5.2.6}%
-\contentsline {section}{\numberline {5.3}Water Infiltration Process}{44}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Water Paths}{44}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Updating Links}{45}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Cell detachment}{46}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}Final Algorithm Summary}{47}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Implementation and Results}{48}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Voronoi Decomposition}{48}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}User Interaction}{48}{subsection.6.1.1}%
-\contentsline {subsubsection}{Voronoi Generation Options}{48}{section*.42}%
-\contentsline {subsubsection}{Visualization Options}{50}{section*.46}%
-\contentsline {subsection}{\numberline {6.1.2}Decomposition and Sampling Size}{51}{subsection.6.1.2}%
-\contentsline {subsubsection}{Heightfield Dimensions Experiment}{51}{section*.49}%
-\contentsline {subsubsection}{Changing the Samples in the z-direction}{52}{section*.52}%
-\contentsline {subsubsection}{Experimenting with Rugosity Thresholds}{53}{section*.55}%
-\contentsline {subsubsection}{Different Lighting Test}{54}{section*.59}%
-\contentsline {subsection}{\numberline {6.1.3}Multi-Resolution Comparison}{55}{subsection.6.1.3}%
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contributions}{8}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Set-up and tools}{9}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Preliminaries}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Terrains and Landscapes}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Terrain Representation and Modeling}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Terrain Representations}{11}{subsection.2.2.1}%
+\contentsline {subsubsection}{Elevation Models}{11}{section*.5}%
+\contentsline {subsubsection}{Volumetric Models}{13}{section*.8}%
+\contentsline {subsubsection}{Implicit Surfaces}{13}{section*.9}%
+\contentsline {subsection}{\numberline {2.2.2}Terrain Synthesis}{14}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Model Decompositions}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Tetrahedralization}{14}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Voronoi Decomposition}{15}{subsection.2.3.2}%
+\contentsline {chapter}{\numberline {3}Previous Work}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Work in Applied sciences}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Models to Simulate Rock Systems}{17}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Discrete Element Method for Rock Simulation}{17}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Work in Computer Graphics}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Related Methods in Computer Graphics}{18}{subsection.3.2.1}%
+\contentsline {subsubsection}{Spring-Mass Systems and Brittle Fracture}{18}{section*.12}%
+\contentsline {subsubsection}{Modeling Wood Decay}{18}{section*.14}%
+\contentsline {subsection}{\numberline {3.2.2}Weathering in Computer Graphics}{19}{subsection.3.2.2}%
+\contentsline {subsubsection}{Rock Erosion Simulation with Volumetric Models}{19}{section*.16}%
+\contentsline {subsubsection}{Terrain Amplification using Implicit Representations}{20}{section*.18}%
+\contentsline {subsubsection}{Erosion using Layered Representations}{21}{section*.21}%
+\contentsline {subsubsection}{Machine Learning Approach}{22}{section*.23}%
+\contentsline {section}{\numberline {3.3}Base Simulator for this Project}{22}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Model Decomposition}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Base Method Overview}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Point and Cell Generation}{24}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Cell Generation}{25}{subsection.4.2.1}%
+\contentsline {subsubsection}{Neighboring Information}{26}{section*.28}%
+\contentsline {subsubsection}{Cell Attributes}{26}{section*.29}%
+\contentsline {subsection}{\numberline {4.2.2}Point Sampling}{27}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Wall Construction}{28}{subsection.4.2.3}%
+\contentsline {subsubsection}{Sampling out of Bounds}{29}{section*.31}%
+\contentsline {subsubsection}{Using Additional Samples to Generate Cutting Planes}{29}{section*.33}%
+\contentsline {section}{\numberline {4.3}Link Generation}{32}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Link Parameters}{32}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Link Adjacency Information}{33}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Multi-Resolution Extension}{33}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Furthest Point Subsampling}{34}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Subsampling Improvement}{35}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}Erosion}{37}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Base Method Overview}{37}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Mechanical Model}{38}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Rotation Preliminaries and Notation}{38}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Basic Considerations}{38}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Cell Movement}{40}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Stiffness Matrices}{42}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Link Damage Model}{43}{subsection.5.2.5}%
+\contentsline {subsubsection}{Link Stresses and Failure}{43}{section*.41}%
+\contentsline {subsubsection}{Link Damage}{44}{section*.42}%
+\contentsline {subsection}{\numberline {5.2.6}Final Model Considerations}{44}{subsection.5.2.6}%
+\contentsline {section}{\numberline {5.3}Water Infiltration Process}{45}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Water Paths}{45}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Updating Links}{46}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Cell detachment}{47}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Final Algorithm Summary}{48}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Implementation and Results}{49}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Voronoi Decomposition}{49}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}User Interaction}{50}{subsection.6.1.1}%
+\contentsline {subsubsection}{Voronoi Generation Options}{50}{section*.43}%
+\contentsline {subsubsection}{Visualization Options}{51}{section*.47}%
+\contentsline {subsection}{\numberline {6.1.2}Decomposition and Sampling Size Analysis}{52}{subsection.6.1.2}%
+\contentsline {subsubsection}{Heightfield Dimensions Experiment}{52}{section*.50}%
+\contentsline {subsubsection}{Changing the Samples in the z-direction}{53}{section*.53}%
+\contentsline {subsubsection}{Experimenting with Rugosity Thresholds}{54}{section*.56}%
+\contentsline {subsubsection}{Different Lighting Test}{55}{section*.60}%
+\contentsline {subsection}{\numberline {6.1.3}Multi-Resolution Comparison}{56}{subsection.6.1.3}%
 \contentsline {section}{\numberline {6.2}Erosion Simulation}{57}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}UI For Erosion}{57}{subsection.6.2.1}%
-\contentsline {subsubsection}{Erosion Menu}{57}{section*.64}%
-\contentsline {subsubsection}{Visualization Options}{57}{section*.66}%
+\contentsline {subsubsection}{Erosion Menu}{57}{section*.65}%
+\contentsline {subsubsection}{Visualization Options}{58}{section*.67}%
 \contentsline {subsection}{\numberline {6.2.2}Base Algorithm Experimentation}{58}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Mechanical Model Experimentation}{59}{subsection.6.2.3}%
-\contentsline {subsubsection}{Simulating Different Materials}{60}{section*.71}%
-\contentsline {subsubsection}{Reinforced Materials}{61}{section*.75}%
-\contentsline {subsubsection}{Failure Parameter Tunning}{62}{section*.77}%
-\contentsline {subsubsection}{Computational Time Results}{62}{section*.78}%
-\contentsline {subsection}{\numberline {6.2.4}Method Comparison}{62}{subsection.6.2.4}%
-\contentsline {chapter}{\numberline {7}Conclusions}{63}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Future Work}{63}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Conclusions}{63}{section.7.2}%
+\contentsline {subsubsection}{Impact of Multi-Resolution in Computational Cost}{60}{section*.72}%
+\contentsline {subsection}{\numberline {6.2.3}Mechanical Model Experimentation}{61}{subsection.6.2.3}%
+\contentsline {subsubsection}{Simulating Different Materials}{61}{section*.74}%
+\contentsline {subsubsection}{Reinforced Materials}{63}{section*.78}%
+\contentsline {subsubsection}{Computational Time Results}{63}{section*.81}%
+\contentsline {subsection}{\numberline {6.2.4}Method Comparison}{65}{subsection.6.2.4}%
+\contentsline {chapter}{\numberline {7}Conclusions}{67}{chapter.7}%

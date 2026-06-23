@@ -6,9 +6,47 @@ can better understand both the problem and our proposed solutions.
 
 \section{Terrains and Landscapes}
 
-T
+Terrains and natural landscapes, especially high and rocky mountain environments, 
+are a core part of this project, and it is important to know some of 
+their properties in order to understand 
+the motivations behind this thesis.
 
-\subsection{Freeze-thaw cycle}
+\vspace{10pt}
+
+The rocky terrains that we work with are heavily influenced by their 
+high elevation, cold climate, and the frequent storms that occur at 
+those elevations, heavily impacting 
+the shape of the terrain due to weathering. These types of terrains usually 
+have steep and sharp features that sare hard to capture 
+as digital terrains. Additionally, the combination of cold and stormy 
+weather makes it so a lot of rainfall and snowfall accumulate inside the 
+rocks, producing erosion due to \textit{freeze-thaw cycles}.
+
+\begin{figure}
+    \centering 
+    \includegraphics[scale=0.35]{Background/rockyTerrains.png}
+    \caption{Examples of rocky high mountain environments, that show 
+    some sharp and straight features that can be difficult to capture 
+    with digital elevation models. Images by Oscar Argudo}
+\end{figure}
+
+\vspace{10pt} 
+
+A freeze-thaw cycle is produced when water enters the 
+rocks through the different cracks on the 
+material. Then, when the temperature drops below 
+freezing temperature, the water freezes and expands, generating 
+internal stresses that increase the size of the rock's cracks. Once 
+water melts again, it can enter even deeper into the cracks of the 
+rock (which are now wider). This process repeats itself until the rock 
+is fully broken.
+
+\vspace{10pt}
+
+This erosion process, which is sometimes called frost weathering or 
+frost shattering, plays a key role in the shape of cold mountainous 
+environments, and it is what we will attempt to simulate by reproducing
+water infiltration on our digital terrains.
 
 \section{Terrain Representation and Modeling}
 Virtual terrains are a fundamental aspect of this thesis, so it is important 
@@ -101,10 +139,10 @@ and test our erosion algorithm.
 \begin{figure}
     \centering
 
-    \subfigure[Aneto heightfield]{\label{fig:anetoTex}\includegraphics[width=0.28\linewidth]{Background/aneto.png}
+    \subfigure[Aneto heightfield]{\label{fig:anetoTex}\includegraphics[width=0.29\linewidth]{Background/aneto.png}
     }
     \hspace{20pt}
-    \subfigure[Aneto model on the app]{\label{fig:anetoApp}\includegraphics[width=0.335\linewidth]{Background/aneto-app.png}
+    \subfigure[Aneto model on the app]{\label{fig:anetoApp}\includegraphics[width=0.345\linewidth]{Background/aneto-app.png}
         }
     
     \caption{Heightfield of the mountain Aneto as a monochromatic image and 
@@ -122,7 +160,7 @@ types of layered heightfields can be seen on figure \ref{fig:layeredRep}
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.65]{Background/layeredRep.png}
+    \includegraphics[scale=0.75]{Background/layeredRep.png}
     \caption{Illustration of stacked height functions,
     figure taken from \cite{galin2019review}}
     \label{fig:layeredRep}
@@ -275,7 +313,19 @@ shapes, which better represents the shapes we can observe in nature.
     \label{fig:tetrahedralization}
 \end{figure}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.10]{Background/voronoiDecomp.png}
+    \caption{Example of a voronoi decomposition of a cube, showing 
+    the particles and faces of the decomposition. Figure taken 
+    from the documentation of the C++ library Voro++ \cite{osti_code-54674}}
+    \label{fig:voronoiDecomposition}
+\end{figure}
+
+
 \subsection{Voronoi Decomposition} \label{voronoiTheory}
+
+
 Given a set of sample points, a voronoi decomposition is a partition of the space into 
 multiple regions, where every region is defined by the set of all points 
 that are closer to a given sample than any other sample. In a more formal way,
@@ -295,6 +345,8 @@ lying inside two regions create a plane that defines the boundary between those
 two regions.
 \vspace{10pt}
 
+
+
 In this thesis, we decided to use voronoi cells for multiple reasons. First,
 they can be generated with a lot of flexibility (just choose an arbitrary set 
 of points), and we can adapt the decomposition depending on our needs. 
@@ -302,14 +354,7 @@ Additionally, the generated cells are not very regular, with varying
 sizes and shapes, which produces a more natural rocky appearance than
 other more regular decompositions.
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.10]{Background/voronoiDecomp.png}
-    \caption{Example of a voronoi decomposition of a cube, showing 
-    the particles and faces of the decomposition. Figure taken 
-    from the documentation of the C++ library Voro++ \cite{osti_code-54674}}
-    \label{fig:voronoiDecomposition}
-\end{figure}
+
 
 \chapter{Previous Work} \label{previousWork}
 
@@ -668,6 +713,15 @@ algorithm will fit the terrain conditions.
 
 \vspace{10pt}
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.27]{Background/waterInfiltration.png}
+    \caption{Example of water infiltrating a terrain divided into a set
+    of voronoi cells connected by links. Taken from 
+\cite{mateos_arlanzon_2023}}
+    \label{fig:waterInfiltration}
+\end{figure}
+
 Regarding the algorithm that simulates water infiltration and link breakage, 
 we implemented a mechanical model to represent link stress and modify 
 those stress values once a link breaks. The extended  
@@ -701,13 +755,6 @@ the reader can understand our implementation just by reading this
 thesis. Keep in mind we took the main ideas of the method and implemented them in our own way, 
 so some smaller details of the implementation may also be different 
 from the original even if we do not highlight the change.   
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.35]{Background/waterInfiltration.png}
-    \caption{Example of water infiltrating a terrain divided into a set
-    of voronoi cells connected by links. Taken from 
-\cite{mateos_arlanzon_2023}}
-    \label{fig:waterInfiltration}
-\end{figure}
+
 
 

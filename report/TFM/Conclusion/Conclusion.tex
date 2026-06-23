@@ -1,7 +1,56 @@
 
 
 \chapter{Conclusions}
-\textbf{Summary of the previous results, final conclusions and closing thoughts}
-\section{Future Work}
-\section{Conclusions}
 
+In this project, we successfully improved the previous work of 
+\cite{10.2312:ceig.20241139}, adding a mechanical model to simulate 
+the physical properties of terrains and better reproduce erosion 
+processes. Moreover, we also made improvements in the voronoi tessellation and 
+added a low-resolution layer to speed up the erosion simulation. 
+All added improvements with respect to the previous project contributed 
+to the quality and realism of the final eroded terrain, which 
+has the potential to be used to produce realistic landscapes in virtual 
+scenes. 
+
+\vspace{10pt}
+
+Despite all of this, there is some work that can still be done to improve 
+this project. First, the goal of this thesis was just to improve 
+the previous method and add the physical considerations. In this 
+project, we did not have the intention to provide tools for authoring 
+terrains using our technique, and we just provided some tools for 
+experimentation and debugging. If we want this method to be available for 
+digital artists, we would need to port our algorithm to another application 
+better suited for these tasks. Furthermore, the current lighting 
+method of our application is not suited to produce high-quality 
+visuals, so a port to another application that does implement 
+better lighting will also improve this aspect.
+
+\vspace{10pt}
+
+Second, we have researched a little about improvements on the solver 
+for systems of equations. There are some steps that can be done to improve 
+that part, like using a GPU solver or recomputing just the relevant 
+parts of the system when a portion of the terrain changes, avoiding a 
+full computation each time. We did not have the time to test these improvements, 
+so we leave them for future work. Additionally, even if the system of 
+equations is the heaviest part of the project, it is not the only one 
+that can be optimized; multiple parts of the code can be improved and, 
+especially, parallelized in order to increase the algorithm efficiency.
+
+\vspace{10pt}
+
+The last potential improvement of this project has to do with parameter tuning. 
+This thesis proposed multiple improvements, so we had to test a wide 
+variety of parameters and methods to have a good understanding of how 
+our techniques work and how they are compared against other methods. A 
+possible extension of our work could consist in testing and comparing 
+more materials and better tuning the parameters that control the link 
+damage.  
+
+\vspace{10pt}
+
+Finally, and to end this project, we would like to thank both 
+Oscar Argudo for tutoring this thesis and Diego Mateos for 
+providing the base method this project is based on. Without their 
+contributions this project would have not been possible.
